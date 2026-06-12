@@ -1,0 +1,40 @@
+---
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/writing", label: "Writing" },
+  { href: "/coaching", label: "Coaching" },
+  { href: "/about", label: "About" },
+];
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+---
+
+<header class="border-b border-line/80 bg-paper/85 backdrop-blur">
+  <div class="mx-auto flex w-full max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <a href="/" class="text-base font-semibold tracking-tight no-underline" aria-label="Aidan Brotherhood home">
+      Aidan Brotherhood
+    </a>
+    <nav aria-label="Primary navigation">
+      <ul class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-muted">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
+                class:list={[
+                  "rounded-full no-underline transition-colors hover:text-ink",
+                  isActive(item.href) && "font-semibold text-ink",
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

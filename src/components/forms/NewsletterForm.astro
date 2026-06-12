@@ -1,0 +1,90 @@
+---
+interface Props {
+  id?: string;
+  heading?: string;
+  description?: string;
+  class?: string;
+}
+
+const {
+  id = "newsletter-form",
+  heading = "Get writing updates",
+  description = "Occasional notes on coaching, training, health, and ownership.",
+  class: className = "",
+} = Astro.props;
+
+const inputClass =
+  "mt-2 w-full rounded-2xl border border-line bg-paper-soft px-4 py-3 text-base text-ink shadow-none transition placeholder:text-ink-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
+const errorClass = "mt-2 min-h-5 text-sm text-red-700";
+---
+
+<form
+  id={id}
+  class:list={["rounded-3xl border border-line bg-paper-soft p-6 sm:p-8", className]}
+  action="/api/subscribe"
+  method="post"
+  data-enhanced-form
+  data-success-message="Thanks — you’re on the list."
+  data-generic-error-message="Something went wrong. Please try again."
+  novalidate
+>
+  <div>
+    <p class="eyebrow">Newsletter</p>
+    <h2 class="mt-3 text-2xl font-semibold tracking-tight">{heading}</h2>
+    <p class="mt-3 max-w-readable text-ink-muted">{description}</p>
+  </div>
+
+  <div class="mt-6 grid gap-4 sm:grid-cols-[1fr_1.4fr]">
+    <div>
+      <label class="text-sm font-semibold" for={`${id}-firstName`}>First name <span class="font-normal text-ink-muted">(optional)</span></label>
+      <input class={inputClass} id={`${id}-firstName`} name="firstName" type="text" autocomplete="given-name" maxlength="80" />
+      <p id={`${id}-firstName-error`} class={errorClass} data-error-for="firstName"></p>
+    </div>
+
+    <div>
+      <label class="text-sm font-semibold" for={`${id}-email`}>Email address</label>
+      <input
+        class={inputClass}
+        id={`${id}-email`}
+        name="email"
+        type="email"
+        autocomplete="email"
+        maxlength="254"
+        required
+        aria-describedby={`${id}-email-error`}
+      />
+      <p id={`${id}-email-error`} class={errorClass} data-error-for="email"></p>
+    </div>
+  </div>
+
+  <input type="hidden" name="sourcePage" />
+  <input type="hidden" name="utmSource" />
+  <input type="hidden" name="utmMedium" />
+  <input type="hidden" name="utmCampaign" />
+  <input type="hidden" name="utmTerm" />
+  <input type="hidden" name="utmContent" />
+
+  <div class="hidden" aria-hidden="true">
+    <label for={`${id}-website`}>Website</label>
+    <input id={`${id}-website`} name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center">
+    <button
+      class="inline-flex items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-semibold text-paper-soft transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
+      type="submit"
+      data-idle-label="Join the list"
+      data-loading-label="Joining…"
+    >
+      Join the list
+    </button>
+    <p class="text-sm text-ink-muted" role="status" aria-live="polite" data-form-status></p>
+  </div>
+</form>
+
+<script>
+  import { enhanceForms } from "../../lib/form-client";
+
+  enhanceForms();
+  document.addEventListener("astro:page-load", enhanceForms);
+</script>

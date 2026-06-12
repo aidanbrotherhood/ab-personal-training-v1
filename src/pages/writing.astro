@@ -1,0 +1,79 @@
+---
+export const prerender = true;
+
+import NewsletterForm from "../components/forms/NewsletterForm.astro";
+import PostCard from "../components/cards/PostCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPublishedWriting } from "../lib/writing";
+
+const posts = await getPublishedWriting();
+const featuredPosts = posts.filter((post) => post.data.featured);
+---
+
+<BaseLayout
+  title="Writing"
+  description="Writing archive for Aidan Brotherhood: notes and essays on coaching, health, training, and ownership."
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <div class="max-w-readable">
+      <p class="eyebrow">Writing</p>
+      <h1 class="mt-5 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">Notes, essays, and updates.</h1>
+      <p class="lede mt-6">
+        A file-based archive for writing on training, health, coaching, and practical ownership. The current entries are
+        placeholders until final copy is ready.
+      </p>
+    </div>
+
+    {
+      featuredPosts.length > 0 && (
+        <section class="mt-14" aria-labelledby="featured-writing-title">
+          <div class="flex flex-col gap-3 border-t border-line pt-8 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p class="eyebrow">Featured</p>
+              <h2 id="featured-writing-title" class="mt-3 text-3xl font-semibold tracking-tight">
+                Start here
+              </h2>
+            </div>
+          </div>
+          <div class="mt-6 grid gap-6 md:grid-cols-2">
+            {featuredPosts.map((post) => (
+              <PostCard post={post} headingLevel="h3" />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="mt-14" aria-labelledby="all-writing-title">
+      <div class="border-t border-line pt-8">
+        <p class="eyebrow">Archive</p>
+        <h2 id="all-writing-title" class="mt-3 text-3xl font-semibold tracking-tight">All writing</h2>
+      </div>
+
+      {
+        posts.length > 0 ? (
+          <div class="mt-6 grid gap-5">
+            {posts.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        ) : (
+          <div class="mt-8 rounded-3xl border border-line bg-paper-soft p-8">
+            <h2 class="text-2xl font-semibold tracking-tight">No published writing yet.</h2>
+            <p class="mt-3 max-w-readable text-ink-muted">
+              Add a Markdown or MDX file to <code>src/content/writing</code> and set <code>status: published</code>.
+            </p>
+          </div>
+        )
+      }
+    </section>
+
+    <aside class="mt-14" aria-label="Newsletter signup">
+      <NewsletterForm
+        id="writing-newsletter-form"
+        heading="Get future writing"
+        description="Join for occasional writing and newsletter updates."
+      />
+    </aside>
+  </section>
+</BaseLayout>
