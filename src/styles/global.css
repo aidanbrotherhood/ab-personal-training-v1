@@ -317,6 +317,33 @@ a:hover {
   box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.14);
 }
 
+.newsletter-form .form-label {
+  font-size: 0.925rem;
+}
+
+.newsletter-fields {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.newsletter-name-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.newsletter-form .form-input {
+  min-height: 3.15rem;
+  border-color: var(--color-line-strong);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  padding: 0.82rem 0.95rem;
+}
+
+.newsletter-form .button-primary {
+  min-height: 3.1rem;
+  padding-inline: 1.15rem;
+}
+
 textarea.form-input {
   min-height: 9rem;
   resize: vertical;

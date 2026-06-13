@@ -8,8 +8,8 @@ interface Props {
 
 const {
   id = "newsletter-form",
-  heading = "Get posts by email",
-  description = "Occasional clear notes on training, coaching, and physical capability. No noise.",
+  heading = "A useful note, when it earns its place",
+  description = "Short, practical ideas on training, standards, and building a body you can rely on. No filler.",
   class: className = "",
 } = Astro.props;
 
@@ -19,7 +19,7 @@ const errorClass = "form-error";
 
 <form
   id={id}
-  class:list={["surface-card p-5 sm:p-7", className]}
+  class:list={["newsletter-form surface-card p-5 sm:p-7", className]}
   action="/api/subscribe"
   method="post"
   data-enhanced-form
@@ -33,33 +33,39 @@ const errorClass = "form-error";
     <p class="mt-3 max-w-readable leading-7 text-ink-muted">{description}</p>
   </div>
 
-  <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.4fr]">
-    <div>
-      <label class="form-label" for={`${id}-firstName`}>First name <span class="form-label-optional">(optional)</span></label>
-      <input
-        class={inputClass}
-        id={`${id}-firstName`}
-        name="firstName"
-        type="text"
-        autocomplete="given-name"
-        maxlength="80"
-        aria-describedby={`${id}-firstName-error`}
-      />
-      <p id={`${id}-firstName-error`} class={errorClass} data-error-for="firstName"></p>
-    </div>
+  <div class="newsletter-fields mt-6">
+    <div class="newsletter-name-grid">
+      <div>
+        <label class="form-label" for={`${id}-firstName`}>First name</label>
+        <input
+          class={inputClass}
+          id={`${id}-firstName`}
+          name="firstName"
+          type="text"
+          autocomplete="given-name"
+          maxlength="80"
+          placeholder="First name"
+          required
+          aria-describedby={`${id}-firstName-error`}
+        />
+        <p id={`${id}-firstName-error`} class={errorClass} data-error-for="firstName"></p>
+      </div>
 
-    <div>
-      <label class="form-label" for={`${id}-lastName`}>Last name <span class="form-label-optional">(optional)</span></label>
-      <input
-        class={inputClass}
-        id={`${id}-lastName`}
-        name="lastName"
-        type="text"
-        autocomplete="family-name"
-        maxlength="80"
-        aria-describedby={`${id}-lastName-error`}
-      />
-      <p id={`${id}-lastName-error`} class={errorClass} data-error-for="lastName"></p>
+      <div>
+        <label class="form-label" for={`${id}-lastName`}>Last name</label>
+        <input
+          class={inputClass}
+          id={`${id}-lastName`}
+          name="lastName"
+          type="text"
+          autocomplete="family-name"
+          maxlength="80"
+          placeholder="Last name"
+          required
+          aria-describedby={`${id}-lastName-error`}
+        />
+        <p id={`${id}-lastName-error`} class={errorClass} data-error-for="lastName"></p>
+      </div>
     </div>
 
     <div>
@@ -71,6 +77,7 @@ const errorClass = "form-error";
         type="email"
         autocomplete="email"
         maxlength="254"
+        placeholder="you@example.com"
         required
         aria-describedby={`${id}-email-error`}
       />
@@ -90,14 +97,14 @@ const errorClass = "form-error";
     <input id={`${id}-website`} name="website" type="text" tabindex="-1" autocomplete="off" />
   </div>
 
-  <div class="mt-5 flex flex-col gap-4 border-t border-line pt-5 sm:flex-row sm:items-center">
+  <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
     <button
       class="button-primary disabled:cursor-not-allowed disabled:opacity-60"
       type="submit"
-      data-idle-label="Join the list"
-      data-loading-label="Joining…"
+      data-idle-label="Send me the useful notes"
+      data-loading-label="Sending…"
     >
-      Join the list
+      Send me the useful notes
     </button>
     <p class="text-sm text-ink-muted" role="status" aria-live="polite" data-form-status></p>
   </div>

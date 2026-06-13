@@ -194,7 +194,7 @@ Optional publishing/SEO fields:
 The frontend forms are deliberately small and progressive:
 
 - Newsletter signup posts to `/api/subscribe`.
-- Newsletter signup collects optional first name, optional last name, and required email address.
+- Newsletter signup collects required first name, last name, and email address.
 - Coaching enquiry posts to `/api/enquiry`.
 - `/contact` uses the Get Started qualification form to collect lead context before a first conversation.
 - Both routes accept form data or JSON.

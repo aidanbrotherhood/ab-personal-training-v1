@@ -50,6 +50,11 @@ type ButtondownSubscriberPayload = {
   utm_source?: string;
 };
 
+type ButtondownSubscribeInput = Omit<NewsletterSignupInput, "firstName" | "lastName"> & {
+  firstName?: string;
+  lastName?: string;
+};
+
 function getButtondownApiBaseUrl() {
   const configuredBaseUrl = getServerEnv("BUTTONDOWN_API_BASE_URL")?.trim();
   return (configuredBaseUrl || DEFAULT_BUTTONDOWN_API_BASE_URL).replace(/\/+$/, "");
@@ -63,7 +68,7 @@ function addMetadataValue(metadata: Record<string, string>, key: string, value?:
   }
 }
 
-function buildSubscriberMetadata(input: NewsletterSignupInput) {
+function buildSubscriberMetadata(input: ButtondownSubscribeInput) {
   const metadata: Record<string, string> = {
     source: "website",
     signup_origin: "newsletter_form",
@@ -81,7 +86,7 @@ function buildSubscriberMetadata(input: NewsletterSignupInput) {
   return metadata;
 }
 
-function buildSubscriberPayload(input: NewsletterSignupInput): ButtondownSubscriberPayload {
+function buildSubscriberPayload(input: ButtondownSubscribeInput): ButtondownSubscriberPayload {
   const payload: ButtondownSubscriberPayload = {
     email_address: input.email,
     metadata: buildSubscriberMetadata(input),
@@ -245,7 +250,7 @@ function mapButtondownFailure(response: Response, body: unknown): ButtondownSubs
   };
 }
 
-async function updateExistingSubscriberMetadata(input: NewsletterSignupInput, apiKey: string) {
+async function updateExistingSubscriberMetadata(input: ButtondownSubscribeInput, apiKey: string) {
   return buttondownRequest(
     "PATCH",
     `/subscribers/${encodeURIComponent(input.email)}`,
@@ -257,7 +262,7 @@ async function updateExistingSubscriberMetadata(input: NewsletterSignupInput, ap
 }
 
 export async function subscribeToButtondown(
-  input: NewsletterSignupInput,
+  input: ButtondownSubscribeInput,
 ): Promise<ButtondownSubscribeResult> {
   const apiKey = getServerEnv("BUTTONDOWN_API_KEY")?.trim();
 

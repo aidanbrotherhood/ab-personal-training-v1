@@ -126,8 +126,8 @@ const attributionFields = {
 export const newsletterSignupSchema = z
   .object({
     email: z.string().trim().email("Please enter a valid email address.").max(254),
-    firstName: optionalTrimmedString(80),
-    lastName: optionalTrimmedString(80),
+    firstName: trimmedString(80),
+    lastName: trimmedString(80),
     website: honeypot,
     ...attributionFields,
   })
