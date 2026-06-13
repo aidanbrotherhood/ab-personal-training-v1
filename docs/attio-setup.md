@@ -72,6 +72,15 @@ Create list fields for the enquiry-specific data you want to retain:
 - Submitted at: timestamp
 - Main interest: select or text
 - Message: long text/text
+- Primary goal: text
+- Service preference: select or text
+- Current training level: select or text
+- Gym confidence: select or text
+- Current routine: select or text
+- Biggest barrier: select or text
+- Preferred coaching format: select or text
+- Availability: select or text
+- Start timeline: select or text
 - Location: text
 - Preferred contact method: select or text
 - Referral source: text
@@ -93,6 +102,15 @@ ATTIO_FIELD_STAGE=
 ATTIO_FIELD_SUBMITTED_AT=
 ATTIO_FIELD_MAIN_INTEREST=
 ATTIO_FIELD_MESSAGE=
+ATTIO_FIELD_PRIMARY_GOAL=
+ATTIO_FIELD_SERVICE_PREFERENCE=
+ATTIO_FIELD_CURRENT_TRAINING_LEVEL=
+ATTIO_FIELD_GYM_CONFIDENCE=
+ATTIO_FIELD_CURRENT_ROUTINE=
+ATTIO_FIELD_BIGGEST_BARRIER=
+ATTIO_FIELD_PREFERRED_COACHING_FORMAT=
+ATTIO_FIELD_AVAILABILITY=
+ATTIO_FIELD_START_TIMELINE=
 ATTIO_FIELD_LOCATION=
 ATTIO_FIELD_PREFERRED_CONTACT_METHOD=
 ATTIO_FIELD_REFERRAL_SOURCE=
@@ -118,7 +136,14 @@ For a private live test that proves field capture, map at least:
 - `ATTIO_FIELD_MESSAGE`
 - `ATTIO_FIELD_CONSENT_TO_CONTACT`
 
-For a production-ready coaching flow, also map any optional fields you genuinely want to inspect, such as source page, UTMs, newsletter opt-in, and status notes.
+For a production-ready coaching flow, also map any optional fields you genuinely want to inspect, such as source page, UTMs, newsletter opt-in, qualification fields, and status notes.
+
+Qualification fallback summary:
+
+- The Get Started form posts to the existing `/api/enquiry` route with `enquiryType=qualification`.
+- `ATTIO_FIELD_MESSAGE`, when configured, receives the user's free-text answer plus a compact summary of qualification fields.
+- `ATTIO_FIELD_STATUS_NOTES`, when configured, also includes the qualification summary.
+- The detailed `ATTIO_FIELD_PRIMARY_GOAL`, `ATTIO_FIELD_SERVICE_PREFERENCE`, `ATTIO_FIELD_CURRENT_TRAINING_LEVEL`, `ATTIO_FIELD_GYM_CONFIDENCE`, `ATTIO_FIELD_CURRENT_ROUTINE`, `ATTIO_FIELD_BIGGEST_BARRIER`, `ATTIO_FIELD_PREFERRED_COACHING_FORMAT`, `ATTIO_FIELD_AVAILABILITY`, and `ATTIO_FIELD_START_TIMELINE` mappings are optional. Leaving them blank does not fail the enquiry.
 
 If you choose select/status fields, create Attio options that exactly match the website form values. The stage value written by the integration is `New enquiry`.
 
@@ -144,12 +169,14 @@ Buttondown receives only newsletter-safe fields:
 
 - email
 - first name
+- last name
 - source page
 - UTM fields
 
 Buttondown does not receive:
 
 - coaching enquiry message
+- qualification form answers
 - phone number
 - location
 - main interest
@@ -161,8 +188,8 @@ If Buttondown is missing or fails after Attio succeeds, the enquiry still succee
 
 ## Sensitive Data Warning
 
-Do not use the public enquiry form as a health record, PAR-Q, medical screening, injury intake, medication history, or mental health intake.
+Do not use the public enquiry or Get Started qualification form as a health record, PAR-Q, medical screening, injury intake, medication history, diagnosis intake, or mental health intake.
 
-The form warns users not to include detailed medical information. Keep that warning visible. Any appropriate screening should happen separately after coaching fit is established.
+The forms warn users not to include detailed medical information. Keep that warning visible. Any appropriate screening should happen separately after coaching fit is established.
 
 Do not create Attio fields intended to store detailed medical, injury, medication, mental health, or PAR-Q data from this public form.

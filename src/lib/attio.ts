@@ -248,8 +248,10 @@ function buildPersonValues(input: CoachingEnquiryInput) {
 function buildStatusNotes(input: CoachingEnquiryInput) {
   return [
     "Coaching enquiry submitted from the website.",
+    `Enquiry type: ${input.enquiryType}`,
     `Main interest: ${input.mainInterest}`,
     `Message: ${input.message}`,
+    buildQualificationSummary(input),
     input.location ? `Location: ${input.location}` : undefined,
     input.preferredContactMethod ? `Preferred contact: ${input.preferredContactMethod}` : undefined,
     input.referralSource ? `Referral source: ${input.referralSource}` : undefined,
@@ -265,6 +267,32 @@ function buildStatusNotes(input: CoachingEnquiryInput) {
   ]
     .filter(Boolean)
     .join("\n");
+}
+
+function buildQualificationSummary(input: CoachingEnquiryInput) {
+  const details = [
+    input.primaryGoal ? `Primary goal: ${input.primaryGoal}` : undefined,
+    input.servicePreference ? `Service preference: ${input.servicePreference}` : undefined,
+    input.currentTrainingLevel ? `Current training level: ${input.currentTrainingLevel}` : undefined,
+    input.gymConfidence ? `Gym confidence: ${input.gymConfidence}` : undefined,
+    input.currentRoutine ? `Current routine: ${input.currentRoutine}` : undefined,
+    input.biggestBarrier ? `Biggest barrier: ${input.biggestBarrier}` : undefined,
+    input.preferredCoachingFormat ? `Preferred coaching format: ${input.preferredCoachingFormat}` : undefined,
+    input.availability ? `Availability: ${input.availability}` : undefined,
+    input.startTimeline ? `Start timeline: ${input.startTimeline}` : undefined,
+  ].filter(Boolean);
+
+  if (details.length === 0) {
+    return undefined;
+  }
+
+  return ["Qualification details:", ...details].join("\n");
+}
+
+function buildMessageField(input: CoachingEnquiryInput) {
+  const qualificationSummary = buildQualificationSummary(input);
+
+  return [input.message, qualificationSummary].filter(Boolean).join("\n\n");
 }
 
 function getFieldMappings(input: CoachingEnquiryInput): ListFieldMapping[] {
@@ -286,8 +314,44 @@ function getFieldMappings(input: CoachingEnquiryInput): ListFieldMapping[] {
     },
     {
       envName: "ATTIO_FIELD_MESSAGE",
-      value: input.message,
+      value: buildMessageField(input),
       recommended: true,
+    },
+    {
+      envName: "ATTIO_FIELD_PRIMARY_GOAL",
+      value: input.primaryGoal,
+    },
+    {
+      envName: "ATTIO_FIELD_SERVICE_PREFERENCE",
+      value: input.servicePreference,
+    },
+    {
+      envName: "ATTIO_FIELD_CURRENT_TRAINING_LEVEL",
+      value: input.currentTrainingLevel,
+    },
+    {
+      envName: "ATTIO_FIELD_GYM_CONFIDENCE",
+      value: input.gymConfidence,
+    },
+    {
+      envName: "ATTIO_FIELD_CURRENT_ROUTINE",
+      value: input.currentRoutine,
+    },
+    {
+      envName: "ATTIO_FIELD_BIGGEST_BARRIER",
+      value: input.biggestBarrier,
+    },
+    {
+      envName: "ATTIO_FIELD_PREFERRED_COACHING_FORMAT",
+      value: input.preferredCoachingFormat,
+    },
+    {
+      envName: "ATTIO_FIELD_AVAILABILITY",
+      value: input.availability,
+    },
+    {
+      envName: "ATTIO_FIELD_START_TIMELINE",
+      value: input.startTimeline,
     },
     {
       envName: "ATTIO_FIELD_LOCATION",

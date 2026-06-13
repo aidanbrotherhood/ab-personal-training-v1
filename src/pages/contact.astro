@@ -1,0 +1,104 @@
+---
+export const prerender = true;
+
+import QualificationForm from "../components/forms/QualificationForm.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Get Started"
+  description="Start a practical coaching enquiry with Aidan Brotherhood."
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <div class="max-w-editorial">
+      <p class="eyebrow">Get Started</p>
+      <h1 class="mt-5 max-w-3xl text-4xl font-semibold sm:text-5xl">
+        Start with a simple conversation.
+      </h1>
+      <p class="lede mt-6">
+        This form helps Aidan understand your goals, confidence, training background, and whether coaching looks like a
+        sensible fit for where you are starting from.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      <div class="surface-card p-5 sm:p-6">
+        <div class="flex items-center justify-between gap-3">
+          <p class="eyebrow">Fit</p>
+          <span class="text-sm font-bold text-accent-strong">01</span>
+        </div>
+        <h2 class="mt-3 text-xl font-semibold">No pressure.</h2>
+        <p class="mt-3 leading-7 text-ink-muted">
+          The first step is a practical enquiry, not a commitment to start coaching.
+        </p>
+      </div>
+      <div class="surface-card p-5 sm:p-6">
+        <div class="flex items-center justify-between gap-3">
+          <p class="eyebrow">Tone</p>
+          <span class="text-sm font-bold text-accent-strong">02</span>
+        </div>
+        <h2 class="mt-3 text-xl font-semibold">No hype.</h2>
+        <p class="mt-3 leading-7 text-ink-muted">
+          No extreme transformation claims, quick-fix promises, or pressure-heavy sales copy.
+        </p>
+      </div>
+      <div class="surface-card p-5 sm:p-6">
+        <div class="flex items-center justify-between gap-3">
+          <p class="eyebrow">Context</p>
+          <span class="text-sm font-bold text-accent-strong">03</span>
+        </div>
+        <h2 class="mt-3 text-xl font-semibold">Useful context.</h2>
+        <p class="mt-3 leading-7 text-ink-muted">
+          The aim is to understand your starting point before suggesting a next step.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section bg-paper-soft">
+    <div class="mx-auto grid w-full max-w-6xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.62fr_1.38fr] lg:px-8">
+      <div class="max-w-readable">
+        <p class="eyebrow">Qualification</p>
+        <h2 class="mt-3 text-3xl font-semibold">Share enough to make the first reply useful.</h2>
+        <p class="mt-4 leading-7 text-ink-muted">
+          Keep answers concise and practical. This is not a medical intake. If coaching is appropriate, any health
+          screening or onboarding detail can happen separately after the first conversation.
+        </p>
+      </div>
+
+      <QualificationForm id="get-started-qualification-form" />
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="mx-auto grid w-full max-w-6xl gap-8 px-5 sm:px-6 md:grid-cols-3 lg:px-8">
+      <article>
+        <p class="eyebrow">What happens next</p>
+        <h2 class="mt-3 text-2xl font-semibold">Aidan reviews your enquiry.</h2>
+        <p class="mt-3 leading-7 text-ink-muted">
+          You will get a reply about whether coaching looks like a good fit and what the next sensible step could be.
+        </p>
+      </article>
+
+      <article>
+        <p class="eyebrow">What not to include</p>
+        <h2 class="mt-3 text-2xl font-semibold">Keep medical detail out of this form.</h2>
+        <p class="mt-3 leading-7 text-ink-muted">
+          Do not include diagnoses, medication details, injury histories, mental health information, or PAR-Q answers
+          here. Any relevant health screening happens separately.
+        </p>
+      </article>
+
+      <article>
+        <p class="eyebrow">Services</p>
+        <h2 class="mt-3 text-2xl font-semibold">Initial consultations are free.</h2>
+        <p class="mt-3 leading-7 text-ink-muted">
+          For now, start with the enquiry form or review the services overview so the first reply can be specific.
+        </p>
+        <a class="text-link mt-5 inline-block" href="/coaching">
+          View services →
+        </a>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

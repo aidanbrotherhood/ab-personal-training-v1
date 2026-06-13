@@ -77,17 +77,30 @@ export function sanitiseForLog(kind: FormKind, payload: Record<string, unknown>)
     return {
       ...shared,
       firstNameProvided: Boolean(payload.firstName),
+      lastNameProvided: Boolean(payload.lastName),
     };
   }
 
   return {
     ...shared,
+    enquiryType: payload.enquiryType,
     firstNameProvided: Boolean(payload.firstName),
     phoneProvided: Boolean(payload.phone),
     socialHandleProvided: Boolean(payload.socialHandle),
     mainInterest: payload.mainInterest,
     preferredContactMethod: payload.preferredContactMethod,
     newsletterOptIn: payload.newsletterOptIn,
+    qualificationFieldsProvided: [
+      payload.primaryGoal,
+      payload.servicePreference,
+      payload.currentTrainingLevel,
+      payload.gymConfidence,
+      payload.currentRoutine,
+      payload.biggestBarrier,
+      payload.preferredCoachingFormat,
+      payload.availability,
+      payload.startTimeline,
+    ].filter(Boolean).length,
     messageLength: typeof payload.message === "string" ? payload.message.length : undefined,
   };
 }

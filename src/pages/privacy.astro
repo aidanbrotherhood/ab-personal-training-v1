@@ -4,14 +4,30 @@ export const prerender = true;
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Privacy" description="Privacy information for Aidan Brotherhood." noindex={true}>
+<BaseLayout title="Privacy" description="Draft privacy information for Aidan Brotherhood." noindex={true}>
   <section class="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
-    <div class="prose prose-lg">
+    <div class="prose prose-lg surface-card p-5 sm:p-8">
       <p class="eyebrow">Privacy</p>
-      <h1>Privacy</h1>
+      <h1>Privacy notice</h1>
       <p>
-        Placeholder privacy page. It should be replaced with proper privacy language before collecting personal data
-        through newsletter signup, enquiry forms, analytics, or payments.
+        This is a draft privacy notice for private review. The site can collect newsletter signup details and coaching
+        enquiry information so Aidan Brotherhood can respond to enquiries and send requested email updates.
+      </p>
+      <h2>What is collected</h2>
+      <p>
+        Newsletter signup collects first name, last name, email address, source page, and basic UTM attribution when
+        present. Coaching enquiries collect the contact and lead qualification details submitted through the form.
+      </p>
+      <h2>How it is used</h2>
+      <p>
+        The information is used to reply to coaching enquiries, understand what support may be appropriate, and manage
+        newsletter subscriptions. The Get Started form should not be used for detailed medical information, PAR-Q
+        answers, medication history, diagnoses, or injury records.
+      </p>
+      <h2>Service providers</h2>
+      <p>
+        When configured, newsletter signups are sent to Buttondown and coaching enquiries are sent to Attio. This page
+        should be reviewed and finalised before a public launch.
       </p>
     </div>
   </section>

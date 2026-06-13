@@ -1,6 +1,6 @@
 # Aidan Brotherhood Coaching
 
-V1 website foundation for Aidan Brotherhood: a calm, minimal Astro site for coaching, health, and writing.
+V1 website foundation for Aidan Brotherhood: a calm, minimal Astro site for coaching, health, and posts.
 
 The site is intentionally simple and file-based for now. There is no auth, database, payments, booking system, analytics provider, CMS, client dashboard, or payment/booking logic.
 
@@ -49,7 +49,7 @@ For deployment planning, use `.env.example` as the Vercel environment variable c
 
 `SITE_URL` currently falls back to `https://example.com` as a placeholder. Replace it with the private deployment URL for private testing and the real production URL before launch so RSS links and `sitemap-index.xml` are correct.
 
-`FORM_STUB_MODE=true` makes the newsletter and coaching forms validate successfully and log a sanitised payload to the server console. This is useful for local testing only.
+`FORM_STUB_MODE=true` makes the newsletter, standard enquiry, and Get Started qualification forms validate successfully and log a sanitised payload to the server console. This is useful for local testing only.
 
 Do not deploy public forms with `FORM_STUB_MODE=true`; that creates fake success and loses leads.
 
@@ -89,14 +89,19 @@ src/
   styles/
 ```
 
-- `src/content/writing/` stores Markdown/MDX writing entries.
+- `src/content/writing/` stores Markdown/MDX post entries; the internal collection name remains `writing` for now.
 - `src/content.config.ts` defines the Astro 6 content collection schema.
 - `src/lib/writing.ts` contains small helpers for published posts, featured posts, dates, slugs, and post paths.
-- `src/pages/writing.astro` renders the public archive.
-- `src/pages/writing/[slug].astro` generates individual published posts.
-- `src/pages/rss.xml.ts` generates `/rss.xml` from published writing only.
+- `src/pages/posts.astro` renders the public posts archive at `/posts`.
+- `src/pages/posts/[slug].astro` generates individual published posts at `/posts/[slug]`.
+- `src/pages/writing.astro` and `src/pages/writing/[slug].astro` are legacy redirects to `/posts`.
+- `src/pages/rss.xml.ts` generates `/rss.xml` from published posts only.
 - `src/layouts/PostLayout.astro` renders article pages with metadata, tags, MDX content, and a newsletter form.
 - `src/components/forms/` contains reusable newsletter and coaching enquiry forms.
+- `src/data/services.ts` manages the public coaching/services structure.
+- `src/components/services/` contains reusable service overview components.
+- `src/pages/coaching/[slug].astro` generates concise service detail pages.
+- `src/pages/contact.astro` renders the Get Started qualification page.
 - `src/pages/api/subscribe.ts` validates newsletter submissions and sends to Buttondown only when configured.
 - `src/pages/api/enquiry.ts` validates coaching submissions and sends to Attio only when configured.
 - `src/lib/attio.ts` contains the server-only Attio coaching enquiry helper.
@@ -107,7 +112,7 @@ src/
 - `docs/pre-production-checklist.md` contains the private deployment QA checklist.
 - `docs/private-deployment.md` explains private Vercel deployment, env vars, real Buttondown/Attio testing, and safe rollback.
 
-## Adding A Writing Post
+## Adding A Post
 
 Create a new `.md` or `.mdx` file in `src/content/writing/`.
 
@@ -162,27 +167,36 @@ Optional publishing/SEO fields:
 ## Drafts And Published Posts
 
 - Posts with `status: draft` are not rendered publicly.
-- Drafts are excluded from `/writing`, individual static routes, `/rss.xml`, and sitemap output.
+- Drafts are excluded from `/posts`, individual static routes, `/rss.xml`, and sitemap output.
 - Posts with `status: published` are sorted newest first by `publishedDate`.
 
 ## Featured Posts
 
-- Set `featured: true` to show a post in the featured section on `/writing`.
+- Set `featured: true` to show a post in the featured section on `/posts`.
 - The homepage shows up to three featured published posts.
 - If fewer than three featured posts exist, the homepage falls back to the latest published posts.
 
 ## RSS And Sitemap
 
-- `/rss.xml` is generated from published writing only.
+- `/rss.xml` is generated from published posts only.
 - The Astro sitemap integration is enabled and uses `SITE_URL`.
 - Keep `SITE_URL=https://example.com` only for local scaffolding; change it before production.
+
+## Services
+
+- Current public services are managed in `src/data/services.ts`.
+- `/coaching` renders the grouped services overview.
+- `/coaching/[slug]` renders concise service detail pages from the same data file.
+- Service CTAs point to `/contact`; there is no booking, payment, dashboard, or live calendar integration in this phase.
 
 ## Forms
 
 The frontend forms are deliberately small and progressive:
 
 - Newsletter signup posts to `/api/subscribe`.
+- Newsletter signup collects optional first name, optional last name, and required email address.
 - Coaching enquiry posts to `/api/enquiry`.
+- `/contact` uses the Get Started qualification form to collect lead context before a first conversation.
 - Both routes accept form data or JSON.
 - Both routes validate with Zod.
 - Both routes reject honeypot submissions.
@@ -191,7 +205,9 @@ The frontend forms are deliberately small and progressive:
 - `/api/enquiry` sends to Attio only after validation and only when configured.
 - `/api/enquiry` calls Buttondown for `newsletterOptIn` only after Attio succeeds.
 
-The coaching enquiry form intentionally does not collect medical, injury, medication, mental health, or PAR-Q style data. Any relevant screening should happen separately after coaching is deemed appropriate.
+The Get Started qualification form collects contact details, goals, training background, gym confidence, routine, barriers, preferred coaching format, start timeline, referral/source, newsletter opt-in, and consent to contact.
+
+The coaching enquiry and qualification forms intentionally do not collect detailed medical information, injury history, medication information, mental health information, diagnoses, PAR-Q answers, or sensitive health-record data. Any relevant health screening should happen separately after coaching is deemed appropriate.
 
 ### Attio Coaching Enquiry Integration
 
@@ -226,6 +242,13 @@ Data sent to Attio:
 - name and email;
 - phone only if supplied in E.164 format, such as `+447777777777`;
 - configured list fields for main interest, message, location, contact preference, referral source, social handle, newsletter opt-in, source page, UTMs, consent, stage, submitted time, and optional status notes.
+- optional qualification fields when configured: primary goal, service preference, current training level, gym confidence, current routine, biggest barrier, preferred coaching format, availability, and start timeline.
+
+Qualification fallback summary:
+
+- `ATTIO_FIELD_MESSAGE` receives the submitted message plus a compact qualification summary when qualification fields are present.
+- `ATTIO_FIELD_STATUS_NOTES` receives the same qualification context as part of the broader status notes when configured.
+- If detailed qualification field mappings are blank, the enquiry can still succeed as long as the required Attio config and recommended core fields are present.
 
 Data intentionally not collected or structured:
 
@@ -233,6 +256,7 @@ Data intentionally not collected or structured:
 - injury histories;
 - medication information;
 - mental health information;
+- diagnoses;
 - PAR-Q or screening data.
 
 If `ATTIO_API_KEY` or `ATTIO_COACHING_ENQUIRIES_LIST` is missing in non-stub mode, `/api/enquiry` returns:
@@ -248,7 +272,7 @@ When `FORM_STUB_MODE` is not `true` and `BUTTONDOWN_API_KEY` is present, `/api/s
 Data sent to Buttondown:
 
 - `email_address`
-- subscriber `metadata`: `first_name`, `source`, `source_page`, UTM fields, and `signup_origin`
+- subscriber `metadata`: `first_name`, `last_name`, `source`, `source_page`, UTM fields, and `signup_origin`
 - top-level `utm_source`, `utm_medium`, and `utm_campaign` when present
 
 Data intentionally not sent:
@@ -320,10 +344,10 @@ When the coaching enquiry form has `newsletterOptIn` checked, Buttondown is call
 
 ### Test Coaching Locally
 
-Open `http://localhost:4321/coaching?utm_source=local-test&utm_medium=manual&utm_campaign=forms` and submit the coaching form with required fields completed. You should see:
+Open `http://localhost:4321/contact?utm_source=local-test&utm_medium=manual&utm_campaign=forms` and submit the Get Started form with required fields completed. You should see:
 
 ```text
-Thanks — I’ve got this. I’ll get back to you soon.
+Thanks — I’ve got this. I’ll review your answers and get back to you soon.
 ```
 
 To test validation, submit an invalid email or omit required fields. To test safe production behaviour, set `FORM_STUB_MODE=false` or remove it without Attio config and submit again; the API will return:
@@ -350,22 +374,22 @@ Add `ATTIO_FIELD_*` mappings for the list fields you want to persist. For privat
 - `ATTIO_FIELD_MESSAGE`
 - `ATTIO_FIELD_CONSENT_TO_CONTACT`
 
-Submit the coaching form with a test enquiry. On success, the form should show:
+Submit the Get Started form with a test enquiry. On success, the form should show:
 
 ```text
-Thanks — I’ve got this. I’ll get back to you soon.
+Thanks — I’ve got this. I’ll review your answers and get back to you soon.
 ```
 
 ## Implemented
 
 - Astro + TypeScript + Tailwind foundation.
 - MDX and Astro Content Collections.
-- Production-quality file-based writing schema.
-- Writing archive with featured posts, empty state, post cards, tags, and newest-first sorting.
+- Production-quality file-based posts schema.
+- Posts archive with featured posts, empty state, post cards, tags, and newest-first sorting.
 - Individual post layout with dates, tags, MDX content, SEO metadata, canonical support, and newsletter form.
-- Homepage writing hook that pulls from real content.
+- Homepage posts hook that pulls from real content.
 - RSS feed and sitemap generation.
-- Newsletter signup and coaching enquiry frontend forms.
+- Newsletter signup, standard coaching enquiry, and Get Started qualification frontend forms.
 - Zod validation, honeypot checks, UTM/source capture, and safe stub API routes.
 - Buttondown subscriber integration for `/api/subscribe` when configured.
 - Attio Person/list-entry integration for `/api/enquiry` when configured.
@@ -380,7 +404,7 @@ Thanks — I’ve got this. I’ll get back to you soon.
 - Analytics such as Plausible.
 - Newsletter draft publishing scripts.
 - Medical/PAR-Q screening or health-record storage.
-- Final brand copy, legal text, privacy language, and terms.
+- Final legal review, privacy language, and terms.
 
 ## Dependency Audit Notes
 
@@ -390,9 +414,9 @@ Thanks — I’ve got this. I’ll get back to you soon.
 
 ## Later TODOs
 
-- Add final writing and delete placeholder seed posts.
-- Replace legal placeholder pages before collecting personal data.
-- Decide whether Keystatic should manage writing frontmatter and MDX.
+- Review the starter posts and replace or expand them before public launch if needed.
+- Finalise privacy and terms before public launch.
+- Decide whether Keystatic should manage post frontmatter and MDX.
 - Configure real Attio list fields before production launch.
 - Test real Attio and Buttondown keys in a private deployment before public launch.
 - Complete `docs/pre-production-checklist.md` before any public deployment.

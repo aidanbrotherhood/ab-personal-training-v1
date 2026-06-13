@@ -39,7 +39,7 @@ export function getWritingSlug(post: WritingPost) {
 }
 
 export function getWritingPath(post: WritingPost) {
-  return `/writing/${getWritingSlug(post)}`;
+  return `/posts/${getWritingSlug(post)}`;
 }
 
 export function getPostSummary(post: WritingPost) {

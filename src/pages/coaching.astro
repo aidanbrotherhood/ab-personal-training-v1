@@ -1,36 +1,70 @@
 ---
 export const prerender = true;
 
-import CoachingEnquiryForm from "../components/forms/CoachingEnquiryForm.astro";
+import ServiceGroup from "../components/services/ServiceGroup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getServicesByGroup, primaryServiceCategory, serviceGroups } from "../data/services";
 ---
 
 <BaseLayout
-  title="Coaching"
-  description="Coaching information for Aidan Brotherhood."
+  title="Coaching Services"
+  description="Current coaching services from Aidan Brotherhood: personal training, strength and conditioning, body composition, nutrition support, and online or hybrid coaching."
 >
   <section class="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
-    <div class="max-w-readable">
-      <p class="eyebrow">Coaching</p>
-      <h1 class="mt-5 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">Coaching information will live here.</h1>
+    <div class="max-w-editorial">
+      <p class="eyebrow">{primaryServiceCategory}</p>
+      <h1 class="mt-5 max-w-4xl text-4xl font-semibold sm:text-5xl">
+        Coaching services for strength, confidence, and capable training.
+      </h1>
       <p class="lede mt-6">
-        This page is ready for a clear coaching offer, boundaries, and enquiry path. The enquiry form validates safely,
-        but CRM and email integrations are intentionally deferred.
+        These are the current coaching services: one-to-one personal training, strength and conditioning, body
+        composition support, practical nutrition habits, and remote or hybrid structure. The common thread is simple:
+        reduce confusion, build repeatable training, and progress without drama.
       </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a class="button-primary" href="/contact">
+          Get Started
+        </a>
+        <a class="button-secondary" href="/posts">
+          Read posts
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-12 grid border-y border-line text-sm md:grid-cols-3 md:divide-x md:divide-line">
+      <div class="py-5 md:px-5 md:first:pl-0">
+        <p class="font-bold text-ink">Start with context</p>
+        <p class="mt-2 leading-6 text-ink-muted">Goals, background, confidence, schedule, and constraints first.</p>
+      </div>
+      <div class="border-t border-line py-5 md:border-t-0 md:px-5">
+        <p class="font-bold text-ink">Choose useful structure</p>
+        <p class="mt-2 leading-6 text-ink-muted">The service should fit the person, not the other way around.</p>
+      </div>
+      <div class="border-t border-line py-5 md:border-t-0 md:px-5 md:last:pr-0">
+        <p class="font-bold text-ink">Progress without theatre</p>
+        <p class="mt-2 leading-6 text-ink-muted">Training, nutrition, and accountability kept practical.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section bg-paper-soft">
+    <div class="mx-auto grid w-full max-w-6xl gap-12 px-5 sm:px-6 lg:px-8">
+      {serviceGroups.map((group) => <ServiceGroup group={group} services={getServicesByGroup(group.id)} />)}
     </div>
   </section>
 
   <section class="content-section">
-    <div class="mx-auto grid w-full max-w-6xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+    <div class="mx-auto flex w-full max-w-6xl flex-col gap-5 px-5 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
       <div class="max-w-readable">
-        <p class="eyebrow">Start a conversation</p>
-        <h2 class="mt-3 text-3xl font-semibold tracking-tight">Tell me what you are looking for.</h2>
-        <p class="mt-4 leading-7 text-ink-muted">
-          Use the form for a coaching question or a first enquiry. Keep it practical and high-level for now; if coaching
-          is appropriate, any screening detail can happen separately.
+        <p class="eyebrow">Next step</p>
+        <h2 class="mt-3 text-3xl font-semibold">Start with a simple enquiry.</h2>
+        <p class="mt-3 leading-7 text-ink-muted">
+          Share where you are starting from, what you want help with, and what kind of support feels realistic.
         </p>
       </div>
-      <CoachingEnquiryForm />
+      <a class="button-primary shrink-0" href="/contact">
+        Get Started
+      </a>
     </div>
   </section>
 </BaseLayout>

@@ -8,8 +8,8 @@ export async function GET(context: APIContext) {
   const posts = await getPublishedWriting();
 
   return rss({
-    title: "Aidan Brotherhood Writing",
-    description: "Published writing from Aidan Brotherhood.",
+    title: "Aidan Brotherhood Posts",
+    description: "Published posts from Aidan Brotherhood.",
     site: context.site ?? "https://example.com",
     items: posts.map((post) => ({
       title: post.data.title,

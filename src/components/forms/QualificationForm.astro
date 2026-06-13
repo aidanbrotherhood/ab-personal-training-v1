@@ -1,0 +1,279 @@
+---
+import {
+  availabilityOptions,
+  biggestBarrierOptions,
+  currentRoutineOptions,
+  currentTrainingLevelOptions,
+  gymConfidenceOptions,
+  mainInterestOptions,
+  preferredCoachingFormatOptions,
+  preferredContactMethodOptions,
+  servicePreferenceOptions,
+  startTimelineOptions,
+} from "../../lib/validation";
+
+interface Props {
+  id?: string;
+}
+
+const { id = "qualification-form" } = Astro.props;
+
+const inputClass = "form-input";
+const errorClass = "form-error";
+const sectionTitleClass = "text-xl font-semibold";
+---
+
+<form
+  id={id}
+  class="surface-card p-5 sm:p-7"
+  action="/api/enquiry"
+  method="post"
+  data-enhanced-form
+  data-success-message="Thanks — I’ve got this. I’ll review your answers and get back to you soon."
+  data-generic-error-message="Something went wrong. Please try again."
+  novalidate
+>
+  <input type="hidden" name="enquiryType" value="qualification" />
+
+  <div>
+    <p class="eyebrow">Get Started</p>
+    <h2 class="mt-3 text-2xl font-semibold">Share enough context for a useful first reply.</h2>
+    <p class="mt-3 max-w-readable leading-7 text-ink-muted">
+      Short answers are fine. This is a lead qualification form, not a full intake or onboarding process.
+    </p>
+    <p class="form-note mt-4">
+      Please do not include detailed medical information here. If coaching is appropriate, any relevant health
+      screening will be completed separately.
+    </p>
+  </div>
+
+  <section class="form-section" aria-labelledby={`${id}-contact-title`}>
+    <h3 id={`${id}-contact-title`} class={sectionTitleClass}>Contact details</h3>
+    <p class="mt-2 text-sm leading-6 text-ink-muted">The basics Aidan needs in order to respond.</p>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <div>
+        <label class="form-label" for={`${id}-firstName`}>First name</label>
+        <input class={inputClass} id={`${id}-firstName`} name="firstName" type="text" autocomplete="given-name" maxlength="80" required />
+        <p class={errorClass} data-error-for="firstName"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-lastName`}>Last name <span class="form-label-optional">(optional)</span></label>
+        <input class={inputClass} id={`${id}-lastName`} name="lastName" type="text" autocomplete="family-name" maxlength="80" />
+        <p class={errorClass} data-error-for="lastName"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-email`}>Email address</label>
+        <input class={inputClass} id={`${id}-email`} name="email" type="email" autocomplete="email" maxlength="254" required />
+        <p class={errorClass} data-error-for="email"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-phone`}>Phone <span class="form-label-optional">(optional)</span></label>
+        <input class={inputClass} id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" maxlength="40" />
+        <p class={errorClass} data-error-for="phone"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-location`}>Location <span class="form-label-optional">(optional)</span></label>
+        <input class={inputClass} id={`${id}-location`} name="location" type="text" autocomplete="address-level2" maxlength="120" />
+        <p class={errorClass} data-error-for="location"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-preferredContactMethod`}>
+          Preferred contact method <span class="form-label-optional">(optional)</span>
+        </label>
+        <select class={inputClass} id={`${id}-preferredContactMethod`} name="preferredContactMethod">
+          <option value="">No preference selected</option>
+          {preferredContactMethodOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="preferredContactMethod"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section" aria-labelledby={`${id}-goals-title`}>
+    <h3 id={`${id}-goals-title`} class={sectionTitleClass}>Service and goals</h3>
+    <p class="mt-2 text-sm leading-6 text-ink-muted">What you want help with, in your own words.</p>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <div>
+        <label class="form-label" for={`${id}-mainInterest`}>Main interest</label>
+        <select class={inputClass} id={`${id}-mainInterest`} name="mainInterest" required>
+          <option value="">Choose the closest option</option>
+          {mainInterestOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="mainInterest"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-servicePreference`}>
+          Service preference <span class="form-label-optional">(optional)</span>
+        </label>
+        <select class={inputClass} id={`${id}-servicePreference`} name="servicePreference">
+          <option value="">No preference selected</option>
+          {servicePreferenceOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="servicePreference"></p>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label class="form-label" for={`${id}-primaryGoal`}>Primary goal</label>
+        <input class={inputClass} id={`${id}-primaryGoal`} name="primaryGoal" type="text" maxlength="240" required />
+        <p class={errorClass} data-error-for="primaryGoal"></p>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label class="form-label" for={`${id}-message`}>What are you looking for help with?</label>
+        <textarea class={inputClass} id={`${id}-message`} name="message" rows="6" maxlength="3000" required></textarea>
+        <p class={errorClass} data-error-for="message"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section" aria-labelledby={`${id}-background-title`}>
+    <h3 id={`${id}-background-title`} class={sectionTitleClass}>Training background</h3>
+    <p class="mt-2 text-sm leading-6 text-ink-muted">Choose the closest option. This is context, not a test.</p>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <div>
+        <label class="form-label" for={`${id}-currentTrainingLevel`}>Current training level</label>
+        <select class={inputClass} id={`${id}-currentTrainingLevel`} name="currentTrainingLevel" required>
+          <option value="">Choose the closest option</option>
+          {currentTrainingLevelOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="currentTrainingLevel"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-gymConfidence`}>Gym confidence</label>
+        <select class={inputClass} id={`${id}-gymConfidence`} name="gymConfidence" required>
+          <option value="">Choose the closest option</option>
+          {gymConfidenceOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="gymConfidence"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-currentRoutine`}>Current routine</label>
+        <select class={inputClass} id={`${id}-currentRoutine`} name="currentRoutine" required>
+          <option value="">Choose the closest option</option>
+          {currentRoutineOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="currentRoutine"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-biggestBarrier`}>Biggest barrier</label>
+        <select class={inputClass} id={`${id}-biggestBarrier`} name="biggestBarrier" required>
+          <option value="">Choose the closest option</option>
+          {biggestBarrierOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="biggestBarrier"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section" aria-labelledby={`${id}-fit-title`}>
+    <h3 id={`${id}-fit-title`} class={sectionTitleClass}>Practical fit</h3>
+    <p class="mt-2 text-sm leading-6 text-ink-muted">A few details that help avoid suggesting the wrong next step.</p>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <div>
+        <label class="form-label" for={`${id}-preferredCoachingFormat`}>Preferred coaching format</label>
+        <select class={inputClass} id={`${id}-preferredCoachingFormat`} name="preferredCoachingFormat" required>
+          <option value="">Choose the closest option</option>
+          {preferredCoachingFormatOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="preferredCoachingFormat"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-availability`}>
+          Availability <span class="form-label-optional">(optional)</span>
+        </label>
+        <select class={inputClass} id={`${id}-availability`} name="availability">
+          <option value="">No preference selected</option>
+          {availabilityOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="availability"></p>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label class="form-label" for={`${id}-startTimeline`}>How soon do you want to start?</label>
+        <select class={inputClass} id={`${id}-startTimeline`} name="startTimeline" required>
+          <option value="">Choose the closest option</option>
+          {startTimelineOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <p class={errorClass} data-error-for="startTimeline"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section" aria-labelledby={`${id}-source-title`}>
+    <h3 id={`${id}-source-title`} class={sectionTitleClass}>Referral and consent</h3>
+    <p class="mt-2 text-sm leading-6 text-ink-muted">How you found the site, and permission to reply.</p>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <div>
+        <label class="form-label" for={`${id}-referralSource`}>
+          How did you hear about this? <span class="form-label-optional">(optional)</span>
+        </label>
+        <input class={inputClass} id={`${id}-referralSource`} name="referralSource" type="text" maxlength="200" />
+        <p class={errorClass} data-error-for="referralSource"></p>
+      </div>
+
+      <div>
+        <label class="form-label" for={`${id}-socialHandle`}>
+          Social handle <span class="form-label-optional">(optional)</span>
+        </label>
+        <input class={inputClass} id={`${id}-socialHandle`} name="socialHandle" type="text" maxlength="120" placeholder="@username" />
+        <p class={errorClass} data-error-for="socialHandle"></p>
+      </div>
+    </div>
+
+    <div class="mt-5 grid gap-4">
+      <label class="flex gap-3 text-sm leading-6 text-ink-muted">
+        <input class="form-checkbox" name="newsletterOptIn" type="checkbox" value="true" />
+        <span>I would also like occasional posts/newsletter updates.</span>
+      </label>
+
+      <div>
+        <label class="flex gap-3 text-sm leading-6 text-ink-muted">
+          <input class="form-checkbox" name="consentToContact" type="checkbox" value="true" required />
+          <span>I consent to being contacted about this enquiry.</span>
+        </label>
+        <p class={errorClass} data-error-for="consentToContact"></p>
+      </div>
+    </div>
+  </section>
+
+  <input type="hidden" name="sourcePage" />
+  <input type="hidden" name="utmSource" />
+  <input type="hidden" name="utmMedium" />
+  <input type="hidden" name="utmCampaign" />
+  <input type="hidden" name="utmTerm" />
+  <input type="hidden" name="utmContent" />
+
+  <div class="hidden" aria-hidden="true">
+    <label for={`${id}-website`}>Website</label>
+    <input id={`${id}-website`} name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="mt-6 flex flex-col gap-4 border-t border-line pt-5 sm:flex-row sm:items-center">
+    <button
+      class="button-primary disabled:cursor-not-allowed disabled:opacity-60"
+      type="submit"
+      data-idle-label="Send Get Started enquiry"
+      data-loading-label="Sending…"
+    >
+      Send Get Started enquiry
+    </button>
+    <p class="text-sm text-ink-muted" role="status" aria-live="polite" data-form-status></p>
+  </div>
+</form>
+
+<script>
+  import { enhanceForms } from "../../lib/form-client";
+
+  enhanceForms();
+  document.addEventListener("astro:page-load", enhanceForms);
+</script>

@@ -14,7 +14,7 @@ The repo already has the pieces Vercel needs:
 - `src/pages/api/subscribe.ts` and `src/pages/api/enquiry.ts` export `POST` handlers and `prerender = false`, so they run as server-rendered API routes.
 - `package.json` pins `"node": "24.x"` in `engines`.
 - `.nvmrc` pins local Node to `24`.
-- Static pages and writing routes opt into `prerender = true`.
+- Static pages and posts routes opt into `prerender = true`.
 - RSS and sitemap use `SITE_URL` through Astro `site`, falling back to `https://example.com` only so local builds do not fail.
 
 Official references checked during this audit:
@@ -119,6 +119,15 @@ BUTTONDOWN_API_VERSION=
 ATTIO_API_BASE_URL=
 ATTIO_FIELD_LOCATION=
 ATTIO_FIELD_PREFERRED_CONTACT_METHOD=
+ATTIO_FIELD_PRIMARY_GOAL=
+ATTIO_FIELD_SERVICE_PREFERENCE=
+ATTIO_FIELD_CURRENT_TRAINING_LEVEL=
+ATTIO_FIELD_GYM_CONFIDENCE=
+ATTIO_FIELD_CURRENT_ROUTINE=
+ATTIO_FIELD_BIGGEST_BARRIER=
+ATTIO_FIELD_PREFERRED_COACHING_FORMAT=
+ATTIO_FIELD_AVAILABILITY=
+ATTIO_FIELD_START_TIMELINE=
 ATTIO_FIELD_REFERRAL_SOURCE=
 ATTIO_FIELD_SOCIAL_HANDLE=
 ATTIO_FIELD_NEWSLETTER_OPT_IN=
@@ -151,7 +160,8 @@ Trigger a Vercel deployment after setting env vars.
 After deploy:
 
 - Open the deployment URL.
-- Confirm `/`, `/writing`, `/coaching`, `/privacy`, `/terms`, and `/rss.xml` load.
+- Confirm `/`, `/posts`, `/coaching`, `/about`, `/contact`, `/privacy`, `/terms`, and `/rss.xml` load.
+- Confirm `/writing` redirects or safely resolves to `/posts`.
 - Confirm the deployment URL and `SITE_URL` match the URL you expect in RSS/sitemap output.
 - Confirm forms are not tested with real client data.
 
@@ -159,7 +169,7 @@ After deploy:
 
 Use a fresh test email you control.
 
-- Open the homepage or `/writing` with test UTMs, e.g. `?utm_source=private-test&utm_medium=manual&utm_campaign=buttondown`.
+- Open the homepage or `/posts` with test UTMs, e.g. `?utm_source=private-test&utm_medium=manual&utm_campaign=buttondown`.
 - Submit the newsletter form with a valid fresh test email.
 - Confirm the page shows `Thanks — you’re on the list.`
 - Confirm the subscriber appears in Buttondown.
@@ -170,7 +180,7 @@ Use a fresh test email you control.
 - If practical, send a manual honeypot request with `website=bot` and confirm Buttondown is not called.
 - Confirm no coaching enquiry message, phone, health, injury, medical, medication, or mental-health data appears in Buttondown.
 
-## Step 7: Test Coaching Enquiry Form With Attio
+## Step 7: Test Get Started Form With Attio
 
 Before testing:
 
@@ -181,16 +191,17 @@ Before testing:
 
 Then:
 
-- Open `/coaching` with test UTMs, e.g. `?utm_source=private-test&utm_medium=manual&utm_campaign=attio`.
-- Submit a realistic test enquiry with a test email.
-- Confirm the page shows `Thanks — I’ve got this. I’ll get back to you soon.`
+- Open `/contact` with test UTMs, e.g. `?utm_source=private-test&utm_medium=manual&utm_campaign=attio`.
+- Submit a realistic Get Started enquiry with a test email.
+- Confirm the page shows `Thanks — I’ve got this. I’ll review your answers and get back to you soon.`
 - Confirm Attio created or updated the Person by email.
 - Confirm Attio created/asserted the Coaching Enquiries list entry.
 - Confirm the stage is `New enquiry` if `ATTIO_FIELD_STAGE` is configured.
-- Confirm message, source page, and UTMs are captured according to configured fields.
+- Confirm message, source page, UTMs, and qualification summary are captured according to configured fields.
+- If detailed qualification fields are not mapped, confirm `ATTIO_FIELD_MESSAGE` or `ATTIO_FIELD_STATUS_NOTES` contains the fallback qualification summary when either field is configured.
 - Submit the same email again and inspect whether Attio updates/asserts the existing list entry safely.
 - Submit with optional fields omitted and confirm the enquiry still succeeds.
-- Confirm no medical/PAR-Q style data is intentionally collected or routed.
+- Confirm no medical, injury-history, medication, diagnosis, mental-health, or PAR-Q style data is intentionally collected or routed.
 
 ## Step 8: Test Coaching Newsletter Opt-In
 
@@ -198,8 +209,8 @@ With both Attio and Buttondown configured:
 
 - Submit a coaching enquiry with newsletter opt-in checked.
 - Confirm Attio succeeds first.
-- Confirm Buttondown receives only newsletter-safe data: email, first name, source page, and UTMs.
-- Confirm Buttondown does not receive the coaching message, phone, location, referral source, social handle, or health/medical details.
+- Confirm Buttondown receives only newsletter-safe data: email, first name, last name, source page, and UTMs.
+- Confirm Buttondown does not receive the coaching message, qualification answers, phone, location, referral source, social handle, or health/medical details.
 - Temporarily remove `BUTTONDOWN_API_KEY` in a private test environment and redeploy.
 - Submit another opt-in enquiry.
 - Confirm Attio still succeeds and the public response is still the enquiry success message.
@@ -238,8 +249,8 @@ This form is not available yet. Please contact Aidan directly for now.
 
 Resolve these before public launch:
 
-- Replace placeholder privacy and terms pages.
-- Replace placeholder coaching/about/writing copy where needed.
+- Finalise privacy and terms pages.
+- Review coaching/about/posts copy with the private test audience and refine where needed.
 - Confirm final `SITE_URL`.
 - Confirm real Buttondown and Attio credentials in the production environment.
 - Confirm Attio list fields and stage options match the website values.

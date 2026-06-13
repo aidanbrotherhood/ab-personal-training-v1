@@ -1,0 +1,85 @@
+---
+export const prerender = true;
+
+import NewsletterForm from "../components/forms/NewsletterForm.astro";
+import PostCard from "../components/cards/PostCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPublishedWriting } from "../lib/writing";
+
+const posts = await getPublishedWriting();
+const featuredPosts = posts.filter((post) => post.data.featured);
+---
+
+<BaseLayout
+  title="Posts"
+  description="Posts from Aidan Brotherhood on strength, health ownership, training consistency, and physical capability."
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <div class="max-w-editorial">
+      <p class="eyebrow">Posts</p>
+      <h1 class="mt-5 text-4xl font-semibold sm:text-5xl">Clear notes for stronger training.</h1>
+      <p class="lede mt-6">
+        A compact archive on strength, consistency, health ownership, coaching, and the practical work of building a
+        body you can rely on.
+      </p>
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-3 border-y border-line py-4 text-sm font-semibold text-ink-muted">
+      <span>Training notes</span>
+      <span aria-hidden="true">/</span>
+      <span>Coaching thinking</span>
+      <span aria-hidden="true">/</span>
+      <span>Physical capability</span>
+    </div>
+
+    {
+      featuredPosts.length > 0 && (
+        <section class="mt-14" aria-labelledby="featured-posts-title">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p class="eyebrow">Featured</p>
+              <h2 id="featured-posts-title" class="mt-3 text-3xl font-semibold">
+                Start here
+              </h2>
+            </div>
+          </div>
+          <div class="mt-6 grid gap-6 md:grid-cols-2">
+            {featuredPosts.map((post) => (
+              <PostCard post={post} headingLevel="h3" />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="mt-14" aria-labelledby="all-posts-title">
+      <div class="border-t border-line pt-8">
+        <p class="eyebrow">Archive</p>
+        <h2 id="all-posts-title" class="mt-3 text-3xl font-semibold">All posts</h2>
+      </div>
+
+      {
+        posts.length > 0 ? (
+          <div class="mt-6 grid gap-5">
+            {posts.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        ) : (
+          <div class="surface-card mt-8 p-8">
+            <h2 class="text-2xl font-semibold">No published posts yet.</h2>
+            <p class="mt-3 max-w-readable text-ink-muted">Published posts will appear here automatically.</p>
+          </div>
+        )
+      }
+    </section>
+
+    <aside class="mt-14" aria-label="Newsletter signup">
+      <NewsletterForm
+        id="posts-newsletter-form"
+        heading="Get future posts"
+        description="Occasional writing on training, capability, and practical health ownership."
+      />
+    </aside>
+  </section>
+</BaseLayout>

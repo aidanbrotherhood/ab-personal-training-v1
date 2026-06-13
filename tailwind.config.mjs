@@ -6,27 +6,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#181715",
-        "ink-muted": "#5f5a52",
-        paper: "#f6f1e8",
-        "paper-soft": "#fbf8f2",
-        line: "#d8cec0",
-        accent: "#6f5d45"
+        ink: "#111827",
+        "ink-muted": "#5B6472",
+        "ink-soft": "#7A8493",
+        paper: "#F7F8FA",
+        "paper-soft": "#FFFFFF",
+        "paper-tint": "#F1F5F9",
+        line: "#E2E8F0",
+        "line-strong": "#CBD5E1",
+        accent: "#007AFF",
+        "accent-strong": "#0066D6",
+        "accent-soft": "#EAF4FF"
       },
       fontFamily: {
-        sans: [
-          "Inter",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "sans-serif"
-        ],
-        serif: ["Georgia", "Cambria", "Times New Roman", "serif"]
+        sans: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
+        heading: ["var(--font-heading)", "var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["var(--font-heading)", "var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"]
       },
       maxWidth: {
-        readable: "68ch"
+        readable: "68ch",
+        editorial: "74ch"
+      },
+      boxShadow: {
+        card: "0 1px 2px rgba(17, 24, 39, 0.04)"
+      },
+      borderRadius: {
+        brand: "0.5rem"
       }
     }
   },

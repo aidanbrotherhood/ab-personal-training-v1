@@ -1,7 +1,6 @@
 ---
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/writing", label: "Writing" },
+  { href: "/posts", label: "Posts" },
   { href: "/coaching", label: "Coaching" },
   { href: "/about", label: "About" },
 ];
@@ -11,13 +10,18 @@ const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 ---
 
-<header class="border-b border-line/80 bg-paper/85 backdrop-blur">
-  <div class="mx-auto flex w-full max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-    <a href="/" class="text-base font-semibold tracking-tight no-underline" aria-label="Aidan Brotherhood home">
-      Aidan Brotherhood
+<header class="site-header sticky top-0 z-40 border-b border-line/80 bg-paper-soft/90 backdrop-blur">
+  <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-5 py-2 sm:flex-nowrap sm:px-6 sm:py-3 lg:px-8">
+    <a
+      href="/"
+      class="heading-font inline-flex items-center gap-3 text-sm font-bold text-ink no-underline sm:text-base"
+      aria-label="Aidan Brotherhood home"
+    >
+      <span class="h-2 w-2 rounded-full bg-accent" aria-hidden="true"></span>
+      <span>Aidan Brotherhood</span>
     </a>
-    <nav aria-label="Primary navigation">
-      <ul class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-muted">
+    <nav class="w-full sm:ml-auto sm:w-auto" aria-label="Primary navigation">
+      <ul class="flex flex-nowrap items-center gap-x-1.5 overflow-x-auto pb-1 text-[0.8125rem] text-ink-muted sm:justify-end sm:overflow-visible sm:pb-0 sm:text-sm">
         {
           navItems.map((item) => (
             <li>
@@ -25,8 +29,8 @@ const isActive = (href: string) =>
                 href={item.href}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 class:list={[
-                  "rounded-full no-underline transition-colors hover:text-ink",
-                  isActive(item.href) && "font-semibold text-ink",
+                  "shrink-0 rounded-brand px-2 py-1.5 font-semibold no-underline transition-colors hover:bg-accent-soft hover:text-accent-strong sm:px-2.5 sm:py-2",
+                  isActive(item.href) && "bg-accent-soft text-accent-strong",
                 ]}
               >
                 {item.label}
@@ -34,6 +38,18 @@ const isActive = (href: string) =>
             </li>
           ))
         }
+        <li>
+          <a
+            href="/contact"
+            aria-current={isActive("/contact") ? "page" : undefined}
+            class:list={[
+              "button-primary button-small ml-1 shrink-0",
+              isActive("/contact") && "border-accent-strong bg-accent-strong",
+            ]}
+          >
+            Get Started
+          </a>
+        </li>
       </ul>
     </nav>
   </div>

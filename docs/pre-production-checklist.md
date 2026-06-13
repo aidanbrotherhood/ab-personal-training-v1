@@ -13,7 +13,8 @@ Do not use real client data for testing. Use labelled test addresses and test en
 - Run build: `npm run build`.
 - Start local dev in stub mode: `FORM_STUB_MODE=true npm run dev`.
 - Open `http://localhost:4321`.
-- Confirm `/`, `/writing`, `/coaching`, `/privacy`, and `/terms` render.
+- Confirm `/`, `/posts`, `/coaching`, `/about`, `/contact`, `/privacy`, and `/terms` render.
+- Confirm `/writing` redirects or safely resolves to `/posts`.
 
 ## Vercel Readiness
 
@@ -63,6 +64,15 @@ BUTTONDOWN_API_VERSION=
 ATTIO_API_BASE_URL=
 ATTIO_FIELD_LOCATION=
 ATTIO_FIELD_PREFERRED_CONTACT_METHOD=
+ATTIO_FIELD_PRIMARY_GOAL=
+ATTIO_FIELD_SERVICE_PREFERENCE=
+ATTIO_FIELD_CURRENT_TRAINING_LEVEL=
+ATTIO_FIELD_GYM_CONFIDENCE=
+ATTIO_FIELD_CURRENT_ROUTINE=
+ATTIO_FIELD_BIGGEST_BARRIER=
+ATTIO_FIELD_PREFERRED_COACHING_FORMAT=
+ATTIO_FIELD_AVAILABILITY=
+ATTIO_FIELD_START_TIMELINE=
 ATTIO_FIELD_REFERRAL_SOURCE=
 ATTIO_FIELD_SOCIAL_HANDLE=
 ATTIO_FIELD_NEWSLETTER_OPT_IN=
@@ -92,9 +102,9 @@ With `FORM_STUB_MODE=true` locally:
 - Confirm success: `Thanks — you’re on the list.`
 - Submit newsletter with an invalid email.
 - Confirm a friendly validation error.
-- Submit coaching enquiry with required fields.
-- Confirm success: `Thanks — I’ve got this. I’ll get back to you soon.`
-- Submit coaching enquiry with missing required fields.
+- Submit the Get Started form on `/contact` with required fields.
+- Confirm success: `Thanks — I’ve got this. I’ll review your answers and get back to you soon.`
+- Submit Get Started with missing required fields.
 - Confirm friendly validation errors.
 - Confirm server logs contain sanitised data only.
 - Confirm no data is sent to Buttondown or Attio.
@@ -105,7 +115,7 @@ With `FORM_STUB_MODE=false` and no provider keys:
 
 - Submit newsletter.
 - Confirm `503` or the visible unavailable message.
-- Submit coaching enquiry.
+- Submit Get Started enquiry.
 - Confirm `503` or the visible unavailable message.
 - Confirm neither route returns a success message.
 - Confirm server logs do not include secrets, full email addresses, or full enquiry messages.
@@ -128,8 +138,8 @@ Use a manual request tool such as `curl` and include `website=bot`.
 
 ## UTM And Source Capture
 
-- Open `http://localhost:4321/coaching?utm_source=private-test&utm_medium=manual&utm_campaign=preprod&utm_term=forms&utm_content=checklist`.
-- Submit a stub coaching enquiry.
+- Open `http://localhost:4321/contact?utm_source=private-test&utm_medium=manual&utm_campaign=preprod&utm_term=forms&utm_content=checklist`.
+- Submit a stub Get Started enquiry.
 - Confirm hidden attribution appears in sanitised server logs.
 - Navigate to another page in the same session.
 - Submit newsletter.
@@ -137,7 +147,7 @@ Use a manual request tool such as `curl` and include `website=bot`.
 
 ## RSS And Sitemap
 
-- Confirm `/rss.xml` includes published writing only.
+- Confirm `/rss.xml` includes published posts only.
 - Confirm sitemap output uses the configured `SITE_URL`.
 - Confirm `https://example.com` appears only when `SITE_URL` is missing or placeholder.
 - Treat placeholder RSS/sitemap URLs as safe for local builds but a public-launch blocker.
@@ -166,7 +176,7 @@ Checklist:
 - Submit newsletter with a fresh test email you control.
 - Confirm the form shows `Thanks — you’re on the list.`
 - Confirm Buttondown has the subscriber.
-- Confirm metadata/source/UTMs are present if supported: `first_name`, `source`, `source_page`, UTM fields, and `signup_origin`.
+- Confirm metadata/source/UTMs are present if supported: `first_name`, `last_name`, `source`, `source_page`, UTM fields, and `signup_origin`.
 - Submit the same email again.
 - Confirm duplicate handling returns success and does not forcibly resubscribe an unsubscribed person.
 - Submit an invalid email and confirm validation fails before Buttondown is called.
@@ -207,33 +217,35 @@ Checklist:
 
 - Create or identify the Coaching Enquiries list.
 - Configure required list field mappings for the values you want to inspect.
-- Submit coaching enquiry with a test email.
-- Confirm the form shows `Thanks — I’ve got this. I’ll get back to you soon.`
+- Submit Get Started with a test email.
+- Confirm the form shows `Thanks — I’ve got this. I’ll review your answers and get back to you soon.`
 - Confirm Attio created or updated a Person by email.
 - Confirm Attio created/asserted the Coaching Enquiries list entry.
 - Confirm stage is `New enquiry` if `ATTIO_FIELD_STAGE` is configured.
-- Confirm message, source page, and UTMs are captured according to configured fields.
+- Confirm message, source page, UTMs, and qualification summary are captured according to configured fields.
+- If detailed qualification mappings are blank, confirm the qualification summary is present in `ATTIO_FIELD_MESSAGE` or `ATTIO_FIELD_STATUS_NOTES` when either field is configured.
 - Submit the same email again and inspect whether Attio updates/asserts the list entry safely.
 - Test missing optional fields and confirm the enquiry still succeeds.
-- Confirm no medical, injury, medication, mental-health, or PAR-Q style data is intentionally collected or routed.
+- Confirm no detailed medical information, injury history, medication information, diagnosis, mental-health information, or PAR-Q style data is intentionally collected or routed.
 
 ## Enquiry Newsletter Opt-In Test
 
 With Attio configured and Buttondown configured:
 
-- Submit coaching enquiry with `newsletterOptIn` checked.
+- Submit Get Started with `newsletterOptIn` checked.
 - Confirm Attio succeeds.
-- Confirm Buttondown receives only newsletter-safe fields: email, first name, source page, and UTMs.
-- Confirm Buttondown does not receive the coaching message, phone, location, referral source, or social handle.
+- Confirm Buttondown receives only newsletter-safe fields: email, first name, last name, source page, and UTMs.
+- Confirm Buttondown does not receive the coaching message, qualification answers, phone, location, referral source, or social handle.
 - Temporarily remove `BUTTONDOWN_API_KEY` in a private test environment and redeploy.
 - Submit another opt-in enquiry.
 - Confirm Attio still succeeds.
 - Confirm the public response is still enquiry success.
 - Confirm server logs show only a sanitised Buttondown opt-in skip/failure.
 
-## Writing And Drafts
+## Posts And Drafts
 
-- Confirm `/writing` shows published posts only.
+- Confirm `/posts` shows published posts only.
+- Confirm `/writing` redirects or safely resolves to `/posts`.
 - Confirm at least one individual published post route works.
 - Confirm `src/content/writing/draft-example.mdx` does not render publicly.
 - Confirm draft posts are absent from `/rss.xml` and sitemap output.
@@ -250,8 +262,8 @@ To safely disable real form handling:
 
 ## Final Human Check
 
-- Read the coaching form warning out loud.
+- Read the Get Started form warning out loud.
 - Confirm the form still does not ask for detailed medical information.
-- Confirm privacy and terms placeholders are acceptable for the private test audience only.
-- Confirm placeholder pages and seed posts are not treated as public-launch-ready.
+- Confirm privacy and terms drafts are acceptable for the private test audience only.
+- Confirm starter posts and service copy are ready for the intended review audience.
 - Confirm any test data created in Buttondown or Attio is labelled or removed after testing.

@@ -4,15 +4,72 @@ export const prerender = true;
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="About" description="About Aidan Brotherhood.">
+<BaseLayout
+  title="About"
+  description="About Aidan Brotherhood and the coaching practice being built around strength, confidence, and physical capability."
+>
   <section class="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
-    <div class="max-w-readable">
+    <div class="max-w-editorial">
       <p class="eyebrow">About</p>
-      <h1 class="mt-5 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">Aidan Brotherhood</h1>
+      <h1 class="mt-5 text-4xl font-semibold sm:text-5xl">Aidan Brotherhood</h1>
       <p class="lede mt-6">
-        Placeholder page for a concise profile, background, and principles. Final biography and positioning will be
-        written later.
+        Aidan is building a coaching practice focused on strength, conditioning, body composition, gym confidence,
+        practical nutrition habits, and long-term physical capability.
       </p>
+    </div>
+  </section>
+
+  <section class="content-section bg-paper-soft">
+    <div class="mx-auto grid w-full max-w-6xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.7fr_1.3fr] lg:px-8">
+      <div>
+        <p class="eyebrow">Profile</p>
+        <h2 class="mt-3 text-3xl font-semibold">A practical coaching practice, built carefully.</h2>
+        <p class="mt-4 leading-7 text-ink-muted">
+          The tone is deliberately simple: useful training, better decisions, and steady progress.
+        </p>
+      </div>
+
+      <div class="grid gap-6">
+        <section class="surface-card p-5 sm:p-6" aria-labelledby="who-i-am-title">
+          <h3 id="who-i-am-title" class="text-2xl font-semibold">Who I am</h3>
+          <p class="mt-3 leading-7 text-ink-muted">
+            I am Aidan Brotherhood, a personal trainer and coach building a small practice around clear training,
+            practical nutrition habits, and better confidence in the gym.
+          </p>
+        </section>
+
+        <section class="surface-card p-5 sm:p-6" aria-labelledby="why-i-coach-title">
+          <h3 id="why-i-coach-title" class="text-2xl font-semibold">Why I coach</h3>
+          <p class="mt-3 leading-7 text-ink-muted">
+            Physical capability changes how daily life feels. Good coaching should reduce confusion, make the basics
+            easier to practise, and help progress feel less fragile.
+          </p>
+        </section>
+
+        <section class="surface-card p-5 sm:p-6" aria-labelledby="what-i-care-about-title">
+          <h3 id="what-i-care-about-title" class="text-2xl font-semibold">What I care about</h3>
+          <p class="mt-3 leading-7 text-ink-muted">
+            The work is useful, clear, disciplined, evidence-informed, and honest. In practice, that means strength,
+            conditioning, body composition, gym confidence, and long-term health behaviours approached without drama.
+          </p>
+        </section>
+
+        <section class="surface-card p-5 sm:p-6" aria-labelledby="how-i-work-title">
+          <h3 id="how-i-work-title" class="text-2xl font-semibold">How I work</h3>
+          <p class="mt-3 leading-7 text-ink-muted">
+            Coaching is calm and practical. The aim is not to impress you with complexity; it is to choose useful work,
+            progress it sensibly, and keep adjusting based on what is actually happening.
+          </p>
+        </section>
+
+        <section class="surface-card p-5 sm:p-6" aria-labelledby="current-stage-title">
+          <h3 id="current-stage-title" class="text-2xl font-semibold">Current stage</h3>
+          <p class="mt-3 leading-7 text-ink-muted">
+            The practice is being built properly, one client and one result at a time. The site reflects the current
+            stage: clear services, a practical Get Started flow, and writing that explains the thinking behind the work.
+          </p>
+        </section>
+      </div>
     </div>
   </section>
 </BaseLayout>

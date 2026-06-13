@@ -15,6 +15,12 @@ import { coachingEnquirySchema } from "../../lib/validation";
 
 export const prerender = false;
 
+function getSuccessMessage(enquiryType: string) {
+  return enquiryType === "qualification"
+    ? "Thanks — I’ve got this. I’ll review your answers and get back to you soon."
+    : "Thanks — I’ve got this. I’ll get back to you soon.";
+}
+
 export async function POST({ request }: { request: Request }) {
   try {
     const payload = await parseRequestBody(request);
@@ -30,7 +36,7 @@ export async function POST({ request }: { request: Request }) {
 
       return jsonResponse({
         ok: true,
-        message: "Thanks — I’ve got this. I’ll get back to you soon.",
+        message: getSuccessMessage(data.enquiryType),
         ...(import.meta.env.DEV ? { devMessage: "Stub mode: validated but not sent to integrations." } : {}),
       });
     }
@@ -51,6 +57,7 @@ export async function POST({ request }: { request: Request }) {
         const newsletterResult = await subscribeToButtondown({
           email: data.email,
           firstName: data.firstName,
+          lastName: data.lastName,
           website: "",
           sourcePage: data.sourcePage,
           utmSource: data.utmSource,
@@ -65,6 +72,7 @@ export async function POST({ request }: { request: Request }) {
             ...sanitiseForLog("newsletter", {
               email: data.email,
               firstName: data.firstName,
+              lastName: data.lastName,
               sourcePage: data.sourcePage,
               utmSource: data.utmSource,
               utmMedium: data.utmMedium,
@@ -81,6 +89,7 @@ export async function POST({ request }: { request: Request }) {
             ...sanitiseForLog("newsletter", {
               email: data.email,
               firstName: data.firstName,
+              lastName: data.lastName,
               sourcePage: data.sourcePage,
               utmSource: data.utmSource,
               utmMedium: data.utmMedium,
@@ -96,7 +105,7 @@ export async function POST({ request }: { request: Request }) {
 
       return jsonResponse({
         ok: true,
-        message: "Thanks — I’ve got this. I’ll get back to you soon.",
+        message: getSuccessMessage(data.enquiryType),
       });
     }
 

@@ -70,6 +70,7 @@ function buildSubscriberMetadata(input: NewsletterSignupInput) {
   };
 
   addMetadataValue(metadata, "first_name", input.firstName);
+  addMetadataValue(metadata, "last_name", input.lastName);
   addMetadataValue(metadata, "source_page", input.sourcePage);
   addMetadataValue(metadata, "utm_source", input.utmSource);
   addMetadataValue(metadata, "utm_medium", input.utmMedium);
