@@ -1,4 +1,4 @@
-import type { MetaFunction } from "react-router";
+import { useSearchParams, type MetaFunction } from "react-router";
 
 export const meta: MetaFunction = () => [
   { title: "Personal Training in Renfrew | AB Personal Training" },
@@ -62,6 +62,8 @@ function Brand() {
 }
 
 export default function Home() {
+  const [searchParams] = useSearchParams();
+  const received = searchParams.get("enquiry") === "received";
   return (
     <div id="top">
       <header className="site-header">
@@ -161,7 +163,7 @@ export default function Home() {
         <section className="consult-section section-pad" id="consultation">
           <div className="container consult-grid">
             <div><span className="section-tag light-tag">/ START HERE</span><h2>Ready to make<br /><em>a change?</em></h2><p>Start with a free PT consultation. Tell me what you're working towards and we'll see whether one-to-one coaching is the right fit.</p><div className="consult-details"><span>✓ No obligation to buy a package</span><span>✓ Independent coaching at JD Gyms Renfrew</span><span>✓ Clear next steps, no hard sell</span></div></div>
-            <div className="contact-panel"><div className="panel-kicker">YOUR FIRST STEP</div><h3>Free PT consultation</h3><p>A straightforward introduction to your goals, your current routine and what you'd like help with.</p><form className="enquiry-form" action="/api/enquiry" method="post">
+            <div className="contact-panel"><div className="panel-kicker">YOUR FIRST STEP</div><h3>Free PT consultation</h3>{received && <p className="form-success" role="status">Your enquiry has been received. I'll be in touch to arrange a consultation.</p>}<p>A straightforward introduction to your goals, your current routine and what you'd like help with.</p><form className="enquiry-form" action="/api/enquiry" method="post">
               <label htmlFor="enquiry-name">Your name <span>*</span></label><input id="enquiry-name" name="name" required minLength={2} maxLength={120} autoComplete="name" />
               <label htmlFor="enquiry-email">Email address <span>*</span></label><input id="enquiry-email" type="email" name="email" required autoComplete="email" />
               <label htmlFor="enquiry-phone">Phone number (optional)</label><input id="enquiry-phone" name="phone" type="tel" maxLength={40} autoComplete="tel" />
