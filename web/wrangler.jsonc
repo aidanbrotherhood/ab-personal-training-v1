@@ -9,5 +9,12 @@
   "observability": {
     "enabled": true
   },
-  "workers_dev": true
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "ENQUIRIES",
+      "database_name": "ab-pt-enquiries",
+      "database_id": "720c34f0-0a11-4518-9695-142c2635c708"
+    }
+  ]
 }
