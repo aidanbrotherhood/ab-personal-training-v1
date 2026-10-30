@@ -83,7 +83,7 @@ export default function Home() {
           <div className="container hero-grid">
             <div className="hero-copy">
               <div className="eyebrow"><span className="status-dot" /> PERSONAL TRAINING · JD GYMS RENFREW</div>
-              <h1>Feel stronger.<br /><em>Look after yourself.</em><br />For the long run.</h1>
+              <h1>Get back in shape.<br /><em>With a plan that fits your life.</em></h1>
               <p className="hero-description">Personal coaching to help you lose body fat, build strength and make progress you can sustain. Expert guidance in the gym, clear direction outside it, and a plan that works around your life.</p>
               <div className="hero-actions">
                 <a href="#consultation" className="btn btn-primary">Request a free consultation <Arrow /></a>
