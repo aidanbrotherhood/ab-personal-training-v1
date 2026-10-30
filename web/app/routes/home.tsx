@@ -6,7 +6,7 @@ export const meta: MetaFunction = () => [
   { name: "robots", content: "noindex, nofollow" },
 ];
 
-const enquiry = "mailto:aidanbrotherhood@gmail.com?subject=Free%20PT%20Consultation%20-%20AB%20Personal%20Training";
+
 
 const plans = [
   {
@@ -161,7 +161,16 @@ export default function Home() {
         <section className="consult-section section-pad" id="consultation">
           <div className="container consult-grid">
             <div><span className="section-tag light-tag">/ START HERE</span><h2>Ready to make<br /><em>a change?</em></h2><p>Start with a free PT consultation. Tell me what you're working towards and we'll see whether one-to-one coaching is the right fit.</p><div className="consult-details"><span>✓ No obligation to buy a package</span><span>✓ Independent coaching at JD Gyms Renfrew</span><span>✓ Clear next steps, no hard sell</span></div></div>
-            <div className="contact-panel"><div className="panel-kicker">YOUR FIRST STEP</div><h3>Free PT consultation</h3><p>A straightforward introduction to your goals, your current routine and what you'd like help with.</p><a href={enquiry} className="btn btn-lime btn-full">Email to request a consultation <Arrow /></a><p className="booking-note">Enquiries currently open your email app. Online bookings and automatic confirmations will be connected before paid ads launch.</p></div>
+            <div className="contact-panel"><div className="panel-kicker">YOUR FIRST STEP</div><h3>Free PT consultation</h3><p>A straightforward introduction to your goals, your current routine and what you'd like help with.</p><form className="enquiry-form" action="/api/enquiry" method="post">
+              <label htmlFor="enquiry-name">Your name <span>*</span></label><input id="enquiry-name" name="name" required minLength={2} maxLength={120} autoComplete="name" />
+              <label htmlFor="enquiry-email">Email address <span>*</span></label><input id="enquiry-email" type="email" name="email" required autoComplete="email" />
+              <label htmlFor="enquiry-phone">Phone number (optional)</label><input id="enquiry-phone" name="phone" type="tel" maxLength={40} autoComplete="tel" />
+              <label htmlFor="enquiry-member">JD Gyms Renfrew membership <span>*</span></label><select id="enquiry-member" name="membership" required defaultValue=""><option value="" disabled>Select an option</option><option value="yes">I'm already a member</option><option value="joining">I'm willing to join</option><option value="no">I'm not a member</option></select>
+              <label htmlFor="enquiry-time">Preferred days / times (optional)</label><input id="enquiry-time" name="availability" maxLength={300} placeholder="e.g. Weekday evenings" />
+              <div className="honeypot" aria-hidden="true"><label htmlFor="enquiry-website">Website</label><input id="enquiry-website" name="website" tabIndex={-1} autoComplete="off" /></div>
+              <label className="consent-check"><input type="checkbox" name="consent" value="yes" required /><span>I agree to be contacted about my PT enquiry. See the <a href="/privacy">privacy notice</a>.</span></label>
+              <button type="submit" className="btn btn-lime btn-full">Request my free consultation <Arrow /></button>
+            </form><p className="booking-note">This sends a consultation request, not an instant booking. I'll reply to arrange a suitable time. Please don't include sensitive medical information.</p></div>
           </div>
         </section>
       </main>
