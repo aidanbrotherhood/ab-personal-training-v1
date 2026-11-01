@@ -13,12 +13,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: "24"
       - name: Install dependencies
         run: npm install --no-audit --no-fund
       - name: Generate Cloudflare types
         run: npm run cf-typegen
       - name: Typecheck
         run: npm run typecheck
+      - name: Enquiry safeguards
+        run: npm test
       - name: Build
         run: npm run build

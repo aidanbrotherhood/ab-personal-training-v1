@@ -1,43 +1,41 @@
 import { createRequestHandler, RouterContextProvider } from "react-router";
+import { envContext } from "../app/lib/context";
+import { handleEnquiry } from "./enquiry";
 
-const handler = createRequestHandler(() => import("virtual:react-router/server-build"), import.meta.env.MODE);
-
-type ABEnv = { ENQUIRIES: D1Database };
-const MAX_BYTES = 8000;
-
-async function enquiry(request: Request, env: ABEnv): Promise<Response> {
-  const origin = request.headers.get("Origin");
-  if (origin && new URL(origin).host !== new URL(request.url).host) return new Response("Invalid origin", { status: 403 });
-  if (Number(request.headers.get("Content-Length") || 0) > MAX_BYTES) return new Response("Request too large", { status: 413 });
-  const data = await request.formData().catch(() => null);
-  if (!data) return new Response("Invalid form", { status: 400 });
-  const value = (key: string) => String(data.get(key) ?? "").trim();
-  if (value("website")) return Response.redirect(new URL("/?enquiry=received#consultation", request.url), 303);
-  const name = value("name"), email = value("email"), phone = value("phone");
-  const membership = value("membership"), availability = value("availability"), consent = value("consent");
-  if (name.length < 2 || name.length > 120 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-    email.length > 254 || phone.length > 40 || availability.length > 300 ||
-    !["yes","joining","no"].includes(membership) || consent !== "yes") {
-    return new Response("Please go back and check the required fields.", { status: 400 });
-  }
-  const id = crypto.randomUUID();
-  try {
-    await env.ENQUIRIES.prepare(
-      "INSERT INTO enquiries (id, created_at, name, email, phone, membership, availability, source, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'new')"
-    ).bind(id, new Date().toISOString(), name, email, phone || null, membership, availability || null, "website").run();
-  } catch (error) {
-    console.error(JSON.stringify({ event: "enquiry_insert_failed", id, message: error instanceof Error ? error.name : "unknown" }));
-    return new Response("We couldn't save your enquiry. Please email aidanbrotherhood@gmail.com instead.", { status: 503 });
-  }
-  return Response.redirect(new URL("/?enquiry=received#consultation", request.url), 303);
-}
-
+const handler = createRequestHandler(
+  () => import("virtual:react-router/server-build"),
+  import.meta.env.MODE,
+);
 export default {
-  fetch(request: Request, env: ABEnv) {
+  async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname === "/api/enquiry") {
-      return request.method === "POST" ? enquiry(request, env) : new Response("Method not allowed", { status: 405 });
-    }
-    return handler(request, new RouterContextProvider());
+    if (url.pathname === "/api/enquiry") return handleEnquiry(request, env);
+    const indexable =
+      String(env.INDEXABLE) === "true" &&
+      url.origin === "https://aidanbrotherhood.com";
+    if (url.pathname === "/robots.txt")
+      return new Response(
+        indexable
+          ? "User-agent: *\nAllow: /\nSitemap: https://aidanbrotherhood.com/sitemap.xml\n"
+          : "User-agent: *\nDisallow: /\n",
+        { headers: { "Content-Type": "text/plain; charset=utf-8" } },
+      );
+    if (url.pathname === "/sitemap.xml" && indexable)
+      return new Response(
+        '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://aidanbrotherhood.com/</loc></url><url><loc>https://aidanbrotherhood.com/privacy</loc></url></urlset>',
+        { headers: { "Content-Type": "application/xml; charset=utf-8" } },
+      );
+    const context = new RouterContextProvider();
+    context.set(envContext, env);
+    const response = await handler(request, context);
+    response.headers.set("X-Content-Type-Options", "nosniff");
+    response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+    response.headers.set(
+      "Permissions-Policy",
+      "camera=(), microphone=(), geolocation=()",
+    );
+    response.headers.set("X-Frame-Options", "DENY");
+    if (!indexable) response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    return response;
   },
-} satisfies ExportedHandler<ABEnv>;
+} satisfies ExportedHandler<Env>;

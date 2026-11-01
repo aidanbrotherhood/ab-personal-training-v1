@@ -8,7 +8,8 @@
     "build": "react-router build",
     "typecheck": "react-router typegen && tsc --noEmit",
     "deploy": "npm run build && wrangler deploy",
-    "cf-typegen": "wrangler types && react-router typegen"
+    "cf-typegen": "wrangler types && react-router typegen",
+    "test": "node --test tests/enquiry.test.mjs"
   },
   "dependencies": {
     "react": "19.2.7",
@@ -27,6 +28,7 @@
     "typescript": "5.9.3",
     "vite": "^7.0.0",
     "vite-tsconfig-paths": "5.1.4",
-    "wrangler": "4.136.1"
+    "wrangler": "4.136.1",
+    "esbuild": "0.28.2"
   }
 }

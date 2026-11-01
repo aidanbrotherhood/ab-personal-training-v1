@@ -1,20 +1,121 @@
 import type { MetaFunction } from "react-router";
-export const meta: MetaFunction = () => [{ title: "Privacy | AB Personal Training" }, { name: "robots", content: "noindex,nofollow" }];
+import { Brand } from "../components/site";
+export const meta: MetaFunction = () => [
+  { title: "Privacy notice | AB Personal Training" },
+  {
+    name: "description",
+    content:
+      "How Aidan Brotherhood uses and protects information provided when you enquire about personal training.",
+  },
+];
 export default function Privacy() {
-  return <main className="error-page privacy-page">
-    <a className="brand" href="/">AB<span>.</span><small>PERSONAL TRAINING</small></a>
-    <p className="section-tag">PRIVACY INFORMATION · DRAFT FOR REVIEW</p>
-    <h1>Privacy.</h1>
-    <p>AB Personal Training is an independent personal-training service operated by Aidan Brotherhood in Renfrew, Scotland. Contact: <a href="mailto:aidanbrotherhood@gmail.com">aidanbrotherhood@gmail.com</a>.</p>
-    <h2>Enquiries</h2>
-    <p>When you contact me to ask about coaching, I use the information you choose to provide, such as your name, email address and fitness goals, to respond and arrange a consultation. Please avoid sending sensitive health information by email unless it is needed and we have agreed an appropriate way to share it.</p>
-    <h2>Service information</h2>
-    <p>If you become a client, I may need further information to provide safe and appropriate coaching. This will be explained during onboarding and handled according to applicable data-protection requirements.</p>
-    <h2>Analytics and marketing</h2>
-    <p>This preview does not currently use advertising pixels or analytical cookies. This notice will be updated before any such tracking goes live.</p>
-    <h2>Your rights</h2>
-    <p>You may ask to see, correct or delete personal information, subject to applicable legal requirements. For privacy questions, contact the address above.</p>
-    <p>This is a working draft. Complete retention periods, processor details and relevant legal bases must be finalised before taking customer data through an online form.</p>
-    <a className="btn btn-dark" href="/">Back to the website →</a>
-  </main>;
+  return (
+    <main className="privacy-page" id="top">
+      <Brand />
+      <p className="section-label">Last updated 1 November 2026</p>
+      <h1>Privacy notice.</h1>
+      <p>
+        Aidan Brotherhood, trading as AB Personal Training, is responsible for
+        the personal information described here. This notice covers this website
+        and enquiries about independent personal training at JD Gyms Renfrew.
+      </p>
+      <p>
+        For privacy questions or requests, email{" "}
+        <a href="mailto:hello@aidanbrotherhood.com">
+          hello@aidanbrotherhood.com
+        </a>
+        .
+      </p>
+      <h2>What the enquiry form collects</h2>
+      <p>
+        The form asks for your name, email address and JD Gyms membership
+        status. You can also select a broad training goal, a coaching option and
+        your usual availability. These optional details help us have a useful
+        first conversation. Please don’t include medical information or other
+        sensitive personal details.
+      </p>
+      <p>
+        We store the date of your request and the version of the form notice you
+        acknowledged. If the page link includes campaign labels, we may save
+        those labels with your enquiry, along with the referring website’s
+        hostname. We don’t save advertising click identifiers or full referring
+        URLs in the enquiry database.
+      </p>
+      <h2>Why the information is used</h2>
+      <p>
+        Your enquiry details are used to respond, arrange a consultation and
+        discuss coaching you have asked about. This supports steps you request
+        before entering into a coaching agreement. You don’t have to buy
+        anything.
+      </p>
+      <p>
+        Basic source information helps us understand which enquiries lead to
+        useful conversations and clients. We use this for our legitimate
+        interest in understanding and improving the business. It is linked to
+        your enquiry, not used to build an advertising profile. You can ask us
+        to stop using it for this purpose.
+      </p>
+      <p>
+        The form’s acknowledgement is permission to reply about your enquiry. It
+        doesn’t subscribe you to a mailing list. We don’t sell your information
+        or make automated decisions about you.
+      </p>
+      <h2>Where information is handled</h2>
+      <p>
+        Cloudflare hosts the website and stores form enquiries in its D1
+        database. Cloudflare also processes technical request information,
+        including IP addresses, to run and protect the service. The website uses
+        your IP address for short-lived rate limiting; the form does not store
+        it in the enquiry database. Application logs record operational events
+        without the form’s contents.
+      </p>
+      <p>
+        Email correspondence is handled using Apple iCloud Mail. There is
+        currently no automatic email notification or confirmation service
+        attached to the form. Form enquiries are stored separately from email.
+      </p>
+      <p>
+        Cloudflare and Apple operate internationally. Information may be
+        processed outside the UK under their applicable data-protection
+        arrangements. Access to enquiries is for handling coaching enquiries and
+        maintaining the service; they aren’t sent to JD Gyms as part of
+        submitting this form.
+      </p>
+      <h2>How long information is kept</h2>
+      <p>
+        Enquiry information is kept while discussing your request and any
+        relevant follow-up. Retention is reviewed according to whether it is
+        still needed to handle the enquiry, provide an agreed service or meet a
+        legal obligation. You can contact Aidan to ask about, or request
+        deletion of, your enquiry. If you become a client, any additional
+        coaching records and their retention will be explained separately.
+      </p>
+      <h2>Cookies and measurement</h2>
+      <p>
+        This site does not use Google Analytics, Meta Pixel, advertising cookies
+        or visitor-tracking storage. Campaign labels are read from the current
+        page link and submitted only with an enquiry. Choosing a package updates
+        the form on this page. We don’t send browsing or form-field activity to
+        an analytics service.
+      </p>
+      <h2>Your choices and rights</h2>
+      <p>
+        You can ask to access or correct your information, request deletion or
+        restriction, and object to processing based on legitimate interests.
+        Data portability may apply in some circumstances. These rights depend on
+        the circumstances and applicable law. To make a request, contact the
+        email address above. You can also ask us to stop contacting you.
+      </p>
+      <p>
+        If you have concerns, please contact Aidan. You can also{" "}
+        <a href="https://ico.org.uk/make-a-complaint/">
+          raise a concern with the Information Commissioner’s Office
+        </a>
+        , the UK’s data-protection regulator.
+      </p>
+      <a className="btn btn-primary" href="/">
+        Back to the website →
+      </a>
+    </main>
+  );
 }
