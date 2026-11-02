@@ -1,5 +1,6 @@
 import { createRequestHandler, RouterContextProvider } from "react-router";
 import { envContext } from "../app/lib/context";
+import { processNotifications } from "./notifications";
 import { handleEnquiry } from "./enquiry";
 
 const handler = createRequestHandler(
@@ -7,9 +8,15 @@ const handler = createRequestHandler(
   import.meta.env.MODE,
 );
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname === "/api/enquiry") return handleEnquiry(request, env);
+    if (url.hostname === "www.aidanbrotherhood.com") {
+      url.hostname = "aidanbrotherhood.com";
+      url.protocol = "https:";
+      return Response.redirect(url.toString(), 308);
+    }
+    if (url.pathname === "/api/enquiry")
+      return handleEnquiry(request, env, ctx);
     const indexable =
       String(env.INDEXABLE) === "true" &&
       url.origin === "https://aidanbrotherhood.com";
@@ -37,5 +44,8 @@ export default {
     response.headers.set("X-Frame-Options", "DENY");
     if (!indexable) response.headers.set("X-Robots-Tag", "noindex, nofollow");
     return response;
+  },
+  async scheduled(_event, env, ctx) {
+    ctx.waitUntil(processNotifications(env));
   },
 } satisfies ExportedHandler<Env>;

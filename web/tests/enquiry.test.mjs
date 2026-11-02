@@ -32,6 +32,7 @@ const valid = () => ({
 function fixture({ limited = false, broken = false } = {}) {
   const db = new DatabaseSync(":memory:");
   db.exec(readFileSync("migrations/0001_enquiry_context.sql", "utf8"));
+  db.exec(readFileSync("migrations/0002_notifications.sql", "utf8"));
   const env = {
     ENQUIRY_LIMITER: { limit: async () => ({ success: !limited }) },
     ENQUIRIES: {
@@ -92,7 +93,7 @@ test("persists an enquiry and its context atomically, with no phone or click ide
   assert.equal(row.phone, null);
   assert.equal(row.package_interest, "weekly");
   assert.equal(row.goal, "strength");
-  assert.equal(row.notice_version, "2026-11-01");
+  assert.equal(row.notice_version, "2026-11-02");
   assert.equal(row.contact_acknowledged, 1);
   assert.deepEqual(JSON.parse(row.attribution), {
     utm_source: "instagram",
@@ -268,4 +269,76 @@ test("HTML success is based on a stored submission, without a spoofable query pa
   assert.match(await response.text(), /Your enquiry has been saved/);
   assert.equal(db.prepare("SELECT COUNT(*) AS n FROM enquiries").get().n, 1);
   db.close();
+});
+
+test("optional phone persists and durable notification is queued", async () => {
+  const { env, db } = fixture();
+  const fields = { ...valid(), phone: "+44 7700 900123" };
+  assert.equal((await handleEnquiry(request(fields), env)).status, 200);
+  assert.equal(
+    db.prepare("SELECT phone FROM enquiries").get().phone,
+    fields.phone,
+  );
+  assert.equal(
+    db.prepare("SELECT state FROM enquiry_notifications").get().state,
+    "pending",
+  );
+  db.close();
+});
+test("notification failure preserves queued enquiry; acceptance records provider reference", async () => {
+  const compiled = await build({
+    entryPoints: ["workers/notifications.ts"],
+    tsconfig: "tsconfig.json",
+    bundle: true,
+    write: false,
+    format: "esm",
+    platform: "neutral",
+  });
+  const { processNotifications } = await import(
+    `data:text/javascript;base64,${Buffer.from(compiled.outputFiles[0].text).toString("base64")}`
+  );
+  const { env, db } = fixture();
+  await handleEnquiry(request(), env);
+  env.RESEND_API_KEY = "test-only";
+  env.ENQUIRIES.prepare = (sql) => {
+    const stmt = {
+      args: [],
+      bind(...args) {
+        this.args = args;
+        return this;
+      },
+      async run() {
+        return { meta: { changes: db.prepare(sql).run(...this.args).changes } };
+      },
+      async all() {
+        return { results: db.prepare(sql).all(...this.args) };
+      },
+    };
+    return stmt;
+  };
+  const original = globalThis.fetch;
+  try {
+    globalThis.fetch = async () => new Response("{}", { status: 503 });
+    await processNotifications(env);
+    assert.equal(
+      db.prepare("SELECT state FROM enquiry_notifications").get().state,
+      "pending",
+    );
+    assert.equal(db.prepare("SELECT count(*) AS n FROM enquiries").get().n, 1);
+    db.exec("UPDATE enquiry_notifications SET next_attempt=0");
+    globalThis.fetch = async () => Response.json({ id: "test-provider-id" });
+    await processNotifications(env);
+    assert.equal(
+      db.prepare("SELECT provider_id FROM enquiry_notifications").get()
+        .provider_id,
+      "test-provider-id",
+    );
+    assert.equal(
+      db.prepare("SELECT state FROM enquiry_notifications").get().state,
+      "accepted",
+    );
+  } finally {
+    globalThis.fetch = original;
+    db.close();
+  }
 });

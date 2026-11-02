@@ -12,7 +12,7 @@ export default function Privacy() {
   return (
     <main className="privacy-page" id="top">
       <Brand />
-      <p className="section-label">Last updated 1 November 2026</p>
+      <p className="section-label">Last updated 2 November 2026</p>
       <h1>Privacy notice.</h1>
       <p>
         Aidan Brotherhood, trading as AB Personal Training, is responsible for
@@ -70,9 +70,10 @@ export default function Privacy() {
         without the form’s contents.
       </p>
       <p>
-        Email correspondence is handled using Apple iCloud Mail. There is
-        currently no automatic email notification or confirmation service
-        attached to the form. Form enquiries are stored separately from email.
+        Email correspondence is handled using Apple iCloud Mail. Resend sends an
+        internal notification to Aidan after an enquiry is saved. This includes
+        your contact details and selected coaching interest, so Aidan can
+        respond. Enquiries are stored independently of notification delivery.
       </p>
       <p>
         Cloudflare and Apple operate internationally. Information may be

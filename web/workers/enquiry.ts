@@ -1,8 +1,9 @@
+import { processNotifications } from "./notifications";
 import { campaignKeys, safeCampaignLabel } from "../app/lib/attribution";
 import { packageIds } from "../app/lib/offers";
 
 const MAX_BYTES = 8000;
-const NOTICE_VERSION = "2026-11-01";
+const NOTICE_VERSION = "2026-11-02";
 type EnquiryEnv = Pick<Env, "ENQUIRIES" | "ENQUIRY_LIMITER">;
 type Fields = Record<string, string>;
 const escape = (value: string) =>
@@ -108,6 +109,7 @@ async function boundedForm(request: Request): Promise<FormData | null> {
 export async function handleEnquiry(
   request: Request,
   env: EnquiryEnv,
+  context?: Pick<ExecutionContext, "waitUntil">,
 ): Promise<Response> {
   const fail = (
     status: number,
@@ -183,6 +185,7 @@ export async function handleEnquiry(
     "package_interest",
     "request_id",
     "attribution",
+    "phone",
     "consent",
     "website",
   ]) {
@@ -192,6 +195,11 @@ export async function handleEnquiry(
   if (values.website)
     return result(request, 200, "Your request has been received.");
   const errors: Fields = {};
+  if (
+    values.phone.length > 40 ||
+    (values.phone && !/^[+0-9 ()-]{6,40}$/.test(values.phone))
+  )
+    errors.phone = "Enter a valid phone number, or leave it empty.";
   if (
     values.name.length < 2 ||
     values.name.length > 120 ||
@@ -254,12 +262,13 @@ export async function handleEnquiry(
     // D1 batch is atomic. The request UUID makes retries safe without overwriting an enquiry.
     const saved = await env.ENQUIRIES.batch([
       env.ENQUIRIES.prepare(
-        "INSERT OR IGNORE INTO enquiries (id, created_at, name, email, phone, membership, availability, source, status) VALUES (?, ?, ?, ?, NULL, ?, ?, 'website', 'new')",
+        "INSERT OR IGNORE INTO enquiries (id, created_at, name, email, phone, membership, availability, source, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'website', 'new')",
       ).bind(
         id,
         new Date().toISOString(),
         values.name,
         values.email,
+        values.phone || null,
         values.membership,
         values.availability || null,
       ),
@@ -272,6 +281,9 @@ export async function handleEnquiry(
         JSON.stringify(attribution),
         NOTICE_VERSION,
       ),
+      env.ENQUIRIES.prepare(
+        "INSERT OR IGNORE INTO enquiry_notifications (enquiry_id) VALUES (?)",
+      ).bind(id),
     ]);
     if (saved[0].meta.changes > 0)
       console.info(
@@ -289,6 +301,14 @@ export async function handleEnquiry(
       values,
     );
   }
+  if (context)
+    context.waitUntil(
+      processNotifications(env as Env).catch(() =>
+        console.error(
+          JSON.stringify({ event: "notification_processing_failed" }),
+        ),
+      ),
+    );
   return result(
     request,
     200,

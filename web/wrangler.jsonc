@@ -12,6 +12,8 @@
     },
   },
   "workers_dev": true,
+  "routes": [{"pattern":"aidanbrotherhood.com","custom_domain":true},{"pattern":"www.aidanbrotherhood.com","custom_domain":true}],
+  "triggers": { "crons": ["*/5 * * * *"] },
   "d1_databases": [
     {
       "binding": "ENQUIRIES",
@@ -21,7 +23,7 @@
     },
   ],
   "vars": {
-    "INDEXABLE": "false",
+    "INDEXABLE": "true",
   },
   "ratelimits": [
     {

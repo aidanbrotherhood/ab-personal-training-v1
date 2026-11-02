@@ -155,6 +155,20 @@ export function ConsultationForm({
             {error("email")}
           </div>
           <div className="field">
+            <label htmlFor="enquiry-phone">
+              Phone number <span>Optional</span>
+            </label>
+            <input
+              id="enquiry-phone"
+              name="phone"
+              type="tel"
+              maxLength={40}
+              autoComplete="tel"
+              {...invalid("phone")}
+            />
+            {error("phone")}
+          </div>
+          <div className="field">
             <label htmlFor="enquiry-goal">
               What would you like to work on? <span>Optional</span>
             </label>
