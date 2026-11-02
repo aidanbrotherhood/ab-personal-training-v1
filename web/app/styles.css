@@ -713,6 +713,131 @@ details > p {
   align-items: center;
   overflow-wrap: anywhere;
 }
+
+/* Consultation booking: no third-party calendar is loaded until a visitor opts in. */
+.booking-panel {
+  background: #fff;
+  padding: 36px;
+  border-radius: 9px;
+}
+.booking-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.booking-panel h3 {
+  font-size: 25px;
+  line-height: 1.2;
+  margin-top: 12px;
+}
+.booking-intro {
+  color: #58616c;
+  font-size: 15px;
+  margin-top: 18px;
+}
+.booking-facts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 22px 0 0;
+}
+.booking-facts li {
+  border: 1px solid #d5dce6;
+  border-radius: 40px;
+  padding: 7px 12px;
+  font-size: 12px;
+  color: #35445b;
+}
+.booking-trigger {
+  margin-top: 26px;
+  width: 100%;
+}
+.booking-embed {
+  margin-top: 22px;
+  border: 1px solid #d8dce3;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+.booking-embed iframe {
+  display: block;
+  width: 100%;
+  height: 760px;
+  border: 0;
+}
+.booking-external {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #606773;
+}
+.booking-external a,
+.booking-privacy a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.booking-alternative {
+  border-top: 1px solid #dfe3e9;
+  margin-top: 28px;
+  padding-top: 23px;
+}
+.booking-alternative p {
+  margin-bottom: 8px;
+  color: #515b68;
+  font-size: 13px;
+}
+.booking-alternative .inline-link {
+  font-size: 14px;
+}
+.booking-privacy {
+  margin-top: 24px;
+  font-size: 11px;
+  color: #717985;
+}
+.enquiry-fallback-wrap {
+  margin-top: 40px;
+}
+.enquiry-fallback {
+  max-width: 720px;
+  margin: 0 auto;
+  border: 1px solid #cbd7e6;
+  border-radius: 8px;
+  padding: 22px 26px;
+  background: rgba(255, 255, 255, 0.7);
+  scroll-margin-top: 25px;
+}
+.enquiry-fallback summary {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 550;
+  color: #223b60;
+  line-height: 1.6;
+}
+.enquiry-fallback[open] summary {
+  margin-bottom: 22px;
+}
+.enquiry-fallback-body .contact-panel {
+  padding: 26px;
+}
+@media (max-width: 760px) {
+  .booking-panel {
+    padding: 26px 22px;
+  }
+  .booking-embed iframe {
+    height: 790px;
+  }
+  .enquiry-fallback {
+    padding: 18px;
+  }
+  .enquiry-fallback-body .contact-panel {
+    padding: 15px 8px;
+  }
+}
+
 .contact-panel {
   background: #fff;
   padding: 36px;

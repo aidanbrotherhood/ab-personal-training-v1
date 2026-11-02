@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { MetaFunction } from "react-router";
 import { Brand, Arrow, Footer } from "../components/site";
 import { ConsultationForm } from "../components/consultation-form";
+import { BookingPanel } from "../components/booking-panel";
 import { plans, type PackageId } from "../lib/offers";
 
 export const meta: MetaFunction = () => [
@@ -35,11 +36,11 @@ const faqs = [
   ],
   [
     "What happens in the free consultation?",
-    "We’ll talk about your goals, your training experience and when you can train. You can ask questions and discuss the coaching options. It’s a conversation, with no obligation to book paid sessions.",
+    "We’ll meet at JD Gyms Renfrew for 30 minutes to discuss your goals, training background and availability. Where appropriate, we can look at some basic movements together. It’s free and there’s no obligation to buy coaching.",
   ],
   [
     "What if I have limited time or availability?",
-    "Tell me which days and times usually work for you. We’ll discuss what’s realistic and check session availability before you decide on coaching. A consultation request doesn’t reserve a session time.",
+    "You can book a free consultation at a time that suits you. If none of the available slots works, send an enquiry and we’ll see what’s possible. Paid training sessions are arranged separately.",
   ],
   [
     "What support is included between sessions?",
@@ -57,8 +58,14 @@ const faqs = [
 
 export default function Home() {
   const [interest, setInterest] = useState<PackageId>("unsure");
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const enquiryDetails = useRef<HTMLDetailsElement>(null);
+  function showEnquiryForm() {
+    if (enquiryDetails.current) enquiryDetails.current.open = true;
+  }
   function choosePackage(id: PackageId) {
     setInterest(id);
+    showEnquiryForm();
     window.dispatchEvent(
       new CustomEvent("ab:package-interest", { detail: { package: id } }),
     );
@@ -76,8 +83,8 @@ export default function Home() {
             <a href="#about">Meet Aidan</a>
             <a href="#coaching">Coaching & pricing</a>
           </nav>
-          <a className="nav-cta" href="#consultation">
-            Let’s talk <Arrow />
+          <a className="nav-cta" href="#consultation" onClick={() => setBookingOpen(true)}>
+            Book a consultation <Arrow />
           </a>
         </div>
       </header>
@@ -124,10 +131,10 @@ export default function Home() {
             </h1>
             <div className="hero-bottom">
               <div className="hero-actions">
-                <a href="#consultation" className="btn btn-primary">
-                  Request a free consultation <Arrow />
+                <a href="#consultation" className="btn btn-primary" onClick={() => setBookingOpen(true)}>
+                  Book a free consultation <Arrow />
                 </a>
-                <p>A conversation with Aidan. No obligation.</p>
+                <p>30 minutes at JD Gyms Renfrew. No obligation.</p>
               </div>
               <p className="hero-description">
                 Lose body fat. Build strength. Feel more confident in the gym.
@@ -308,7 +315,7 @@ export default function Home() {
                 You just need a starting point and a willingness to learn. We’ll
                 work from there.
               </p>
-              <a href="#consultation" className="inline-link">
+              <a href="#consultation" className="inline-link" onClick={() => setBookingOpen(true)}>
                 Let’s talk about your goals <Arrow />
               </a>
             </div>
@@ -363,7 +370,7 @@ export default function Home() {
                       </span>
                     </p>
                     <a
-                      href="#consultation"
+                      href="#enquiry"
                       onClick={() => choosePackage(plan.id)}
                       className="inline-link"
                       aria-label={"Ask about " + plan.title}
@@ -406,15 +413,15 @@ export default function Home() {
               <li>
                 <h3>Make an introduction.</h3>
                 <p>
-                  Request a free consultation. I’ll reply by email to arrange a
-                  time to talk.
+                  Book a free 30-minute consultation at JD Gyms Renfrew. If a
+                  suitable time isn’t shown, send an enquiry instead.
                 </p>
               </li>
               <li>
                 <h3>Talk it through.</h3>
                 <p>
-                  Discuss your goals, experience and availability. Ask questions
-                  and explore the options, with no obligation to buy.
+                  Discuss your goals and experience, and where appropriate try
+                  some basic movements. There’s no obligation to buy.
                 </p>
               </li>
               <li>
@@ -485,12 +492,12 @@ export default function Home() {
                 <span>Let’s start here.</span>
               </h2>
               <p>
-                Tell me a little about where you are. We’ll talk about what you
-                want to achieve, what’s getting in the way and whether coaching
-                would help.
+                Meet me at JD Gyms Renfrew for a relaxed 30-minute consultation.
+                We’ll discuss what you want to achieve and, where appropriate,
+                look at a few simple movements to understand your starting point.
               </p>
               <p className="consult-promise">
-                A free conversation.
+                Free. In person.
                 <br />
                 No obligation to buy a package.
               </p>
@@ -501,10 +508,24 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <ConsultationForm
-              interest={interest}
-              onInterestChange={setInterest}
+            <BookingPanel
+              open={bookingOpen}
+              onOpen={() => setBookingOpen(true)}
+              onEnquiry={showEnquiryForm}
             />
+          </div>
+          <div className="container enquiry-fallback-wrap">
+            <details className="enquiry-fallback" id="enquiry" ref={enquiryDetails}>
+              <summary>
+                Can’t find a suitable appointment? Send an enquiry instead.
+              </summary>
+              <div className="enquiry-fallback-body">
+                <ConsultationForm
+                  interest={interest}
+                  onInterestChange={setInterest}
+                />
+              </div>
+            </details>
           </div>
         </section>
       </main>
