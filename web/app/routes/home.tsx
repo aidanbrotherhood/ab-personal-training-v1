@@ -1,7 +1,8 @@
 import type { MetaFunction } from "react-router";
 import { Brand, Arrow, Footer } from "../components/site";
 import { ConsultationCalendar } from "../components/consultation-calendar";
-import { getPerSessionRate, plans } from "../lib/offers";
+import { plans } from "../lib/offers";
+import { PricingSection } from "../components/pricing-section";
 
 export const meta: MetaFunction = () => [
   { title: "Aidan Brotherhood | Personal Training at JD Gyms Renfrew" },
@@ -41,9 +42,9 @@ const faqs = [
       "No. Coaching and Coaching+ are bought in four-week blocks. We can plan for longer-term progress, but you decide whether to continue each block.",
   },
   {
-    question: "Is the £99 Introduction different from the free consultation?",
+    question: "Is the £99 Starter different from the free consultation?",
     answer:
-      "Yes. The consultation is a free, 30-minute meeting to find out whether we'd work well together. The £99 PT Introduction is a paid option with two full one-to-one training sessions and a practical starting plan.",
+      "Yes. The consultation is a free, 30-minute meeting to find out whether we'd work well together. The £99 Starter is a paid option with two full one-to-one training sessions and a practical starting plan.",
   },
   {
     question: "What if my schedule changes every week?",
@@ -51,21 +52,6 @@ const faqs = [
       "We can talk through what your week normally looks like and what you can realistically commit to. If the available consultation times don't suit, email me and we'll see what we can arrange.",
   },
 ];
-
-const planCopy: Record<string, { kicker: string; lead: string }> = {
-  introduction: {
-    kicker: "Find your feet",
-    lead: "A practical way to get started without a recurring commitment.",
-  },
-  weekly: {
-    kicker: "Build consistency",
-    lead: "A regular session, a plan for the days between, and someone keeping you on track.",
-  },
-  complete: {
-    kicker: "More hands-on coaching",
-    lead: "Two sessions a week for people who want more time working on technique and progress together.",
-  },
-};
 
 export default function Home() {
   return (
@@ -235,54 +221,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="pricing-section section-pad" id="coaching" aria-labelledby="coaching-title">
-          <div className="container">
-            <div className="pricing-heading">
-              <div>
-                <p className="eyebrow">WORKING TOGETHER</p>
-                <h2 id="coaching-title">Coaching that fits. Prices that make sense.</h2>
-              </div>
-              <p>Start with a free 30-minute consultation. If we decide to work together, choose a two-session introduction or ongoing coaching in four-week blocks.</p>
-            </div>
-            <div className="pricing-grid">
-              {plans.map((plan) => {
-                const details = planCopy[plan.id];
-                return (
-                  <article key={plan.id} className={"pricing-card" + (plan.id === "weekly" ? " pricing-card-featured" : "")}>
-                    <div className="pricing-card-top">
-                      <p className="pricing-kicker">{details.kicker}</p>
-                      {plan.id === "weekly" && <span className="pricing-tag">A balanced place to start</span>}
-                      <h3>{plan.title}</h3>
-                      <p className="pricing-lead">{details.lead}</p>
-                    </div>
-                    <div className="pricing-amount">
-                      <strong>{plan.price}</strong>
-                      <span>{plan.id === "introduction" ? "one-off payment" : "per 4-week block"}</span>
-                    </div>
-                    <div className="pricing-sessions">
-                      <strong>{plan.sessions} × 60-minute one-to-one sessions</strong>
-                      <span>{plan.frequency}</span>
-                      <span className="pricing-rate">{getPerSessionRate(plan)} per session</span>
-                    </div>
-                    <p className="pricing-includes">What's included</p>
-                    <ul className="pricing-features">
-                      {plan.features.map((feature) => (
-                        <li key={feature}><span aria-hidden="true">✓</span>{feature}</li>
-                      ))}
-                    </ul>
-                    <a className={"btn pricing-cta" + (plan.id === "weekly" ? " btn-primary" : " btn-outline")} href="#consultation">
-                      Book a free consultation <Arrow />
-                    </a>
-                  </article>
-                );
-              })}
-            </div>
-            <div className="pricing-footer">
-              <p><strong>Free consultation first.</strong> We'll meet for 30 minutes, discuss your goals and decide whether coaching is right for you. The £99 Introduction is a separate paid package.</p>
-              <p><strong>Transparent four-week pricing.</strong> Coaching and Coaching+ are priced per four-week block, not per calendar month (there are 13 four-week periods in a year). Paid sessions require a separate JD Gyms membership. AB Personal Training is independent of JD Gyms.</p>
-            </div>
-          </div>
-        </section>
+        <PricingSection variant="home" />
 
         <section className="consultation-value section-pad" aria-labelledby="consult-value-title">
           <div className="container consult-value-layout">

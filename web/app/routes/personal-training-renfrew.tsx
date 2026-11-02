@@ -1,6 +1,7 @@
 import type { MetaFunction } from "react-router";
 import { Arrow, Brand, Footer } from "../components/site";
-import { getPerSessionRate, plans } from "../lib/offers";
+import { plans } from "../lib/offers";
+import { PricingSection } from "../components/pricing-section";
 
 const pageUrl = "https://aidanbrotherhood.com/personal-training-renfrew";
 const gymUrl = "https://www.jdgyms.co.uk/gym/renfrew/";
@@ -25,7 +26,7 @@ export const meta: MetaFunction = () => [
 const questions = [
   {
     q: "How much does a personal trainer cost in Renfrew?",
-    a: "My one-to-one coaching starts at £99 for two 60-minute introduction sessions. Four-week coaching blocks are £180 for four sessions or £320 for eight sessions. JD Gyms membership is separate. We'll discuss what's appropriate during your free consultation.",
+    a: "Starter is a £99 one-off package with two 60-minute sessions. Ongoing Coaching is £180 per four weeks for four sessions; Coaching+ is £320 per four weeks for eight sessions. JD Gyms membership is separate. We'll discuss what's appropriate during your free consultation.",
   },
   {
     q: "Where are your personal training sessions held?",
@@ -265,37 +266,7 @@ export default function PersonalTrainingRenfrew() {
           </div>
         </section>
 
-        <section className="service-pricing section-pad" id="prices" aria-labelledby="prices-title">
-          <div className="container">
-            <div className="service-section-heading">
-              <p className="eyebrow">PERSONAL TRAINER PRICES · RENFREW</p>
-              <h2 id="prices-title">Your coaching options, clearly priced.</h2>
-              <p>Every option includes 60-minute one-to-one sessions. Meet me for a free 30-minute consultation first, then choose a paid introduction or a four-week coaching block.</p>
-            </div>
-            <div className="service-pricing-grid">
-              {plans.map((plan) => (
-                <article key={plan.id} className={"service-price-card" + (plan.id === "weekly" ? " service-price-featured" : "")}>
-                  {plan.id === "weekly" && <span className="service-price-tag">A balanced starting point</span>}
-                  <h3>{plan.title}</h3>
-                  <p className="service-price-amount">{plan.price}</p>
-                  <p className="service-price-period">{plan.id === "introduction" ? "One-off payment" : "Per four-week block"}</p>
-                  <p className="service-price-sessions">{plan.sessions} × 60-minute sessions</p>
-                  <p className="service-price-frequency">{plan.frequency}</p>
-                  <p className="service-price-rate">{getPerSessionRate(plan)} per session</p>
-                  <p className="service-price-includes">What's included</p>
-                  <ul>{plan.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-                  <a href="/#consultation" className={plan.id === "weekly" ? "btn btn-primary" : "btn btn-outline"}>
-                    Book a free consultation <Arrow />
-                  </a>
-                </article>
-              ))}
-            </div>
-            <div className="service-pricing-notes">
-              <p><strong>No charge for the first meeting.</strong> The free 30-minute consultation is separate from the £99 PT Introduction, which includes two paid training sessions.</p>
-              <p><strong>Four weeks, not a calendar month.</strong> Coaching and Coaching+ cover a four-week period; 52 weeks contains 13 such periods. Prices exclude JD Gyms membership, required for paid training.</p>
-            </div>
-          </div>
-        </section>
+        <PricingSection variant="renfrew" />
 
         <section className="service-location-section section-pad" id="location" aria-labelledby="location-title">
           <div className="container service-location-grid">
