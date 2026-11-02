@@ -42,6 +42,7 @@ export function Footer() {
           <a href="/#approach">The approach</a>
           <a href="/#about">Meet Aidan</a>
           <a href="/#coaching">Coaching & prices</a>
+          <a href="/personal-training-renfrew">Personal training in Renfrew</a>
           <a href="/#consultation">Book a free consultation</a>
           <a href="/privacy">Privacy notice</a>
           <a href="mailto:hello@aidanbrotherhood.com">Email Aidan <Arrow /></a>
