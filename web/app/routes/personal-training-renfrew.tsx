@@ -168,18 +168,20 @@ export default function PersonalTrainingRenfrew() {
               </div>
               <p className="service-disclaimer">Free 30-minute meeting · In person · No obligation</p>
             </div>
-            <aside className="service-key-facts" aria-label="Training location and service details">
-              <p>WHERE WE TRAIN</p>
-              <h2>JD Gyms Renfrew</h2>
-              <address>Renfrew Retail Park<br />Renfrew, PA4 9EN</address>
-              <hr />
-              <p>YOUR COACH</p>
-              <span>Aidan Brotherhood — independent personal training, by appointment.</span>
-              <a href={gymUrl} className="service-location-link" target="_blank" rel="noopener noreferrer">
-                View the gym’s official location information <Arrow />
-              </a>
-              <span className="service-location-note">Coaching is independent of JD Gyms. A separate gym membership is required for paid sessions.</span>
-            </aside>
+            <figure className="service-hero-photo">
+              <img
+                src="https://images.unsplash.com/photo-1758875568582-ec8a4229c2b0?auto=format&fit=crop&w=1200&q=76"
+                alt="Personal trainer watching a client practise a barbell squat"
+                width="1000"
+                height="667"
+                decoding="async"
+                fetchPriority="high"
+              />
+              <figcaption>
+                <strong>Coaching that starts with technique.</strong>
+                <span>Illustrative photography — not Aidan or JD Gyms Renfrew.</span>
+              </figcaption>
+            </figure>
           </div>
         </section>
 
@@ -246,6 +248,20 @@ export default function PersonalTrainingRenfrew() {
               <article><span>03</span><h3>Review and adapt</h3><p>We can use exercise performance, consistency, feedback and relevant body-composition measures to judge progress and adjust when needed.</p></article>
             </div>
             <p className="service-process-note">Nutrition guidance focuses on practical day-to-day habits. It isn't a substitute for clinical dietetic or medical care.</p>
+            <figure className="service-method-photo">
+              <img
+                src="https://images.unsplash.com/photo-1758875568800-29fb434c7b17?auto=format&fit=crop&w=1400&q=74"
+                alt="Client learning barbell technique under a personal trainer's supervision"
+                width="1000"
+                height="667"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <strong>Good training is built, not guessed.</strong>
+                <span>Illustrative coaching photograph.</span>
+              </figcaption>
+            </figure>
           </div>
         </section>
 
@@ -297,6 +313,28 @@ export default function PersonalTrainingRenfrew() {
                 <p>Independent one-to-one coaching with Aidan Brotherhood.</p>
                 <a href="mailto:hello@aidanbrotherhood.com?subject=Renfrew%20personal%20training%20enquiry">Email Aidan <Arrow /></a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="service-consult-preview" aria-labelledby="service-consult-title">
+          <div className="container service-consult-grid">
+            <figure className="service-consult-photo">
+              <img
+                src="https://images.unsplash.com/photo-1758875569399-99a7d80ace43?auto=format&fit=crop&w=1050&q=75"
+                alt="Personal trainer and client discussing a training plan together"
+                width="1000"
+                height="667"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Illustrative consultation photograph.</figcaption>
+            </figure>
+            <div className="service-consult-copy">
+              <p className="eyebrow">COME IN AND HAVE A CONVERSATION</p>
+              <h2 id="service-consult-title">Start with a free 30-minute consultation.</h2>
+              <p>Tell me what you're hoping to achieve, ask your questions and find out what coaching could look like for you. If appropriate, we'll try a few basic movements together. There's no obligation to buy anything.</p>
+              <a href="/#consultation" className="btn btn-primary">Choose an appointment <Arrow /></a>
             </div>
           </div>
         </section>
