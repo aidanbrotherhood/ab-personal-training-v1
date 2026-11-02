@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-11-02T22:28:38.384Z",
+  "origin": "https://ab-personal-training-staging.aidanbrotherhood.workers.dev",
+  "requestId": "817b55c6-b799-49b4-8be0-9b467335ce0e",
+  "synthetic": true,
+  "results": [
+    {
+      "attempt": 1,
+      "status": 200,
+      "ok": true
+    },
+    {
+      "attempt": 2,
+      "status": 200,
+      "ok": true
+    }
+  ],
+  "bookingCreated": false,
+  "expectedNotificationState": "disabled",
+  "retainedForAudit": true,
+  "verifiedDatabase": "7af4c995-22ad-4ecd-9359-eec163d27e45",
+  "verifiedRow": {
+    "copies": 1,
+    "package_interest": "weekly",
+    "state": "disabled",
+    "attempts": 0,
+    "provider_id": null
+  },
+  "verification": "Read-only, parameterised D1 SELECT limited to this synthetic request UUID; no customer rows read."
+}

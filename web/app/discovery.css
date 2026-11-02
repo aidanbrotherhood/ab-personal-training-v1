@@ -41,6 +41,10 @@
 .offer-card--complete :focus-visible {
   outline-color: #9dceff;
 }
+.nav-cta,
+.hero .btn-primary {
+  background: var(--blue);
+}
 .mobile-menu {
   display: none;
   position: static;

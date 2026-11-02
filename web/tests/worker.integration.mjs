@@ -228,4 +228,16 @@ test("retired, deferred and unknown paths remain genuine noindex 404s without ca
   assert.equal(api.status, 405);
   assert.equal(api.headers.get("Allow"), "POST");
   assert.equal(api.headers.get("X-Robots-Tag"), "noindex, nofollow");
+  assert.equal(api.headers.get("Referrer-Policy"), "no-referrer");
+  const fallback = await api.text();
+  for (const label of [
+    "Starter — £99 one-off",
+    "Coaching — £180 / four weeks",
+    "Coaching+ — £320 / four weeks",
+  ])
+    assert.ok(fallback.includes(label));
+  assert.doesNotMatch(
+    fallback,
+    /PT Introduction|Weekly Coaching|Complete Coaching/,
+  );
 });
