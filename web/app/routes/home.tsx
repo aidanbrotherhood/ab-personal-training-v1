@@ -195,6 +195,7 @@ export default function Home() {
               </article>
             </div>
           </div>
+          <div className="container">
             <div className="method-visual">
               <div className="method-visual-media">
                 <img
@@ -213,7 +214,7 @@ export default function Home() {
                 <a href="/personal-training-renfrew" className="inline-link">Explore personal training in Renfrew <Arrow /></a>
               </div>
             </div>
-
+          </div>
         </section>
 
         <section className="about-section section-pad" id="about" aria-labelledby="about-title">
