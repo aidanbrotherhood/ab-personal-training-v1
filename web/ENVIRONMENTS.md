@@ -19,6 +19,8 @@ GitHub Actions validates both environment artifacts on pushes and PRs to main/de
 4. Merge the PR normally (no force push). The main push triggers production's blocking checks/build/deploy. Verify Cloudflare's commit metadata, Worker version and the public domain, canonical, D1/secret/cron bindings.
 5. Merge main back into develop as needed so future promotion PRs have a clear history. Feature code can stay on develop until approved; do not merge it into main merely to synchronise branches.
 
+The production deploy script also rejects non-merge commits, so an accidental direct single-parent push to main fails before Wrangler deployment. Promote through normal two-parent merge PRs; squash/rebase merges are intentionally unsupported. This does not replace branch protection against a privileged user modifying the deployment guard itself.
+
 The connected GitHub App cannot administer branch protections. The PR/approval process is auditable but direct pushes to main are not server-enforced by this integration. The owner should enable required PRs, required `validate (staging)` and `validate (production)` checks, and block force pushes in GitHub branch rules. Codex instructions in root AGENTS.md prohibit unapproved production changes. Repository default branch stays main.
 
 ## Data and notifications

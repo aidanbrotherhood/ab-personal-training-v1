@@ -44,5 +44,17 @@ console.log(
   }),
 );
 if (process.argv.includes("--check")) process.exit(0);
+if (target === "production") {
+  const commitObject = spawnSync("git", ["cat-file", "-p", "HEAD"], {
+    encoding: "utf8",
+  });
+  const parents = commitObject.stdout
+    .split("\n")
+    .filter((line) => /^parent [a-f0-9]{40}$/.test(line));
+  if (commitObject.status !== 0 || parents.length !== 2)
+    throw Error(
+      "Production requires a reviewed merge commit. Promote develop through a normal merge PR; direct single-parent pushes and squash merges cannot deploy.",
+    );
+}
 const result = spawnSync("npx", ["wrangler", "deploy"], { stdio: "inherit" });
 process.exit(result.status ?? 1);
