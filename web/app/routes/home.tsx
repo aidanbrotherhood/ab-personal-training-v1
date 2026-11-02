@@ -38,7 +38,7 @@ const faqs = [
   {
     question: "Do I need to commit to 12 weeks?",
     answer:
-      "No. Weekly Coaching and Complete Coaching are bought in four-week blocks. We can plan for longer-term progress, but you decide whether to continue each block.",
+      "No. Coaching and Coaching+ are bought in four-week blocks. We can plan for longer-term progress, but you decide whether to continue each block.",
   },
   {
     question: "Is the £99 Introduction different from the free consultation?",
@@ -279,7 +279,7 @@ export default function Home() {
             </div>
             <div className="pricing-footer">
               <p><strong>Free consultation first.</strong> We'll meet for 30 minutes, discuss your goals and decide whether coaching is right for you. The £99 Introduction is a separate paid package.</p>
-              <p><strong>Transparent four-week pricing.</strong> Weekly and Complete Coaching are priced per four-week block, not per calendar month (there are 13 four-week periods in a year). Paid sessions require a separate JD Gyms membership. AB Personal Training is independent of JD Gyms.</p>
+              <p><strong>Transparent four-week pricing.</strong> Coaching and Coaching+ are priced per four-week block, not per calendar month (there are 13 four-week periods in a year). Paid sessions require a separate JD Gyms membership. AB Personal Training is independent of JD Gyms.</p>
             </div>
           </div>
         </section>
