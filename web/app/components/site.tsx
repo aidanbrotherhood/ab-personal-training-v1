@@ -8,8 +8,8 @@ export function Brand() {
       <img
         src="/ab-logo.svg"
         alt="Aidan Brotherhood Personal Training"
-        width="500"
-        height="92"
+        width="420"
+        height="84"
       />
     </a>
   );
