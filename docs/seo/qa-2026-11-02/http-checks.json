@@ -1,0 +1,315 @@
+{
+  "checkedAt": "2026-11-02T22:26:10.039Z",
+  "base": "https://ab-personal-training-staging.aidanbrotherhood.workers.dev",
+  "sourceCommit": "c7191ab57bdfefdc53580ae60590c696f0a2239e",
+  "readOnly": true,
+  "bookingSubmissions": 0,
+  "records": [
+    {
+      "path": "/",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "AB Personal Training | Aidan Brotherhood, Renfrew",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/personal-training-renfrew",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Personal Trainer Renfrew | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/coaching",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Personal Training Prices &amp; Coaching | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/about",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Meet Aidan Brotherhood | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/personal-training-for-beginners",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Beginner Personal Training Renfrew | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/consultation",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Free PT Consultation in Renfrew | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/privacy",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Privacy Notice | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/robots.txt",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": null,
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/plain; charset=utf-8",
+      "cache": "public, max-age=300"
+    },
+    {
+      "path": "/sitemap.xml",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 404,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": null,
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/plain; charset=utf-8",
+      "cache": "no-store"
+    },
+    {
+      "path": "/terms",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 404,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Page Not Found | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/writing",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 404,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Page Not Found | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/sign-up-to-my-newsletter",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 404,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Page Not Found | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/strength-training",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 404,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Page Not Found | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/fat-loss-coaching",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 404,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Page Not Found | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/personal-training-paisley",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 404,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Page Not Found | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/not-a-page/",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 404,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Page Not Found | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/api/enquiry",
+      "agent": "ABPT-Staging-QA/1.0",
+      "status": 405,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "Check your enquiry | AB Personal Training",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html; charset=utf-8",
+      "cache": "no-store"
+    },
+    {
+      "path": "/",
+      "agent": "Googlebot",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "AB Personal Training | Aidan Brotherhood, Renfrew",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    },
+    {
+      "path": "/",
+      "agent": "OAI-SearchBot",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "canonical": null,
+      "title": "AB Personal Training | Aidan Brotherhood, Renfrew",
+      "liveFrames": false,
+      "liveCalendarLinks": false,
+      "contentType": "text/html",
+      "cache": null
+    }
+  ],
+  "internalLinksChecked": 198,
+  "assets": [
+    {
+      "path": "/ab-mark.svg",
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    {
+      "path": "/assets/entry.client-aUkGdGSX.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/jsx-runtime-BaDw9FPm.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/root-DNNRd8uv.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/site-vaCUwRF_.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/home-CDqKBVLN.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/pricing-section-BM5tk1jY.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/root-CUbsldfq.css",
+      "status": 200,
+      "type": "text/css"
+    },
+    {
+      "path": "/assets/personal-training-renfrew-CsXxJauJ.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/coaching-BXi2sOJY.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/about-VRWoClUM.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/beginners-BEhAuFlX.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/consultation-7rmI6iVh.js",
+      "status": 200,
+      "type": "text/javascript"
+    },
+    {
+      "path": "/assets/privacy-D2v_zn0c.js",
+      "status": 200,
+      "type": "text/javascript"
+    }
+  ],
+  "limitations": [
+    "Crawler user-agent checks are not genuine crawler-IP verification.",
+    "Staging intentionally blocks indexing and live appointment actions.",
+    "Production redirect/indexable responses are tested against the real compiled Worker, not deployed to production."
+  ]
+}

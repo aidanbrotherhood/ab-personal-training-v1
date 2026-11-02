@@ -1,6 +1,6 @@
 import { processNotifications } from "./notifications";
 import { campaignKeys, safeCampaignLabel } from "../app/lib/attribution";
-import { packageIds } from "../app/lib/offers";
+import { packageIds, plans } from "../app/lib/offers";
 
 const MAX_BYTES = 8000;
 const NOTICE_VERSION = "2026-11-02";
@@ -59,9 +59,13 @@ function result(
           ["confidence", "Gym confidence and consistency"],
         ])}${select("package_interest", "Coaching option (optional)", [
           ["unsure", "I’m not sure yet"],
-          ["introduction", "PT Introduction — £99 one-off"],
-          ["weekly", "Weekly Coaching — £180 / four weeks"],
-          ["complete", "Complete Coaching — £320 / four weeks"],
+          ...plans.map(
+            (plan) =>
+              [
+                plan.id,
+                `${plan.title} — ${plan.price} ${plan.id === "introduction" ? "one-off" : "/ four weeks"}`,
+              ] as [string, string],
+          ),
         ])}<label>Usual days or times (optional)<input name="availability" maxlength="300" value="${escape(values.availability || "")}"></label><input type="hidden" name="request_id" value="${escape(values.request_id || crypto.randomUUID())}"><input type="hidden" name="attribution" value="${escape(values.attribution || "{}")}"><div class="trap" aria-hidden="true"><label>Leave empty<input name="website" tabindex="-1" autocomplete="off"></label></div><label class="check"><input type="checkbox" name="consent" value="yes" required> Please contact me about my enquiry. I’ve read the <a href="/privacy">privacy notice</a>.</label><button>Request a free consultation</button></form>`;
   return new Response(
     `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${status === 200 ? "Enquiry received" : "Check your enquiry"} | AB Personal Training</title><style>body{font:16px/1.6 system-ui,sans-serif;color:#25272b;max-width:620px;margin:60px auto;padding:0 24px}h1{font-size:42px;letter-spacing:-.04em;line-height:1.1}a{color:#075fd8}label{display:block;margin:20px 0}input,select{display:block;box-sizing:border-box;width:100%;font:inherit;padding:10px;border:1px solid #9ba5b5;border-radius:4px;margin-top:8px}button{background:#075fd8;color:white;border:0;padding:16px 20px;font:inherit;border-radius:5px;cursor:pointer}.check input{display:inline;width:auto}.trap{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}:focus-visible{outline:3px solid #075fd8;outline-offset:4px}</style></head><body><a href="/">AB Personal Training</a><main><h1>${status === 200 ? "Thanks for getting in touch." : "Let’s check your request."}</h1><p>${escape(message)}</p>${
