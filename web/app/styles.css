@@ -79,10 +79,7 @@ h2 span { color: var(--blue); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 91px; }
 .brand { display: inline-flex; align-items: center; flex: none; }
 .brand img.brand-full { display: block; width: clamp(296px, 26vw, 375px); height: auto; }
-.brand img.brand-wordmark { display: block; width: clamp(325px, 27vw, 375px); height: auto; }
-.brand-mobile-wordmark { display: none; }
-.brand-mobile-wordmark strong { font-size: 14px; line-height: 1.18; font-weight: 800; letter-spacing: -.04em; text-transform: uppercase; white-space: nowrap; color: var(--ink); }
-.brand-mobile-wordmark small { font-size: 10px; line-height: 1.4; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.brand img.brand-symbol { display: block; width: 78px; height: auto; }
 .desktop-nav { display: flex; align-items: center; gap: clamp(15px, 2.4vw, 35px); color: #3b4d60; font-size: 14px; font-weight: 550; }
 .desktop-nav a:hover { color: var(--blue); }
 .nav-cta {
@@ -262,7 +259,7 @@ h2 span { color: var(--blue); }
 @media (max-width: 1060px) {
   .container { width: min(1200px, calc(100% - 56px)); }
   .brand img.brand-full { width: clamp(280px, 29vw, 340px); }
-  .brand img.brand-wordmark { width: clamp(295px, 30vw, 355px); }
+  .brand img.brand-symbol { width: 70px; }
   .header-inner { gap: 12px; }
   .desktop-nav { gap: 14px; font-size: 13px; }
   .nav-cta { padding-inline: 14px; }
@@ -306,8 +303,7 @@ h2 span { color: var(--blue); }
   .container { width: calc(100% - 36px); }
   .section-pad { padding-block: 74px; }
   .header-inner { min-height: 75px; gap: 10px; }
-  .site-header .brand img.brand-wordmark { display: none; }
-  .site-header .brand-mobile-wordmark { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .site-header .brand img.brand-symbol { width: 67px; }
   .footer-grid .brand img.brand-full { width: min(100%, 380px); }
   .nav-cta { min-height: 43px; font-size: 13px; padding: 10px 12px; gap: 9px; }
   .cta-full { display: none; }
@@ -349,8 +345,7 @@ h2 span { color: var(--blue); }
   .privacy-page, .error-page { padding: 52px 20px 85px; }
 }
 @media (max-width: 380px) {
-  .brand-mobile-wordmark strong { font-size: 12px; }
-  .brand-mobile-wordmark small { font-size: 9px; }
+  .site-header .brand img.brand-symbol { width: 60px; }
   .nav-cta { min-height: 40px; padding-inline: 9px; font-size: 12px; gap: 7px; }
 }
 @media (prefers-reduced-motion: reduce) {

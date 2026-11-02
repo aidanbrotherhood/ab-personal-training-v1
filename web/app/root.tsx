@@ -39,7 +39,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <Meta />
         <Links />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
         <meta property="og:site_name" content="Aidan Brotherhood Personal Training" />
         <meta property="og:locale" content="en_GB" />
         <meta

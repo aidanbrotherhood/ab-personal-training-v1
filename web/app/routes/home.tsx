@@ -76,7 +76,7 @@ export default function Home() {
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="site-header">
         <div className="container header-inner">
-          <Brand variant="wordmark" />
+          <Brand variant="symbol" />
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#approach">The approach</a>
             <a href="#about">Meet Aidan</a>

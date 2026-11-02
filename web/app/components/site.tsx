@@ -2,34 +2,26 @@ export function Arrow() {
   return <span className="arrow-icon" aria-hidden="true">↗</span>;
 }
 
-export function Brand({ variant = "full" }: { variant?: "full" | "wordmark" }) {
-  if (variant === "wordmark") {
-    return (
-      <a className="brand brand-wordmark-link" href="/" aria-label="Aidan Brotherhood Personal Training home">
-        <img
-          className="brand-wordmark"
-          src="/ab-wordmark.svg"
-          alt=""
-          width="1286"
-          height="171"
-        />
-        <span className="brand-mobile-wordmark" aria-hidden="true">
-          <strong>Aidan Brotherhood</strong>
-          <small>Personal Training</small>
-        </span>
-      </a>
-    );
-  }
-
+export function Brand({ variant = "full" }: { variant?: "full" | "symbol" }) {
   return (
     <a className="brand" href="/" aria-label="Aidan Brotherhood Personal Training home">
-      <img
-        className="brand-full"
-        src="/ab-logo.svg"
-        alt=""
-        width="1710"
-        height="190"
-      />
+      {variant === "symbol" ? (
+        <img
+          className="brand-symbol"
+          src="/ab-mark.svg"
+          alt=""
+          width="337"
+          height="182"
+        />
+      ) : (
+        <img
+          className="brand-full"
+          src="/ab-logo.svg"
+          alt=""
+          width="1710"
+          height="190"
+        />
+      )}
     </a>
   );
 }
