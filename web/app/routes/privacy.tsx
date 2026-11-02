@@ -28,8 +28,9 @@ export default function Privacy() {
       </p>
       <h2>Booking a consultation</h2>
       <p>
-        When you select the booking calendar, an embedded Calendly scheduling
-        page loads. Calendly may receive technical information about your visit.
+        The booking section includes an embedded Calendly scheduling page. It
+        loads as you approach that section of the website. Calendly may
+        receive technical information about your visit when it loads.
         If you book, it collects your name, email address and any details you
         provide in the booking questions to arrange the consultation. Please
         don’t enter medical or other sensitive details in the booking form.
@@ -112,9 +113,9 @@ export default function Privacy() {
         or first-party visitor-tracking storage. Campaign labels are read from
         the current page link and submitted only with an enquiry. Choosing a
         package updates the form on this page. When you choose to open the
-        Calendly calendar, that third-party embed may use its own cookies or
-        similar technologies. It is not loaded until you select it. We don’t
-        send enquiry-form activity to an analytics service.
+        Calendly booking section, that third-party embed may use its own cookies
+        or similar technologies when it loads. We don’t send enquiry-form
+        activity to an analytics service.
       </p>
       <h2>Your choices and rights</h2>
       <p>
