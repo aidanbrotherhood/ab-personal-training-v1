@@ -47,3 +47,18 @@ export const packageIds: readonly string[] = [
   "unsure",
   ...plans.map((plan) => plan.id),
 ];
+
+/**
+ * Rates are derived from the package amount and number of sessions.
+ * Four-week blocks are not calendar-month subscriptions.
+ */
+export function getPerSessionRate(plan: Pick<(typeof plans)[number], "price" | "sessions">): string {
+  const amount = Number(plan.price.replace("£", ""));
+  const rate = amount / plan.sessions;
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
+    minimumFractionDigits: Number.isInteger(rate) ? 0 : 2,
+    maximumFractionDigits: 2,
+  }).format(rate);
+}

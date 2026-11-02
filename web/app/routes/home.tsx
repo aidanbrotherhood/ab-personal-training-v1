@@ -1,7 +1,7 @@
 import type { MetaFunction } from "react-router";
 import { Brand, Arrow, Footer } from "../components/site";
 import { ConsultationCalendar } from "../components/consultation-calendar";
-import { plans } from "../lib/offers";
+import { getPerSessionRate, plans } from "../lib/offers";
 
 export const meta: MetaFunction = () => [
   { title: "Aidan Brotherhood | Personal Training at JD Gyms Renfrew" },
@@ -52,21 +52,18 @@ const faqs = [
   },
 ];
 
-const planCopy: Record<string, { kicker: string; lead: string; note: string }> = {
+const planCopy: Record<string, { kicker: string; lead: string }> = {
   introduction: {
     kicker: "Find your feet",
     lead: "A practical way to get started without a recurring commitment.",
-    note: "£49.50 per session",
   },
   weekly: {
     kicker: "Build consistency",
     lead: "A regular session, a plan for the days between, and someone keeping you on track.",
-    note: "£45 per session",
   },
   complete: {
     kicker: "More hands-on coaching",
     lead: "Two sessions a week for people who want more time working on technique and progress together.",
-    note: "£40 per session",
   },
 };
 
@@ -243,9 +240,9 @@ export default function Home() {
             <div className="pricing-heading">
               <div>
                 <p className="eyebrow">WORKING TOGETHER</p>
-                <h2 id="coaching-title">Choose your starting point.</h2>
+                <h2 id="coaching-title">Coaching that fits. Prices that make sense.</h2>
               </div>
-              <p>Different levels of support, the same approach: proper coaching and a plan that works for you. We can decide what fits during your free consultation.</p>
+              <p>Start with a free 30-minute consultation. If we decide to work together, choose a two-session introduction or ongoing coaching in four-week blocks.</p>
             </div>
             <div className="pricing-grid">
               {plans.map((plan) => {
@@ -260,27 +257,29 @@ export default function Home() {
                     </div>
                     <div className="pricing-amount">
                       <strong>{plan.price}</strong>
-                      <span>{plan.id === "introduction" ? "one-off" : "per 4 weeks"}</span>
+                      <span>{plan.id === "introduction" ? "one-off payment" : "per 4-week block"}</span>
                     </div>
                     <div className="pricing-sessions">
                       <strong>{plan.sessions} × 60-minute one-to-one sessions</strong>
-                      <span>{details.note}</span>
+                      <span>{plan.frequency}</span>
+                      <span className="pricing-rate">{getPerSessionRate(plan)} per session</span>
                     </div>
+                    <p className="pricing-includes">What's included</p>
                     <ul className="pricing-features">
                       {plan.features.map((feature) => (
                         <li key={feature}><span aria-hidden="true">✓</span>{feature}</li>
                       ))}
                     </ul>
                     <a className={"btn pricing-cta" + (plan.id === "weekly" ? " btn-primary" : " btn-outline")} href="#consultation">
-                      Discuss this option <Arrow />
+                      Book a free consultation <Arrow />
                     </a>
                   </article>
                 );
               })}
             </div>
             <div className="pricing-footer">
-              <p><strong>Nothing to commit to yet.</strong> The first consultation is free. We’ll talk about your goals and which option, if any, makes sense.</p>
-              <p>Sessions take place at JD Gyms Renfrew. A valid membership is required for paid coaching and is purchased separately. AB Personal Training is independent of JD Gyms.</p>
+              <p><strong>Free consultation first.</strong> We'll meet for 30 minutes, discuss your goals and decide whether coaching is right for you. The £99 Introduction is a separate paid package.</p>
+              <p><strong>Transparent four-week pricing.</strong> Weekly and Complete Coaching are priced per four-week block, not per calendar month (there are 13 four-week periods in a year). Paid sessions require a separate JD Gyms membership. AB Personal Training is independent of JD Gyms.</p>
             </div>
           </div>
         </section>
