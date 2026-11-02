@@ -1,3 +1,5 @@
+> Current deployment workflow: see [environment architecture and promotion instructions](ENVIRONMENTS.md). `main` is production; `develop` is staging. Earlier setup notes below are historical and do not authorise deployment from the retired landing branch.
+
 # AB Personal Training / React Router preview
 
 The active application is `/web` on `ab-react-router-landing`. The root Astro application is legacy. Hosting stays on the existing `ab-personal-training-preview` Cloudflare Worker with its existing `ENQUIRIES` D1 binding.

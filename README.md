@@ -1,3 +1,5 @@
+> Active React Router application: `/web`. `main` is production and `develop` is staging. See [environment architecture and promotion instructions](web/ENVIRONMENTS.md). Root Astro setup notes below are historical; do not deploy that legacy app.
+
 # Aidan Brotherhood Coaching
 
 V1 website foundation for Aidan Brotherhood: a calm, minimal Astro site for coaching, health, and posts.
