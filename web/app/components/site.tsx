@@ -1,22 +1,20 @@
 export function Arrow() {
-  return (
-    <span className="arrow-icon" aria-hidden="true">
-      ↗
-    </span>
-  );
+  return <span className="arrow-icon" aria-hidden="true">↗</span>;
 }
+
 export function Brand() {
   return (
-    <a className="brand" href="/" aria-label="AB Personal Training home">
+    <a className="brand" href="/" aria-label="Aidan Brotherhood Personal Training home">
       <img
         src="/ab-logo.svg"
         alt="Aidan Brotherhood Personal Training"
-        width="280"
-        height="56"
+        width="500"
+        height="92"
       />
     </a>
   );
 }
+
 export function Footer() {
   return (
     <footer className="site-footer">
@@ -24,24 +22,22 @@ export function Footer() {
         <div>
           <Brand />
           <p>
-            Independent personal training at JD Gyms Renfrew.
-            <br />
-            Gym membership required and purchased separately.
-            <br />
-            AB Personal Training is not an official JD Gyms programme.
+            One-to-one personal training with Aidan Brotherhood at JD Gyms Renfrew.
+            Gym membership is required for paid coaching and purchased separately.
+            This is an independent coaching service, not an official JD Gyms programme.
           </p>
         </div>
         <nav aria-label="Footer">
-          <a href="/#coaching">Coaching & pricing</a>
-          <a href="/#consultation">Free consultation</a>
+          <a href="/#approach">The approach</a>
+          <a href="/#about">Meet Aidan</a>
+          <a href="/#coaching">Coaching & prices</a>
+          <a href="/#consultation">Book a free consultation</a>
           <a href="/privacy">Privacy notice</a>
-          <a href="mailto:hello@aidanbrotherhood.com">
-            Email Aidan <Arrow />
-          </a>
+          <a href="mailto:hello@aidanbrotherhood.com">Email Aidan <Arrow /></a>
         </nav>
       </div>
       <div className="container footer-bottom">
-        <span>© {new Date().getFullYear()} AB Personal Training</span>
+        <span>© {new Date().getFullYear()} Aidan Brotherhood Personal Training</span>
         <span>Renfrew, Scotland</span>
         <a href="#top">Back to top ↑</a>
       </div>
