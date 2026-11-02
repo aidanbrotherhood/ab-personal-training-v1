@@ -1,11 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 84" role="img" aria-labelledby="brand-title">
-  <title id="brand-title">Aidan Brotherhood Personal Training</title>
-  <g transform="translate(2 2)">
-    <rect width="72" height="78" rx="14" fill="#075FD8"/>
-    <path d="M13 63 30 15h10l19 48H47L35 29 25 63z" fill="#fff"/>
-    <path d="M26 51h20l-3-9H29z" fill="#8DBDFB"/>
-    <path d="M13 69h47" stroke="#8DBDFB" stroke-width="3" stroke-linecap="square"/>
-  </g>
-  <text x="88" y="35" fill="#172A40" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="800" letter-spacing="-0.7">AIDAN BROTHERHOOD</text>
-  <text x="89" y="65" fill="#53677C" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" letter-spacing="3.0">PERSONAL TRAINING</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 530 94" role="img" aria-labelledby="title"><title id="title">Aidan Brotherhood Personal Training</title><rect x="1" y="1" width="88" height="88" rx="17" fill="#075FD8"/><path d="M16 66 35 22h11l19.2 44H53.5L40.5 35 27.8 66H16Z" fill="#fff"/><path d="M33.5 53h14.2l4.2 9.6H29.3L33.5 53Z" fill="#9BC7FF"/><path d="M63 22h6c12 0 15 14 5.5 20.7C84.6 49.2 81 66 68 66H59l-4.3-9.5h12c5.5 0 7-8.4-.9-8.4h-7.1L55 38.5h11.4c5.4 0 5.4-8.3 0-8.3h-6.8L56 22H63Z" fill="#fff"/><path d="M16 74h60" stroke="#9BC7FF" stroke-width="1.8"/><text x="110" y="41" fill="#172B43" font-family="Arial,Helvetica,sans-serif" font-size="29" font-weight="700" letter-spacing="-1.3">AIDAN BROTHERHOOD</text><path d="M110 52h386" stroke="#DCE4EF" stroke-width="1"/><text x="110" y="76" fill="#52708C" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" letter-spacing="4.3">PERSONAL TRAINING</text></svg>
