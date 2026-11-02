@@ -1,352 +1,177 @@
-import type { MetaFunction } from "react-router";
-import { Arrow, Brand, Footer } from "../components/site";
-import { plans } from "../lib/offers";
+import {
+  Arrow,
+  ConsultationCTA,
+  ConsultationLink,
+  FAQs,
+  LocationNote,
+  PageIntro,
+  PageShell,
+} from "../components/site";
 import { PricingSection } from "../components/pricing-section";
+import { GYM_URL } from "../lib/seo";
 
-const pageUrl = "https://aidanbrotherhood.com/personal-training-renfrew";
-const gymUrl = "https://www.jdgyms.co.uk/gym/renfrew/";
-
-export const meta: MetaFunction = () => [
-  { title: "Personal Trainer Renfrew | 1:1 Coaching at JD Gyms | Aidan Brotherhood" },
-  {
-    name: "description",
-    content:
-      "Looking for a personal trainer in Renfrew? Train one-to-one with Aidan Brotherhood at JD Gyms Renfrew. Strength, fitness, nutrition guidance and a free 30-minute consultation.",
-  },
-  { property: "og:title", content: "Personal Trainer in Renfrew | Aidan Brotherhood" },
-  {
-    property: "og:description",
-    content:
-      "Independent one-to-one personal training at JD Gyms Renfrew. See coaching options, prices and what to expect, then book a free consultation.",
-  },
-  { property: "og:type", content: "website" },
-  { name: "twitter:card", content: "summary_large_image" },
-];
-
-const questions = [
-  {
-    q: "How much does a personal trainer cost in Renfrew?",
-    a: "Starter is a £99 one-off package with two 60-minute sessions. Ongoing Coaching is £180 per four weeks for four sessions; Coaching+ is £320 per four weeks for eight sessions. JD Gyms membership is separate. We'll discuss what's appropriate during your free consultation.",
-  },
-  {
-    q: "Where are your personal training sessions held?",
-    a: "I coach in person at JD Gyms Renfrew, Renfrew Retail Park, Renfrew, PA4 9EN. I'm an independent personal trainer, not an official JD Gyms training programme.",
-  },
-  {
-    q: "Do I need a JD Gyms membership?",
-    a: "Yes, a valid JD Gyms membership is required for paid training sessions and isn't included in my coaching prices. If you aren't a member, email me before booking your consultation so I can confirm visitor access arrangements.",
-  },
-  {
-    q: "Can you help if I've never used a gym before?",
-    a: "Yes. We can start with the equipment and exercises that feel manageable, spend time on technique and build your confidence gradually. You don't need previous training experience to have a consultation.",
-  },
-  {
-    q: "Can personal training help with fat loss?",
-    a: "I can help you build a realistic strength and activity routine, alongside practical nutrition habits that support your goals. We won't rely on extreme dieting or promise a particular rate of weight loss.",
-  },
-  {
-    q: "What happens during the free consultation?",
-    a: "It's a 30-minute in-person meeting. We'll discuss your goals, training history and schedule, and, where appropriate, look at a few basic movements. I'll explain how I would approach your training and you can decide whether you want to work together.",
-  },
-  {
-    q: "Do you offer personal training to people from Paisley or the surrounding area?",
-    a: "Yes. My sessions take place in Renfrew and are also suitable for people travelling from Paisley, Erskine, Clydebank or nearby areas who can get to JD Gyms Renfrew for their appointments.",
-  },
-];
-
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "BreadcrumbList",
-      "@id": `${pageUrl}#breadcrumb`,
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://aidanbrotherhood.com/" },
-        { "@type": "ListItem", position: 2, name: "Personal training in Renfrew", item: pageUrl },
-      ],
-    },
-    {
-      "@type": "Person",
-      "@id": "https://aidanbrotherhood.com/#aidan",
-      name: "Aidan Brotherhood",
-      jobTitle: "Personal trainer",
-      url: "https://aidanbrotherhood.com/",
-      email: "hello@aidanbrotherhood.com",
-      sameAs: ["https://www.instagram.com/aidanbrotherhood.pt/"],
-    },
-    {
-      "@type": "Service",
-      "@id": `${pageUrl}#service`,
-      name: "One-to-one personal training in Renfrew",
-      serviceType: "Personal training",
-      description:
-        "Independent in-person strength and fitness coaching, exercise programming, nutrition guidance and progress reviews at JD Gyms Renfrew.",
-      provider: { "@id": "https://aidanbrotherhood.com/#aidan" },
-      areaServed: { "@type": "Place", name: "Renfrew, Scotland" },
-      availableChannel: {
-        "@type": "ServiceChannel",
-        serviceLocation: {
-          "@type": "Place",
-          name: "JD Gyms Renfrew",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "Renfrew Retail Park",
-            addressLocality: "Renfrew",
-            postalCode: "PA4 9EN",
-            addressCountry: "GB",
-          },
-        },
-      },
-      offers: plans.map((plan) => ({
-        "@type": "Offer",
-        price: Number(plan.price.replace("£", "")),
-        priceCurrency: "GBP",
-        name: plan.title,
-        description:
-          plan.id === "introduction"
-            ? "Two 60-minute coaching sessions, one-off package; gym membership separate"
-            : `${plan.sessions} 60-minute one-to-one sessions in a four-week coaching block; gym membership separate`,
-        url: "https://aidanbrotherhood.com/#coaching",
-      })),
-    },
-    {
-      "@type": "WebPage",
-      "@id": pageUrl,
-      url: pageUrl,
-      name: "Personal Trainer in Renfrew | Aidan Brotherhood",
-      description: "Independent one-to-one personal training at JD Gyms Renfrew.",
-      breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
-      mainEntity: { "@id": `${pageUrl}#service` },
-      inLanguage: "en-GB",
-    },
-  ],
-};
-
-export default function PersonalTrainingRenfrew() {
+export default function Renfrew() {
   return (
-    <div id="top" className="service-page">
-      <a className="skip-link" href="#main">Skip to content</a>
-      <header className="site-header">
-        <div className="container header-inner">
-          <Brand variant="symbol" />
-          <nav className="desktop-nav" aria-label="Main navigation">
-            <a href="/">Home</a>
-            <a href="/#approach">How I coach</a>
-            <a href="/#coaching">Coaching & prices</a>
-          </nav>
-          <a className="nav-cta" href="/#consultation">
-            <span className="cta-full">Book a free consultation</span><span className="cta-short">Book free</span> <Arrow />
+    <PageShell>
+      <PageIntro
+        label="Training in Renfrew"
+        eyebrow="Independent one-to-one coaching · PA4 9EN"
+        title={
+          <>
+            Personal training
+            <br />
+            at JD Gyms Renfrew.
+          </>
+        }
+      >
+        <p>
+          I’m Aidan Brotherhood. I coach people one-to-one at JD Gyms Renfrew,
+          helping them build strength, improve fitness and train with more
+          confidence.
+        </p>
+        <div className="hero-actions">
+          <ConsultationLink placement="renfrew_hero" />
+          <a className="intro-secondary" href="#prices">
+            See the prices ↓
           </a>
         </div>
-      </header>
-      <main id="main">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
-        />
-        <section className="service-hero" aria-labelledby="service-title">
-          <nav className="container service-breadcrumb" aria-label="Breadcrumb">
-            <a href="/">Home</a>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page">Personal training in Renfrew</span>
-          </nav>
-          <div className="container service-hero-layout">
-            <div>
-              <p className="eyebrow">INDEPENDENT 1:1 COACHING · RENFREW</p>
-              <h1 id="service-title">Personal trainer in Renfrew.</h1>
-              <p>
-                I’m Aidan Brotherhood. I provide one-to-one personal training at JD Gyms Renfrew,
-                helping people get stronger, improve their fitness, lose body fat and feel more
-                confident in the gym — with a plan that fits around real life.
-              </p>
-              <div className="service-hero-actions">
-                <a href="/#consultation" className="btn btn-primary btn-large">
-                  Book a free consultation <Arrow />
-                </a>
-                <a href="#prices" className="service-hero-secondary">
-                  See coaching prices <span aria-hidden="true">↓</span>
-                </a>
-              </div>
-              <p className="service-disclaimer">Free 30-minute meeting · In person · No obligation</p>
-            </div>
-            <figure className="service-hero-photo">
-              <img
-                src="https://images.unsplash.com/photo-1758875568582-ec8a4229c2b0?auto=format&fit=crop&w=1200&q=76"
-                alt="Personal trainer watching a client practise a barbell squat"
-                width="1000"
-                height="667"
-                decoding="async"
-                fetchPriority="high"
-              />
-              <figcaption>
-                <strong>Coaching that starts with technique.</strong>
-                <span>Illustrative photography — not Aidan or JD Gyms Renfrew.</span>
-              </figcaption>
-            </figure>
+      </PageIntro>
+      <section className="section-pad">
+        <div className="container editorial-split">
+          <div>
+            <p className="eyebrow">The way we work</p>
+            <h2>
+              A starting point.
+              <br />
+              <span>A plan to build on.</span>
+            </h2>
           </div>
-        </section>
-
-        <div className="service-jump-wrap">
-          <nav className="container service-jump" aria-label="On this page">
-            <a href="#who-its-for">Who it's for</a>
-            <a href="#approach">How coaching works</a>
-            <a href="#prices">Prices</a>
-            <a href="#location">Location</a>
-            <a href="#questions">FAQs</a>
-          </nav>
+          <div className="prose-copy">
+            <p>
+              Whether you’re new to the gym or feeling stuck with your current
+              routine, we start by understanding your goals, experience and
+              available time.
+            </p>
+            <p>
+              Paid sessions last 60 minutes. We work on technique and a
+              programme that makes sense for your starting point. Ongoing
+              Coaching adds a personalised plan, practical nutrition guidance
+              and a weekly check-in and progress review.
+            </p>
+            <div className="text-link-row">
+              <a href="/personal-training-for-beginners">
+                New to the gym? Start here ↗
+              </a>
+              <a href="/about">Meet your coach ↗</a>
+            </div>
+          </div>
         </div>
-
-        <section className="service-content section-pad" id="who-its-for" aria-labelledby="who-title">
-          <div className="container service-content-grid">
-            <div className="service-main">
-              <p className="eyebrow">PERSONAL TRAINING THAT STARTS WITH YOU</p>
-              <h2 id="who-title">Get more out of the time you spend training.</h2>
+      </section>
+      <PricingSection variant="renfrew" />
+      <section className="section-pad" id="location">
+        <div className="container editorial-split">
+          <div>
+            <p className="eyebrow">Your training location</p>
+            <h2>
+              One coach.
+              <br />
+              <span>One Renfrew base.</span>
+            </h2>
+            <div className="prose-copy">
               <p>
-                If you're new to the gym, the amount of equipment and conflicting advice can be
-                overwhelming. If you've been training for a while, you might be working hard but
-                not seeing the progress you'd hoped for. Both are good reasons to seek some direction.
+                AB Personal Training operates independently within JD Gyms
+                Renfrew. Coaching packages and gym membership are purchased
+                separately.
               </p>
               <p>
-                As your personal trainer in Renfrew, my job is to help you understand what you're
-                doing and why. We'll work on the movements, habits and training decisions that make
-                sense for <em>your</em> starting point rather than relying on a generic workout.
+                If you travel from Paisley, Erskine, Clydebank or another nearby
+                area, all your appointments will still be here in Renfrew. Check
+                that the journey works for your regular training.
               </p>
-              <h3>What would you like to work on?</h3>
-              <ul className="service-goals">
-                <li><strong>Build strength:</strong> improve exercise technique and progress through a structured programme.</li>
-                <li><strong>Lose body fat:</strong> combine practical training with nutrition habits that are realistic to maintain.</li>
-                <li><strong>Feel confident in the gym:</strong> learn how to use equipment and train with more independence.</li>
-                <li><strong>Improve overall fitness:</strong> develop consistency, movement quality and a routine you can stick with.</li>
-                <li><strong>Get past a plateau:</strong> review what you're currently doing and make purposeful adjustments.</li>
-              </ul>
-            </div>
-            <aside className="service-side">
-              <p className="eyebrow">AT A GLANCE</p>
-              <h3>One-to-one personal training</h3>
-              <dl>
-                <div><dt>Coach</dt><dd>Aidan Brotherhood</dd></div>
-                <div><dt>Where</dt><dd>JD Gyms Renfrew, PA4 9EN</dd></div>
-                <div><dt>How</dt><dd>In-person sessions by appointment</dd></div>
-                <div><dt>Session duration</dt><dd>60 minutes for paid PT sessions</dd></div>
-                <div><dt>First step</dt><dd>Free 30-minute consultation</dd></div>
-                <div><dt>Membership</dt><dd>JD Gyms membership is an additional cost</dd></div>
-              </dl>
-              <a className="inline-link" href="/#consultation">Find a consultation time <Arrow /></a>
-            </aside>
-          </div>
-        </section>
-
-        <section className="service-process section-pad" id="approach" aria-labelledby="process-title">
-          <div className="container">
-            <div className="service-section-heading">
-              <p className="eyebrow">HOW COACHING WORKS</p>
-              <h2 id="process-title">A clear plan. Proper coaching. Progress you can follow.</h2>
-              <p>I don't think you need endless exercise variation to make progress. You need a starting point, a sensible programme and a way to review what's working.</p>
-            </div>
-            <div className="service-process-grid">
-              <article><span>01</span><h3>Understand your starting point</h3><p>We look at your goals, training history, experience with different movements and how many days you can realistically train.</p></article>
-              <article><span>02</span><h3>Build and practise the plan</h3><p>We'll work on technique, make movements feel more comfortable and build a routine you understand, including what to do between our sessions.</p></article>
-              <article><span>03</span><h3>Review and adapt</h3><p>We can use exercise performance, consistency, feedback and relevant body-composition measures to judge progress and adjust when needed.</p></article>
-            </div>
-            <p className="service-process-note">Nutrition guidance focuses on practical day-to-day habits. It isn't a substitute for clinical dietetic or medical care.</p>
-            <figure className="service-method-photo">
-              <img
-                src="https://images.unsplash.com/photo-1758875568800-29fb434c7b17?auto=format&fit=crop&w=1400&q=74"
-                alt="Client learning barbell technique under a personal trainer's supervision"
-                width="1000"
-                height="667"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>
-                <strong>Good training is built, not guessed.</strong>
-                <span>Illustrative coaching photograph.</span>
-              </figcaption>
-            </figure>
-          </div>
-        </section>
-
-        <PricingSection variant="renfrew" />
-
-        <section className="service-location-section section-pad" id="location" aria-labelledby="location-title">
-          <div className="container service-location-grid">
-            <div>
-              <p className="eyebrow">PERSONAL TRAINING AT JD GYMS RENFREW</p>
-              <h2 id="location-title">Train in Renfrew, with a coach who knows your plan.</h2>
-              <p>Sessions take place at <strong>JD Gyms Renfrew, Renfrew Retail Park, Renfrew, PA4 9EN</strong>. This is where we'll meet for your in-person coaching appointments.</p>
-              <p>If you're coming from Paisley, Erskine, Clydebank or another nearby area, you're welcome to enquire — just make sure the location works for your regular training routine.</p>
-              <p>You will need a valid JD Gyms membership for paid coaching. I operate my own independent PT business, so training packages and gym membership are purchased separately.</p>
-              <p>If you are not yet a member, contact me before booking a consultation so I can confirm the access arrangements. I don't want you to turn up and discover there is an unexpected entry requirement.</p>
-              <div className="service-location-actions">
-                <a href="/#consultation" className="btn btn-primary">Book a free consultation <Arrow /></a>
-                <a href={gymUrl} target="_blank" rel="noopener noreferrer" className="inline-link">JD Gyms Renfrew's official page <Arrow /></a>
-              </div>
-            </div>
-            <div className="service-location-card">
-              <span>TRAINING LOCATION</span>
-              <h3>JD Gyms<br />Renfrew</h3>
-              <address>Renfrew Retail Park<br />Renfrew<br />PA4 9EN</address>
-              <div className="service-location-card-bottom">
-                <p>Independent one-to-one coaching with Aidan Brotherhood.</p>
-                <a href="mailto:hello@aidanbrotherhood.com?subject=Renfrew%20personal%20training%20enquiry">Email Aidan <Arrow /></a>
-              </div>
+              <p>
+                Use the directions link to find the gym. If you’re unsure about
+                entry or your visit, contact me before booking.
+              </p>
+              <a
+                className="inline-link"
+                href={GYM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                JD Gyms Renfrew’s official page <Arrow />
+              </a>
             </div>
           </div>
-        </section>
-
-        <section className="service-consult-preview" aria-labelledby="service-consult-title">
-          <div className="container service-consult-grid">
-            <figure className="service-consult-photo">
-              <img
-                src="https://images.unsplash.com/photo-1758875569399-99a7d80ace43?auto=format&fit=crop&w=1050&q=75"
-                alt="Personal trainer and client discussing a training plan together"
-                width="1000"
-                height="667"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>Illustrative consultation photograph.</figcaption>
-            </figure>
-            <div className="service-consult-copy">
-              <p className="eyebrow">COME IN AND HAVE A CONVERSATION</p>
-              <h2 id="service-consult-title">Start with a free 30-minute consultation.</h2>
-              <p>Tell me what you're hoping to achieve, ask your questions and find out what coaching could look like for you. If appropriate, we'll try a few basic movements together. There's no obligation to buy anything.</p>
-              <a href="/#consultation" className="btn btn-primary">Choose an appointment <Arrow /></a>
-            </div>
+          <LocationNote />
+        </div>
+      </section>
+      <section className="faq-section section-pad">
+        <div className="container faq-layout">
+          <div className="faq-intro">
+            <p className="eyebrow">Good to know</p>
+            <h2>
+              Before you
+              <br />
+              get started.
+            </h2>
           </div>
-        </section>
-
-        <section className="service-faq section-pad" id="questions" aria-labelledby="faq-title">
-          <div className="container service-faq-layout">
-            <div>
-              <p className="eyebrow">COMMON QUESTIONS</p>
-              <h2 id="faq-title">Before you get started.</h2>
-              <p>Answers to the questions people usually have when looking for personal training in Renfrew.</p>
-            </div>
-            <div className="faq-items">
-              {questions.map(({ q, a }) => (
-                <details key={q} className="faq-item">
-                  <summary>{q}<span aria-hidden="true">+</span></summary>
-                  <p>{a}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="service-cta section-pad" aria-labelledby="service-cta-title">
-          <div className="container">
-            <p className="eyebrow">YOUR FIRST STEP</p>
-            <h2 id="service-cta-title">Let's talk about what you want to achieve.</h2>
-            <p>Book a free 30-minute consultation at JD Gyms Renfrew, or email me if you can't find a suitable time.</p>
-            <div className="service-cta-actions">
-              <a href="/#consultation" className="btn btn-primary btn-large">See available times <Arrow /></a>
-              <a href="mailto:hello@aidanbrotherhood.com?subject=Personal%20training%20in%20Renfrew" className="inline-link">Email Aidan <Arrow /></a>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          <FAQs
+            items={[
+              {
+                question: "Do I need to be a JD Gyms member?",
+                answer: (
+                  <p>
+                    Yes, for paid coaching. A valid membership is required and
+                    isn’t included in coaching prices. If you aren’t a member
+                    yet, contact Aidan before booking the free consultation so
+                    access can be confirmed.
+                  </p>
+                ),
+              },
+              {
+                question: "Is the consultation a training session?",
+                answer: (
+                  <p>
+                    It’s a free, 30-minute introduction. We discuss your goals,
+                    training experience and routine. Where appropriate and
+                    you’re comfortable, we may look at a few basic movements.
+                    It’s separate from the paid Starter package.
+                  </p>
+                ),
+              },
+              {
+                question: "Can I work on strength or fat loss?",
+                answer: (
+                  <p>
+                    Coaching can focus on your training goals, with practical
+                    nutrition guidance in ongoing packages.{" "}
+                    <a href="/coaching">
+                      See the support and packages available
+                    </a>
+                    . We don’t promise a particular rate of progress or weight
+                    loss.
+                  </p>
+                ),
+              },
+              {
+                question: "What if I can’t find a consultation time?",
+                answer: (
+                  <p>
+                    Email{" "}
+                    <a href="mailto:hello@aidanbrotherhood.com">
+                      hello@aidanbrotherhood.com
+                    </a>{" "}
+                    to discuss availability. Training is arranged with Aidan;
+                    the gym’s opening hours aren’t a promise of coaching
+                    availability.
+                  </p>
+                ),
+              },
+            ]}
+          />
+        </div>
+      </section>
+      <ConsultationCTA />
+    </PageShell>
   );
 }

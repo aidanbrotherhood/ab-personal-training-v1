@@ -1,17 +1,17 @@
 import type { Route } from "./+types/robots";
 import { envContext } from "../lib/context";
+import { isIndexableProduction, SITE_ORIGIN } from "../lib/seo";
 
 export function loader({ request, context }: Route.LoaderArgs) {
-  const origin = new URL(request.url).origin;
   const env = context.get(envContext);
-  const production = origin === "https://aidanbrotherhood.com" && String(env.INDEXABLE) === "true";
+  const production = isIndexableProduction(request, env);
 
   const content = production
     ? [
         "User-agent: *",
         "Allow: /",
         "",
-        "Sitemap: https://aidanbrotherhood.com/sitemap.xml",
+        `Sitemap: ${SITE_ORIGIN}/sitemap.xml`,
       ].join("\n")
     : ["User-agent: *", "Disallow: /"].join("\n");
 

@@ -1,14 +1,15 @@
-> Current deployment workflow: see [environment architecture and promotion instructions](ENVIRONMENTS.md). `main` is production; `develop` is staging. Earlier setup notes below are historical and do not authorise deployment from the retired landing branch.
+# AB Personal Training
 
-# AB Personal Training / React Router preview
+The active React Router SSR application is `/web`. Root Astro files are legacy. Deployment boundaries and provider identities are authoritative in [ENVIRONMENTS.md](ENVIRONMENTS.md) and [../AGENTS.md](../AGENTS.md).
 
-The active application is `/web` on `ab-react-router-landing`. The root Astro application is legacy. Hosting stays on the existing `ab-personal-training-preview` Cloudflare Worker with its existing `ENQUIRIES` D1 binding.
+- `develop` publishes **only staging**, `ab-personal-training-staging`.
+- `main` publishes production, **`ab-personal-training-preview`**. Its historical name does not make it a preview system.
+- Production promotion requires a normally merged develop-to-main PR and explicit approval in the current task. Never use the retired landing branch.
+- Bare `npm run deploy` intentionally fails. Do not alter guards, bindings, secrets, domains or cron to make a deployment pass.
 
-## Delivery and checks
+## Validation and builds
 
-Cloudflare Workers Builds is connected to this branch with root `/web`, build `npm install --no-audit --no-fund && npm run build`, deploy `npx wrangler deploy`. GitHub Actions separately generates types, checks TypeScript, tests the enquiry safeguards and builds. A passing commit is not proof of deployment: inspect the Cloudflare build and verify the served page.
-
-In a temporary development environment with Node 24.4+:
+Run from `/web`, with Node 24.4+:
 
 ```sh
 npm ci --no-audit --no-fund
@@ -16,44 +17,53 @@ npm run cf-typegen
 npm run typecheck
 npm test
 npm run build
+node scripts/deploy.mjs staging --check
+npm run build:production
+node scripts/deploy.mjs production --check
 ```
 
-The repository's pinned Vite plugin and Wrangler bundle development runtimes older than the existing 2026-10-30 compatibility date. Builds and types work; for runtime QA use an up-to-date Wrangler installed in a separate temporary tools directory against `build/server/wrangler.json`. Do not lower the deployed compatibility date to make local development work. No user-operated local server or manual file transfer is needed.
+Both builds run `test:built` against the actual compiled Worker, including its SSR router, resource routes and environment gates. Unit tests separately exercise the enquiry system using isolated in-memory SQLite. Tests make no provider bookings or notification calls. The production **check** validates an artifact; it does not deploy it.
 
-## Enquiries
+Cloudflare Workers Builds is the sole publisher. Both triggers install, generate types, typecheck and test before building/deploying. `npm run build` targets staging; `npm run build:production` explicitly selects production at build time. Their deploy commands are `npm run deploy:staging` and `npm run deploy:production`, respectively. GitHub Actions validates both artifacts and never publishes. Consult ENVIRONMENTS.md for the complete promotion procedure.
 
-`POST /api/enquiry` remains the endpoint. `enquiries` keeps its original schema and records. The additive migration `migrations/0001_enquiry_context.sql` creates `enquiry_details` for a broad goal, selected package, campaign labels and acknowledged notice version. Apply it to the named D1 database **before** deploying code that writes context. The migration is idempotent and does not delete data.
+The pinned local development runtimes predate the existing 2026-10-30 compatibility date. For local rendered QA, use a current Wrangler installed in a temporary tools directory against `build/server/wrangler.json`. Do not lower the compatibility date. Rebuild staging before serving a local staging preview; do not reuse the production artifact for development.
 
-The endpoint validates on the server, bounds the actual request body to 8 KB, checks same-origin requests, keeps a honeypot and uses a Workers rate-limit binding (five attempts per IP per minute, approximate and per Cloudflare location). It saves the enquiry, context and notification queue row in an atomic D1 batch. A per-form UUID makes retries idempotent. JavaScript errors keep entered values in place; a no-JavaScript HTML fallback allows correction. An apparent success is returned for honeypot submissions without writing data. Resend notification processing and retries are described below. No booking system or WhatsApp link is configured.
+For no-JavaScript QA, start the local staging artifact on 8787, then `node scripts/qa-nojs.mjs`. Its loopback-only GET/HEAD proxy on 8788 sets `script-src 'none'`. It never submits forms or targets a remote provider. Responsive QA must record measured CSS `innerWidth`/`innerHeight`, not just the requested override.
 
-The automated tests use isolated, in-memory SQLite behind a D1-shaped transaction adapter. They verify query execution, rollback, deduplication, validation and safeguards. This is not a claim that hosted D1 or email delivery has been exercised. Run runtime QA against isolated local D1 for a full valid submission. Hosted checks should use GET/invalid submissions only, avoiding unwanted customer records.
+## Public content and discovery
+
+[../docs/seo/implementation-specification-2026-11-02.md](../docs/seo/implementation-specification-2026-11-02.md) and its evidence are the original audit. The subsequent owner instruction limits publication to complete approved pages and preserves the creative proposition/pricing hierarchy. Delivery decisions and QA are recorded alongside that document.
+
+- `app/lib/public-pages.ts` is the **published** HTML page registry. Routing, canonical paths, metadata and sitemap use it. Never add an unpublished draft.
+- React Router resource routes `app/routes/sitemap.ts` and `robots.ts` alone publish crawler responses. The Worker must not intercept them with a second list.
+- Production indexing requires `INDEXABLE=true` **and** the exact HTTPS apex origin. Every staging/Workers alias is noindex, has no canonical or entity graph, blocks robots and returns 404/no-store for XML sitemap.
+- `app/lib/seo.ts` upgrades production HTTP/www and trims recognised HTML trailing slashes, preserving path/query. Unknown/retired paths remain genuine 404s. `practice.aidanbrotherhood.com` is outside these rules.
+- `app/lib/structured-data.ts` connects AB's business, Aidan, the separate JD Gyms venue, pages, breadcrumbs and service offers. No ratings, invented credentials, gym ownership or Business Profile eligibility claims.
+- `app/lib/offers.ts` owns all product names, stable IDs, prices and deliverables. `PricingSection` preserves Starter / recommended blue Coaching / premium navy Coaching+. Home/local show all actual prices; `/coaching` adds the full comparison. Four-week blocks are not calendar months.
+- `/terms` is unpublished pending actual owner policies. No standalone goal or neighbouring-city pages exist. See the owner requirements document before adding them.
+
+## Consultation and staging safety
+
+`/consultation` is the canonical destination of commercial CTAs. Old home `#approach`, `#about`, `#coaching` and `#consultation` fragments remain useful. Production retains the existing Calendly event URL; no custom booking backend was introduced.
+
+The calendar is enabled only by the same strict production origin/flag gate. Staging renders an explicit, disabled preview **without an iframe or a live Calendly anchor**, even if INDEXABLE is mistakenly true. There is no test Calendly provider configured, so live date/time selection cannot be safely exercised on staging. Email links remain available as ordinary explicit user actions; QA does not send them.
+
+Production shows direct Calendly and email alternatives before the iframe, plus the current instruction for non-members to contact Aidan before booking. Calendar event-type details are hidden to reduce duplicate introductory content. The provider's scheduling window, account, questions, notifications and connected calendar are unchanged. After separately approved production promotion, check the actual iframe/date/time/details flow without completing a genuine booking unless specifically authorised.
 
 ## Measurement
 
-Current-page UTM source, medium, campaign, content and term labels plus an external referrer hostname can accompany a submitted enquiry. Only allowlisted, bounded labels are saved. No cookies, localStorage, sessionStorage, full referrer URLs, advertising click IDs or external analytics scripts are used. Do not place personal data in campaign labels.
+`app/lib/measurement.ts` dispatches ephemeral `ab:measurement` browser CustomEvents with an allowlisted event, pathname, placement and optional stable package ID. No listener uploads them; there is no persistence, tracking vendor, advertising pixel or database flow. Destination views are hydrated browser views, not unique people. Hard navigation does not carry package/source attribution into the provider.
 
-Package CTAs preselect the form's optional coaching option. Browser CustomEvents `ab:package-interest` and `ab:consultation-submitted` expose only the package enum for future consent-aware integration; there is no analytics listener or reporting service. The submission event follows server-confirmed persistence. Server logs record `enquiry_saved` with the package enum only on a new insert. No names, emails, goals, free text or request body are logged. Invocation logging is disabled.
+Events distinguish CTA clicks, destination views, Calendly calendar/time engagement and contact fallbacks. The optional `booking_completed_client_signal` is diagnostic only, **never a confirmed booking**. Provider messages require the exact Calendly origin and active iframe window; payloads and personal details are not forwarded. Bookings require provider reconciliation, attendance requires owner confirmation, and paying clients require a genuine commercial record. See the measurement and release checklist for future configuration requirements.
 
-For useful commercial reporting, review enquiries by source/package and maintain `enquiries.status` manually as conversations progress (for example `new`, `contacted`, `consulted`, `client`). Do not equate enquiry count with acquired paying clients. Add no analytics or advertising tags without an explicit account and consent decision.
+## Existing enquiries and notifications
 
-## Before switching the public domain
+`POST /api/enquiry` is retained although the legacy form is not mounted on the current public pages. Existing enquiry records and migrations are untouched. Server validation, same-origin checks, actual 8 KB body limit, honeypot, rate limit, idempotent UUID and atomic enquiry/context/notification batch remain intact. Optional phone is validated; email is required. No names, emails, free text or request bodies are logged.
 
-1. Owner review of the creative direction, service copy, actual availability and the privacy notice. Confirm a specific enquiry-retention/review schedule, lawful bases, processor arrangements and any applicable registration obligations. The current notice describes retention criteria; it does not invent an agreed number of months. Ensure the manual enquiry-review process is workable.
-2. Validate the deployed build, form errors, mobile experience and a clearly labelled end-to-end test enquiry with permission. Delete any disposable test records only with appropriate authorisation. Add a verified business number if WhatsApp is wanted.
-3. Audit legacy Webflow URLs and define redirects. Domain connection and root/www DNS changes need explicit approval. Preserve all iCloud Mail MX/SPF/DKIM, Google verification and unrelated records.
-4. The shared Worker uses `INDEXABLE=true`. Production indexing requires both `INDEXABLE=true` and the exact `https://aidanbrotherhood.com` origin. Only then are canonical URLs and the sitemap emitted and the robots block removed. The preview remains noindex even if the flag is set accidentally. Social cards use the serving origin.
-5. Check production canonical host, redirects, social-card URL, structured data and the enquiry endpoint after the approved cutover. There is no custom-domain route in this configuration.
+Staging uses only `ab-pt-enquiries-staging` (`7af4c995-22ad-4ecd-9359-eec163d27e45`), disabled notifications, no secrets, no custom domains and no schedules. A staging enquiry creates a notification row with `state=disabled`; processing exits before external calls. Use synthetic data only.
 
-## Service facts
+Production retains `ab-pt-enquiries` (`720c34f0-0a11-4518-9695-142c2635c708`), its existing Resend secret and five-minute reconciliation cron. A saved enquiry is durable even when email fails. Provider acceptance differs from delivery. Tracking is disabled. Notifications go only to the existing business inbox; Reply-To is the prospect.
 
-PT Introduction: £99 one-off, two 60-minute sessions, assessment, technique coaching and practical starting plan. Weekly Coaching: £180/four-week block, four sessions, programme, nutrition guidance and weekly review. Complete Coaching: £320/four-week block, eight sessions, programme, nutrition coaching and weekly accountability/reviews. Optional 12-week pathway: three independent £320 blocks, £960 total, no requirement to commit to or pay for all three upfront. The free consultation is separate from the paid Introduction. JD Gyms membership is required and purchased separately; AB is independent of JD Gyms.
+Operational review: inspect pending notification rows with six attempts or older than 23 hours. Processing stops at those limits within Resend's idempotency window. Fix the provider fault first. Reconcile older rows against provider references before any manual retry/send; never delete the lead or assume acceptance proves delivery. Website work does not authorise production record mutation or notification changes.
 
-## Production launch / 2 November 2026
-
-Production apex and www use Custom Domain mappings to the existing Worker. The Worker redirects www with HTTP 308 preserving path and query. INDEXABLE=true allows indexing only on the apex; workers.dev stays noindex. Root/www Webflow CNAME originals are in launch-rollback.json. No Apple or unrelated records are changed. Isolated sender DNS under notify.aidanbrotherhood.com authenticates Resend; no receiving service is configured there.
-
-Notifications: each new enquiry atomically creates a durable enquiry_notifications row. After saving, waitUntil attempts delivery through Resend using a domain-restricted Cloudflare secret. A five-minute cron reconciles pending rows. Email failure does not change successful lead storage. Provider acceptance is recorded separately from delivery; check the provider's delivery event by provider_id. No provider body or personal fields are logged. Open/click tracking is disabled. Reply-To is the prospect's email; notifications go only to hello@aidanbrotherhood.com.
-
-Operational review: query enquiry_notifications for state='pending', attempts>=6, or created_at older than 23 hours. Automatic processing stops after six attempts or 23 hours, within Resend's 24-hour idempotency window. Fix the sender/credential/provider fault first. For a recent failure, reset attempts=0,next_attempt=unixepoch() on the exact row to retry at the next cron. For rows older than 23 hours, reconcile the provider reference/idempotency history before any manual email or new send to prevent duplicates; do not delete the lead. Accepted rows can still bounce: inspect Resend delivery events and reconcile with D1. A failed email is never a failed enquiry. The existing phone column is optional and validated; email remains required.
-
-Rollback website routing: remove only the two Worker Custom Domain mappings, then recreate the two DNS-only CNAMEs from launch-rollback.json (apex and www, target proxy-ssl.webflow.com, ttl=1, proxied=false). Do not change mail records, sending subdomain records or any D1 data. For an application-only fault use the previous Worker version recorded in the file, preserving current routing; note that the old version has no notification processing and production noindex, so restoring routing to Webflow is preferable for a prolonged incident. Remove custom-domain entries from Wrangler configuration before a later deployment if intentionally rolling routing back.
+Apply migrations only to an explicitly identified environment UUID. No schema migration is required for this implementation. Provider rollback/promotion instructions remain in ENVIRONMENTS.md; preserve bindings, secrets, cron and customer data. Historical launch routing evidence remains in `launch-rollback.json`.
