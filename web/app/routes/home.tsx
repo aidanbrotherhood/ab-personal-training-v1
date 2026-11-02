@@ -83,7 +83,7 @@ export default function Home() {
             <a href="#coaching">Coaching & prices</a>
           </nav>
           <a className="nav-cta" href="#consultation">
-            Book a free consultation <Arrow />
+            <span className="cta-full">Book a free consultation</span><span className="cta-short">Book free</span> <Arrow />
           </a>
         </div>
       </header>
