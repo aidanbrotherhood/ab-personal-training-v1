@@ -510,3 +510,124 @@ h2 span { color: var(--blue); }
  .service-hero-layout > div > p:not(.eyebrow) { font-size:17px; }
  .service-hero .btn,.service-cta .btn { width:100%; }
 }
+
+
+/* Renfrew service page — integrated dark breadcrumb, legible local intent and conversion sections. */
+.service-page .service-hero { padding: 0 0 clamp(66px,7vw,108px); background: radial-gradient(ellipse at 84% 10%, #22405e 0%, transparent 48%), #0b192a; }
+.service-page .service-breadcrumb {
+  color: #9fb5c9; background: transparent; padding-block: 25px 18px;
+  border-bottom: 1px solid rgba(171,196,222,.16); font-size: 13px;
+}
+.service-page .service-breadcrumb a { color: #c7dcf2; text-underline-offset: 4px; }
+.service-page .service-breadcrumb a:hover { text-decoration: underline; color: white; }
+.service-page .service-breadcrumb span[aria-current="page"] { color: #e5edf6; }
+.service-page .service-hero-layout { padding-top: clamp(42px,5vw,76px); }
+.service-page .service-hero h1 { max-width: 780px; font-size: clamp(49px,5.65vw,77px); }
+.service-page .service-hero .eyebrow { font-size:13px; }
+.service-page .service-hero-layout > div > p:not(.eyebrow) { max-width: 665px; font-size: 19px; }
+.service-hero-actions { display:flex; align-items:center; flex-wrap:wrap; gap:23px; margin-top: 29px; }
+.service-hero-actions .btn { margin-top:0; }
+.service-hero-secondary { display:inline-flex; gap:12px; align-items:center; color:#d6e5f4; font-size:15px; font-weight:650; }
+.service-hero-secondary:hover { color:#97c7ff; }
+.service-page .service-hero-layout > div > .service-disclaimer { margin-top:15px; font-size:13px; color:#aabed0; }
+.service-page .service-key-facts { background: rgba(255,255,255,.045); border-color:#405975; padding:31px; }
+.service-page .service-key-facts h2 { font-size: clamp(28px,3.2vw,38px); }
+.service-location-link { display:inline-flex; gap:9px; color:#a9d2ff; font-size:14px; font-weight:650; line-height:1.5; margin-top:18px; }
+.service-location-link:hover { text-decoration:underline; text-underline-offset:4px; }
+.service-page .service-key-facts .service-location-note { margin-top:21px; padding-top:15px; border-top:1px solid #405975; color:#b7c6d6; font-size:13px; }
+
+.service-jump-wrap { background:#12263d; border-bottom:1px solid #30455d; }
+.service-jump { display:flex; flex-wrap:wrap; align-items:center; gap:clamp(16px,3vw,42px); min-height:69px; padding-block:13px; }
+.service-jump a { color:#d4e2ee; font-size:14px; font-weight:650; text-underline-offset:5px; }
+.service-jump a:hover, .service-jump a:focus-visible { color:#89c1ff; text-decoration:underline; }
+
+.service-page .service-content { background:#f5f7fa; }
+.service-page .service-content-grid { grid-template-columns:minmax(0,1.4fr) minmax(290px,.72fr); }
+.service-page .service-main h2 { max-width:800px; }
+.service-page .service-main h3 { margin-top:39px; }
+.service-page .service-main .service-goals { margin-top:22px; }
+.service-page .service-main .service-goals li { margin-top:13px; }
+.service-page .service-side { border:1px solid #cdd9e7; box-shadow:0 12px 30px rgba(14,36,57,.045); }
+.service-page .service-side h3 { margin-top:14px; font-size:27px; }
+.service-page .service-side .eyebrow { font-size:12px; }
+
+.service-process { background:#13263c; color:#f5f8fc; }
+.service-section-heading { max-width:850px; margin-bottom:44px; }
+.service-section-heading h2 { margin-top:16px; }
+.service-section-heading > p:not(.eyebrow) { color:inherit; opacity:.85; max-width:740px; font-size:18px; margin-top:21px; }
+.service-process .eyebrow { color:#92c7ff; }
+.service-process-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.service-process-grid article { background:#1d334d; border:1px solid #39516a; border-radius:8px; padding:30px 25px 33px; }
+.service-process-grid article > span { color:#91c7ff; font-size:14px; font-weight:750; }
+.service-process-grid h3 { margin-top:33px; font-size:24px; letter-spacing:-.04em; line-height:1.2; }
+.service-process-grid p { margin-top:15px; color:#c8d6e4; font-size:15px; }
+.service-process-note { color:#b5c7d9; margin-top:23px; font-size:13px; }
+
+.service-pricing { background:#e9eef3; }
+.service-pricing .service-section-heading > p:not(.eyebrow) { color:#485b6d; opacity:1; }
+.service-pricing-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.service-price-card { background:#fff; border:1px solid #cbd8e5; border-radius:8px; padding:29px 25px 26px; min-width:0; display:flex; flex-direction:column; position:relative; }
+.service-price-featured { border:2px solid #147bfa; padding:28px 24px 25px; box-shadow:0 11px 30px rgba(17,69,125,.12); }
+.service-price-tag { display:inline-block; width:fit-content; border-radius:30px; font-size:12px; line-height:1.35; font-weight:750; background:#e6f2ff; color:#155897; padding:7px 11px; margin-bottom:15px; }
+.service-price-card h3 { font-size:26px; line-height:1.2; letter-spacing:-.035em; margin-top:10px; }
+.service-price-amount { font-size:clamp(45px,4vw,56px); font-weight:760; letter-spacing:-.06em; line-height:1.1; margin-top:24px; }
+.service-price-period { color:#5f7184; font-size:14px; margin-top:2px; }
+.service-price-sessions { margin-top:21px; padding-top:18px; border-top:1px solid #dce4ed; font-size:15px; font-weight:730; }
+.service-price-card ul { list-style:none; margin:20px 0 25px; padding:0; flex:1; display:flex; flex-direction:column; gap:11px; }
+.service-price-card li { display:flex; gap:10px; align-items:flex-start; color:#43586e; font-size:14px; line-height:1.55; }
+.service-price-card li::before { content:"✓"; color:#0969d4; font-weight:800; }
+.service-price-card .btn { width:100%; margin-top:auto; }
+.service-pricing-note { margin-top:24px; max-width:850px; color:#506379; font-size:14px; }
+
+.service-location-section { background:#f8fafc; }
+.service-location-grid { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(290px,.78fr); gap:clamp(35px,7vw,105px); align-items:center; }
+.service-location-grid h2 { margin-top:19px; max-width:800px; }
+.service-location-grid > div > p:not(.eyebrow) { font-size:17px; color:#46596d; margin-top:23px; }
+.service-location-actions { display:flex; align-items:center; flex-wrap:wrap; gap:24px; margin-top:29px; }
+.service-location-card { background:linear-gradient(150deg,#112940,#254a70); border-radius:8px; border:1px solid #334f69; min-height:420px; color:#fff; padding:clamp(28px,4vw,46px); display:flex; flex-direction:column; }
+.service-location-card > span { font-size:12px; color:#a5ccfa; letter-spacing:.15em; font-weight:750; }
+.service-location-card h3 { margin-top:31px; font-size:clamp(40px,4vw,57px); line-height:1.07; letter-spacing:-.05em; }
+.service-location-card address { font-style:normal; line-height:1.6; color:#d8e5f1; margin-top:22px; font-size:18px; }
+.service-location-card-bottom { border-top:1px solid #56718c; padding-top:24px; margin-top:auto; }
+.service-location-card-bottom p { color:#c7d9e8; font-size:14px; }
+.service-location-card-bottom a { display:inline-flex; align-items:center; gap:10px; color:#acd5ff; font-size:15px; font-weight:700; margin-top:17px; }
+
+.service-faq { background:#ecf1f6; }
+.service-faq-layout { display:grid; grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr); gap:clamp(35px,7vw,95px); align-items:start; }
+.service-faq-layout h2 { margin-top:20px; }
+.service-faq-layout > div > p:not(.eyebrow) { color:#51667b; margin-top:19px; font-size:17px; }
+.service-faq .faq-items { border-top-color:#c4d2e0; }
+.service-faq .faq-item { border-bottom-color:#c4d2e0; }
+.service-faq .faq-item > p { color:#4c5f73; }
+
+.service-page .service-cta { background:#0c1b2d; }
+.service-page .service-cta h2 { max-width:860px; }
+.service-cta-actions { display:flex; flex-wrap:wrap; align-items:center; gap:25px; margin-top:29px; }
+.service-cta-actions .btn { margin-top:0; }
+.service-cta-actions .inline-link { color:#b1d8ff; }
+.service-page [id] { scroll-margin-top:105px; }
+@media(max-width:1000px) {
+  .service-pricing-grid { gap:11px; }
+  .service-price-card { padding:24px 18px; }
+  .service-price-featured { padding:23px 17px; }
+}
+@media(max-width:800px){
+  .service-page .service-content-grid,.service-location-grid,.service-faq-layout { grid-template-columns:1fr; }
+  .service-pricing-grid,.service-process-grid { grid-template-columns:1fr; }
+  .service-section-heading { margin-bottom:28px; }
+  .service-page .service-hero-layout { padding-top:36px; }
+  .service-page .service-key-facts { margin-top:5px; }
+  .service-jump { gap:14px 22px; }
+  .service-price-card,.service-price-featured { padding:26px; }
+}
+@media(max-width:560px){
+  .service-page .service-hero { padding-bottom:64px; }
+  .service-page .service-breadcrumb { padding-block:17px; font-size:12px; }
+  .service-hero-actions { align-items:stretch; }
+  .service-hero-actions .btn { width:100%; }
+  .service-jump { gap:11px 18px; padding-block:17px; }
+  .service-jump a { font-size:13px; }
+  .service-location-actions .btn { width:100%; }
+  .service-location-card { min-height:370px; }
+  .service-cta-actions .btn { width:100%; }
+}
