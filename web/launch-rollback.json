@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-02",
+  "worker": "ab-personal-training-preview",
+  "previousVersion": "060aec93-4b17-4b89-8879-8a0efb7f15af",
+  "website": [
+    {
+      "id": "6dbc35639a54e7f5eb336bd269919f2b",
+      "name": "aidanbrotherhood.com",
+      "type": "CNAME",
+      "content": "proxy-ssl.webflow.com",
+      "proxiable": true,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-01-27T18:23:31.653324Z",
+      "modified_on": "2024-01-27T18:24:51.133355Z"
+    },
+    {
+      "id": "424cfa3806385d3db19c29d7e3d2a581",
+      "name": "www.aidanbrotherhood.com",
+      "type": "CNAME",
+      "content": "proxy-ssl.webflow.com",
+      "proxiable": true,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-01-27T18:24:07.504419Z",
+      "modified_on": "2024-01-27T18:24:56.718404Z"
+    }
+  ]
+}

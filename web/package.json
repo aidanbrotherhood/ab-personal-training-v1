@@ -1,0 +1,37 @@
+{
+  "name": "ab-personal-training",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "react-router dev",
+    "build": "react-router build",
+    "typecheck": "react-router typegen && tsc --noEmit",
+    "deploy": "node -e \"throw new Error('Choose deploy:staging or deploy:production explicitly')\"",
+    "cf-typegen": "wrangler types && react-router typegen",
+    "test": "node --test tests/enquiry.test.mjs",
+    "build:production": "CLOUDFLARE_ENV=production react-router build",
+    "deploy:staging": "node scripts/deploy.mjs staging",
+    "deploy:production": "node scripts/deploy.mjs production"
+  },
+  "dependencies": {
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-router": "8.5.1",
+    "isbot": "5.1.32"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.52.1",
+    "@react-router/dev": "8.5.1",
+    "@tailwindcss/vite": "4.1.17",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "tailwindcss": "4.1.17",
+    "typescript": "5.9.3",
+    "vite": "^7.0.0",
+    "vite-tsconfig-paths": "5.1.4",
+    "wrangler": "4.136.1",
+    "esbuild": "0.28.2"
+  }
+}

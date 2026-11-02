@@ -1,0 +1,8 @@
+node_modules
+build
+.react-router
+.wrangler
+.dev.vars*
+.env*
+!.env.example
+worker-configuration.d.ts
