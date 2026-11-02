@@ -299,7 +299,7 @@ h2 span { color: var(--blue); }
   .container { width: calc(100% - 36px); }
   .section-pad { padding-block: 74px; }
   .header-inner { min-height: 75px; gap: 10px; }
-  .brand img { width: min(50vw, 176px); }
+  .brand img { width: min(51.5vw, 200px); }
   .nav-cta { min-height: 43px; font-size: 13px; padding: 10px 12px; gap: 9px; }
   .cta-full { display: none; }
   .cta-short { display: inline; }
