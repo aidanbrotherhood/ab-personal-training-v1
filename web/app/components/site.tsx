@@ -6,11 +6,19 @@ export function Brand() {
   return (
     <a className="brand" href="/" aria-label="Aidan Brotherhood Personal Training home">
       <img
+        className="brand-full"
         src="/ab-logo.svg"
-        alt="Aidan Brotherhood Personal Training"
-        width="420"
-        height="84"
+        alt=""
+        width="1710"
+        height="190"
       />
+      <span className="brand-compact" aria-hidden="true">
+        <img className="brand-compact-mark" src="/ab-mark.svg" alt="" width="337" height="182" />
+        <span className="brand-compact-copy">
+          <strong>Aidan Brotherhood</strong>
+          <small>Personal Training</small>
+        </span>
+      </span>
     </a>
   );
 }
