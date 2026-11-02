@@ -1,6 +1,6 @@
 import type { MetaFunction } from "react-router";
 import { Arrow, Brand, Footer } from "../components/site";
-import { plans } from "../lib/offers";
+import { getPerSessionRate, plans } from "../lib/offers";
 
 const pageUrl = "https://aidanbrotherhood.com/personal-training-renfrew";
 const gymUrl = "https://www.jdgyms.co.uk/gym/renfrew/";
@@ -269,8 +269,8 @@ export default function PersonalTrainingRenfrew() {
           <div className="container">
             <div className="service-section-heading">
               <p className="eyebrow">PERSONAL TRAINER PRICES · RENFREW</p>
-              <h2 id="prices-title">Choose how much support you want.</h2>
-              <p>All three options are built around one-to-one coaching at JD Gyms Renfrew. We can decide which makes sense after the free consultation.</p>
+              <h2 id="prices-title">Your coaching options, clearly priced.</h2>
+              <p>Every option includes 60-minute one-to-one sessions. Meet me for a free 30-minute consultation first, then choose a paid introduction or a four-week coaching block.</p>
             </div>
             <div className="service-pricing-grid">
               {plans.map((plan) => (
@@ -278,16 +278,22 @@ export default function PersonalTrainingRenfrew() {
                   {plan.id === "weekly" && <span className="service-price-tag">A balanced starting point</span>}
                   <h3>{plan.title}</h3>
                   <p className="service-price-amount">{plan.price}</p>
-                  <p className="service-price-period">{plan.id === "introduction" ? "One-off package" : "Per four-week block"}</p>
+                  <p className="service-price-period">{plan.id === "introduction" ? "One-off payment" : "Per four-week block"}</p>
                   <p className="service-price-sessions">{plan.sessions} × 60-minute sessions</p>
+                  <p className="service-price-frequency">{plan.frequency}</p>
+                  <p className="service-price-rate">{getPerSessionRate(plan)} per session</p>
+                  <p className="service-price-includes">What's included</p>
                   <ul>{plan.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
                   <a href="/#consultation" className={plan.id === "weekly" ? "btn btn-primary" : "btn btn-outline"}>
-                    Discuss this option <Arrow />
+                    Book a free consultation <Arrow />
                   </a>
                 </article>
               ))}
             </div>
-            <p className="service-pricing-note">Gym membership is not included in these prices. The free 30-minute consultation is separate from the paid PT Introduction package.</p>
+            <div className="service-pricing-notes">
+              <p><strong>No charge for the first meeting.</strong> The free 30-minute consultation is separate from the £99 PT Introduction, which includes two paid training sessions.</p>
+              <p><strong>Four weeks, not a calendar month.</strong> Weekly and Complete Coaching cover a four-week period; 52 weeks contains 13 such periods. Prices exclude JD Gyms membership, required for paid training.</p>
+            </div>
           </div>
         </section>
 
