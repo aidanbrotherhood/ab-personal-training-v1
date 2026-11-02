@@ -81,6 +81,7 @@ export default function Home() {
             <a href="#approach">The approach</a>
             <a href="#about">Meet Aidan</a>
             <a href="#coaching">Coaching & prices</a>
+            <a href="/personal-training-renfrew">Training in Renfrew</a>
           </nav>
           <a className="nav-cta" href="#consultation">
             <span className="cta-full">Book a free consultation</span><span className="cta-short">Book free</span> <Arrow />
@@ -139,21 +140,20 @@ export default function Home() {
               </div>
               <p className="hero-footnote">30 minutes, face to face. No sales pitch or obligation.</p>
             </div>
-            <aside className="hero-feature" aria-label="Aidan's approach to coaching">
-              <div className="hero-feature-top">
-                <img src="/ab-mark.svg" alt="" width="72" height="72" />
-                <span>COACHING, WITH A REASON</span>
-              </div>
-              <p className="feature-quote">
-                My job isn’t just to count your reps.
-                <strong> It’s to help you understand the work.</strong>
-              </p>
-              <div className="feature-bottom">
-                <span>Assess where you are</span>
-                <span>Build a plan</span>
-                <span>Keep improving</span>
-              </div>
-            </aside>
+            <figure className="hero-photo">
+              <img
+                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1080&q=82"
+                alt="Atmospheric photograph of strength-training equipment"
+                width="750"
+                height="860"
+                decoding="async"
+                fetchPriority="high"
+              />
+              <figcaption>
+                <span>Strength / Technique / Progress</span>
+                <small>Illustrative gym imagery — not JD Gyms Renfrew</small>
+              </figcaption>
+            </figure>
           </div>
           <div className="container hero-proof" aria-label="Coaching at a glance">
             <p><strong>01 /</strong> One-to-one coaching</p>
@@ -195,6 +195,25 @@ export default function Home() {
               </article>
             </div>
           </div>
+            <div className="method-visual">
+              <div className="method-visual-media">
+                <img
+                  src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=78"
+                  alt="Athlete practising strength training with free weights"
+                  width="1200"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="method-visual-copy">
+                <span className="eyebrow">PROGRESS IS A PROCESS</span>
+                <h3>Train with intent. Not just intensity.</h3>
+                <p>We’ll use your training sessions to practise good technique, build useful strength and make informed adjustments — not chase exhaustion for its own sake.</p>
+                <a href="/personal-training-renfrew" className="inline-link">Explore personal training in Renfrew <Arrow /></a>
+              </div>
+            </div>
+
         </section>
 
         <section className="about-section section-pad" id="about" aria-labelledby="about-title">
