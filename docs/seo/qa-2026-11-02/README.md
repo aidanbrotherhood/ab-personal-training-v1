@@ -4,7 +4,7 @@ The core website was merged to develop through [PR #15](https://github.com/aidan
 
 Staging: https://ab-personal-training-staging.aidanbrotherhood.workers.dev
 
-This evidence records that deployment. A following feature PR preserves the legacy enquiry fallback's stricter Referrer-Policy and sources its previously stale package labels from shared offer data. It changes no page layout, booking gate, database schema or notification processing. That PR reruns TypeScript, all tests and both builds. The final deployment SHA/version and post-fix hosted checks are recorded in the unmerged develop-to-main production promotion PR; do not treat this earlier SHA as the later deployment.
+This evidence records that deployment. A following feature PR preserves the legacy enquiry fallback's stricter Referrer-Policy and sources its previously stale package labels from shared offer data. It also uses the existing primary blue token for the header/home hero CTA: white text contrast improves from 4.01:1 to 5.77:1. It changes no page layout, booking gate, database schema or notification processing. That PR reruns TypeScript, all tests and both builds. The final deployment SHA/version and post-fix hosted checks are recorded in the unmerged develop-to-main production promotion PR; do not treat this earlier SHA as the later deployment.
 
 ## Automated validation
 
@@ -19,6 +19,8 @@ This evidence records that deployment. A following feature PR preserves the lega
 ## Hosted HTTP and rendered evidence
 
 [http-checks.json](http-checks.json) records seven successful HTML responses, 198 internal href/fragment checks and 14 successful assets, blocked staging robots, 404/no-store sitemap, genuine deferred/retired/unknown 404s and API GET 405. All staged HTML is noindex with no canonical, live calendar iframe or live Calendly anchor. Googlebot and OAI-SearchBot **user-agent string** GETs returned 200/noindex. This is not verification from genuine crawler IP ranges; production robots permission and indexing responses were tested through the compiled Worker, not released to production.
+
+Additional read-only checks against the unchanged production site returned 200 for robots (wildcard Allow and existing sitemap) and 200/index-follow for both Googlebot and OAI-SearchBot user-agent home requests. The original production page title remained in place. These checks establish request-level access only, not genuine crawler-IP verification or indexing of the new pages.
 
 [rendered-matrix.json](rendered-matrix.json) records **42 hosted page/viewport checks** after each page's load event. Measured CSS dimensions, independently read from `innerWidth`/`innerHeight`:
 
