@@ -196,7 +196,9 @@ export function PageShell({
   return (
     <div id="top" className={className}>
       <Header />
-      <main id="main">{children}</main>
+      <main id="main" tabIndex={-1}>
+        {children}
+      </main>
       <Footer />
     </div>
   );
