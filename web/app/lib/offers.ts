@@ -15,7 +15,7 @@ export const plans = [
   },
   {
     id: "weekly",
-    title: "Weekly Coaching",
+    title: "Coaching",
     price: "£180",
     sessions: 4,
     frequency: "Approximately one session per week",
@@ -29,7 +29,7 @@ export const plans = [
   },
   {
     id: "complete",
-    title: "Complete Coaching",
+    title: "Coaching+",
     price: "£320",
     sessions: 8,
     frequency: "Approximately two sessions per week",
