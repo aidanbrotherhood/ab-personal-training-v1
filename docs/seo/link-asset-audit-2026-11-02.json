@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-11-02T21:41:44.557710+00:00",
+  "scope": "Deduplicated same-host links per public HTML page including fragment targets; read-only asset requests with an explicit audit user-agent. An initial request with default Python user-agent returned 403; the cause was not established.",
+  "internal_links_checked": 28,
+  "failures": [],
+  "assets": {
+    "/ab-logo.svg": {
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    "/ab-mark.svg": {
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    "/ab-wordmark.svg": {
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    "/favicon.svg": {
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    "/social-card.png": {
+      "status": 200,
+      "type": "image/png"
+    }
+  }
+}

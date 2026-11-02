@@ -1,0 +1,867 @@
+{
+  "checked_at": "2026-11-02T21:28:12.095476+00:00",
+  "requests": [
+    {
+      "url": "https://aidanbrotherhood.com/",
+      "status": 200,
+      "final_url": "https://aidanbrotherhood.com/",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "Aidan Brotherhood | Personal Training at JD Gyms Renfrew",
+      "description": "Personal training at JD Gyms Renfrew with Aidan Brotherhood. Get stronger, lose body fat and feel more confident with one-to-one coaching built around you. Book a free 30-minute consultation.",
+      "robots": "index, follow",
+      "canonical": [
+        "https://aidanbrotherhood.com/"
+      ],
+      "h1": [
+        "Get stronger.Stop guessing."
+      ],
+      "links": [
+        "#main",
+        "/",
+        "#approach",
+        "#about",
+        "#coaching",
+        "/personal-training-renfrew",
+        "#consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Personal%20training%20enquiry",
+        "https://calendly.com/hello-aidanbrotherhood/free-personal-training-consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Consultation%20availability",
+        "/#approach",
+        "/#about",
+        "/#coaching",
+        "/#consultation",
+        "/privacy",
+        "mailto:hello@aidanbrotherhood.com",
+        "https://www.instagram.com/aidanbrotherhood.pt/",
+        "https://wa.me/447414497675",
+        "#top"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/personal-training-renfrew",
+      "status": 200,
+      "final_url": "https://aidanbrotherhood.com/personal-training-renfrew",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "Personal Trainer Renfrew | 1:1 Coaching at JD Gyms | Aidan Brotherhood",
+      "description": "Looking for a personal trainer in Renfrew? Train one-to-one with Aidan Brotherhood at JD Gyms Renfrew. Strength, fitness, nutrition guidance and a free 30-minute consultation.",
+      "robots": "index, follow",
+      "canonical": [
+        "https://aidanbrotherhood.com/personal-training-renfrew"
+      ],
+      "h1": [
+        "Personal trainer in Renfrew."
+      ],
+      "links": [
+        "#main",
+        "/",
+        "/#approach",
+        "/#coaching",
+        "/#consultation",
+        "#prices",
+        "#who-its-for",
+        "#approach",
+        "#location",
+        "#questions",
+        "https://www.jdgyms.co.uk/gym/renfrew/",
+        "mailto:hello@aidanbrotherhood.com?subject=Renfrew%20personal%20training%20enquiry",
+        "mailto:hello@aidanbrotherhood.com?subject=Personal%20training%20in%20Renfrew",
+        "/#about",
+        "/personal-training-renfrew",
+        "/privacy",
+        "mailto:hello@aidanbrotherhood.com",
+        "https://www.instagram.com/aidanbrotherhood.pt/",
+        "https://wa.me/447414497675",
+        "#top"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/privacy",
+      "status": 200,
+      "final_url": "https://aidanbrotherhood.com/privacy",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "Privacy notice | AB Personal Training",
+      "description": "How Aidan Brotherhood uses and protects information provided when you enquire about personal training.",
+      "robots": "index, follow",
+      "canonical": [
+        "https://aidanbrotherhood.com/privacy"
+      ],
+      "h1": [
+        "Privacy notice."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com",
+        "https://ico.org.uk/make-a-complaint/"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/robots.txt",
+      "status": 200,
+      "final_url": "https://aidanbrotherhood.com/robots.txt",
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": null,
+      "canonical": [],
+      "h1": [],
+      "links": [],
+      "body": "User-agent: *\nAllow: /\nSitemap: https://aidanbrotherhood.com/sitemap.xml\n"
+    },
+    {
+      "url": "https://aidanbrotherhood.com/sitemap.xml",
+      "status": 200,
+      "final_url": "https://aidanbrotherhood.com/sitemap.xml",
+      "headers": {
+        "Content-Type": "application/xml; charset=utf-8",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": null,
+      "canonical": [],
+      "h1": [],
+      "links": [],
+      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><url><loc>https://aidanbrotherhood.com/</loc></url><url><loc>https://aidanbrotherhood.com/privacy</loc></url></urlset>"
+    },
+    {
+      "url": "https://aidanbrotherhood.com/coaching",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/coaching",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/about",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/about",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/personal-training-for-beginners",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/personal-training-for-beginners",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/strength-training",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/strength-training",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/fat-loss-coaching",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/fat-loss-coaching",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/consultation",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/consultation",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/terms",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/terms",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/contact",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/contact",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/writing",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/writing",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/posts",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/posts",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/rss.xml",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/rss.xml",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/sign-up-to-my-newsletter",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/sign-up-to-my-newsletter",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/posts/it-shows",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/posts/it-shows",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/writing/physical-capability",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/writing/physical-capability",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/no-such-page-seo-audit",
+      "status": 404,
+      "final_url": "https://aidanbrotherhood.com/no-such-page-seo-audit",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s get youback on track."
+      ],
+      "links": [
+        "/",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/personal-training-renfrew/",
+      "status": 200,
+      "final_url": "https://aidanbrotherhood.com/personal-training-renfrew/",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "Personal Trainer Renfrew | 1:1 Coaching at JD Gyms | Aidan Brotherhood",
+      "description": "Looking for a personal trainer in Renfrew? Train one-to-one with Aidan Brotherhood at JD Gyms Renfrew. Strength, fitness, nutrition guidance and a free 30-minute consultation.",
+      "robots": "index, follow",
+      "canonical": [
+        "https://aidanbrotherhood.com/personal-training-renfrew/"
+      ],
+      "h1": [
+        "Personal trainer in Renfrew."
+      ],
+      "links": [
+        "#main",
+        "/",
+        "/#approach",
+        "/#coaching",
+        "/#consultation",
+        "#prices",
+        "#who-its-for",
+        "#approach",
+        "#location",
+        "#questions",
+        "https://www.jdgyms.co.uk/gym/renfrew/",
+        "mailto:hello@aidanbrotherhood.com?subject=Renfrew%20personal%20training%20enquiry",
+        "mailto:hello@aidanbrotherhood.com?subject=Personal%20training%20in%20Renfrew",
+        "/#about",
+        "/personal-training-renfrew",
+        "/privacy",
+        "mailto:hello@aidanbrotherhood.com",
+        "https://www.instagram.com/aidanbrotherhood.pt/",
+        "https://wa.me/447414497675",
+        "#top"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/?utm_source=seo_audit",
+      "status": 200,
+      "final_url": "https://aidanbrotherhood.com/?utm_source=seo_audit",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare"
+      },
+      "title": "Aidan Brotherhood | Personal Training at JD Gyms Renfrew",
+      "description": "Personal training at JD Gyms Renfrew with Aidan Brotherhood. Get stronger, lose body fat and feel more confident with one-to-one coaching built around you. Book a free 30-minute consultation.",
+      "robots": "index, follow",
+      "canonical": [
+        "https://aidanbrotherhood.com/"
+      ],
+      "h1": [
+        "Get stronger.Stop guessing."
+      ],
+      "links": [
+        "#main",
+        "/",
+        "#approach",
+        "#about",
+        "#coaching",
+        "/personal-training-renfrew",
+        "#consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Personal%20training%20enquiry",
+        "https://calendly.com/hello-aidanbrotherhood/free-personal-training-consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Consultation%20availability",
+        "/#approach",
+        "/#about",
+        "/#coaching",
+        "/#consultation",
+        "/privacy",
+        "mailto:hello@aidanbrotherhood.com",
+        "https://www.instagram.com/aidanbrotherhood.pt/",
+        "https://wa.me/447414497675",
+        "#top"
+      ]
+    },
+    {
+      "url": "https://aidanbrotherhood.com/api/enquiry",
+      "status": 405,
+      "final_url": "https://aidanbrotherhood.com/api/enquiry",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "no-store",
+        "X-Robots-Tag": "noindex, nofollow",
+        "Server": "cloudflare"
+      },
+      "title": "Check your enquiry | AB Personal Training",
+      "description": null,
+      "robots": "noindex,nofollow",
+      "canonical": [],
+      "h1": [
+        "Let’s check your request."
+      ],
+      "links": [
+        "/",
+        "/privacy",
+        "mailto:hello@aidanbrotherhood.com"
+      ]
+    },
+    {
+      "url": "http://aidanbrotherhood.com/",
+      "status": 200,
+      "final_url": "http://aidanbrotherhood.com/",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "X-Robots-Tag": "noindex, nofollow",
+        "Server": "cloudflare"
+      },
+      "title": "Aidan Brotherhood | Personal Training at JD Gyms Renfrew",
+      "description": "Personal training at JD Gyms Renfrew with Aidan Brotherhood. Get stronger, lose body fat and feel more confident with one-to-one coaching built around you. Book a free 30-minute consultation.",
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Get stronger.Stop guessing."
+      ],
+      "links": [
+        "#main",
+        "/",
+        "#approach",
+        "#about",
+        "#coaching",
+        "/personal-training-renfrew",
+        "#consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Personal%20training%20enquiry",
+        "https://calendly.com/hello-aidanbrotherhood/free-personal-training-consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Consultation%20availability",
+        "/#approach",
+        "/#about",
+        "/#coaching",
+        "/#consultation",
+        "/privacy",
+        "mailto:hello@aidanbrotherhood.com",
+        "https://www.instagram.com/aidanbrotherhood.pt/",
+        "https://wa.me/447414497675",
+        "#top"
+      ]
+    },
+    {
+      "url": "https://www.aidanbrotherhood.com/personal-training-renfrew?utm_source=seo_audit",
+      "status": 308,
+      "final_url": "https://www.aidanbrotherhood.com/personal-training-renfrew?utm_source=seo_audit",
+      "headers": {
+        "Location": "https://aidanbrotherhood.com/personal-training-renfrew?utm_source=seo_audit",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": null,
+      "canonical": [],
+      "h1": [],
+      "links": []
+    },
+    {
+      "url": "https://ab-personal-training-staging.aidanbrotherhood.workers.dev/",
+      "status": 200,
+      "final_url": "https://ab-personal-training-staging.aidanbrotherhood.workers.dev/",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "X-Robots-Tag": "noindex, nofollow",
+        "Server": "cloudflare"
+      },
+      "title": "Aidan Brotherhood | Personal Training at JD Gyms Renfrew",
+      "description": "Personal training at JD Gyms Renfrew with Aidan Brotherhood. Get stronger, lose body fat and feel more confident with one-to-one coaching built around you. Book a free 30-minute consultation.",
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Get stronger.Stop guessing."
+      ],
+      "links": [
+        "#main",
+        "/",
+        "#approach",
+        "#about",
+        "#coaching",
+        "/personal-training-renfrew",
+        "#consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Personal%20training%20enquiry",
+        "https://calendly.com/hello-aidanbrotherhood/free-personal-training-consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Consultation%20availability",
+        "/#approach",
+        "/#about",
+        "/#coaching",
+        "/#consultation",
+        "/privacy",
+        "mailto:hello@aidanbrotherhood.com",
+        "https://www.instagram.com/aidanbrotherhood.pt/",
+        "https://wa.me/447414497675",
+        "#top"
+      ]
+    },
+    {
+      "url": "https://ab-personal-training-staging.aidanbrotherhood.workers.dev/robots.txt",
+      "status": 200,
+      "final_url": "https://ab-personal-training-staging.aidanbrotherhood.workers.dev/robots.txt",
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": null,
+      "canonical": [],
+      "h1": [],
+      "links": [],
+      "body": "User-agent: *\nDisallow: /\n"
+    },
+    {
+      "url": "https://ab-personal-training-staging.aidanbrotherhood.workers.dev/sitemap.xml",
+      "status": 404,
+      "final_url": "https://ab-personal-training-staging.aidanbrotherhood.workers.dev/sitemap.xml",
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff",
+        "X-Robots-Tag": "noindex, nofollow",
+        "Server": "cloudflare"
+      },
+      "title": "",
+      "description": null,
+      "robots": null,
+      "canonical": [],
+      "h1": [],
+      "links": []
+    },
+    {
+      "url": "https://ab-personal-training-preview.aidanbrotherhood.workers.dev/",
+      "status": 200,
+      "final_url": "https://ab-personal-training-preview.aidanbrotherhood.workers.dev/",
+      "headers": {
+        "Content-Type": "text/html",
+        "X-Content-Type-Options": "nosniff",
+        "X-Robots-Tag": "noindex, nofollow",
+        "Server": "cloudflare"
+      },
+      "title": "Aidan Brotherhood | Personal Training at JD Gyms Renfrew",
+      "description": "Personal training at JD Gyms Renfrew with Aidan Brotherhood. Get stronger, lose body fat and feel more confident with one-to-one coaching built around you. Book a free 30-minute consultation.",
+      "robots": "noindex, nofollow",
+      "canonical": [],
+      "h1": [
+        "Get stronger.Stop guessing."
+      ],
+      "links": [
+        "#main",
+        "/",
+        "#approach",
+        "#about",
+        "#coaching",
+        "/personal-training-renfrew",
+        "#consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Personal%20training%20enquiry",
+        "https://calendly.com/hello-aidanbrotherhood/free-personal-training-consultation",
+        "mailto:hello@aidanbrotherhood.com?subject=Consultation%20availability",
+        "/#approach",
+        "/#about",
+        "/#coaching",
+        "/#consultation",
+        "/privacy",
+        "mailto:hello@aidanbrotherhood.com",
+        "https://www.instagram.com/aidanbrotherhood.pt/",
+        "https://wa.me/447414497675",
+        "#top"
+      ]
+    },
+    {
+      "url": "https://practice.aidanbrotherhood.com/",
+      "status": 200,
+      "final_url": "https://practice.aidanbrotherhood.com/",
+      "headers": {
+        "Server": "openresty/1.27.1.2",
+        "Content-Type": "text/html; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "cache-control": "max-age=30, public, stale-while-revalidate=300, stale-if-error=86400"
+      },
+      "title": "Aidan Brotherhood | Personal Trainer",
+      "description": "I'm a personal trainer and strength and conditioning coach helping people build strength, consistency, and confidence.",
+      "robots": null,
+      "canonical": [
+        "https://practice.aidanbrotherhood.com"
+      ],
+      "h1": [
+        "Aidan Brotherhood"
+      ],
+      "links": [
+        "/profile/posts",
+        "/profile/links",
+        "https://practice.aidanbrotherhood.com/posts/start-here-1",
+        "https://practice.aidanbrotherhood.com/posts/it-shows",
+        "https://practice.aidanbrotherhood.com/posts/evidence-1",
+        "https://x.com/intent/tweet/?text=&url=https://practice.aidanbrotherhood.com/profile",
+        "https://facebook.com/sharer/sharer.php?u=https://practice.aidanbrotherhood.com/profile",
+        "mailto:?subject=&body=Visit%20the%20link%20at%20https%3A%2F%2Fpractice.aidanbrotherhood.com%2Fprofile",
+        "https://kit.com/features/forms?utm_campaign=poweredby&utm_content=newsletter_feed&utm_medium=referral&utm_source=dynamic"
+      ]
+    },
+    {
+      "url": "https://practice.aidanbrotherhood.com/posts/it-shows",
+      "status": 200,
+      "final_url": "https://practice.aidanbrotherhood.com/posts/it-shows",
+      "headers": {
+        "Server": "openresty/1.27.1.2",
+        "Content-Type": "text/html; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "cache-control": "max-age=10, private"
+      },
+      "title": "It shows",
+      "description": null,
+      "robots": null,
+      "canonical": [
+        "https://practice.aidanbrotherhood.com/posts/it-shows"
+      ],
+      "h1": [
+        "Aidan Brotherhood",
+        "It shows",
+        "Aidan Brotherhood"
+      ],
+      "links": [
+        "/posts",
+        "https://x.com/intent/tweet/?text=&url=https://practice.aidanbrotherhood.com/posts/it-shows",
+        "https://facebook.com/sharer/sharer.php?u=https://practice.aidanbrotherhood.com/posts/it-shows",
+        "mailto:?subject=&body=Visit%20the%20link%20at%20https%3A%2F%2Fpractice.aidanbrotherhood.com%2Fposts%2Fit-shows",
+        "https://preview.kit-mail3.com/unsubscribe",
+        "https://preview.kit-mail3.com/preferences",
+        "https://builtwith.kit-mail3.com?utm_campaign=poweredby&utm_content=email&utm_medium=referral&utm_source=dynamic",
+        "https://practice.aidanbrotherhood.com/posts/evidence-1",
+        "https://practice.aidanbrotherhood.com/posts/start-here-1",
+        "https://kit.com/features/forms?utm_campaign=poweredby&utm_content=newsletter_feed&utm_medium=referral&utm_source=dynamic"
+      ]
+    },
+    {
+      "url": "https://practice.aidanbrotherhood.com/posts/start-here-1",
+      "status": 200,
+      "final_url": "https://practice.aidanbrotherhood.com/posts/start-here-1",
+      "headers": {
+        "Server": "openresty/1.27.1.2",
+        "Content-Type": "text/html; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "cache-control": "max-age=10, private"
+      },
+      "title": "Start here",
+      "description": null,
+      "robots": null,
+      "canonical": [
+        "https://practice.aidanbrotherhood.com/posts/start-here-1"
+      ],
+      "h1": [
+        "Aidan Brotherhood",
+        "Start here",
+        "Aidan Brotherhood"
+      ],
+      "links": [
+        "/posts",
+        "https://x.com/intent/tweet/?text=&url=https://practice.aidanbrotherhood.com/posts/start-here-1",
+        "https://facebook.com/sharer/sharer.php?u=https://practice.aidanbrotherhood.com/posts/start-here-1",
+        "mailto:?subject=&body=Visit%20the%20link%20at%20https%3A%2F%2Fpractice.aidanbrotherhood.com%2Fposts%2Fstart-here-1",
+        "https://preview.kit-mail3.com/unsubscribe",
+        "https://preview.kit-mail3.com/preferences",
+        "https://builtwith.kit-mail3.com?utm_campaign=poweredby&utm_content=email&utm_medium=referral&utm_source=dynamic",
+        "https://practice.aidanbrotherhood.com/posts/it-shows",
+        "https://practice.aidanbrotherhood.com/posts/evidence-1",
+        "https://kit.com/features/forms?utm_campaign=poweredby&utm_content=newsletter_feed&utm_medium=referral&utm_source=dynamic"
+      ]
+    },
+    {
+      "url": "https://practice.aidanbrotherhood.com/robots.txt",
+      "status": 404,
+      "final_url": "https://practice.aidanbrotherhood.com/robots.txt",
+      "headers": {
+        "Server": "openresty/1.27.1.2",
+        "Content-Type": "text/html"
+      },
+      "title": "The page you were looking for doesn't exist (404)",
+      "description": null,
+      "robots": null,
+      "canonical": [],
+      "h1": [
+        "404!"
+      ],
+      "links": [
+        "http://status.kit.com",
+        "http://help.kit.com"
+      ]
+    },
+    {
+      "url": "https://practice.aidanbrotherhood.com/sitemap.xml",
+      "status": 404,
+      "final_url": "https://practice.aidanbrotherhood.com/sitemap.xml",
+      "headers": {
+        "Server": "openresty/1.27.1.2",
+        "Content-Type": "text/html"
+      },
+      "title": "The page you were looking for doesn't exist (404)",
+      "description": null,
+      "robots": null,
+      "canonical": [],
+      "h1": [
+        "404!"
+      ],
+      "links": [
+        "http://status.kit.com",
+        "http://help.kit.com"
+      ]
+    }
+  ],
+  "scope": "Read-only HTTP checks. No POST requests or bookings. Public information only. Search result observations are recorded separately in the specification."
+}

@@ -9,21 +9,44 @@ import {
 } from "react-router";
 import type { Route } from "./+types/root";
 import { envContext } from "./lib/context";
-import { Brand } from "./components/site";
+import { getPublicPage } from "./lib/public-pages";
+import { BUSINESS_NAME, isIndexableProduction, SITE_ORIGIN } from "./lib/seo";
+import { structuredData } from "./lib/structured-data";
+import { Header, Footer, ConsultationLink } from "./components/site";
 import "./styles.css";
+import "./discovery.css";
 
 export function loader({ request, context }: Route.LoaderArgs) {
-  const env = context.get(envContext);
   const url = new URL(request.url);
-  // Indexing requires both an explicit flag and the final production host.
-  const indexable =
-    String(env.INDEXABLE) === "true" &&
-    url.origin === "https://aidanbrotherhood.com";
+  const page = getPublicPage(url.pathname);
+  const production = isIndexableProduction(request, context.get(envContext));
   return {
-    indexable,
+    page,
+    indexable: production && !!page,
+    bookingEnabled: production,
+    canonical: production && page ? `${SITE_ORIGIN}${page.path}` : null,
     socialImage: `${url.origin}/social-card.png`,
-    canonical: indexable ? `https://aidanbrotherhood.com${url.pathname}` : null,
+    graph: production && page ? structuredData(page.path) : null,
   };
+}
+export function meta({ loaderData, error }: Route.MetaArgs) {
+  const page = !error ? loaderData?.page : undefined;
+  const title =
+    page?.title ||
+    (isRouteErrorResponse(error) && error.status !== 404
+      ? "Page Unavailable | AB Personal Training"
+      : "Page Not Found | AB Personal Training");
+  const description =
+    page?.description ||
+    "Find personal training, coaching prices and a free consultation with Aidan Brotherhood at JD Gyms Renfrew.";
+  return [
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ];
 }
 export function Layout({ children }: { children: React.ReactNode }) {
   const data = useRouteLoaderData<typeof loader>("root");
@@ -40,25 +63,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
         <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
-        <meta property="og:site_name" content="Aidan Brotherhood Personal Training" />
+        <meta property="og:site_name" content={BUSINESS_NAME} />
         <meta property="og:locale" content="en_GB" />
         <meta
           property="og:image"
-          content={
-            data?.socialImage || "https://aidanbrotherhood.com/social-card.png"
-          }
+          content={data?.socialImage || `${SITE_ORIGIN}/social-card.png`}
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta
           property="og:image:alt"
-          content="Aidan Brotherhood Personal Training. Get stronger. Stop guessing. One-to-one coaching at JD Gyms Renfrew."
+          content="AB Personal Training. Get stronger. Stop guessing. Coaching with Aidan Brotherhood at JD Gyms Renfrew."
         />
         {data?.canonical && (
           <>
             <link rel="canonical" href={data.canonical} />
             <meta property="og:url" content={data.canonical} />
           </>
+        )}
+        {data?.graph && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(data.graph).replace(/</g, "\\u003c"),
+            }}
+          />
         )}
       </head>
       <body>
@@ -73,29 +102,31 @@ export default function App() {
   return <Outlet />;
 }
 export function ErrorBoundary({ error }: { error: unknown }) {
-  const detail =
-    isRouteErrorResponse(error) && error.status === 404
-      ? "That page couldn’t be found."
-      : "Something went wrong loading this page.";
+  const notFound = isRouteErrorResponse(error) && error.status === 404;
   return (
-    <main className="error-page">
-      <Brand />
-      <h1>
-        Let’s get you
-        <br />
-        back on track.
-      </h1>
-      <p>{detail}</p>
-      <a href="/" className="btn btn-primary">
-        Back to the homepage →
-      </a>
-      <p>
-        Or email{" "}
-        <a href="mailto:hello@aidanbrotherhood.com">
-          hello@aidanbrotherhood.com
-        </a>
-        .
-      </p>
-    </main>
+    <div id="top">
+      <Header />
+      <main id="main" className="error-page">
+        <p className="eyebrow">
+          {notFound ? "Page not found" : "Please try again"}
+        </p>
+        <h1>
+          {notFound
+            ? "We couldn’t find that page."
+            : "We couldn’t load that page."}
+        </h1>
+        <p>
+          {notFound
+            ? "The link may be out of date. Here are a few places to start."
+            : "Please refresh the page, or get in touch with Aidan."}
+        </p>
+        <div className="text-link-row">
+          <a href="/">Home →</a>
+          <a href="/personal-training-renfrew">Training in Renfrew →</a>
+        </div>
+        <ConsultationLink />
+      </main>
+      <Footer />
+    </div>
   );
 }
