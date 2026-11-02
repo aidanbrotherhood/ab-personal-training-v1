@@ -4,7 +4,7 @@ import { ConsultationCalendar } from "../components/consultation-calendar";
 import { plans } from "../lib/offers";
 
 export const meta: MetaFunction = () => [
-  { title: "Personal Training in Renfrew | Aidan Brotherhood" },
+  { title: "Aidan Brotherhood | Personal Training at JD Gyms Renfrew" },
   {
     name: "description",
     content:
