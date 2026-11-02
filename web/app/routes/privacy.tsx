@@ -26,6 +26,22 @@ export default function Privacy() {
         </a>
         .
       </p>
+      <h2>Booking a consultation</h2>
+      <p>
+        The booking section includes an embedded Calendly scheduling page. It
+        loads as you approach that section of the website. Calendly may
+        receive technical information about your visit when it loads.
+        If you book, it collects your name, email address and any details you
+        provide in the booking questions to arrange the consultation. Please
+        don’t enter medical or other sensitive details in the booking form.
+      </p>
+      <p>
+        Calendly manages bookings, confirmations and changes. Appointments are
+        added to our connected Google Calendar to manage availability. Booking
+        through Calendly does not submit an enquiry to the website’s separate
+        Cloudflare D1 enquiry database. Calendly and Google handle booking
+        information under their applicable privacy and data-protection terms.
+      </p>
       <h2>What the enquiry form collects</h2>
       <p>
         The form asks for your name, email address and JD Gyms membership
@@ -94,10 +110,12 @@ export default function Privacy() {
       <h2>Cookies and measurement</h2>
       <p>
         This site does not use Google Analytics, Meta Pixel, advertising cookies
-        or visitor-tracking storage. Campaign labels are read from the current
-        page link and submitted only with an enquiry. Choosing a package updates
-        the form on this page. We don’t send browsing or form-field activity to
-        an analytics service.
+        or first-party visitor-tracking storage. Campaign labels are read from
+        the current page link and submitted only with an enquiry. Choosing a
+        package updates the form on this page. When you choose to open the
+        Calendly booking section, that third-party embed may use its own cookies
+        or similar technologies when it loads. We don’t send enquiry-form
+        activity to an analytics service.
       </p>
       <h2>Your choices and rights</h2>
       <p>

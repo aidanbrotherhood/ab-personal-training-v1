@@ -39,8 +39,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <Meta />
         <Links />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <meta property="og:site_name" content="AB Personal Training" />
+        <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
+        <meta property="og:site_name" content="Aidan Brotherhood Personal Training" />
         <meta property="og:locale" content="en_GB" />
         <meta
           property="og:image"
@@ -52,7 +52,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta property="og:image:height" content="630" />
         <meta
           property="og:image:alt"
-          content="AB Personal Training. Less guesswork. More from your training. Independent coaching at JD Gyms Renfrew."
+          content="Aidan Brotherhood Personal Training. Get stronger. Stop guessing. One-to-one coaching at JD Gyms Renfrew."
         />
         {data?.canonical && (
           <>
