@@ -2,7 +2,25 @@ export function Arrow() {
   return <span className="arrow-icon" aria-hidden="true">↗</span>;
 }
 
-export function Brand() {
+export function Brand({ variant = "full" }: { variant?: "full" | "wordmark" }) {
+  if (variant === "wordmark") {
+    return (
+      <a className="brand brand-wordmark-link" href="/" aria-label="Aidan Brotherhood Personal Training home">
+        <img
+          className="brand-wordmark"
+          src="/ab-wordmark.svg"
+          alt=""
+          width="1286"
+          height="171"
+        />
+        <span className="brand-mobile-wordmark" aria-hidden="true">
+          <strong>Aidan Brotherhood</strong>
+          <small>Personal Training</small>
+        </span>
+      </a>
+    );
+  }
+
   return (
     <a className="brand" href="/" aria-label="Aidan Brotherhood Personal Training home">
       <img
@@ -12,13 +30,6 @@ export function Brand() {
         width="1710"
         height="190"
       />
-      <span className="brand-compact" aria-hidden="true">
-        <img className="brand-compact-mark" src="/ab-mark.svg" alt="" width="337" height="182" />
-        <span className="brand-compact-copy">
-          <strong>Aidan Brotherhood</strong>
-          <small>Personal Training</small>
-        </span>
-      </span>
     </a>
   );
 }
