@@ -43,7 +43,7 @@ function result(
   const form =
     status === 200
       ? ""
-      : `<form action="/api/enquiry" method="post"><label>Your name<input name="name" required minlength="2" maxlength="120" autocomplete="name" value="${escape(values.name || "")}"></label><label>Email address<input type="email" name="email" required maxlength="254" autocomplete="email" value="${escape(values.email || "")}"></label>${select(
+      : `<form action="/api/enquiry" method="post"><label>Your name<input name="name" required minlength="2" maxlength="120" autocomplete="name" value="${escape(values.name || "")}"></label><label>Email address<input type="email" name="email" required maxlength="254" autocomplete="email" value="${escape(values.email || "")}"></label><label>Phone number (optional)<input type="tel" name="phone" maxlength="40" autocomplete="tel" value="${escape(values.phone || "")}"></label>${select(
           "membership",
           "JD Gyms Renfrew membership",
           [

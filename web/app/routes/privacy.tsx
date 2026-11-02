@@ -29,10 +29,10 @@ export default function Privacy() {
       <h2>What the enquiry form collects</h2>
       <p>
         The form asks for your name, email address and JD Gyms membership
-        status. You can also select a broad training goal, a coaching option and
-        your usual availability. These optional details help us have a useful
-        first conversation. Please don’t include medical information or other
-        sensitive personal details.
+        status. You can optionally provide a phone number and select a broad
+        training goal, a coaching option and your usual availability. These
+        optional details help us have a useful first conversation. Please don’t
+        include medical information or other sensitive personal details.
       </p>
       <p>
         We store the date of your request and the version of the form notice you
