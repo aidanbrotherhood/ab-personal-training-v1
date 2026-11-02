@@ -1,5 +1,6 @@
 export async function processNotifications(env: Env) {
-  if (!env.RESEND_API_KEY) return;
+  if (String(env.NOTIFICATIONS_ENABLED) !== "true" || !env.RESEND_API_KEY)
+    return;
   const rows = await env.ENQUIRIES.prepare(
     `SELECT n.enquiry_id, e.name, e.email, e.phone, d.goal, d.package_interest FROM enquiry_notifications n JOIN enquiries e ON e.id=n.enquiry_id JOIN enquiry_details d ON d.enquiry_id=e.id WHERE n.state='pending' AND n.attempts<6 AND n.next_attempt<=unixepoch() AND n.created_at>unixepoch()-82800 LIMIT 10`,
   ).all<{

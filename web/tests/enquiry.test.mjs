@@ -34,6 +34,7 @@ function fixture({ limited = false, broken = false } = {}) {
   db.exec(readFileSync("migrations/0001_enquiry_context.sql", "utf8"));
   db.exec(readFileSync("migrations/0002_notifications.sql", "utf8"));
   const env = {
+    NOTIFICATIONS_ENABLED: "true",
     ENQUIRY_LIMITER: { limit: async () => ({ success: !limited }) },
     ENQUIRIES: {
       prepare(sql) {
@@ -341,4 +342,37 @@ test("notification failure preserves queued enquiry; acceptance records provider
     globalThis.fetch = original;
     db.close();
   }
+});
+
+test("staging notification guard prevents external sends even if a key is accidentally supplied", async () => {
+  const compiled = await build({
+    entryPoints: ["workers/notifications.ts"],
+    tsconfig: "tsconfig.json",
+    bundle: true,
+    write: false,
+    format: "esm",
+    platform: "neutral",
+  });
+  const { processNotifications } = await import(
+    `data:text/javascript;base64,${Buffer.from(compiled.outputFiles[0].text).toString("base64")}`
+  );
+  await processNotifications({
+    NOTIFICATIONS_ENABLED: "false",
+    RESEND_API_KEY: "test",
+    ENQUIRIES: {
+      prepare() {
+        throw Error("Staging must not read notification queue");
+      },
+    },
+  });
+});
+test("staging enquiries are stored with notifications disabled", async () => {
+  const { env, db } = fixture();
+  env.NOTIFICATIONS_ENABLED = "false";
+  assert.equal((await handleEnquiry(request(), env)).status, 200);
+  assert.equal(
+    db.prepare("SELECT state FROM enquiry_notifications").get().state,
+    "disabled",
+  );
+  db.close();
 });

@@ -4,7 +4,8 @@ import { packageIds } from "../app/lib/offers";
 
 const MAX_BYTES = 8000;
 const NOTICE_VERSION = "2026-11-02";
-type EnquiryEnv = Pick<Env, "ENQUIRIES" | "ENQUIRY_LIMITER">;
+type EnquiryEnv = Pick<Env, "ENQUIRIES" | "ENQUIRY_LIMITER"> &
+  Partial<Pick<Env, "NOTIFICATIONS_ENABLED">>;
 type Fields = Record<string, string>;
 const escape = (value: string) =>
   value.replace(
@@ -282,8 +283,11 @@ export async function handleEnquiry(
         NOTICE_VERSION,
       ),
       env.ENQUIRIES.prepare(
-        "INSERT OR IGNORE INTO enquiry_notifications (enquiry_id) VALUES (?)",
-      ).bind(id),
+        "INSERT OR IGNORE INTO enquiry_notifications (enquiry_id,state) VALUES (?,?)",
+      ).bind(
+        id,
+        String(env.NOTIFICATIONS_ENABLED) === "true" ? "pending" : "disabled",
+      ),
     ]);
     if (saved[0].meta.changes > 0)
       console.info(

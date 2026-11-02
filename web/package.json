@@ -7,9 +7,12 @@
     "dev": "react-router dev",
     "build": "react-router build",
     "typecheck": "react-router typegen && tsc --noEmit",
-    "deploy": "npm run build && wrangler deploy",
+    "deploy": "node -e \"throw new Error('Choose deploy:staging or deploy:production explicitly')\"",
     "cf-typegen": "wrangler types && react-router typegen",
-    "test": "node --test tests/enquiry.test.mjs"
+    "test": "node --test tests/enquiry.test.mjs",
+    "build:production": "CLOUDFLARE_ENV=production react-router build",
+    "deploy:staging": "node scripts/deploy.mjs staging",
+    "deploy:production": "node scripts/deploy.mjs production"
   },
   "dependencies": {
     "react": "19.2.7",
