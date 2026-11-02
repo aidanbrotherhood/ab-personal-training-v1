@@ -106,7 +106,7 @@ export function ErrorBoundary({ error }: { error: unknown }) {
   return (
     <div id="top">
       <Header />
-      <main id="main" className="error-page">
+      <main id="main" tabIndex={-1} className="error-page">
         <p className="eyebrow">
           {notFound ? "Page not found" : "Please try again"}
         </p>
