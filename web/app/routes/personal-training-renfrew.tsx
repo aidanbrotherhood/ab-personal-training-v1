@@ -292,7 +292,7 @@ export default function PersonalTrainingRenfrew() {
             </div>
             <div className="service-pricing-notes">
               <p><strong>No charge for the first meeting.</strong> The free 30-minute consultation is separate from the £99 PT Introduction, which includes two paid training sessions.</p>
-              <p><strong>Four weeks, not a calendar month.</strong> Weekly and Complete Coaching cover a four-week period; 52 weeks contains 13 such periods. Prices exclude JD Gyms membership, required for paid training.</p>
+              <p><strong>Four weeks, not a calendar month.</strong> Coaching and Coaching+ cover a four-week period; 52 weeks contains 13 such periods. Prices exclude JD Gyms membership, required for paid training.</p>
             </div>
           </div>
         </section>
