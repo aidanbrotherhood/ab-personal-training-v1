@@ -34,6 +34,8 @@ export function Footer() {
           <a href="/#consultation">Book a free consultation</a>
           <a href="/privacy">Privacy notice</a>
           <a href="mailto:hello@aidanbrotherhood.com">Email Aidan <Arrow /></a>
+          <a href="https://www.instagram.com/aidanbrotherhood.pt/" target="_blank" rel="noopener noreferrer">Instagram <Arrow /></a>
+          <a href="https://wa.me/447414497675" target="_blank" rel="noopener noreferrer">WhatsApp <Arrow /></a>
         </nav>
       </div>
       <div className="container footer-bottom">
