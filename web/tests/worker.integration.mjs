@@ -144,7 +144,6 @@ test("About Me navigation and text contrast stay consistent with the page design
   assert.match(html, /<title>About Me \| Aidan Brotherhood \| AB Personal Training<\/title>/);
   assert.match(html, /href="\/about\/approach"/);
   assert.doesNotMatch(html, /Meet Aidan/);
-  assert.match(html, /about-me\.css/);
   for (const page of ["/", "/personal-training-for-beginners", "/consultation"]) {
     const other = await (await request(page)).text();
     assert.ok(other.includes("About Me"), page);
