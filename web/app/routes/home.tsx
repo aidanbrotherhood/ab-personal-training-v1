@@ -92,7 +92,15 @@ export default function Home() {
               review what’s working. The aim is to make your training easier to
               understand and your next step clearer.
             </p>
+            <p>
+              My approach is about more than an exercise plan. It’s about
+              developing strength, confidence and physical capability that
+              serve the life you want to live.
+            </p>
             <div className="movement-home-links">
+              <a className="inline-link" href="/my-approach">
+                Read my coaching philosophy <Arrow />
+              </a>
               <a className="inline-link" href="/personal-training-renfrew">
                 How personal training works in Renfrew <Arrow />
               </a>

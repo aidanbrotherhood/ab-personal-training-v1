@@ -38,6 +38,7 @@ export function Brand({ variant = "full" }: { variant?: "full" | "symbol" }) {
 const links = [
   ["/personal-training-renfrew", "Training in Renfrew"],
   ["/coaching", "Coaching & prices"],
+  ["/my-approach", "My approach"],
   ["/personal-training-for-beginners", "New to the gym?"],
   ["/movement-assessment", "Movement assessment"],
   ["/about", "Meet Aidan"],

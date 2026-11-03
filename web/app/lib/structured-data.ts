@@ -89,7 +89,9 @@ export function structuredData(path: string) {
                       ? "Free consultation"
                       : page.key === "movement"
                         ? "Free movement assessment"
-                        : "Privacy notice",
+                        : page.key === "approach"
+                          ? "My approach"
+                          : "Privacy notice",
           item: pageUrl,
         },
       ],
