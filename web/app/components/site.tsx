@@ -266,6 +266,10 @@ export function Header() {
               onClose={() => setOpenMenu(null)}
             />
           </nav>
+          <ConsultationLink className="nav-cta" placement="header">
+            <span className="cta-full">Book Free Consultation</span>
+            <span className="cta-short">Free consultation</span>
+          </ConsultationLink>
           <details
             className="mobile-menu"
             ref={disclosure}
@@ -277,7 +281,7 @@ export function Header() {
             }}
           >
             <summary>
-              <span>Menu</span>
+              <span className="mobile-menu-label">Menu</span>
               <svg className="mobile-menu-icon mobile-menu-icon--hamburger" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
                 <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
               </svg>
@@ -301,10 +305,6 @@ export function Header() {
               </a>
             </nav>
           </details>
-          <ConsultationLink className="nav-cta" placement="header">
-            <span className="cta-full">Book Free Consultation</span>
-            <span className="cta-short">Book Free</span>
-          </ConsultationLink>
         </div>
       </header>
     </>
