@@ -1,4 +1,4 @@
-import { useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useLocation } from "react-router";
 import {
   BUSINESS_EMAIL,
@@ -47,57 +47,110 @@ const aboutLinks = [
 ] as const;
 
 type NavItem = readonly [href: string, label: string, description: string];
+type MenuKey = "training" | "about";
 
+function Chevron({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+      <path d="m4.5 6 3.5 3.5L11.5 6" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** Standard navigation disclosures: one trigger, normal links, mouse + touch + keyboard. */
 function DesktopMenu({
+  id,
   label,
-  href,
   items,
   pathname,
+  open,
+  onOpen,
+  onClose,
 }: {
+  id: MenuKey;
   label: string;
-  href: string;
   items: readonly NavItem[];
   pathname: string;
+  open: boolean;
+  onOpen: () => void;
+  onClose: () => void;
 }) {
-  const [open, setOpen] = useState(false);
-  const group = useRef<HTMLDivElement>(null);
-  const isActive = items.some(([itemHref]) => itemHref === pathname);
+  const container = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const active = items.some(([href]) => href === pathname);
+  const panelId = "nav-panel-" + id;
+
+  function handleKeys(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key === "Escape" && open) {
+      event.preventDefault();
+      event.stopPropagation();
+      onClose();
+      trigger.current?.focus();
+      return;
+    }
+    if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+
+    const links = Array.from(
+      container.current?.querySelectorAll<HTMLAnchorElement>(".nav-popover-link") ?? [],
+    );
+    if (links.length === 0) return;
+    event.preventDefault();
+    const direction = event.key === "ArrowDown" ? 1 : -1;
+    const index = links.indexOf(document.activeElement as HTMLAnchorElement);
+    if (!open) {
+      onOpen();
+      requestAnimationFrame(() =>
+        links[direction === 1 ? 0 : links.length - 1]?.focus(),
+      );
+    } else {
+      links[index < 0 ? (direction === 1 ? 0 : links.length - 1) : (index + direction + links.length) % links.length]?.focus();
+    }
+  }
+
   return (
     <div
-      className={"nav-group" + (open ? " is-open" : "")}
-      ref={group}
-      data-section-active={isActive ? "true" : undefined}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onFocusCapture={() => setOpen(true)}
+      ref={container}
+      className={"nav-cluster" + (open ? " is-open" : "")}
+      data-section-active={active ? "true" : undefined}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") onOpen();
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") onClose();
+      }}
       onBlurCapture={(event) => {
-        if (!group.current?.contains(event.relatedTarget as Node | null))
-          setOpen(false);
+        if (!container.current?.contains(event.relatedTarget as Node | null))
+          onClose();
       }}
-      onKeyDown={(event) => {
-        if (event.key === "Escape") {
-          setOpen(false);
-          event.stopPropagation();
-        }
-      }}
+      onKeyDown={handleKeys}
     >
-      <a href={href} className="nav-group-link" aria-current={pathname === href ? "page" : undefined}>
-        {label}
-      </a>
       <button
+        ref={trigger}
+        className="nav-trigger"
         type="button"
-        className="nav-group-toggle"
-        aria-label={"Show " + label + " menu"}
         aria-expanded={open}
-        onClick={() => setOpen(true)}
+        aria-controls={panelId}
+        onClick={() => (open ? onClose() : onOpen())}
       >
-        <span aria-hidden="true">⌄</span>
+        {label}
+        <Chevron className="nav-trigger-chevron" />
       </button>
-      <div className="nav-dropdown-panel" role="group" aria-label={label + " pages"}>
-        {items.map(([itemHref, itemLabel, description]) => (
-          <a key={itemHref} href={itemHref} aria-current={pathname === itemHref ? "page" : undefined}>
-            <strong>{itemLabel}</strong>
-            <span>{description}</span>
+      <div
+        id={panelId}
+        className="nav-popover"
+        role="group"
+        aria-label={label + " pages"}
+        hidden={!open}
+      >
+        {items.map(([href, itemLabel]) => (
+          <a
+            className="nav-popover-link"
+            key={href}
+            href={href}
+            aria-current={pathname === href ? "page" : undefined}
+          >
+            <span>{itemLabel}</span>
+            <span className="nav-item-arrow" aria-hidden="true">↗</span>
           </a>
         ))}
       </div>
@@ -117,7 +170,8 @@ function MobileMenuGroup({
   return (
     <details className="mobile-nav-group">
       <summary data-section-active={items.some(([href]) => href === pathname) ? "true" : undefined}>
-        {label} <span aria-hidden="true">+</span>
+        <span>{label}</span>
+        <Chevron className="mobile-nav-chevron" />
       </summary>
       <div className="mobile-nav-submenu">
         {items.map(([href, itemLabel]) => (
@@ -129,6 +183,7 @@ function MobileMenuGroup({
     </details>
   );
 }
+
 
 export function ConsultationLink({
   children = "Book a free consultation",
@@ -160,6 +215,21 @@ export function ConsultationLink({
 export function Header() {
   const { pathname } = useLocation();
   const disclosure = useRef<HTMLDetailsElement>(null);
+  const desktopNav = useRef<HTMLElement>(null);
+  const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
+
+  useEffect(() => {
+    function dismissOutside(event: PointerEvent) {
+      const target = event.target as Node;
+      if (openMenu && !desktopNav.current?.contains(target))
+        setOpenMenu(null);
+      if (disclosure.current?.open && !disclosure.current.contains(target))
+        disclosure.current.open = false;
+    }
+    document.addEventListener("pointerdown", dismissOutside);
+    return () => document.removeEventListener("pointerdown", dismissOutside);
+  }, [openMenu]);
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -168,12 +238,32 @@ export function Header() {
       <header className="site-header">
         <div className="container header-inner">
           <Brand variant="symbol" />
-          <nav className="desktop-nav" aria-label="Main navigation">
-            <DesktopMenu label="Personal Training" href="/personal-training-renfrew" items={trainingLinks} pathname={pathname} />
-            <a className="nav-single" href="/pricing" aria-current={pathname === "/pricing" ? "page" : undefined}>
+          <nav ref={desktopNav} className="desktop-nav" aria-label="Main navigation">
+            <DesktopMenu
+              id="training"
+              label="Personal Training"
+              items={trainingLinks}
+              pathname={pathname}
+              open={openMenu === "training"}
+              onOpen={() => setOpenMenu("training")}
+              onClose={() => setOpenMenu(null)}
+            />
+            <a
+              className="nav-single"
+              href="/pricing"
+              aria-current={pathname === "/pricing" ? "page" : undefined}
+            >
               Pricing
             </a>
-            <DesktopMenu label="About" href="/about" items={aboutLinks} pathname={pathname} />
+            <DesktopMenu
+              id="about"
+              label="About"
+              items={aboutLinks}
+              pathname={pathname}
+              open={openMenu === "about"}
+              onOpen={() => setOpenMenu("about")}
+              onClose={() => setOpenMenu(null)}
+            />
           </nav>
           <details
             className="mobile-menu"
@@ -186,7 +276,13 @@ export function Header() {
             }}
           >
             <summary>
-              Menu <span aria-hidden="true">+</span>
+              <span>Menu</span>
+              <svg className="mobile-menu-icon mobile-menu-icon--hamburger" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+              <svg className="mobile-menu-icon mobile-menu-icon--close" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+                <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
             </summary>
             <nav
               aria-label="Mobile navigation"
@@ -195,11 +291,13 @@ export function Header() {
                   disclosure.current.open = false;
               }}
             >
-              <a href="/">Home</a>
+              <a href="/" aria-current={pathname === "/" ? "page" : undefined}>Home</a>
               <MobileMenuGroup label="Personal Training" items={trainingLinks} pathname={pathname} />
               <a href="/pricing" aria-current={pathname === "/pricing" ? "page" : undefined}>Pricing</a>
               <MobileMenuGroup label="About" items={aboutLinks} pathname={pathname} />
-              <a href="/consultation" aria-current={pathname === "/consultation" ? "page" : undefined}>Book Free Consultation</a>
+              <a className="mobile-book-link" href="/consultation" aria-current={pathname === "/consultation" ? "page" : undefined}>
+                Book Free Consultation <span aria-hidden="true">↗</span>
+              </a>
             </nav>
           </details>
           <ConsultationLink className="nav-cta" placement="header">

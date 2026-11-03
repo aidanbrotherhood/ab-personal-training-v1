@@ -115,8 +115,13 @@ test("header, dropdown, mobile menu and grouped footer resolve to canonical dest
     "/about/approach",
     "/consultation",
   ]) assert.ok(links(html).includes(path), path);
-  assert.match(html, /Show Personal Training menu/);
-  assert.match(html, /Show About menu/);
+  assert.match(html, /aria-controls="nav-panel-training"/);
+  assert.match(html, /aria-controls="nav-panel-about"/);
+  assert.equal((html.match(/aria-expanded="false"/g) || []).length >= 2, true);
+  assert.match(html, /class="nav-popover"[^>]*hidden=""/);
+  assert.match(html, /class="nav-popover-link"/);
+  assert.match(html, /mobile-menu-icon--hamburger/);
+  assert.match(html, /mobile-nav-chevron/);
   assert.match(html, /mobile-nav-group/);
   assert.match(html, /footer-nav-group/);
   const approachHtml = await (await request("/about/approach")).text();
