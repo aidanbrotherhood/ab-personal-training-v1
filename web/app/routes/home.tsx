@@ -92,9 +92,14 @@ export default function Home() {
               review what’s working. The aim is to make your training easier to
               understand and your next step clearer.
             </p>
-            <a className="inline-link" href="/personal-training-renfrew">
-              How personal training works in Renfrew <Arrow />
-            </a>
+            <div className="movement-home-links">
+              <a className="inline-link" href="/personal-training-renfrew">
+                How personal training works in Renfrew <Arrow />
+              </a>
+              <a className="inline-link" href="/movement-assessment">
+                Your free movement assessment <Arrow />
+              </a>
+            </div>
           </div>
         </div>
         <div className="container pathway-grid">

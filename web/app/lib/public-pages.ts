@@ -46,6 +46,15 @@ export const publicPages = [
     h1: "You don’t have to know where to start.",
   },
   {
+    key: "movement",
+    path: "/movement-assessment",
+    file: "routes/movement-assessment.tsx",
+    title: "Free Movement Assessment Renfrew | AB Personal Training",
+    description:
+      "Book a free 30-minute movement assessment with AB Personal Training at JD Gyms Renfrew. Learn about FMS, your starting point and how coaching works.",
+    h1: "Before we build your programme, let’s understand how you move.",
+  },
+  {
     key: "consultation",
     path: "/consultation",
     file: "routes/consultation.tsx",
