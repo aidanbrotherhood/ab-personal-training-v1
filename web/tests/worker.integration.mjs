@@ -127,6 +127,28 @@ test("all production pages have complete SSR metadata, one H1 and direct consult
     }
 });
 
+
+test("movement assessment landing page explains FMS and uses the existing consultation booking flow", async () => {
+  const response = await request("/movement-assessment");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Functional Movement Screen/);
+  for (const movement of [
+    "Deep Squat",
+    "Hurdle Step",
+    "In-Line Lunge",
+    "Shoulder Mobility",
+    "Active Straight-Leg Raise",
+    "Trunk Stability Push-Up",
+    "Rotary Stability",
+  ])
+    assert.ok(html.includes(movement), movement);
+  assert.match(html, /images\.unsplash\.com/);
+  assert.ok(links(html).includes("/consultation"));
+  assert.doesNotMatch(html, /<iframe|href="https:\/\/calendly\.com/);
+  assert.match(html, /not a medical diagnosis/i);
+});
+
 test("all three pricing surfaces show the approved packages, hierarchy, exact prices and CTA destination", async () => {
   for (const path of ["/", "/personal-training-renfrew", "/coaching"]) {
     const html = await (await request(path)).text();
