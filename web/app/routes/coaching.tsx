@@ -12,8 +12,8 @@ export default function Coaching() {
   return (
     <PageShell>
       <PageIntro
-        label="Coaching & prices"
-        eyebrow="Personal training coaching and prices"
+        label="Pricing"
+        eyebrow="Personal training packages and prices"
         title={
           <>
             The right support.
@@ -84,6 +84,12 @@ export default function Coaching() {
                   </dd>
                 </div>
               </dl>
+              <p>
+                <a href="/strength-training-renfrew">
+                  Learn more about strength &amp; muscle-building coaching
+                </a>
+                .
+              </p>
               <p>
                 New to lifting? You don’t need to arrive knowing the exercises.{" "}
                 <a href="/personal-training-for-beginners">

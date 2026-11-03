@@ -19,10 +19,19 @@ export const publicPages = [
     h1: "Personal training at JD Gyms Renfrew.",
   },
   {
+    key: "strength",
+    path: "/strength-training-renfrew",
+    file: "routes/strength-training-renfrew.tsx",
+    title: "Strength Training Renfrew | AB Personal Training",
+    description:
+      "Build strength and muscle with one-to-one personal training at JD Gyms Renfrew. Personalised programming, technique coaching and a clear plan for progress.",
+    h1: "Strength & muscle-building personal training in Renfrew.",
+  },
+  {
     key: "coaching",
-    path: "/coaching",
+    path: "/pricing",
     file: "routes/coaching.tsx",
-    title: "Personal Training Prices & Coaching | AB Personal Training",
+    title: "Personal Training Prices | AB Personal Training",
     description:
       "Compare Starter at £99, Coaching at £180 and Coaching+ at £320. See sessions and support included at JD Gyms Renfrew. Gym membership is separate.",
     h1: "The right support. A clear way forward.",
@@ -31,9 +40,9 @@ export const publicPages = [
     key: "about",
     path: "/about",
     file: "routes/about.tsx",
-    title: "Meet Aidan Brotherhood | AB Personal Training",
+    title: "About Me | Aidan Brotherhood | AB Personal Training",
     description:
-      "Meet Aidan Brotherhood, the coach behind AB Personal Training at JD Gyms Renfrew. Learn how he approaches strength, confidence and consistent training.",
+      "About Aidan Brotherhood, the coach behind AB Personal Training at JD Gyms Renfrew. Learn about his approach to strength, confidence and consistent training.",
     h1: "Your training. A person in your corner.",
   },
   {
@@ -44,6 +53,24 @@ export const publicPages = [
     description:
       "New to the gym? Learn what starting one-to-one training with Aidan at JD Gyms Renfrew involves and how the free consultation differs from Starter.",
     h1: "You don’t have to know where to start.",
+  },
+  {
+    key: "approach",
+    path: "/about/approach",
+    file: "routes/my-approach.tsx",
+    title: "My Approach | Personal Training Philosophy | AB PT",
+    description:
+      "Discover Aidan Brotherhood’s approach to personal training in Renfrew: evidence-informed coaching, continuous improvement, strength and lifelong capability.",
+    h1: "Become more capable. Live more fully.",
+  },
+  {
+    key: "movement",
+    path: "/movement-assessment",
+    file: "routes/movement-assessment.tsx",
+    title: "Free Movement Assessment Renfrew | AB Personal Training",
+    description:
+      "Book a free 30-minute movement assessment with AB Personal Training at JD Gyms Renfrew. Learn about FMS, your starting point and how coaching works.",
+    h1: "Before we build your programme, let’s understand how you move.",
   },
   {
     key: "consultation",

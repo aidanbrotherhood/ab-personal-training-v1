@@ -1,0 +1,72 @@
+/*
+ * About Me: repair inherited light-on-dark copy applied to a white section.
+ * Scoped to the About page so the wider site's dark editorial treatments remain untouched.
+ */
+.about-me-page { --about-ink: #182b40; --about-copy: #344a60; --about-accent: #0755bd; }
+
+/* Hero: retain the existing dark editorial treatment with legible text. */
+.about-me-page .editorial-intro .page-breadcrumb { color: #d1e3f5; }
+.about-me-page .editorial-intro .eyebrow { color: #b5daff; }
+.about-me-page .editorial-intro .intro-copy > p { color: #edf4ff; }
+
+/* Introduction: ink-on-paper rather than inherited pale text on white. */
+.about-me-page .about-me-introduction { background: #fff; color: var(--about-ink); }
+.about-me-page .about-layout { align-items: center; }
+.about-me-page .about-copy { max-width: 620px; }
+.about-me-page .about-copy .eyebrow { color: var(--about-accent); }
+.about-me-page .about-copy h2 { color: var(--about-ink); line-height: 1.13; }
+.about-me-page .about-copy h2 em { color: var(--about-accent); }
+.about-me-page .about-copy > p:not(.eyebrow) {
+  color: var(--about-copy);
+  font-size: 17px;
+  line-height: 1.84;
+  max-width: 62ch;
+  margin-top: 20px;
+}
+.about-me-page .about-copy .inline-link {
+  color: var(--about-accent);
+  font-weight: 675;
+  margin-top: 28px;
+}
+.about-me-page .about-copy .inline-link:hover { text-decoration: underline; text-underline-offset: 5px; }
+
+/* Typographic identity panel: make the name unmistakably readable. */
+.about-me-page .about-display {
+  background: linear-gradient(150deg, #11273e 0%, #204b77 100%);
+  color: #fff;
+  border: 1px solid #345878;
+  box-shadow: 0 15px 35px rgba(12, 39, 68, .08);
+}
+.about-me-page .about-display > span { color: #deedff; }
+.about-me-page .about-display > p { color: #fff; }
+.about-me-page .about-period { color: #a7d0ff; }
+.about-me-page .about-display-bottom { color: #e7f2ff; border-top-color: rgba(255,255,255,.33); }
+
+/* Principles: consistent type hierarchy and strong contrast on pale cards. */
+.about-me-page .approach-section { background: #f2f6fb; color: var(--about-ink); }
+.about-me-page .approach-section .eyebrow { color: var(--about-accent); }
+.about-me-page .approach-section > .container > h2 { color: var(--about-ink); }
+.about-me-page .approach-section > .container > h2 span { color: var(--about-accent); }
+.about-me-page .principle {
+  background: #fff;
+  border: 1px solid #d6e1eb;
+  box-shadow: 0 7px 23px rgba(15,48,77,.035);
+}
+.about-me-page .principle-number { color: var(--about-accent); }
+.about-me-page .principle h3 { color: var(--about-ink); font-weight: 700; }
+.about-me-page .principle p { color: var(--about-copy); line-height: 1.82; }
+
+/* Final explanatory section: strong contrast and clearly identifiable links. */
+.about-me-page .about-me-details { background: #fff; color: var(--about-ink); }
+.about-me-page .about-me-details .eyebrow { color: var(--about-accent); }
+.about-me-page .about-me-details .editorial-split h2 { color: var(--about-ink); }
+.about-me-page .about-me-details .editorial-split h2 span { color: var(--about-accent); }
+.about-me-page .about-me-details .prose-copy { color: var(--about-copy); line-height: 1.84; }
+.about-me-page .about-me-details .text-link-row { color: var(--about-accent); }
+.about-me-page .about-me-details .text-link-row a:hover { text-decoration: underline; text-underline-offset: 5px; }
+
+@media(max-width:640px) {
+  .about-me-page .about-copy > p:not(.eyebrow) { font-size: 16px; line-height: 1.8; }
+  .about-me-page .about-display { min-height: 340px; }
+  .about-me-page .principle p { line-height: 1.75; }
+}

@@ -20,6 +20,8 @@ const placements = new Set([
   "about_hero", "beginners_hero", "beginners_consultation", "coaching_hero",
   "pricing_home", "pricing_renfrew", "pricing_coaching", "page", "calendar",
   "direct_calendar", "email",
+  "strength_hero", "strength_packages", "movement_hero", "movement_process",
+  "movement_faq", "approach_hero", "approach_closing",
 ]);
 
 export function validMeasurementId(value: unknown): value is string {

@@ -16,6 +16,7 @@ import { Header, Footer, ConsultationLink } from "./components/site";
 import { AnalyticsConsent } from "./components/analytics-consent";
 import "./styles.css";
 import "./discovery.css";
+import "./navigation.css";
 
 export function loader({ request, context }: Route.LoaderArgs) {
   const url = new URL(request.url);

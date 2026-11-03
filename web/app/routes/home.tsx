@@ -33,7 +33,7 @@ export default function Home() {
               >
                 Book your free consultation
               </ConsultationLink>
-              <a className="hero-secondary" href="/coaching">
+              <a className="hero-secondary" href="/pricing">
                 Explore coaching <Arrow />
               </a>
             </div>
@@ -92,9 +92,22 @@ export default function Home() {
               review what’s working. The aim is to make your training easier to
               understand and your next step clearer.
             </p>
-            <a className="inline-link" href="/personal-training-renfrew">
-              How personal training works in Renfrew <Arrow />
-            </a>
+            <p>
+              My approach is about more than an exercise plan. It’s about
+              developing strength, confidence and physical capability that
+              serve the life you want to live.
+            </p>
+            <div className="movement-home-links">
+              <a className="inline-link" href="/about/approach">
+                Read my coaching philosophy <Arrow />
+              </a>
+              <a className="inline-link" href="/personal-training-renfrew">
+                How personal training works in Renfrew <Arrow />
+              </a>
+              <a className="inline-link" href="/movement-assessment">
+                Your free movement assessment <Arrow />
+              </a>
+            </div>
           </div>
         </div>
         <div className="container pathway-grid">
@@ -107,7 +120,7 @@ export default function Home() {
             </p>
             <span className="pathway-link">Start here ↗</span>
           </a>
-          <a href="/coaching#strength">
+          <a href="/strength-training-renfrew">
             <span>02 / BUILDING STRENGTH</span>
             <h3>Train with purpose.</h3>
             <p>
@@ -115,7 +128,7 @@ export default function Home() {
             </p>
             <span className="pathway-link">Explore strength coaching ↗</span>
           </a>
-          <a href="/coaching#fat-loss">
+          <a href="/pricing#fat-loss">
             <span>03 / CHANGING HABITS</span>
             <h3>Make it sustainable.</h3>
             <p>Training and practical nutrition guidance that fit real life.</p>
@@ -157,7 +170,7 @@ export default function Home() {
               JD Gyms Renfrew.
             </p>
             <a href="/about" className="inline-link">
-              Meet Aidan <Arrow />
+              About Me <Arrow />
             </a>
           </div>
         </div>

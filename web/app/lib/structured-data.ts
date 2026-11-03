@@ -73,26 +73,42 @@ export function structuredData(path: string) {
           name: "Home",
           item: `${SITE_ORIGIN}/`,
         },
+        ...(page.key === "approach" || page.key === "strength"
+          ? [{
+              "@type": "ListItem",
+              position: 2,
+              name: page.key === "approach" ? "About" : "Personal Training",
+              item: page.key === "approach"
+                ? `${SITE_ORIGIN}/about`
+                : `${SITE_ORIGIN}/personal-training-renfrew`,
+            }]
+          : []),
         {
           "@type": "ListItem",
-          position: 2,
+          position: page.key === "approach" || page.key === "strength" ? 3 : 2,
           name:
             page.key === "renfrew"
               ? "Training in Renfrew"
+              : page.key === "strength"
+                ? "Strength & Muscle"
               : page.key === "beginners"
                 ? "New to the gym"
                 : page.key === "about"
-                  ? "Meet Aidan"
+                  ? "About Me"
                   : page.key === "coaching"
-                    ? "Coaching & prices"
+                    ? "Pricing"
                     : page.key === "consultation"
                       ? "Free consultation"
-                      : "Privacy notice",
+                      : page.key === "movement"
+                        ? "Free movement assessment"
+                        : page.key === "approach"
+                          ? "My approach"
+                          : "Privacy notice",
           item: pageUrl,
         },
       ],
     });
-  if (["/", "/coaching", "/personal-training-renfrew"].includes(path))
+  if (["/", "/pricing", "/personal-training-renfrew"].includes(path))
     graph.push({
       "@type": "Service",
       "@id": `${SITE_ORIGIN}/#personal-training`,
@@ -109,7 +125,29 @@ export function structuredData(path: string) {
         name: plan.title,
         price: Number(plan.price.slice(1)),
         priceCurrency: "GBP",
-        url: `${SITE_ORIGIN}/coaching#offer-coaching-${plan.id}`,
+        url: `${SITE_ORIGIN}/pricing#offer-coaching-${plan.id}`,
+        description: `${plan.sessions} 60-minute one-to-one sessions; ${plan.period.toLowerCase()}; JD Gyms membership purchased separately.`,
+      })),
+    });
+  if (page.key === "strength")
+    graph.push({
+      "@type": "Service",
+      "@id": `${pageUrl}#strength-coaching`,
+      name: "Strength and muscle-building personal training in Renfrew",
+      serviceType: "One-to-one strength and muscle-building personal training",
+      description: page.description,
+      provider: { "@id": businessId },
+      areaServed: { "@type": "Place", name: "Renfrew, Scotland" },
+      availableChannel: {
+        "@type": "ServiceChannel",
+        serviceLocation: { "@id": venueId },
+      },
+      offers: plans.map((plan) => ({
+        "@type": "Offer",
+        name: plan.title,
+        price: Number(plan.price.slice(1)),
+        priceCurrency: "GBP",
+        url: `${SITE_ORIGIN}/pricing#offer-coaching-${plan.id}`,
         description: `${plan.sessions} 60-minute one-to-one sessions; ${plan.period.toLowerCase()}; JD Gyms membership purchased separately.`,
       })),
     });

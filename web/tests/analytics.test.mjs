@@ -27,7 +27,7 @@ test("consent fails closed for absent, malformed, expired, future and blocked st
 });
 
 test("only known measurement values pass; extra personal fields are discarded", () => {
-  const event = analytics.analyticsEvent({event:"consultation_cta_clicked",page:"/coaching",
+  const event = analytics.analyticsEvent({event:"consultation_cta_clicked",page:"/pricing",
     placement:"pricing_coaching",package:"weekly",email:"secret@example.com",payload:{name:"Private"}});
   assert.ok(event);
   assert.equal(event.params.package_id, "weekly");
@@ -40,7 +40,7 @@ test("only known measurement values pass; extra personal fields are discarded", 
 
 function browser(origin = "https://aidanbrotherhood.com") {
   const scripts = [];
-  globalThis.window = {location:{origin,pathname:"/coaching",search:"?email=secret@example.com",hash:"#private"}};
+  globalThis.window = {location:{origin,pathname:"/pricing",search:"?email=secret@example.com",hash:"#private"}};
   globalThis.document = {referrer:"https://example.com/private?email=secret@example.com",
     createElement: () => ({remove(){this.removed=true;}}), head:{appendChild:s=>scripts.push(s)}};
   return scripts;
@@ -69,8 +69,8 @@ test("accepted production sends one view per path without query data; withdrawal
   assert.equal(commands()[0][2].analytics_storage, "denied");
   assert.equal(commands()[1][2].analytics_storage, "granted");
   assert.equal(commands().find(c=>c[0]==="config")[2].send_page_view, false);
-  client.page("/coaching");
-  client.page("/coaching");
+  client.page("/pricing");
+  client.page("/pricing");
   client.page("/consultation");
   client.page("/not-public");
   assert.equal(commands().filter(c=>c[1]==="page_view").length, 2);
