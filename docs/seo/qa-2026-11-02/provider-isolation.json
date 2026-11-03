@@ -1,0 +1,96 @@
+{
+  "checkedAt": "2026-11-02T22:29:33.785Z",
+  "ab-personal-training-staging": {
+    "bindings": [
+      {
+        "name": "ENQUIRIES",
+        "type": "d1",
+        "database_id": "7af4c995-22ad-4ecd-9359-eec163d27e45"
+      },
+      {
+        "name": "ENQUIRY_LIMITER",
+        "type": "ratelimit"
+      },
+      {
+        "name": "INDEXABLE",
+        "type": "plain_text",
+        "text": "false"
+      },
+      {
+        "name": "NOTIFICATIONS_ENABLED",
+        "type": "plain_text",
+        "text": "false"
+      }
+    ],
+    "deployment": {
+      "id": "f26aa381-053c-4516-90f3-9ed4c83a1642",
+      "versions": [
+        {
+          "version_id": "61bc06f4-8648-442c-9e64-c908d90b1117",
+          "percentage": 100
+        }
+      ],
+      "created": "2026-11-02T22:25:26.782961Z"
+    },
+    "crons": [],
+    "secrets": [],
+    "domains": []
+  },
+  "ab-personal-training-preview": {
+    "bindings": [
+      {
+        "name": "ENQUIRIES",
+        "type": "d1",
+        "database_id": "720c34f0-0a11-4518-9695-142c2635c708"
+      },
+      {
+        "name": "ENQUIRY_LIMITER",
+        "type": "ratelimit"
+      },
+      {
+        "name": "INDEXABLE",
+        "type": "plain_text",
+        "text": "true"
+      },
+      {
+        "name": "NOTIFICATIONS_ENABLED",
+        "type": "plain_text",
+        "text": "true"
+      },
+      {
+        "name": "RESEND_API_KEY",
+        "type": "secret_text"
+      }
+    ],
+    "deployment": {
+      "id": "86cdb067-4cac-4914-b820-1688c1efd227",
+      "versions": [
+        {
+          "version_id": "4b65e9f8-1854-408d-9e49-cf060dd11e73",
+          "percentage": 100
+        }
+      ],
+      "created": "2026-11-02T21:14:34.633625Z"
+    },
+    "crons": [
+      "*/5 * * * *"
+    ],
+    "secrets": [
+      "RESEND_API_KEY"
+    ],
+    "domains": [
+      "aidanbrotherhood.com",
+      "www.aidanbrotherhood.com"
+    ]
+  },
+  "build": {
+    "id": "ead2aa4d-d1ec-4115-b485-d1f91977e677",
+    "status": "stopped",
+    "outcome": "success",
+    "branch": "develop",
+    "sha": "c7191ab57bdfefdc53580ae60590c696f0a2239e",
+    "buildCommand": "npm ci --no-audit --no-fund && npm run cf-typegen && npm run typecheck && npm test && npm run build",
+    "deployCommand": "npm run deploy:staging",
+    "stopped": "2026-11-02T22:25:30.165Z"
+  }
+}

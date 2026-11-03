@@ -5,12 +5,13 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "react-router dev",
-    "build": "react-router build",
+    "build": "react-router build && npm run test:built",
     "typecheck": "react-router typegen && tsc --noEmit",
     "deploy": "node -e \"throw new Error('Choose deploy:staging or deploy:production explicitly')\"",
     "cf-typegen": "wrangler types && react-router typegen",
     "test": "node --test tests/*.test.mjs",
-    "build:production": "CLOUDFLARE_ENV=production react-router build",
+    "build:production": "CLOUDFLARE_ENV=production react-router build && npm run test:built",
+    "test:built": "node --test tests/worker.integration.mjs",
     "deploy:staging": "node scripts/deploy.mjs staging",
     "deploy:production": "node scripts/deploy.mjs production"
   },
