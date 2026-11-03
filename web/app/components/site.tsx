@@ -64,7 +64,7 @@ function DesktopMenu({
   const isActive = items.some(([itemHref]) => itemHref === pathname);
   return (
     <div
-      className={\`nav-group\${open ? " is-open" : ""}\`}
+      className={"nav-group" + (open ? " is-open" : "")}
       ref={group}
       data-section-active={isActive ? "true" : undefined}
       onMouseEnter={() => setOpen(true)}
@@ -87,13 +87,13 @@ function DesktopMenu({
       <button
         type="button"
         className="nav-group-toggle"
-        aria-label={\`Show \${label} menu\`}
+        aria-label={"Show " + label + " menu"}
         aria-expanded={open}
         onClick={() => setOpen((wasOpen) => !wasOpen)}
       >
         <span aria-hidden="true">⌄</span>
       </button>
-      <div className="nav-dropdown-panel" aria-label={\`\${label} pages\`}>
+      <div className="nav-dropdown-panel" aria-label={label + " pages"}>
         {items.map(([itemHref, itemLabel, description]) => (
           <a key={itemHref} href={itemHref} aria-current={pathname === itemHref ? "page" : undefined}>
             <strong>{itemLabel}</strong>
