@@ -18,7 +18,7 @@ async function source(path) {
   );
 }
 const { publicPages, getPublicPage } = await source("app/lib/public-pages.ts");
-const { canonicalRedirect, isIndexableProduction, xmlEscape } =
+const { canonicalRedirect, isIndexableProduction, legacyPageDestination, xmlEscape } =
   await source("app/lib/seo.ts");
 const { structuredData } = await source("app/lib/structured-data.ts");
 const { calendlySignal, trustedCalendlySignal } = await source(
@@ -31,9 +31,12 @@ test("published registry contains only complete, approved pages with unique meta
     [
       "/",
       "/personal-training-renfrew",
-      "/coaching",
+      "/strength-training-renfrew",
+      "/pricing",
       "/about",
       "/personal-training-for-beginners",
+      "/about/approach",
+      "/movement-assessment",
       "/consultation",
       "/privacy",
     ],
@@ -62,6 +65,32 @@ test("published registry contains only complete, approved pages with unique meta
   ])
     assert.equal(getPublicPage(path), undefined);
 });
+test("About Me colour treatments keep readable contrast on light and dark sections", () => {
+  const stylesheet = readFileSync("app/about-me.css", "utf8");
+  for (const expected of [
+    ".about-me-page .about-me-introduction",
+    ".about-me-page .about-copy > p:not(.eyebrow)",
+    ".about-me-page .about-copy h2 em",
+    ".about-me-page .principle p",
+    ".about-me-page .about-me-details .prose-copy",
+    ".about-me-page .editorial-intro .intro-copy > p",
+  ])
+    assert.ok(stylesheet.includes(expected), expected);
+  const luminance = (hex) => {
+    const rgb = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+    const linear = rgb.map((c) => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+    return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
+  };
+  const contrast = (foreground, background) => {
+    const a = luminance(foreground);
+    const b = luminance(background);
+    return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  };
+  assert.ok(contrast("#344a60", "#ffffff") >= 4.5);
+  assert.ok(contrast("#0755bd", "#ffffff") >= 4.5);
+  assert.ok(contrast("#edf4ff", "#102338") >= 4.5);
+});
+
 test("canonical normalisation preserves queries and scopes aliases to recognised HTML pages", () => {
   for (const page of publicPages) {
     const path = page.path === "/" ? "/" : `${page.path}/`;
@@ -89,10 +118,34 @@ test("canonical normalisation preserves queries and scopes aliases to recognised
     "aidanbrotherhood.com.evil.invalid",
   ])
     assert.equal(
-      canonicalRedirect(new Request(`http://${host}/coaching/`)),
+      canonicalRedirect(new Request(`http://${host}/pricing/`)),
       null,
     );
 });
+
+test("legacy public paths move directly to the canonical published URLs", () => {
+  for (const [oldPath, newPath] of [
+    ["/coaching", "/pricing"],
+    ["/my-approach", "/about/approach"],
+  ]) {
+    assert.equal(legacyPageDestination(oldPath), newPath);
+    assert.equal(legacyPageDestination(oldPath + "/"), newPath);
+    assert.equal(getPublicPage(oldPath), undefined);
+    assert.ok(getPublicPage(newPath));
+    for (const host of ["https://aidanbrotherhood.com", "http://www.aidanbrotherhood.com"])
+      assert.equal(
+        canonicalRedirect(new Request(host + oldPath + "/?utm_source=old-link")),
+        "https://aidanbrotherhood.com" + newPath + "?utm_source=old-link",
+      );
+    assert.equal(
+      canonicalRedirect(new Request("https://preview.invalid" + oldPath)),
+      null,
+    );
+  }
+  for (const path of ["/pricing", "/about/approach", "/api/enquiry", "/"])
+    assert.equal(legacyPageDestination(path), null);
+});
+
 test("indexing requires the explicit flag and the exact HTTPS apex origin", () => {
   for (const flag of [undefined, false, "false", "TRUE", "1"])
     assert.equal(
@@ -114,7 +167,7 @@ test("indexing requires the explicit flag and the exact HTTPS apex origin", () =
     );
   assert.equal(
     isIndexableProduction(
-      new Request("https://aidanbrotherhood.com/coaching"),
+      new Request("https://aidanbrotherhood.com/pricing"),
       { INDEXABLE: "true" },
     ),
     true,
@@ -144,7 +197,7 @@ test("connected entity graph describes the business and venue separately without
       [])
       assert.ok(
         offer.url.startsWith(
-          "https://aidanbrotherhood.com/coaching#offer-coaching-",
+          "https://aidanbrotherhood.com/pricing#offer-coaching-",
         ),
       );
   }

@@ -62,6 +62,9 @@ export default function Renfrew() {
               <a href="/personal-training-for-beginners">
                 New to the gym? Start here ↗
               </a>
+              <a href="/strength-training-renfrew">
+                Strength &amp; muscle-building coaching ↗
+              </a>
               <a href="/about">Meet your coach ↗</a>
             </div>
           </div>
@@ -145,7 +148,7 @@ export default function Renfrew() {
                   <p>
                     Coaching can focus on your training goals, with practical
                     nutrition guidance in ongoing packages.{" "}
-                    <a href="/coaching">
+                    <a href="/pricing">
                       See the support and packages available
                     </a>
                     . We don’t promise a particular rate of progress or weight

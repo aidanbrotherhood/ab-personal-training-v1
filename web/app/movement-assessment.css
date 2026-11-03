@@ -1,0 +1,118 @@
+/* Movement assessment landing page. Scoped to preserve the existing AB design. */
+.movement-page { --movement-ink: #182a3c; --movement-muted: #486075; --movement-rule: #d8e2ed; }
+.movement-page .movement-hero { background: linear-gradient(180deg, #fff 0%, #f7faff 100%); }
+.movement-hero .page-breadcrumb { padding-top: 20px; padding-bottom: 12px; }
+.movement-hero-grid { display: grid; grid-template-columns: minmax(0, 1.14fr) minmax(340px, .86fr); gap: clamp(36px, 5vw, 72px); align-items: center; padding-block: clamp(36px, 5vw, 84px) clamp(55px, 6vw, 80px); }
+.movement-hero-copy { min-width: 0; }
+.movement-hero h1 { font-size: clamp(49px, 5.25vw, 77px); line-height: 1.055; letter-spacing: -.068em; font-weight: 740; margin-top: 26px; max-width: 740px; }
+.movement-hero h1 span { color: var(--blue); }
+.movement-hero-lead { font-size: clamp(20px, 2vw, 24px); font-weight: 660; margin-top: 27px; letter-spacing: -.025em; }
+.movement-hero-body { font-size: 17px; color: var(--movement-muted); margin-top: 16px; max-width: 620px; }
+.movement-hero-actions { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; margin-top: 32px; }
+.movement-quiet-link { color: #2e4863; font-size: 15px; font-weight: 650; }
+.movement-quiet-link:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+.movement-hero-footnote { font-size: 13px; color: #60758a; margin-top: 17px; }
+.movement-hero-photo { border-radius: 17px; overflow: hidden; position: relative; min-height: 535px; background: #d5dfeb; }
+.movement-hero-photo img { display: block; position: absolute; width: 100%; height: 100%; inset: 0; object-fit: cover; object-position: center; }
+.movement-hero-photo::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(transparent, rgba(7, 24, 41, .80)); pointer-events: none; }
+.movement-hero-photo figcaption { position: absolute; z-index: 1; left: 28px; bottom: 25px; right: 28px; color: #fff; display: grid; gap: 8px; }
+.movement-hero-photo figcaption span { font-size: 12px; font-weight: 750; letter-spacing: .13em; }
+.movement-hero-photo figcaption small { color: #e0e9f4; font-size: 12px; line-height: 1.5; }
+.movement-proof-strip { border-top: 1px solid var(--movement-rule); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding-block: 25px 29px; }
+.movement-proof-strip span { font-size: 14px; font-weight: 550; color: #465c72; line-height: 1.5; }
+.movement-proof-strip strong { color: var(--blue); margin-right: 8px; font-size: 12px; }
+.movement-value-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 59px; }
+.movement-value-grid article { border: 1px solid #dce5ed; background: #f6f9fc; border-radius: 12px; padding: 27px; min-height: 248px; }
+.movement-value-grid span { font-size: 12px; font-weight: 760; letter-spacing: .1em; color: var(--blue); }
+.movement-value-grid h3 { font-size: 24px; line-height: 1.16; letter-spacing: -.035em; margin-top: 34px; }
+.movement-value-grid p { font-size: 15px; color: var(--movement-muted); margin-top: 14px; }
+.movement-method { background: #f1f5fa; }
+.movement-method-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(310px, .88fr); align-items: center; gap: clamp(50px, 8vw, 115px); }
+.movement-method h2 { margin-top: 22px; }
+.movement-method h2 + p { margin-top: 27px; }
+.movement-method-copy > p:not(.eyebrow) { font-size: 17px; color: var(--movement-muted); margin-top: 17px; max-width: 590px; }
+.movement-method-copy .inline-link { margin-top: 26px; }
+.movement-method-figure { border-radius: 15px; position: relative; overflow: hidden; background: #dce6ef; }
+.movement-method-figure img { display: block; aspect-ratio: 4 / 5; width: 100%; object-fit: cover; }
+.movement-method-figure figcaption { background: #172c42; color: #fff; padding: 21px 24px; font-size: 17px; font-weight: 640; line-height: 1.45; }
+.movement-method-figure figcaption small { display: block; margin-top: 10px; font-size: 12px; color: #bdcfdf; font-weight: 450; }
+.movement-tests-heading { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .75fr); gap: clamp(40px, 6vw, 85px); align-items: end; }
+.movement-tests-heading h2 { margin-top: 19px; }
+.movement-tests-heading > p { font-size: 17px; color: var(--movement-muted); }
+.movement-test-grid { list-style: none; padding: 0; margin: 50px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
+.movement-test-grid li { padding: 26px 23px 30px; background: #f7f9fc; border: 1px solid #dbe5ef; border-radius: 12px; min-height: 239px; }
+.movement-test-number { font-size: 12px; font-weight: 750; letter-spacing: .08em; color: var(--blue); }
+.movement-test-grid h3 { font-size: clamp(20px, 2vw, 25px); line-height: 1.2; margin-top: 27px; letter-spacing: -.035em; }
+.movement-test-grid p { font-size: 14px; color: var(--movement-muted); margin-top: 15px; }
+.movement-tests-note { margin-top: 28px; padding: 25px 29px; border-left: 3px solid var(--blue); background: #eef5ff; border-radius: 0 10px 10px 0; display: grid; grid-template-columns: minmax(170px, .35fr) 1fr; gap: 20px; }
+.movement-tests-note strong { color: #194b79; font-size: 18px; }
+.movement-tests-note p { font-size: 15px; color: #405f7b; }
+.movement-visit { background: #f2f6fa; }
+.movement-visit-header { display: grid; grid-template-columns: 1.2fr .76fr; gap: 70px; align-items: end; }
+.movement-visit-header h2 { margin-top: 20px; }
+.movement-visit-header > p { font-size: 17px; color: var(--movement-muted); }
+.movement-visit-steps { list-style: none; margin: 49px 0 0; padding: 0; border-top: 1px solid #cbd9e6; }
+.movement-visit-steps li { display: grid; grid-template-columns: 64px minmax(0, .9fr) minmax(0, 1.15fr); gap: 30px; padding: 28px 0; border-bottom: 1px solid #cbd9e6; align-items: start; }
+.movement-step-number { font-size: 20px; color: var(--blue); font-weight: 740; letter-spacing: -.04em; }
+.movement-visit-steps h3 { font-size: 23px; line-height: 1.18; letter-spacing: -.035em; }
+.movement-step-time { font-size: 13px; color: #57718a; display: block; margin-top: 10px; }
+.movement-visit-steps p { font-size: 16px; color: var(--movement-muted); }
+.movement-visit-note { font-size: 14px; color: #56718b; max-width: 770px; margin-top: 23px; }
+.movement-centred-cta { margin-top: 35px; }
+.movement-coaching-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 55px; }
+.movement-coaching-grid article { border-top: 2px solid #9bbddd; padding: 22px 10px 0 0; }
+.movement-coaching-grid h3 { font-size: 19px; letter-spacing: -.03em; }
+.movement-coaching-grid p { font-size: 14px; color: var(--movement-muted); margin-top: 14px; }
+.movement-progress { background: #12273e; color: white; }
+.movement-progress-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .87fr); gap: clamp(45px, 7vw, 115px); align-items: center; }
+.movement-progress .eyebrow { color: #a4d0ff; }
+.movement-progress h2 { margin-top: 22px; }
+.movement-progress h2 span { color: #8fc1ff; }
+.movement-progress-grid > div:first-child > p:not(.eyebrow) { font-size: 17px; color: #c6d7e7; margin-top: 21px; }
+.movement-progress-panel { background: #1e3b57; border: 1px solid #45627e; border-radius: 15px; padding: clamp(26px, 4vw, 40px); }
+.movement-progress-panel ol { list-style: none; margin: 29px 0 0; padding: 0; }
+.movement-progress-panel li { display: grid; grid-template-columns: 39px 1fr; gap: 17px; padding: 20px 0; border-top: 1px solid #47617d; }
+.movement-progress-panel li span { font-size: 13px; color: #9dcaff; font-weight: 740; }
+.movement-progress-panel li strong { display: block; font-size: 17px; font-weight: 680; }
+.movement-progress-panel li p { font-size: 14px; color: #bed0df; margin-top: 8px; }
+.movement-progress-panel > small { display: block; color: #aabfd3; margin-top: 15px; font-size: 12px; }
+.movement-coach .inline-link { margin-top: 28px; }
+.movement-faq .faq-intro h2 span { color: var(--blue); }
+.movement-faq .faq-intro > p:not(.eyebrow) { margin-bottom: 24px; }
+.movement-faq .faq-items { border-top-color: #c4d5e5; }
+@media(max-width: 1100px) {
+  .movement-test-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .movement-coaching-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+}
+@media(max-width: 900px) {
+  .movement-hero-grid, .movement-method-grid, .movement-progress-grid, .movement-tests-heading, .movement-visit-header { grid-template-columns: minmax(0, 1fr); }
+  .movement-hero-photo { min-height: 380px; aspect-ratio: 16 / 10; }
+  .movement-hero h1 { max-width: 720px; }
+  .movement-method-figure { max-width: 640px; }
+  .movement-test-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .movement-visit-steps li { grid-template-columns: 50px minmax(0, 1fr); gap: 18px; }
+  .movement-visit-steps li > p { grid-column: 2; }
+  .movement-value-grid { gap: 12px; }
+}
+@media(max-width: 640px) {
+  .movement-hero-grid { padding-top: 34px; gap: 35px; padding-bottom: 46px; }
+  .movement-hero h1 { font-size: clamp(41px, 11vw, 57px); margin-top: 20px; }
+  .movement-hero-lead { margin-top: 23px; }
+  .movement-hero-body { font-size: 16px; }
+  .movement-hero-actions { gap: 17px; }
+  .movement-hero-photo { min-height: 360px; aspect-ratio: 4 / 5; }
+  .movement-proof-strip { grid-template-columns: 1fr; gap: 12px; }
+  .movement-value-grid, .movement-test-grid, .movement-coaching-grid { grid-template-columns: 1fr; }
+  .movement-value-grid { margin-top: 37px; }
+  .movement-value-grid article { min-height: 0; }
+  .movement-value-grid h3 { margin-top: 20px; }
+  .movement-test-grid { margin-top: 35px; }
+  .movement-test-grid li { min-height: 0; }
+  .movement-tests-note { grid-template-columns: 1fr; gap: 9px; }
+  .movement-visit-steps li { gap: 13px; grid-template-columns: 36px minmax(0, 1fr); }
+  .movement-visit-steps li > p { grid-column: 1 / -1; }
+  .movement-progress-panel { padding: 24px; }
+}
+@media(prefers-reduced-motion: reduce) { .movement-page * { scroll-behavior: auto; } }
+
+.movement-home-links { display: flex; gap: 17px 28px; flex-wrap: wrap; margin-top: 27px; }

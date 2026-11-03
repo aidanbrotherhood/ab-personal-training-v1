@@ -22,7 +22,18 @@ export function isIndexableProduction(
   );
 }
 
-/** Redirect only the real production domains, never previews or unrelated hosts. */
+/** Keep old public links valid without creating duplicate, indexable pages. */
+export const LEGACY_PAGE_PATHS = {
+  "/coaching": "/pricing",
+  "/my-approach": "/about/approach",
+} as const;
+
+export function legacyPageDestination(pathname: string): string | null {
+  const trimmed = pathname.replace(/\/+$/, "") || "/";
+  return LEGACY_PAGE_PATHS[trimmed as keyof typeof LEGACY_PAGE_PATHS] ?? null;
+}
+
+/** Redirect only real production domains; combine legacy and www/slash fixes in one hop. */
 export function canonicalRedirect(request: Request): string | null {
   const url = new URL(request.url);
   if (
@@ -34,7 +45,9 @@ export function canonicalRedirect(request: Request): string | null {
   url.hostname = "aidanbrotherhood.com";
   url.port = "";
   const trimmed = url.pathname.replace(/\/+$/, "") || "/";
-  if (getPublicPage(trimmed)) url.pathname = trimmed;
+  const destination = legacyPageDestination(trimmed);
+  if (destination) url.pathname = destination;
+  else if (getPublicPage(trimmed)) url.pathname = trimmed;
   return url.href === before ? null : url.href;
 }
 

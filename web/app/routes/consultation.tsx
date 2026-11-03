@@ -47,7 +47,9 @@ export default function Consultation() {
                   <strong>Ask what you need to ask.</strong>
                   <p>
                     Find out how coaching could fit. Where appropriate and
-                    you’re comfortable, we may look at a few basic movements.
+                    you’re comfortable, we can use structured movement screening
+                    to understand your starting point.{" "}
+                    <a href="/movement-assessment">Learn about the movement assessment</a>.
                   </p>
                 </li>
                 <li>
@@ -93,8 +95,8 @@ export default function Consultation() {
               change and cancellation links. There’s no payment at this stage.
             </p>
             <div className="text-link-row">
-              <a href="/coaching">Coaching & prices ↗</a>
-              <a href="/about">Meet Aidan ↗</a>
+              <a href="/pricing">Coaching & prices ↗</a>
+              <a href="/about">About Me ↗</a>
               <a href={EMAIL_URL}>Email a question ↗</a>
             </div>
           </div>

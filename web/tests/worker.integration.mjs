@@ -49,7 +49,7 @@ test("full Worker routing serves the production resource sitemap and robots from
   );
   assert.doesNotMatch(
     xml,
-    /priority|changefreq|lastmod|workers\.dev|\/terms|\/strength-training|\/fat-loss-coaching/,
+    /priority|changefreq|lastmod|workers\.dev|\/terms|\/strength-training<|\/fat-loss-coaching/,
   );
   const robots = await request("/robots.txt");
   assert.equal(
@@ -61,17 +61,94 @@ test("full Worker routing serves the production resource sitemap and robots from
 
 test("full Worker redirects scheme, www and known HTML slashes together, preserving path/query", async () => {
   for (const url of [
-    "http://www.aidanbrotherhood.com/coaching/?source=a%20b&n=2",
-    "http://aidanbrotherhood.com/coaching/?source=a%20b&n=2",
-    "https://www.aidanbrotherhood.com/coaching/?source=a%20b&n=2",
-    "https://aidanbrotherhood.com/coaching/?source=a%20b&n=2",
+    "http://www.aidanbrotherhood.com/pricing/?source=a%20b&n=2",
+    "http://aidanbrotherhood.com/pricing/?source=a%20b&n=2",
+    "https://www.aidanbrotherhood.com/pricing/?source=a%20b&n=2",
+    "https://aidanbrotherhood.com/pricing/?source=a%20b&n=2",
   ]) {
     const response = await worker.fetch(new Request(url), env, ctx);
     assert.equal(response.status, 308);
     assert.equal(
       response.headers.get("Location"),
-      `${origin}/coaching?source=a%20b&n=2`,
+      `${origin}/pricing?source=a%20b&n=2`,
     );
+  }
+});
+
+
+test("legacy pricing and approach URLs return single-hop 301s, retaining query parameters", async () => {
+  for (const [oldPath, destination] of [
+    ["/coaching", "/pricing"],
+    ["/my-approach", "/about/approach"],
+  ]) {
+    for (const host of [
+      "http://www.aidanbrotherhood.com",
+      "https://www.aidanbrotherhood.com",
+      origin,
+    ]) {
+      const response = await worker.fetch(
+        new Request(host + oldPath + "/?utm_source=shared&campaign=launch"),
+        env,
+        ctx,
+      );
+      assert.equal(response.status, 301, host + oldPath);
+      assert.equal(
+        response.headers.get("Location"),
+        origin + destination + "?utm_source=shared&campaign=launch",
+      );
+    }
+    const final = await request(destination);
+    assert.equal(final.status, 200);
+    const html = await final.text();
+    assert.ok(html.includes('<link rel="canonical" href="' + origin + destination + '"'));
+  }
+});
+
+test("header, dropdown, mobile menu and grouped footer resolve to canonical destinations", async () => {
+  const html = await (await request("/")).text();
+  for (const path of [
+    "/personal-training-renfrew",
+    "/strength-training-renfrew",
+    "/personal-training-for-beginners",
+    "/movement-assessment",
+    "/pricing",
+    "/about",
+    "/about/approach",
+    "/consultation",
+  ]) assert.ok(links(html).includes(path), path);
+  assert.match(html, /aria-controls="nav-panel-training"/);
+  assert.match(html, /aria-controls="nav-panel-about"/);
+  assert.equal((html.match(/aria-expanded="false"/g) || []).length >= 2, true);
+  assert.match(html, /class="nav-popover"[^>]*hidden=""/);
+  assert.match(html, /class="nav-popover-link"/);
+  assert.match(html, /mobile-menu-icon--hamburger/);
+  assert.match(html, /mobile-nav-chevron/);
+  assert.match(html, /mobile-nav-group/);
+  assert.match(html, /footer-nav-group/);
+  const approachHtml = await (await request("/about/approach")).text();
+  assert.match(approachHtml, /<a href="\/about">About<\/a>/);
+  const graph = JSON.parse(approachHtml.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])["@graph"];
+  const breadcrumb = graph.find((node) => node["@type"] === "BreadcrumbList");
+  assert.deepEqual(breadcrumb.itemListElement.map((item) => item.item), [origin + "/", origin + "/about", origin + "/about/approach"]);
+  assert.doesNotMatch(html, /href="\/coaching(?:[\/#?"])/);
+  assert.doesNotMatch(html, /href="\/my-approach(?:[\/#?"])/);
+});
+
+test("About Me navigation and text contrast stay consistent with the page design", async () => {
+  const response = await request("/about");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /about-me-page/);
+  assert.match(html, /about-me-introduction/);
+  assert.match(html, /about-me-details/);
+  assert.match(html, /About Me/);
+  assert.match(html, /<title>About Me \| Aidan Brotherhood \| AB Personal Training<\/title>/);
+  assert.match(html, /href="\/about\/approach"/);
+  assert.doesNotMatch(html, /Meet Aidan/);
+  for (const page of ["/", "/personal-training-for-beginners", "/consultation"]) {
+    const other = await (await request(page)).text();
+    assert.ok(other.includes("About Me"), page);
+    assert.doesNotMatch(other, /Meet Aidan/);
   }
 });
 
@@ -127,8 +204,109 @@ test("all production pages have complete SSR metadata, one H1 and direct consult
     }
 });
 
+
+test("movement assessment landing page explains FMS and uses the existing consultation booking flow", async () => {
+  const response = await request("/movement-assessment");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Functional Movement Screen/);
+  for (const movement of [
+    "Deep Squat",
+    "Hurdle Step",
+    "In-Line Lunge",
+    "Shoulder Mobility",
+    "Active Straight-Leg Raise",
+    "Trunk Stability Push-Up",
+    "Rotary Stability",
+  ])
+    assert.ok(html.includes(movement), movement);
+  assert.match(html, /images\.unsplash\.com/);
+  assert.ok(links(html).includes("/consultation"));
+  assert.doesNotMatch(html, /<iframe|href="https:\/\/calendly\.com/);
+  assert.match(html, /not a medical diagnosis/i);
+});
+
+
+test("my approach explains the philosophy, links to assessment and coaching, and uses existing booking", async () => {
+  const response = await request("/about/approach");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const phrase of [
+    "Become more capable.",
+    "Live more fully.",
+    "Training is the means.",
+    "Evidence before assumption.",
+    "Continuous improvement",
+    "Train the individual",
+    "Build for the long term",
+    "Functional Movement Screen",
+    "Assess",
+    "Develop",
+    "Progress",
+  ])
+    assert.ok(html.includes(phrase), phrase);
+  for (const path of ["/consultation", "/pricing", "/movement-assessment"])
+    assert.ok(links(html).includes(path), path);
+  assert.match(html, /images\.unsplash\.com/);
+  assert.doesNotMatch(html, /<iframe|href="https:\/\/calendly\.com/);
+  const home = await (await request("/")).text();
+  assert.ok(links(home).includes("/about/approach"));
+  const about = await (await request("/about")).text();
+  assert.ok(links(about).includes("/about/approach"));
+});
+
+
+test("strength training local page is crawlable, relevant, linked and commercially consistent", async () => {
+  const path = "/strength-training-renfrew";
+  const response = await request(path);
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const text of [
+    "Strength &amp; muscle-building",
+    "JD Gyms Renfrew",
+    "Building strength.",
+    "Building muscle.",
+    "Paisley",
+    "Erskine",
+    "Clydebank",
+    "£99",
+    "£180",
+    "£320",
+  ])
+    assert.ok(html.includes(text), text);
+  assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
+  assert.match(html, /<meta name="robots" content="index, follow"/);
+  assert.ok(html.includes('<link rel="canonical" href="' + origin + path + '"'));
+  assert.match(html, /images\.unsplash\.com/);
+  assert.match(html, /srcSet="[^"]*600w/);
+  for (const link of [
+    "/consultation",
+    "/pricing",
+    "/pricing#offer-coaching-introduction",
+    "/pricing#offer-coaching-weekly",
+    "/pricing#offer-coaching-complete",
+    "/about/approach",
+    "/movement-assessment",
+    "/personal-training-renfrew#location",
+  ])
+    assert.ok(links(html).includes(link), link);
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])["@graph"];
+  const service = graph.find((item) => item["@type"] === "Service" && item["@id"] === origin + path + "#strength-coaching");
+  assert.ok(service, "strength-focused Service structured data");
+  assert.equal(service.provider["@id"], origin + "/#business");
+  assert.deepEqual(service.offers.map((offer) => offer.price), [99, 180, 320]);
+  const breadcrumbs = graph.find((item) => item["@type"] === "BreadcrumbList");
+  assert.deepEqual(breadcrumbs.itemListElement.map((item) => item.item), [
+    origin + "/", origin + "/personal-training-renfrew", origin + path
+  ]);
+  for (const source of ["/", "/pricing", "/personal-training-renfrew", "/personal-training-for-beginners"]) {
+    const sourceHtml = await (await request(source)).text();
+    assert.ok(links(sourceHtml).includes(path), source + " must link to strength service");
+  }
+});
+
 test("all three pricing surfaces show the approved packages, hierarchy, exact prices and CTA destination", async () => {
-  for (const path of ["/", "/personal-training-renfrew", "/coaching"]) {
+  for (const path of ["/", "/personal-training-renfrew", "/pricing"]) {
     const html = await (await request(path)).text();
     for (const value of [
       "Starter",
@@ -147,7 +325,7 @@ test("all three pricing surfaces show the approved packages, hierarchy, exact pr
     assert.match(html, /Recommended for consistency/);
     assert.equal(
       (html.match(/class="offer-compare-table"/g) || []).length,
-      path === "/coaching" ? 1 : 0,
+      path === "/pricing" ? 1 : 0,
     );
     assert.doesNotMatch(html, /href="\/?#consultation"/);
     for (const match of html.matchAll(
@@ -203,6 +381,17 @@ test("production booking HTML retains the existing destination and visible alter
     html,
     /assets\.calendly\.com.*widget\.js|googletagmanager|facebook\.net/,
   );
+});
+
+test("configured Analytics has a settings control but never a server-rendered Google tag", async () => {
+  const configured = { ...env, GA_MEASUREMENT_ID: "G-TEST12345" };
+  for (const base of [origin, "https://ab-personal-training-staging.aidanbrotherhood.workers.dev"]) {
+    const html = await (await request("/pricing?email=private", configured, base)).text();
+    assert.match(html, /Cookie settings/);
+    assert.doesNotMatch(html, /<script[^>]*src="https:\/\/www\.googletagmanager\.com/);
+  }
+  const disabled = await (await request("/pricing")).text();
+  assert.doesNotMatch(disabled, /Cookie settings/);
 });
 
 test("retired, deferred and unknown paths remain genuine noindex 404s without canonicals", async () => {

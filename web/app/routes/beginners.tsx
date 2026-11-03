@@ -87,7 +87,7 @@ export default function Beginners() {
             </p>
             <a
               className="inline-link"
-              href="/coaching#offer-coaching-introduction"
+              href="/pricing#offer-coaching-introduction"
             >
               Explore Starter <Arrow />
             </a>
@@ -121,9 +121,14 @@ export default function Beginners() {
               We’ll discuss the level of support that fits your goals and the
               time you have. You don’t have to decide before meeting.
             </p>
-            <a href="/coaching" className="inline-link">
-              Compare coaching and prices <Arrow />
-            </a>
+            <div className="text-link-row">
+              <a href="/pricing">
+                Compare coaching and prices <Arrow />
+              </a>
+              <a href="/strength-training-renfrew">
+                Building strength with a personal trainer <Arrow />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -148,7 +153,7 @@ export default function Beginners() {
                 your visit, ask Aidan beforehand rather than guessing.
               </p>
               <a href="/about" className="inline-link">
-                Meet Aidan <Arrow />
+                About Me <Arrow />
               </a>
             </div>
           </div>
