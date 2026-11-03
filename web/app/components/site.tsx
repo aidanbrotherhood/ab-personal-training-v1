@@ -1,4 +1,4 @@
-import { useRef, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useLocation } from "react-router";
 import {
   BUSINESS_EMAIL,
@@ -35,14 +35,100 @@ export function Brand({ variant = "full" }: { variant?: "full" | "symbol" }) {
     </a>
   );
 }
-const links = [
-  ["/personal-training-renfrew", "Training in Renfrew"],
-  ["/coaching", "Coaching & prices"],
-  ["/my-approach", "My approach"],
-  ["/personal-training-for-beginners", "New to the gym?"],
-  ["/movement-assessment", "Movement assessment"],
-  ["/about", "Meet Aidan"],
+const trainingLinks = [
+  ["/personal-training-renfrew", "Overview", "One-to-one training in Renfrew"],
+  ["/personal-training-for-beginners", "Beginners", "A confident place to begin"],
+  ["/movement-assessment", "Movement Assessment", "Understand your starting point"],
 ] as const;
+
+const aboutLinks = [
+  ["/about", "Meet Aidan", "The person behind the coaching"],
+  ["/about/approach", "My Approach", "The philosophy behind the training"],
+] as const;
+
+type NavItem = readonly [href: string, label: string, description: string];
+
+function DesktopMenu({
+  label,
+  href,
+  items,
+  pathname,
+}: {
+  label: string;
+  href: string;
+  items: readonly NavItem[];
+  pathname: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const group = useRef<HTMLDivElement>(null);
+  const isActive = items.some(([itemHref]) => itemHref === pathname);
+  return (
+    <div
+      className={\`nav-group\${open ? " is-open" : ""}\`}
+      ref={group}
+      data-section-active={isActive ? "true" : undefined}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocusCapture={() => setOpen(true)}
+      onBlurCapture={(event) => {
+        if (!group.current?.contains(event.relatedTarget as Node | null))
+          setOpen(false);
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          setOpen(false);
+          event.stopPropagation();
+        }
+      }}
+    >
+      <a href={href} className="nav-group-link" aria-current={pathname === href ? "page" : undefined}>
+        {label}
+      </a>
+      <button
+        type="button"
+        className="nav-group-toggle"
+        aria-label={\`Show \${label} menu\`}
+        aria-expanded={open}
+        onClick={() => setOpen((wasOpen) => !wasOpen)}
+      >
+        <span aria-hidden="true">⌄</span>
+      </button>
+      <div className="nav-dropdown-panel" aria-label={\`\${label} pages\`}>
+        {items.map(([itemHref, itemLabel, description]) => (
+          <a key={itemHref} href={itemHref} aria-current={pathname === itemHref ? "page" : undefined}>
+            <strong>{itemLabel}</strong>
+            <span>{description}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MobileMenuGroup({
+  label,
+  items,
+  pathname,
+}: {
+  label: string;
+  items: readonly NavItem[];
+  pathname: string;
+}) {
+  return (
+    <details className="mobile-nav-group">
+      <summary data-section-active={items.some(([href]) => href === pathname) ? "true" : undefined}>
+        {label} <span aria-hidden="true">+</span>
+      </summary>
+      <div className="mobile-nav-submenu">
+        {items.map(([href, itemLabel]) => (
+          <a key={href} href={href} aria-current={pathname === href ? "page" : undefined}>
+            {itemLabel}
+          </a>
+        ))}
+      </div>
+    </details>
+  );
+}
 
 export function ConsultationLink({
   children = "Book a free consultation",
@@ -74,15 +160,6 @@ export function ConsultationLink({
 export function Header() {
   const { pathname } = useLocation();
   const disclosure = useRef<HTMLDetailsElement>(null);
-  const navLinks = links.map(([href, label]) => (
-    <a
-      key={href}
-      href={href}
-      aria-current={pathname === href ? "page" : undefined}
-    >
-      {label}
-    </a>
-  ));
   return (
     <>
       <a className="skip-link" href="#main">
@@ -92,7 +169,11 @@ export function Header() {
         <div className="container header-inner">
           <Brand variant="symbol" />
           <nav className="desktop-nav" aria-label="Main navigation">
-            {navLinks}
+            <DesktopMenu label="Personal Training" href="/personal-training-renfrew" items={trainingLinks} pathname={pathname} />
+            <a className="nav-single" href="/pricing" aria-current={pathname === "/pricing" ? "page" : undefined}>
+              Pricing
+            </a>
+            <DesktopMenu label="About" href="/about" items={aboutLinks} pathname={pathname} />
           </nav>
           <details
             className="mobile-menu"
@@ -110,27 +191,27 @@ export function Header() {
             <nav
               aria-label="Mobile navigation"
               onClick={(event) => {
-                if (
-                  (event.target as HTMLElement).closest("a") &&
-                  disclosure.current
-                )
+                if ((event.target as HTMLElement).closest("a") && disclosure.current)
                   disclosure.current.open = false;
               }}
             >
               <a href="/">Home</a>
-              {navLinks}
-              <a href="/consultation">Free consultation</a>
+              <MobileMenuGroup label="Personal Training" items={trainingLinks} pathname={pathname} />
+              <a href="/pricing" aria-current={pathname === "/pricing" ? "page" : undefined}>Pricing</a>
+              <MobileMenuGroup label="About" items={aboutLinks} pathname={pathname} />
+              <a href="/consultation" aria-current={pathname === "/consultation" ? "page" : undefined}>Book Free Consultation</a>
             </nav>
           </details>
           <ConsultationLink className="nav-cta" placement="header">
-            <span className="cta-full">Book a free consultation</span>
-            <span className="cta-short">Book free</span>
+            <span className="cta-full">Book Free Consultation</span>
+            <span className="cta-short">Book Free</span>
           </ConsultationLink>
         </div>
       </header>
     </>
   );
 }
+
 export function Footer() {
   return (
     <footer className="site-footer">
@@ -150,34 +231,41 @@ export function Footer() {
             programme.
           </p>
         </div>
-        <nav aria-label="Footer">
-          {links.map(([href, label]) => (
-            <a key={href} href={href}>
-              {label}
+        <nav className="footer-nav" aria-label="Footer navigation">
+          <div className="footer-nav-group">
+            <h2>Coaching</h2>
+            <a href="/personal-training-renfrew">Personal Training</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/personal-training-for-beginners">Beginners</a>
+            <a href="/movement-assessment">Movement Assessment</a>
+          </div>
+          <div className="footer-nav-group">
+            <h2>About</h2>
+            <a href="/about">Meet Aidan</a>
+            <a href="/about/approach">My Approach</a>
+            <a
+              href="https://www.instagram.com/aidanbrotherhood.pt/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram <Arrow />
             </a>
-          ))}
-          <ConsultationLink
-            className="footer-consultation"
-            placement="footer"
-          />
-          <a href="/privacy">Privacy notice</a>
-          <a href={EMAIL_URL}>
-            Email Aidan <Arrow />
-          </a>
-          <a
-            href="https://www.instagram.com/aidanbrotherhood.pt/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Instagram <Arrow />
-          </a>
-          <a
-            href="https://wa.me/447414497675"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            WhatsApp <Arrow />
-          </a>
+            <a href="/privacy">Privacy Policy</a>
+          </div>
+          <div className="footer-nav-group">
+            <h2>Get Started</h2>
+            <ConsultationLink className="footer-consultation" placement="footer">
+              Free Consultation
+            </ConsultationLink>
+            <a href={EMAIL_URL}>Email Aidan <Arrow /></a>
+            <a
+              href="https://wa.me/447414497675"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp <Arrow />
+            </a>
+          </div>
         </nav>
       </div>
       <div className="container footer-bottom">
@@ -188,6 +276,7 @@ export function Footer() {
     </footer>
   );
 }
+
 export function PageShell({
   children,
   className = "",
