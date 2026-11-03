@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { useLocation } from "react-router";
 import {
   BUSINESS_EMAIL,
@@ -80,7 +80,7 @@ function DesktopMenu({
   const active = items.some(([href]) => href === pathname);
   const panelId = "nav-panel-" + id;
 
-  function handleKeys(event: React.KeyboardEvent<HTMLDivElement>) {
+  function handleKeys(event: KeyboardEvent<HTMLDivElement>) {
     if (event.key === "Escape" && open) {
       event.preventDefault();
       event.stopPropagation();
