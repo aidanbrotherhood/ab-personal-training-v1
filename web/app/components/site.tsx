@@ -89,7 +89,7 @@ function DesktopMenu({
         className="nav-group-toggle"
         aria-label={"Show " + label + " menu"}
         aria-expanded={open}
-        onClick={() => setOpen((wasOpen) => !wasOpen)}
+        onClick={() => setOpen(true)}
       >
         <span aria-hidden="true">⌄</span>
       </button>
