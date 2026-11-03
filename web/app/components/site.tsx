@@ -42,7 +42,7 @@ const trainingLinks = [
 ] as const;
 
 const aboutLinks = [
-  ["/about", "Meet Aidan", "The person behind the coaching"],
+  ["/about", "About Me", "The person behind the coaching"],
   ["/about/approach", "My Approach", "The philosophy behind the training"],
 ] as const;
 
@@ -339,7 +339,7 @@ export function Footer() {
           </div>
           <div className="footer-nav-group">
             <h2>About</h2>
-            <a href="/about">Meet Aidan</a>
+            <a href="/about">About Me</a>
             <a href="/about/approach">My Approach</a>
             <a
               href="https://www.instagram.com/aidanbrotherhood.pt/"

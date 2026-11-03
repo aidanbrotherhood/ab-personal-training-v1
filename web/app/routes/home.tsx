@@ -170,7 +170,7 @@ export default function Home() {
               JD Gyms Renfrew.
             </p>
             <a href="/about" className="inline-link">
-              Meet Aidan <Arrow />
+              About Me <Arrow />
             </a>
           </div>
         </div>

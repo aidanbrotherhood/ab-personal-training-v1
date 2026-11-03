@@ -133,6 +133,25 @@ test("header, dropdown, mobile menu and grouped footer resolve to canonical dest
   assert.doesNotMatch(html, /href="\/my-approach(?:[\/#?"])/);
 });
 
+test("About Me navigation and text contrast stay consistent with the page design", async () => {
+  const response = await request("/about");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /about-me-page/);
+  assert.match(html, /about-me-introduction/);
+  assert.match(html, /about-me-details/);
+  assert.match(html, /About Me/);
+  assert.match(html, /<title>About Me \| Aidan Brotherhood \| AB Personal Training<\/title>/);
+  assert.match(html, /href="\/about\/approach"/);
+  assert.doesNotMatch(html, /Meet Aidan/);
+  assert.match(html, /about-me\.css/);
+  for (const page of ["/", "/personal-training-for-beginners", "/consultation"]) {
+    const other = await (await request(page)).text();
+    assert.ok(other.includes("About Me"), page);
+    assert.doesNotMatch(other, /Meet Aidan/);
+  }
+});
+
 test("all production pages have complete SSR metadata, one H1 and direct consultation links", async () => {
   const documents = new Map();
   for (const page of publicPages) {

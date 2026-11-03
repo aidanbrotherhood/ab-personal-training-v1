@@ -148,7 +148,7 @@ export default function Beginners() {
                 your visit, ask Aidan beforehand rather than guessing.
               </p>
               <a href="/about" className="inline-link">
-                Meet Aidan <Arrow />
+                About Me <Arrow />
               </a>
             </div>
           </div>
