@@ -15,6 +15,7 @@ import { structuredData } from "./lib/structured-data";
 import { Header, Footer, ConsultationLink } from "./components/site";
 import "./styles.css";
 import "./discovery.css";
+import "./navigation.css";
 
 export function loader({ request, context }: Route.LoaderArgs) {
   const url = new URL(request.url);

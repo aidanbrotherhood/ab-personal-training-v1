@@ -2,7 +2,7 @@ import { createRequestHandler, RouterContextProvider } from "react-router";
 import { envContext } from "../app/lib/context";
 import { processNotifications } from "./notifications";
 import { handleEnquiry } from "./enquiry";
-import { canonicalRedirect, isIndexableProduction } from "../app/lib/seo";
+import { canonicalRedirect, isIndexableProduction, legacyPageDestination } from "../app/lib/seo";
 
 const handler = createRequestHandler(
   () => import("virtual:react-router/server-build"),
@@ -12,7 +12,11 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const redirect = canonicalRedirect(request);
-    if (redirect) return Response.redirect(redirect, 308);
+    if (redirect)
+      return Response.redirect(
+        redirect,
+        legacyPageDestination(url.pathname) ? 301 : 308,
+      );
     const indexable = isIndexableProduction(request, env);
     const context = new RouterContextProvider();
     context.set(envContext, env);

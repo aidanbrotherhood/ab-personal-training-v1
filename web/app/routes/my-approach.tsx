@@ -4,7 +4,7 @@ import {
   ConsultationLink,
   PageShell,
 } from "../components/site";
-import "../my-approach.css";
+import "../about/approach.css";
 
 const principles = [
   {
@@ -359,7 +359,7 @@ export default function MyApproach() {
         </div>
         <div className="container approach-process-footer">
           <p>Assessment informs training. Training creates adaptation. Progress helps determine what comes next.</p>
-          <a href="/coaching" className="inline-link">Explore coaching &amp; prices <Arrow /></a>
+          <a href="/pricing" className="inline-link">Explore coaching &amp; prices <Arrow /></a>
         </div>
       </section>
 

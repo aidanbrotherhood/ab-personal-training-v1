@@ -345,7 +345,7 @@ export default function MovementAssessment() {
               you’re starting, discuss what you want to achieve and establish a
               practical direction together.
             </p>
-            <a href="/coaching" className="inline-link">Explore coaching & prices <Arrow /></a>
+            <a href="/pricing" className="inline-link">Explore coaching & prices <Arrow /></a>
           </div>
         </div>
       </section>
