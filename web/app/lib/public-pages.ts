@@ -46,6 +46,15 @@ export const publicPages = [
     h1: "You don’t have to know where to start.",
   },
   {
+    key: "approach",
+    path: "/my-approach",
+    file: "routes/my-approach.tsx",
+    title: "My Approach | Personal Training Philosophy | AB PT",
+    description:
+      "Discover Aidan Brotherhood’s approach to personal training in Renfrew: evidence-informed coaching, continuous improvement, strength and lifelong capability.",
+    h1: "Become more capable. Live more fully.",
+  },
+  {
     key: "movement",
     path: "/movement-assessment",
     file: "routes/movement-assessment.tsx",

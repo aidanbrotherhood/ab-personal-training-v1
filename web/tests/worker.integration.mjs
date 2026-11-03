@@ -149,6 +149,35 @@ test("movement assessment landing page explains FMS and uses the existing consul
   assert.match(html, /not a medical diagnosis/i);
 });
 
+
+test("my approach explains the philosophy, links to assessment and coaching, and uses existing booking", async () => {
+  const response = await request("/my-approach");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const phrase of [
+    "Become more capable.",
+    "Live more fully.",
+    "Training is the means.",
+    "Evidence before assumption.",
+    "Continuous improvement",
+    "Train the individual",
+    "Build for the long term",
+    "Functional Movement Screen",
+    "Assess",
+    "Develop",
+    "Progress",
+  ])
+    assert.ok(html.includes(phrase), phrase);
+  for (const path of ["/consultation", "/coaching", "/movement-assessment"])
+    assert.ok(links(html).includes(path), path);
+  assert.match(html, /images\.unsplash\.com/);
+  assert.doesNotMatch(html, /<iframe|href="https:\/\/calendly\.com/);
+  const home = await (await request("/")).text();
+  assert.ok(links(home).includes("/my-approach"));
+  const about = await (await request("/about")).text();
+  assert.ok(links(about).includes("/my-approach"));
+});
+
 test("all three pricing surfaces show the approved packages, hierarchy, exact prices and CTA destination", async () => {
   for (const path of ["/", "/personal-training-renfrew", "/coaching"]) {
     const html = await (await request(path)).text();
