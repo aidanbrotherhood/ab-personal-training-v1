@@ -85,6 +85,12 @@ export default function Coaching() {
                 </div>
               </dl>
               <p>
+                <a href="/strength-training-renfrew">
+                  Learn more about strength &amp; muscle-building coaching
+                </a>
+                .
+              </p>
+              <p>
                 New to lifting? You don’t need to arrive knowing the exercises.{" "}
                 <a href="/personal-training-for-beginners">
                   Read about starting out

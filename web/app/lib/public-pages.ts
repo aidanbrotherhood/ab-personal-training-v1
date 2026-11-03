@@ -19,6 +19,15 @@ export const publicPages = [
     h1: "Personal training at JD Gyms Renfrew.",
   },
   {
+    key: "strength",
+    path: "/strength-training-renfrew",
+    file: "routes/strength-training-renfrew.tsx",
+    title: "Strength Training Renfrew | AB Personal Training",
+    description:
+      "Build strength and muscle with one-to-one personal training at JD Gyms Renfrew. Personalised programming, technique coaching and a clear plan for progress.",
+    h1: "Strength & muscle-building personal training in Renfrew.",
+  },
+  {
     key: "coaching",
     path: "/pricing",
     file: "routes/coaching.tsx",

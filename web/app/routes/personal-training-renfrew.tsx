@@ -62,6 +62,9 @@ export default function Renfrew() {
               <a href="/personal-training-for-beginners">
                 New to the gym? Start here ↗
               </a>
+              <a href="/strength-training-renfrew">
+                Strength &amp; muscle-building coaching ↗
+              </a>
               <a href="/about">Meet your coach ↗</a>
             </div>
           </div>
