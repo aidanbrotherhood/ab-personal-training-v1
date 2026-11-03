@@ -65,7 +65,7 @@ export default function About() {
               starts with understanding where you are and what you want to
               achieve.
             </p>
-            <a href="/my-approach" className="inline-link" style={{ marginTop: 26 }}>
+            <a href="/about/approach" className="inline-link" style={{ marginTop: 26 }}>
               Read my approach <Arrow />
             </a>
           </div>
@@ -133,7 +133,7 @@ export default function About() {
               obligation to sign up.
             </p>
             <div className="text-link-row">
-              <a href="/coaching">
+              <a href="/pricing">
                 Coaching & prices <Arrow />
               </a>
               <a href="/personal-training-renfrew#location">

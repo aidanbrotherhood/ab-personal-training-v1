@@ -145,7 +145,7 @@ export default function Renfrew() {
                   <p>
                     Coaching can focus on your training goals, with practical
                     nutrition guidance in ongoing packages.{" "}
-                    <a href="/coaching">
+                    <a href="/pricing">
                       See the support and packages available
                     </a>
                     . We don’t promise a particular rate of progress or weight

@@ -20,9 +20,9 @@ export const publicPages = [
   },
   {
     key: "coaching",
-    path: "/coaching",
+    path: "/pricing",
     file: "routes/coaching.tsx",
-    title: "Personal Training Prices & Coaching | AB Personal Training",
+    title: "Personal Training Prices | AB Personal Training",
     description:
       "Compare Starter at £99, Coaching at £180 and Coaching+ at £320. See sessions and support included at JD Gyms Renfrew. Gym membership is separate.",
     h1: "The right support. A clear way forward.",
@@ -47,7 +47,7 @@ export const publicPages = [
   },
   {
     key: "approach",
-    path: "/my-approach",
+    path: "/about/approach",
     file: "routes/my-approach.tsx",
     title: "My Approach | Personal Training Philosophy | AB PT",
     description:

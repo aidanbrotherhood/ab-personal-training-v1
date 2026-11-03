@@ -73,9 +73,17 @@ export function structuredData(path: string) {
           name: "Home",
           item: `${SITE_ORIGIN}/`,
         },
+        ...(page.key === "approach"
+          ? [{
+              "@type": "ListItem",
+              position: 2,
+              name: "About",
+              item: `${SITE_ORIGIN}/about`,
+            }]
+          : []),
         {
           "@type": "ListItem",
-          position: 2,
+          position: page.key === "approach" ? 3 : 2,
           name:
             page.key === "renfrew"
               ? "Training in Renfrew"
@@ -84,7 +92,7 @@ export function structuredData(path: string) {
                 : page.key === "about"
                   ? "Meet Aidan"
                   : page.key === "coaching"
-                    ? "Coaching & prices"
+                    ? "Pricing"
                     : page.key === "consultation"
                       ? "Free consultation"
                       : page.key === "movement"
@@ -96,7 +104,7 @@ export function structuredData(path: string) {
         },
       ],
     });
-  if (["/", "/coaching", "/personal-training-renfrew"].includes(path))
+  if (["/", "/pricing", "/personal-training-renfrew"].includes(path))
     graph.push({
       "@type": "Service",
       "@id": `${SITE_ORIGIN}/#personal-training`,
@@ -113,7 +121,7 @@ export function structuredData(path: string) {
         name: plan.title,
         price: Number(plan.price.slice(1)),
         priceCurrency: "GBP",
-        url: `${SITE_ORIGIN}/coaching#offer-coaching-${plan.id}`,
+        url: `${SITE_ORIGIN}/pricing#offer-coaching-${plan.id}`,
         description: `${plan.sessions} 60-minute one-to-one sessions; ${plan.period.toLowerCase()}; JD Gyms membership purchased separately.`,
       })),
     });

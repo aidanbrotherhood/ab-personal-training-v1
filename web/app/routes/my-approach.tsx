@@ -90,7 +90,7 @@ export default function MyApproach() {
   return (
     <PageShell className="approach-page">
       <section className="approach-hero" aria-labelledby="approach-title">
-        <Breadcrumb label="My approach" />
+        <Breadcrumb label="My Approach" parent={{ href: "/about", label: "About" }} />
         <div className="container approach-hero-grid">
           <div className="approach-hero-copy">
             <p className="eyebrow">My approach · AB Personal Training</p>
@@ -359,7 +359,7 @@ export default function MyApproach() {
         </div>
         <div className="container approach-process-footer">
           <p>Assessment informs training. Training creates adaptation. Progress helps determine what comes next.</p>
-          <a href="/coaching" className="inline-link">Explore coaching &amp; prices <Arrow /></a>
+          <a href="/pricing" className="inline-link">Explore coaching &amp; prices <Arrow /></a>
         </div>
       </section>
 

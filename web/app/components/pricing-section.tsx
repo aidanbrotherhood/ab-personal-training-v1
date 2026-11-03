@@ -257,7 +257,7 @@ export function PricingSection({ variant }: PricingSectionProps) {
         )}
         {compact && (
           <p className="offer-detail-link">
-            <a href="/coaching">
+            <a href="/pricing">
               Compare everything included in each package <Arrow />
             </a>
           </p>

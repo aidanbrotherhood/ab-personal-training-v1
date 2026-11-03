@@ -18,7 +18,7 @@ async function source(path) {
   );
 }
 const { publicPages, getPublicPage } = await source("app/lib/public-pages.ts");
-const { canonicalRedirect, isIndexableProduction, xmlEscape } =
+const { canonicalRedirect, isIndexableProduction, legacyPageDestination, xmlEscape } =
   await source("app/lib/seo.ts");
 const { structuredData } = await source("app/lib/structured-data.ts");
 const { calendlySignal, trustedCalendlySignal } = await source(
@@ -31,10 +31,10 @@ test("published registry contains only complete, approved pages with unique meta
     [
       "/",
       "/personal-training-renfrew",
-      "/coaching",
+      "/pricing",
       "/about",
       "/personal-training-for-beginners",
-      "/my-approach",
+      "/about/approach",
       "/movement-assessment",
       "/consultation",
       "/privacy",
@@ -91,10 +91,34 @@ test("canonical normalisation preserves queries and scopes aliases to recognised
     "aidanbrotherhood.com.evil.invalid",
   ])
     assert.equal(
-      canonicalRedirect(new Request(`http://${host}/coaching/`)),
+      canonicalRedirect(new Request(`http://${host}/pricing/`)),
       null,
     );
 });
+
+test("legacy public paths move directly to the canonical published URLs", () => {
+  for (const [oldPath, newPath] of [
+    ["/coaching", "/pricing"],
+    ["/my-approach", "/about/approach"],
+  ]) {
+    assert.equal(legacyPageDestination(oldPath), newPath);
+    assert.equal(legacyPageDestination(oldPath + "/"), newPath);
+    assert.equal(getPublicPage(oldPath), undefined);
+    assert.ok(getPublicPage(newPath));
+    for (const host of ["https://aidanbrotherhood.com", "http://www.aidanbrotherhood.com"])
+      assert.equal(
+        canonicalRedirect(new Request(host + oldPath + "/?utm_source=old-link")),
+        "https://aidanbrotherhood.com" + newPath + "?utm_source=old-link",
+      );
+    assert.equal(
+      canonicalRedirect(new Request("https://preview.invalid" + oldPath)),
+      null,
+    );
+  }
+  for (const path of ["/pricing", "/about/approach", "/api/enquiry", "/"])
+    assert.equal(legacyPageDestination(path), null);
+});
+
 test("indexing requires the explicit flag and the exact HTTPS apex origin", () => {
   for (const flag of [undefined, false, "false", "TRUE", "1"])
     assert.equal(
@@ -116,7 +140,7 @@ test("indexing requires the explicit flag and the exact HTTPS apex origin", () =
     );
   assert.equal(
     isIndexableProduction(
-      new Request("https://aidanbrotherhood.com/coaching"),
+      new Request("https://aidanbrotherhood.com/pricing"),
       { INDEXABLE: "true" },
     ),
     true,
@@ -146,7 +170,7 @@ test("connected entity graph describes the business and venue separately without
       [])
       assert.ok(
         offer.url.startsWith(
-          "https://aidanbrotherhood.com/coaching#offer-coaching-",
+          "https://aidanbrotherhood.com/pricing#offer-coaching-",
         ),
       );
   }

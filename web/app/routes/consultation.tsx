@@ -95,7 +95,7 @@ export default function Consultation() {
               change and cancellation links. There’s no payment at this stage.
             </p>
             <div className="text-link-row">
-              <a href="/coaching">Coaching & prices ↗</a>
+              <a href="/pricing">Coaching & prices ↗</a>
               <a href="/about">Meet Aidan ↗</a>
               <a href={EMAIL_URL}>Email a question ↗</a>
             </div>

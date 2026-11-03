@@ -61,18 +61,71 @@ test("full Worker routing serves the production resource sitemap and robots from
 
 test("full Worker redirects scheme, www and known HTML slashes together, preserving path/query", async () => {
   for (const url of [
-    "http://www.aidanbrotherhood.com/coaching/?source=a%20b&n=2",
-    "http://aidanbrotherhood.com/coaching/?source=a%20b&n=2",
-    "https://www.aidanbrotherhood.com/coaching/?source=a%20b&n=2",
-    "https://aidanbrotherhood.com/coaching/?source=a%20b&n=2",
+    "http://www.aidanbrotherhood.com/pricing/?source=a%20b&n=2",
+    "http://aidanbrotherhood.com/pricing/?source=a%20b&n=2",
+    "https://www.aidanbrotherhood.com/pricing/?source=a%20b&n=2",
+    "https://aidanbrotherhood.com/pricing/?source=a%20b&n=2",
   ]) {
     const response = await worker.fetch(new Request(url), env, ctx);
     assert.equal(response.status, 308);
     assert.equal(
       response.headers.get("Location"),
-      `${origin}/coaching?source=a%20b&n=2`,
+      `${origin}/pricing?source=a%20b&n=2`,
     );
   }
+});
+
+
+test("legacy pricing and approach URLs return single-hop 301s, retaining query parameters", async () => {
+  for (const [oldPath, destination] of [
+    ["/coaching", "/pricing"],
+    ["/my-approach", "/about/approach"],
+  ]) {
+    for (const host of [
+      "http://www.aidanbrotherhood.com",
+      "https://www.aidanbrotherhood.com",
+      origin,
+    ]) {
+      const response = await worker.fetch(
+        new Request(host + oldPath + "/?utm_source=shared&campaign=launch"),
+        env,
+        ctx,
+      );
+      assert.equal(response.status, 301, host + oldPath);
+      assert.equal(
+        response.headers.get("Location"),
+        origin + destination + "?utm_source=shared&campaign=launch",
+      );
+    }
+    const final = await request(destination);
+    assert.equal(final.status, 200);
+    const html = await final.text();
+    assert.ok(html.includes('<link rel="canonical" href="' + origin + destination + '"'));
+  }
+});
+
+test("header, dropdown, mobile menu and grouped footer resolve to canonical destinations", async () => {
+  const html = await (await request("/")).text();
+  for (const path of [
+    "/personal-training-renfrew",
+    "/personal-training-for-beginners",
+    "/movement-assessment",
+    "/pricing",
+    "/about",
+    "/about/approach",
+    "/consultation",
+  ]) assert.ok(links(html).includes(path), path);
+  assert.match(html, /Show Personal Training menu/);
+  assert.match(html, /Show About menu/);
+  assert.match(html, /mobile-nav-group/);
+  assert.match(html, /footer-nav-group/);
+  const approachHtml = await (await request("/about/approach")).text();
+  assert.match(approachHtml, /<a href="\/about">About<\/a>/);
+  const graph = JSON.parse(approachHtml.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])["@graph"];
+  const breadcrumb = graph.find((node) => node["@type"] === "BreadcrumbList");
+  assert.deepEqual(breadcrumb.itemListElement.map((item) => item.item), [origin + "/", origin + "/about", origin + "/about/approach"]);
+  assert.doesNotMatch(html, /href="\/coaching(?:[\/#?"])/);
+  assert.doesNotMatch(html, /href="\/my-approach(?:[\/#?"])/);
 });
 
 test("all production pages have complete SSR metadata, one H1 and direct consultation links", async () => {
@@ -151,7 +204,7 @@ test("movement assessment landing page explains FMS and uses the existing consul
 
 
 test("my approach explains the philosophy, links to assessment and coaching, and uses existing booking", async () => {
-  const response = await request("/my-approach");
+  const response = await request("/about/approach");
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const phrase of [
@@ -168,18 +221,18 @@ test("my approach explains the philosophy, links to assessment and coaching, and
     "Progress",
   ])
     assert.ok(html.includes(phrase), phrase);
-  for (const path of ["/consultation", "/coaching", "/movement-assessment"])
+  for (const path of ["/consultation", "/pricing", "/movement-assessment"])
     assert.ok(links(html).includes(path), path);
   assert.match(html, /images\.unsplash\.com/);
   assert.doesNotMatch(html, /<iframe|href="https:\/\/calendly\.com/);
   const home = await (await request("/")).text();
-  assert.ok(links(home).includes("/my-approach"));
+  assert.ok(links(home).includes("/about/approach"));
   const about = await (await request("/about")).text();
-  assert.ok(links(about).includes("/my-approach"));
+  assert.ok(links(about).includes("/about/approach"));
 });
 
 test("all three pricing surfaces show the approved packages, hierarchy, exact prices and CTA destination", async () => {
-  for (const path of ["/", "/personal-training-renfrew", "/coaching"]) {
+  for (const path of ["/", "/personal-training-renfrew", "/pricing"]) {
     const html = await (await request(path)).text();
     for (const value of [
       "Starter",
@@ -198,7 +251,7 @@ test("all three pricing surfaces show the approved packages, hierarchy, exact pr
     assert.match(html, /Recommended for consistency/);
     assert.equal(
       (html.match(/class="offer-compare-table"/g) || []).length,
-      path === "/coaching" ? 1 : 0,
+      path === "/pricing" ? 1 : 0,
     );
     assert.doesNotMatch(html, /href="\/?#consultation"/);
     for (const match of html.matchAll(
