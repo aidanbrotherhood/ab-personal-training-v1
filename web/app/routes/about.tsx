@@ -1,3 +1,5 @@
+import "../about-me.css";
+
 import {
   Arrow,
   ConsultationCTA,
@@ -8,9 +10,9 @@ import {
 
 export default function About() {
   return (
-    <PageShell>
+    <PageShell className="about-me-page">
       <PageIntro
-        label="Meet Aidan"
+        label="About Me"
         eyebrow="Aidan Brotherhood · Personal trainer in Renfrew"
         title={
           <>
@@ -28,7 +30,7 @@ export default function About() {
           <ConsultationLink placement="about_hero" />
         </div>
       </PageIntro>
-      <section className="section-pad">
+      <section className="about-me-introduction section-pad">
         <div className="container about-layout">
           <div className="about-display">
             <span>AB PERSONAL TRAINING</span>
@@ -65,7 +67,7 @@ export default function About() {
               starts with understanding where you are and what you want to
               achieve.
             </p>
-            <a href="/about/approach" className="inline-link" style={{ marginTop: 26 }}>
+            <a href="/about/approach" className="inline-link">
               Read my approach <Arrow />
             </a>
           </div>
@@ -107,7 +109,7 @@ export default function About() {
           </div>
         </div>
       </section>
-      <section className="section-pad">
+      <section className="about-me-details section-pad">
         <div className="container editorial-split">
           <div>
             <p className="eyebrow">A clear relationship</p>
@@ -134,7 +136,7 @@ export default function About() {
             </p>
             <div className="text-link-row">
               <a href="/pricing">
-                Coaching & prices <Arrow />
+                Pricing <Arrow />
               </a>
               <a href="/personal-training-renfrew#location">
                 Where we train <Arrow />

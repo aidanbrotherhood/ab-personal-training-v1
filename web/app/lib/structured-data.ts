@@ -90,7 +90,7 @@ export function structuredData(path: string) {
               : page.key === "beginners"
                 ? "New to the gym"
                 : page.key === "about"
-                  ? "Meet Aidan"
+                  ? "About Me"
                   : page.key === "coaching"
                     ? "Pricing"
                     : page.key === "consultation"
