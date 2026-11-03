@@ -46,7 +46,8 @@
       "workers_dev": true,
       "vars": {
         "INDEXABLE": "true",
-        "NOTIFICATIONS_ENABLED": "true"
+        "NOTIFICATIONS_ENABLED": "true",
+        "GA_MEASUREMENT_ID": "G-NY57FTV5MZ"
       },
       "routes": [
         {
