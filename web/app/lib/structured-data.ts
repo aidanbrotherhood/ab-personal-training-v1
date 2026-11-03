@@ -73,9 +73,17 @@ export function structuredData(path: string) {
           name: "Home",
           item: `${SITE_ORIGIN}/`,
         },
+        ...(page.key === "approach"
+          ? [{
+              "@type": "ListItem",
+              position: 2,
+              name: "About",
+              item: `${SITE_ORIGIN}/about`,
+            }]
+          : []),
         {
           "@type": "ListItem",
-          position: 2,
+          position: page.key === "approach" ? 3 : 2,
           name:
             page.key === "renfrew"
               ? "Training in Renfrew"
@@ -84,7 +92,7 @@ export function structuredData(path: string) {
                 : page.key === "about"
                   ? "Meet Aidan"
                   : page.key === "coaching"
-                    ? "Coaching & prices"
+                    ? "Pricing"
                     : page.key === "consultation"
                       ? "Free consultation"
                       : page.key === "movement"

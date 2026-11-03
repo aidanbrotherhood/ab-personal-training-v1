@@ -93,7 +93,7 @@ function DesktopMenu({
       >
         <span aria-hidden="true">⌄</span>
       </button>
-      <div className="nav-dropdown-panel" aria-label={label + " pages"}>
+      <div className="nav-dropdown-panel" role="group" aria-label={label + " pages"}>
         {items.map(([itemHref, itemLabel, description]) => (
           <a key={itemHref} href={itemHref} aria-current={pathname === itemHref ? "page" : undefined}>
             <strong>{itemLabel}</strong>
@@ -294,11 +294,23 @@ export function PageShell({
     </div>
   );
 }
-export function Breadcrumb({ label }: { label: string }) {
+export function Breadcrumb({
+  label,
+  parent,
+}: {
+  label: string;
+  parent?: { href: string; label: string };
+}) {
   return (
     <nav className="container page-breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span aria-hidden="true">/</span>
+      {parent && (
+        <>
+          <a href={parent.href}>{parent.label}</a>
+          <span aria-hidden="true">/</span>
+        </>
+      )}
       <span aria-current="page">{label}</span>
     </nav>
   );

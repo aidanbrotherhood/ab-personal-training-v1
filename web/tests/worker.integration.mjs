@@ -119,6 +119,11 @@ test("header, dropdown, mobile menu and grouped footer resolve to canonical dest
   assert.match(html, /Show About menu/);
   assert.match(html, /mobile-nav-group/);
   assert.match(html, /footer-nav-group/);
+  const approachHtml = await (await request("/about/approach")).text();
+  assert.match(approachHtml, /<a href="\/about">About<\/a>/);
+  const graph = JSON.parse(approachHtml.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])["@graph"];
+  const breadcrumb = graph.find((node) => node["@type"] === "BreadcrumbList");
+  assert.deepEqual(breadcrumb.itemListElement.map((item) => item.item), [origin + "/", origin + "/about", origin + "/about/approach"]);
   assert.doesNotMatch(html, /href="\/coaching(?:[\/#?"])/);
   assert.doesNotMatch(html, /href="\/my-approach(?:[\/#?"])/);
 });

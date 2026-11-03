@@ -4,7 +4,7 @@ import {
   ConsultationLink,
   PageShell,
 } from "../components/site";
-import "../about/approach.css";
+import "../my-approach.css";
 
 const principles = [
   {
@@ -90,7 +90,7 @@ export default function MyApproach() {
   return (
     <PageShell className="approach-page">
       <section className="approach-hero" aria-labelledby="approach-title">
-        <Breadcrumb label="My approach" />
+        <Breadcrumb label="My Approach" parent={{ href: "/about", label: "About" }} />
         <div className="container approach-hero-grid">
           <div className="approach-hero-copy">
             <p className="eyebrow">My approach · AB Personal Training</p>
