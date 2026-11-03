@@ -121,9 +121,14 @@ export default function Beginners() {
               We’ll discuss the level of support that fits your goals and the
               time you have. You don’t have to decide before meeting.
             </p>
-            <a href="/pricing" className="inline-link">
-              Compare coaching and prices <Arrow />
-            </a>
+            <div className="text-link-row">
+              <a href="/pricing">
+                Compare coaching and prices <Arrow />
+              </a>
+              <a href="/strength-training-renfrew">
+                Building strength with a personal trainer <Arrow />
+              </a>
+            </div>
           </div>
         </div>
       </section>

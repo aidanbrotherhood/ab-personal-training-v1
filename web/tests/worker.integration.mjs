@@ -49,7 +49,7 @@ test("full Worker routing serves the production resource sitemap and robots from
   );
   assert.doesNotMatch(
     xml,
-    /priority|changefreq|lastmod|workers\.dev|\/terms|\/strength-training|\/fat-loss-coaching/,
+    /priority|changefreq|lastmod|workers\.dev|\/terms|\/strength-training<|\/fat-loss-coaching/,
   );
   const robots = await request("/robots.txt");
   assert.equal(
@@ -108,6 +108,7 @@ test("header, dropdown, mobile menu and grouped footer resolve to canonical dest
   const html = await (await request("/")).text();
   for (const path of [
     "/personal-training-renfrew",
+    "/strength-training-renfrew",
     "/personal-training-for-beginners",
     "/movement-assessment",
     "/pricing",
@@ -252,6 +253,56 @@ test("my approach explains the philosophy, links to assessment and coaching, and
   assert.ok(links(home).includes("/about/approach"));
   const about = await (await request("/about")).text();
   assert.ok(links(about).includes("/about/approach"));
+});
+
+
+test("strength training local page is crawlable, relevant, linked and commercially consistent", async () => {
+  const path = "/strength-training-renfrew";
+  const response = await request(path);
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const text of [
+    "Strength &amp; muscle-building",
+    "JD Gyms Renfrew",
+    "Building strength.",
+    "Building muscle.",
+    "Paisley",
+    "Erskine",
+    "Clydebank",
+    "£99",
+    "£180",
+    "£320",
+  ])
+    assert.ok(html.includes(text), text);
+  assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
+  assert.match(html, /<meta name="robots" content="index, follow"/);
+  assert.ok(html.includes('<link rel="canonical" href="' + origin + path + '"'));
+  assert.match(html, /images\.unsplash\.com/);
+  assert.match(html, /srcSet="[^"]*600w/);
+  for (const link of [
+    "/consultation",
+    "/pricing",
+    "/pricing#offer-coaching-introduction",
+    "/pricing#offer-coaching-weekly",
+    "/pricing#offer-coaching-complete",
+    "/about/approach",
+    "/movement-assessment",
+    "/personal-training-renfrew#location",
+  ])
+    assert.ok(links(html).includes(link), link);
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])["@graph"];
+  const service = graph.find((item) => item["@type"] === "Service" && item["@id"] === origin + path + "#strength-coaching");
+  assert.ok(service, "strength-focused Service structured data");
+  assert.equal(service.provider["@id"], origin + "/#business");
+  assert.deepEqual(service.offers.map((offer) => offer.price), [99, 180, 320]);
+  const breadcrumbs = graph.find((item) => item["@type"] === "BreadcrumbList");
+  assert.deepEqual(breadcrumbs.itemListElement.map((item) => item.item), [
+    origin + "/", origin + "/personal-training-renfrew", origin + path
+  ]);
+  for (const source of ["/", "/pricing", "/personal-training-renfrew", "/personal-training-for-beginners"]) {
+    const sourceHtml = await (await request(source)).text();
+    assert.ok(links(sourceHtml).includes(path), source + " must link to strength service");
+  }
 });
 
 test("all three pricing surfaces show the approved packages, hierarchy, exact prices and CTA destination", async () => {

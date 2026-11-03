@@ -120,7 +120,7 @@ export default function Home() {
             </p>
             <span className="pathway-link">Start here ↗</span>
           </a>
-          <a href="/pricing#strength">
+          <a href="/strength-training-renfrew">
             <span>02 / BUILDING STRENGTH</span>
             <h3>Train with purpose.</h3>
             <p>
