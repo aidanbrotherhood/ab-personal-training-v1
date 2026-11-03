@@ -39,6 +39,7 @@ const links = [
   ["/personal-training-renfrew", "Training in Renfrew"],
   ["/coaching", "Coaching & prices"],
   ["/personal-training-for-beginners", "New to the gym?"],
+  ["/movement-assessment", "Movement assessment"],
   ["/about", "Meet Aidan"],
 ] as const;
 

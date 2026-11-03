@@ -34,6 +34,7 @@ test("published registry contains only complete, approved pages with unique meta
       "/coaching",
       "/about",
       "/personal-training-for-beginners",
+      "/movement-assessment",
       "/consultation",
       "/privacy",
     ],

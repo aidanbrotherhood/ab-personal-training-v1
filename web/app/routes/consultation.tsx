@@ -47,7 +47,9 @@ export default function Consultation() {
                   <strong>Ask what you need to ask.</strong>
                   <p>
                     Find out how coaching could fit. Where appropriate and
-                    you’re comfortable, we may look at a few basic movements.
+                    you’re comfortable, we can use structured movement screening
+                    to understand your starting point.{" "}
+                    <a href="/movement-assessment">Learn about the movement assessment</a>.
                   </p>
                 </li>
                 <li>

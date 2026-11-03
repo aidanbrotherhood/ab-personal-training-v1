@@ -87,7 +87,9 @@ export function structuredData(path: string) {
                     ? "Coaching & prices"
                     : page.key === "consultation"
                       ? "Free consultation"
-                      : "Privacy notice",
+                      : page.key === "movement"
+                        ? "Free movement assessment"
+                        : "Privacy notice",
           item: pageUrl,
         },
       ],
