@@ -205,6 +205,17 @@ test("production booking HTML retains the existing destination and visible alter
   );
 });
 
+test("configured Analytics has a settings control but never a server-rendered Google tag", async () => {
+  const configured = { ...env, GA_MEASUREMENT_ID: "G-TEST12345" };
+  for (const base of [origin, "https://ab-personal-training-staging.aidanbrotherhood.workers.dev"]) {
+    const html = await (await request("/coaching?email=private", configured, base)).text();
+    assert.match(html, /Cookie settings/);
+    assert.doesNotMatch(html, /<script[^>]*src="https:\/\/www\.googletagmanager\.com/);
+  }
+  const disabled = await (await request("/coaching")).text();
+  assert.doesNotMatch(disabled, /Cookie settings/);
+});
+
 test("retired, deferred and unknown paths remain genuine noindex 404s without canonicals", async () => {
   for (const path of [
     "/terms",

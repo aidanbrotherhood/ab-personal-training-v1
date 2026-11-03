@@ -3,7 +3,7 @@ export default function Privacy() {
   return (
     <PageShell>
       <article className="privacy-page">
-        <p className="section-label">Last updated 2 November 2026</p>
+        <p className="section-label">Last updated 3 November 2026</p>
         <h1>Privacy notice for AB Personal Training</h1>
         <p>
           Aidan Brotherhood, trading as AB Personal Training, is responsible for
@@ -103,13 +103,37 @@ export default function Privacy() {
         </p>
         <h2>Cookies and measurement</h2>
         <p>
-          This site does not use Google Analytics, Meta Pixel, advertising
-          cookies or first-party visitor-tracking storage. Campaign labels may
-          accompany existing website enquiries as described above. The Calendly
-          calendar may use its own cookies or similar technologies when it loads
-          on the consultation page. Its cookie choices are managed within
-          Calendly. We don’t send booking or enquiry activity to an analytics
-          service.
+          When enabled, Google Analytics loads only if you select “Accept
+          analytics”. It helps us understand page visits, consultation link
+          clicks and engagement with the booking calendar. Rejecting analytics
+          does not affect your use of the website or ability to book.
+        </p>
+        <p>
+          Analytics cookies (_ga and _ga_*) distinguish browsers and visits for
+          up to six months. We remember your cookie choice in this browser for
+          six months. You can change it using “Cookie settings” in the footer;
+          rejecting after accepting stops collection and removes the website’s
+          Analytics cookies. Information already collected is not automatically
+          deleted by changing this choice.
+        </p>
+        <p>
+          Google receives technical information such as browser and device
+          details, page paths and a referring website’s origin. We do not send
+          names, email addresses, phone numbers, enquiry text, booking answers,
+          query strings or URL fragments to Analytics. Google signals and
+          advertising personalisation are disabled. Calendar completion events
+          are browser signals and do not establish a confirmed booking, attendance
+          or payment. Google may process Analytics information outside the UK
+          under its applicable data-protection arrangements. See{" "}
+          <a href="https://policies.google.com/technologies/partner-sites">
+            how Google uses information from sites that use its services
+          </a>.
+        </p>
+        <p>
+          Campaign labels may accompany existing website enquiries as described
+          above. Calendly may use its own cookies or similar technologies when
+          its calendar loads on the consultation page. Its cookie choices are
+          managed within Calendly.
         </p>
         <h2>Your choices and rights</h2>
         <p>

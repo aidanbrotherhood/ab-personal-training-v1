@@ -1,5 +1,5 @@
 import { useRef, type ReactNode } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useRouteLoaderData } from "react-router";
 import {
   BUSINESS_EMAIL,
   CONSULTATION_PATH,
@@ -159,6 +159,7 @@ export function Footer() {
             placement="footer"
           />
           <a href="/privacy">Privacy notice</a>
+          <CookieSettings />
           <a href={EMAIL_URL}>
             Email Aidan <Arrow />
           </a>
@@ -185,6 +186,11 @@ export function Footer() {
       </div>
     </footer>
   );
+}
+function CookieSettings() {
+  const data = useRouteLoaderData<typeof import("../root").loader>("root");
+  if (!data?.analyticsId) return null;
+  return <button type="button" className="cookie-settings" onClick={() => window.dispatchEvent(new Event("ab:cookie-settings"))}>Cookie settings</button>;
 }
 export function PageShell({
   children,
