@@ -74,17 +74,18 @@ test("published registry contains only complete, approved pages with unique meta
   ])
     assert.equal(getPublicPage(path), undefined);
 });
-test("About Me colour treatments keep readable contrast on light and dark sections", () => {
+test("About essay has its own legible, content-first editorial design", () => {
   const stylesheet = readFileSync("app/about-me.css", "utf8");
   for (const expected of [
-    ".about-me-page .about-me-introduction",
-    ".about-me-page .about-copy > p:not(.eyebrow)",
-    ".about-me-page .about-copy h2 em",
-    ".about-me-page .principle p",
-    ".about-me-page .about-me-details .prose-copy",
-    ".about-me-page .editorial-intro .intro-copy > p",
-  ])
-    assert.ok(stylesheet.includes(expected), expected);
+    ".about-journal-page .journal-masthead h1",
+    ".about-journal-page .journal-masthead-meta",
+    ".about-journal-page .journal-article p",
+    ".about-journal-page .journal-break",
+    ".about-journal-page .journal-afterword",
+    "@media (max-width: 680px)",
+  ]) assert.ok(stylesheet.includes(expected), expected);
+  assert.ok(!stylesheet.includes("about-display"));
+  assert.ok(!stylesheet.includes("principles-grid"));
   const luminance = (hex) => {
     const rgb = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
     const linear = rgb.map((c) => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
@@ -95,9 +96,9 @@ test("About Me colour treatments keep readable contrast on light and dark sectio
     const b = luminance(background);
     return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
   };
-  assert.ok(contrast("#344a60", "#ffffff") >= 4.5);
-  assert.ok(contrast("#0755bd", "#ffffff") >= 4.5);
-  assert.ok(contrast("#edf4ff", "#102338") >= 4.5);
+  assert.ok(contrast("#35404a", "#f9f8f5") >= 7);
+  assert.ok(contrast("#60707b", "#f9f8f5") >= 4.5);
+  assert.ok(contrast("#23578d", "#f1f0eb") >= 4.5);
 });
 
 test("canonical normalisation preserves queries and scopes aliases to recognised HTML pages", () => {
