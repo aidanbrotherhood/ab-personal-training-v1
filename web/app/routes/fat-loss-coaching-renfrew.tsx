@@ -119,16 +119,16 @@ export default function FatLossCoachingRenfrew() {
           </div>
           <figure className="fat-hero-figure">
             <img
-              src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1100&q=84"
-              srcSet="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=550&q=80 550w, https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1100&q=84 1100w"
+              src="https://images.unsplash.com/photo-1758875568722-72961c05d5dd?auto=format&fit=crop&w=1100&q=84"
+              srcSet="https://images.unsplash.com/photo-1758875568722-72961c05d5dd?auto=format&fit=crop&w=550&q=80 550w, https://images.unsplash.com/photo-1758875568722-72961c05d5dd?auto=format&fit=crop&w=1100&q=84 1100w"
               sizes="(max-width: 860px) 100vw, 43vw"
               width="900"
               height="1125"
-              alt="Illustrative strength-training photography; not Aidan or JD Gyms Renfrew"
+              alt="Illustrative photograph of a trainer demonstrating barbell setup beside a client; not Aidan or JD Gyms Renfrew"
               fetchPriority="high"
               decoding="async"
             />
-            <figcaption>TRAINING / NUTRITION / PROGRESS <small>Illustrative training photography, not JD Gyms Renfrew</small></figcaption>
+            <figcaption>TRAINING / NUTRITION / PROGRESS <small>Illustrative coaching photograph, not Aidan or JD Gyms Renfrew</small></figcaption>
           </figure>
         </div>
       </section>
@@ -288,17 +288,29 @@ export default function FatLossCoachingRenfrew() {
         </div>
       </section>
 
-      <section className="section-pad fat-location" id="location">
-        <div className="container fat-heading-grid">
-          <div><p className="eyebrow">Personal training in Renfrew</p><h2>One-to-one coaching <span>at JD Gyms Renfrew.</span></h2></div>
-          <div className="fat-heading-copy">
-            <p>All in-person sessions take place at JD Gyms Renfrew, Renfrew Retail Park, PA4 9EN.</p>
-            <p>I operate independently within the gym, providing personal training to people from Renfrew, Paisley, Erskine, Clydebank and the surrounding area.</p>
-            <p>Paid coaching requires a separate JD Gyms membership, which isn't included in the prices above. If you're not currently a member, contact me before booking your consultation so we can clarify access arrangements.</p>
-            <a href="/personal-training-renfrew#location" className="inline-link">Training location and gym access <Arrow /></a>
+      <section className="section-pad fat-location" id="location" aria-labelledby="fat-location-title">
+        <div className="container fat-location-grid">
+          <div className="fat-location-copy">
+            <p className="eyebrow">Personal training in Renfrew</p>
+            <h2 id="fat-location-title">Your training base.<span> JD Gyms Renfrew.</span></h2>
+            <p>
+              All one-to-one body composition and fat-loss coaching sessions take
+              place at JD Gyms Renfrew in Renfrew Retail Park, PA4 9EN.
+            </p>
+            <p>
+              I operate independently within the gym, helping people from
+              Renfrew, Paisley, Erskine, Clydebank and the surrounding area
+              work towards their goals with a clear, individualised plan.
+            </p>
+            <a href="/personal-training-renfrew#location" className="inline-link">
+              Training location and gym access <Arrow />
+            </a>
           </div>
+          <aside className="fat-location-panel" aria-label="JD Gyms Renfrew address and access">
+            <p className="fat-venue-eyebrow">THE TRAINING VENUE <span>01 / 01</span></p>
+            <LocationNote />
+          </aside>
         </div>
-        <div className="container fat-location-note"><LocationNote /></div>
       </section>
 
       <section className="section-pad faq-section fat-faq" aria-labelledby="fat-faq-heading">
