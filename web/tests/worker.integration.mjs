@@ -323,6 +323,15 @@ test("fat loss local landing page is complete, indexable, linked and consistent 
   assert.doesNotMatch(html, /photo-1722925541142-5db2668ca492/);
   assert.match(html, /fat-location-panel/);
   assert.match(html, /Your training base/);
+  assert.match(html, /offer-section--fatLoss/);
+  assert.match(html, /fat-loss-prices-title/);
+  assert.match(html, /offer-card--featured/);
+  assert.match(html, /offer-card-benefits/);
+  assert.match(html, /offer-compare-table/);
+  assert.equal(html.split("The support you need. A plan that makes sense.").length - 1, 1);
+  assert.doesNotMatch(html, /fat-pricing-intro/);
+  assert.match(html, /closing-cta section-pad/);
+  assert.match(html, /You don.t need a perfect starting point/);
   assert.match(html, /<meta name="robots" content="index, follow"/);
   assert.ok(html.includes('<link rel="canonical" href="' + origin + path + '"'));
   for (const label of ["£99", "£180", "£320", "Starter", "Coaching+"]) assert.ok(html.includes(label), label);
