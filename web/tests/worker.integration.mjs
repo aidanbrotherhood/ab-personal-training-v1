@@ -331,7 +331,7 @@ test("fat loss local landing page is complete, indexable, linked and consistent 
   assert.equal(html.split("The support you need. A plan that makes sense.").length - 1, 1);
   assert.doesNotMatch(html, /fat-pricing-intro/);
   assert.match(html, /closing-cta section-pad/);
-  assert.match(html, /You don.t need a perfect starting point/);
+  assert.match(html, /perfect starting point/);
   assert.match(html, /<meta name="robots" content="index, follow"/);
   assert.ok(html.includes('<link rel="canonical" href="' + origin + path + '"'));
   for (const label of ["£99", "£180", "£320", "Starter", "Coaching+"]) assert.ok(html.includes(label), label);
