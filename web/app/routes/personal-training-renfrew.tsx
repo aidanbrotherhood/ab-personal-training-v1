@@ -65,6 +65,9 @@ export default function Renfrew() {
               <a href="/strength-training-renfrew">
                 Strength &amp; muscle-building coaching ↗
               </a>
+              <a href="/fat-loss-coaching-renfrew">
+                Fat loss &amp; body composition coaching ↗
+              </a>
               <a href="/about">Meet your coach ↗</a>
             </div>
           </div>
