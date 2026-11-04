@@ -25,12 +25,12 @@ const { calendlySignal, trustedCalendlySignal } = await source(
   "app/lib/measurement.ts",
 );
 
-test("fat-loss dark panels keep readable heading contrast and pricing is not independently styled", () => {
+test("fat-loss dark panels keep readable headings and avoid duplicate pricing styles", () => {
   const stylesheet = readFileSync("app/fat-loss.css", "utf8");
-  assert.match(stylesheet, /\\.fat-loss-page \\.closing-cta h2 \\{ color:#fff; \\}/);
-  assert.match(stylesheet, /\\.fat-loss-page \\.fat-beyond h2 \\{ color:#fff; \\}/);
-  assert.doesNotMatch(stylesheet, /\\.fat-loss-page h2 \\{ color:var\\(--fat-ink\\)/);
-  assert.doesNotMatch(stylesheet, /fat-pricing-intro/);
+  assert.ok(stylesheet.includes(".fat-loss-page .closing-cta h2 { color:#fff; }"));
+  assert.ok(stylesheet.includes(".fat-loss-page .fat-beyond h2 { color:#fff; }"));
+  assert.ok(!stylesheet.includes(".fat-loss-page h2 { color:var(--fat-ink); }"));
+  assert.ok(!stylesheet.includes("fat-pricing-intro"));
 });
 
 test("published registry contains only complete, approved pages with unique metadata", () => {
