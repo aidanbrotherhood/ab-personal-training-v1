@@ -310,7 +310,7 @@ test("fat loss local landing page is complete, indexable, linked and consistent 
   const response = await request(path);
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.equal((html.match(/<h1[\\s>]/g) || []).length, 1);
+  assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
   assert.match(html, /Lose body fat/);
   assert.match(html, /Build strength/);
   assert.match(html, /Assess/);
@@ -318,13 +318,13 @@ test("fat loss local landing page is complete, indexable, linked and consistent 
   assert.match(html, /Progress/);
   assert.match(html, /calorie|energy deficit/i);
   assert.match(html, /JD Gyms Renfrew/);
-  assert.match(html, /images\\.unsplash\\.com/);
+  assert.match(html, /images\.unsplash\.com/);
   assert.match(html, /<meta name="robots" content="index, follow"/);
   assert.ok(html.includes('<link rel="canonical" href="' + origin + path + '"'));
   for (const label of ["£99", "£180", "£320", "Starter", "Coaching+"]) assert.ok(html.includes(label), label);
   for (const link of ["/consultation", "/pricing", "/about", "/about/approach", "/strength-training-renfrew", "/personal-training-renfrew#location"])
     assert.ok(links(html).includes(link), link);
-  const graph = JSON.parse(html.match(/<script type="application\\/ld\\+json">(.*?)<\\/script>/s)[1])["@graph"];
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])["@graph"];
   const service = graph.find((node) => node["@type"] === "Service" && node["@id"] === origin + path + "#fat-loss-coaching");
   assert.ok(service, "fat-loss-focused Service node");
   assert.equal(service.provider["@id"], origin + "/#business");
