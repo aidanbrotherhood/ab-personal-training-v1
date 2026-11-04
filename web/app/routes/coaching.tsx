@@ -137,6 +137,12 @@ export default function Coaching() {
                 Progress differs from person to person. There’s no promised
                 weight-loss rate or transformation deadline.
               </p>
+              <p>
+                <a href="/fat-loss-coaching-renfrew">
+                  Explore fat loss &amp; body composition coaching
+                </a>
+                .
+              </p>
             </article>
           </div>
         </div>

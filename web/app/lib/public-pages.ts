@@ -28,6 +28,15 @@ export const publicPages = [
     h1: "Strength & muscle-building personal training in Renfrew.",
   },
   {
+    key: "fatLoss",
+    path: "/fat-loss-coaching-renfrew",
+    file: "routes/fat-loss-coaching-renfrew.tsx",
+    title: "Weight Loss Personal Trainer Renfrew | AB Personal Training",
+    description:
+      "Lose body fat, build strength and improve body composition with one-to-one personal training at JD Gyms Renfrew. Practical nutrition guidance and structured coaching.",
+    h1: "Lose body fat. Build strength. Make progress that lasts.",
+  },
+  {
     key: "coaching",
     path: "/pricing",
     file: "routes/coaching.tsx",
