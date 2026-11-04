@@ -1,7 +1,17 @@
 /* Fat Loss & Body Composition — restrained, editorial, responsive. */
 .fat-loss-page { --fat-ink:#17314c; --fat-copy:#465c70; --fat-blue:#075fd8; }
-.fat-loss-page h2 { color:var(--fat-ink); }
-.fat-loss-page h2 span { color:var(--fat-blue); }
+/* Scope accent colours to light editorial sections. Dark sections retain their own text contrast. */
+.fat-loss-page .fat-heading-grid h2 span,
+.fat-loss-page .fat-coach-copy h2 span,
+.fat-loss-page .fat-faq h2 span { color:var(--fat-blue); }
+.fat-loss-page .closing-cta h2 { color:#fff; }
+.fat-loss-page .closing-cta .eyebrow { color:#98caff; }
+.fat-loss-page .fat-beyond h2 { color:#fff; }
+.fat-loss-page .fat-beyond h2 span { color:#a9d4ff; }
+
+/* Editorial type hierarchy: consistent with the site, without overriding the offer cards. */
+.fat-loss-page :is(.fat-goals-grid h3,.fat-feature-copy h3,.fat-consistency h3,.fat-step-title h3) { font-weight:700; }
+.fat-loss-page :is(.fat-feature-copy strong,.fat-consistency-copy strong,.fat-step-title strong,.fat-process-foot p) { font-weight:650; }
 .fat-loss-page .fat-index { color:#075fd8; font-size:12px; letter-spacing:.12em; font-weight:750; text-transform:uppercase; }
 .fat-loss-page .fat-heading-grid { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr); gap:clamp(38px,7vw,100px); align-items:start; }
 .fat-heading-grid h2 { margin-top:22px; max-width:720px; }
@@ -68,10 +78,6 @@
 .fat-beyond-copy blockquote { margin:38px 0 24px; padding:0 0 0 22px; border-left:3px solid #91c4ff; font-size:clamp(25px,2.7vw,35px); line-height:1.33; letter-spacing:-.035em; font-weight:650; }
 .fat-beyond-copy blockquote span { color:#a9d4ff; }
 .fat-beyond .inline-link { color:#b8d9ff; }
-.fat-pricing-intro { padding-top:clamp(85px,9vw,130px); }
-.fat-pricing-intro h2 { max-width:870px; margin-top:25px; }
-.fat-pricing-intro p:last-child { max-width:760px; color:var(--fat-copy); font-size:18px; margin-top:24px; }
-.fat-loss-page .offer-section { padding-top:46px; }
 .fat-coach { background:white; }
 .fat-coach-grid { display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:clamp(50px,8vw,115px); align-items:center; }
 .fat-coach-mark { background:#1b416d; border-radius:15px; min-height:540px; display:flex; flex-direction:column; justify-content:space-between; padding:35px; color:white; }
@@ -133,7 +139,6 @@
   .fat-steps { margin-top:35px; }
   .fat-process-foot { align-items:flex-start; flex-direction:column; }
   .fat-process-foot .btn { width:100%; justify-content:center; }
-  .fat-pricing-intro { padding-top:78px; }
   .fat-coach-mark { min-height:340px; padding:25px; }
   .fat-coach-mark strong { font-size:clamp(45px,11vw,63px); }
   .fat-location-panel { padding:11px; }
