@@ -207,8 +207,6 @@ const chapters: readonly (readonly string[])[] = [
   ]
 ];
 
-const readMinutes = Math.ceil(chapters.flat().join(" ").trim().split(/\s+/).length / 225);
-
 function renderParagraph(text: string) {
   return text.split(/(\*[^*]+\*)/g).map((part, index) =>
     part.startsWith("*") && part.endsWith("*")
@@ -221,20 +219,12 @@ export default function About() {
   return (
     <PageShell className="about-journal-page">
       <header className="journal-masthead" aria-labelledby="journal-title">
-        <div className="journal-masthead-rail">
-          <a href="/" className="journal-return">AB Personal Training</a>
-          <span>Personal writing</span>
-        </div>
         <div className="journal-masthead-intro">
-          <p className="journal-kicker">An essay by Aidan Brotherhood</p>
           <h1 id="journal-title">What I Was Trying to Prove</h1>
-          <p className="journal-deck">
-            On sport, ambition, recognition and learning to contribute.
+          <p className="journal-masthead-meta">
+            Aidan Brotherhood <span aria-hidden="true">·</span>{" "}
+            <time dateTime="2026-11-04">4 November 2026</time>
           </p>
-        </div>
-        <div className="journal-masthead-meta">
-          <span>Aidan Brotherhood</span>
-          <span><time dateTime="2026-11-04">4 November 2026</time><span aria-hidden="true"> · </span>{readMinutes} min read</span>
         </div>
       </header>
 
