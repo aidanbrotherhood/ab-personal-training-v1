@@ -318,6 +318,11 @@ test("fat loss local landing page is complete, indexable, linked and consistent 
   assert.match(html, /Develop/);
   assert.match(html, /Progress/);
   assert.match(html, /calorie|energy deficit/i);
+  assert.match(html, /fat-foundations-intro/);
+  assert.match(html, /fat-foundations-intro-copy/);
+  assert.match(html, /A considered approach to body composition/);
+  assert.match(html, /More than/);
+  assert.doesNotMatch(html, /class="fat-heading-grid"><div><p class="eyebrow">A considered approach to body composition/);
   assert.match(html, /JD Gyms Renfrew/);
   assert.match(html, /photo-1758875568722-72961c05d5dd/);
   assert.doesNotMatch(html, /photo-1722925541142-5db2668ca492/);
