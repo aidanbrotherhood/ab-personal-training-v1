@@ -42,6 +42,14 @@
 .fat-goals-grid p { margin-top:16px; color:var(--fat-copy); font-size:16px; line-height:1.73; }
 .fat-closing-line { max-width:940px; margin-top:30px; color:#244e75; font-size:19px; line-height:1.65; font-weight:620; }
 .fat-foundations { background:#f6f9fc; }
+/* The opening is one coherent editorial thought, not a detached two-column heading and copy. */
+.fat-foundations-intro { max-width:950px; padding-bottom:clamp(37px,4.5vw,60px); border-bottom:1px solid #d4e0ec; }
+.fat-foundations-intro h2 { margin-top:22px; max-width:870px; color:var(--fat-ink); }
+.fat-foundations-intro h2 span { color:var(--fat-blue); }
+.fat-foundations-intro-copy { max-width:780px; margin-top:clamp(25px,3vw,39px); }
+.fat-foundations-intro-copy p { color:var(--fat-copy); font-size:17px; line-height:1.8; font-weight:400; }
+.fat-foundations-intro-copy p + p { margin-top:17px; }
+.fat-foundations .fat-feature-first { margin-top:clamp(45px,5.5vw,78px); }
 .fat-feature-grid { display:grid; grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr); gap:clamp(40px,7vw,100px); align-items:center; margin-top:clamp(70px,9vw,126px); }
 .fat-feature-reversed { grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); }
 .fat-feature-copy h3 { color:var(--fat-ink); font-size:clamp(37px,4.2vw,56px); line-height:1.13; letter-spacing:-.055em; margin-top:23px; }
@@ -131,6 +139,8 @@
   .fat-goals-grid article { min-height:0; padding:28px; }
   .fat-goals-grid h3 { margin-top:22px; }
   .fat-heading-copy p { font-size:16px; }
+  .fat-foundations-intro-copy p { font-size:16px; }
+  .fat-foundations .fat-feature-first { margin-top:43px; }
   .fat-feature-grid { margin-top:58px; gap:32px; }
   .fat-feature-copy h3 { font-size:clamp(33px,8.3vw,46px); }
   .fat-feature-photo img { aspect-ratio:4/3.7; }
