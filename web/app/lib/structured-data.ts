@@ -73,7 +73,7 @@ export function structuredData(path: string) {
           name: "Home",
           item: `${SITE_ORIGIN}/`,
         },
-        ...(page.key === "approach" || page.key === "strength"
+        ...(page.key === "approach" || page.key === "strength" || page.key === "fatLoss"
           ? [{
               "@type": "ListItem",
               position: 2,
@@ -85,12 +85,14 @@ export function structuredData(path: string) {
           : []),
         {
           "@type": "ListItem",
-          position: page.key === "approach" || page.key === "strength" ? 3 : 2,
+          position: page.key === "approach" || page.key === "strength" || page.key === "fatLoss" ? 3 : 2,
           name:
             page.key === "renfrew"
               ? "Training in Renfrew"
               : page.key === "strength"
                 ? "Strength & Muscle"
+              : page.key === "fatLoss"
+                ? "Fat Loss & Body Composition"
               : page.key === "beginners"
                 ? "New to the gym"
                 : page.key === "about"
@@ -135,6 +137,28 @@ export function structuredData(path: string) {
       "@id": `${pageUrl}#strength-coaching`,
       name: "Strength and muscle-building personal training in Renfrew",
       serviceType: "One-to-one strength and muscle-building personal training",
+      description: page.description,
+      provider: { "@id": businessId },
+      areaServed: { "@type": "Place", name: "Renfrew, Scotland" },
+      availableChannel: {
+        "@type": "ServiceChannel",
+        serviceLocation: { "@id": venueId },
+      },
+      offers: plans.map((plan) => ({
+        "@type": "Offer",
+        name: plan.title,
+        price: Number(plan.price.slice(1)),
+        priceCurrency: "GBP",
+        url: `${SITE_ORIGIN}/pricing#offer-coaching-${plan.id}`,
+        description: `${plan.sessions} 60-minute one-to-one sessions; ${plan.period.toLowerCase()}; JD Gyms membership purchased separately.`,
+      })),
+    });
+  if (page.key === "fatLoss")
+    graph.push({
+      "@type": "Service",
+      "@id": `${pageUrl}#fat-loss-coaching`,
+      name: "Fat loss and body composition personal training in Renfrew",
+      serviceType: "One-to-one weight-loss and body composition coaching",
       description: page.description,
       provider: { "@id": businessId },
       areaServed: { "@type": "Place", name: "Renfrew, Scotland" },
