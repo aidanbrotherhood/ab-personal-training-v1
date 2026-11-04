@@ -241,7 +241,6 @@ export default function About() {
       <article className="journal-article" aria-labelledby="journal-title">
         {chapters.map((paragraphs, chapterIndex) => (
           <div className="journal-chapter" key={chapterIndex}>
-            {chapterIndex > 0 && <hr className="journal-break" />}
             {paragraphs.map((paragraph, paragraphIndex) => (
               <p
                 key={paragraphIndex}

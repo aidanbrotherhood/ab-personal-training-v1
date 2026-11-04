@@ -149,7 +149,9 @@ test("About is a complete personal essay, not a sales landing page", async () =>
   assert.match(html, /href="\/about\/approach"/);
   const article = html.match(/<article class="journal-article"[^>]*>([\s\S]*?)<\/article>/)?.[1];
   assert.ok(article, "A self-contained semantic article renders");
-  assert.equal((article.match(/<hr class="journal-break"/g) || []).length, 5);
+  assert.equal((article.match(/class="journal-chapter"/g) || []).length, 6);
+  assert.doesNotMatch(article, /<hr(?:\s|>)/);
+  assert.doesNotMatch(html, /journal-break/);
   assert.equal((article.match(/<p(?:\s|>)/g) || []).length, 187);
   for (const excerpt of [
     "I was eighteen when I stopped playing tennis.",
