@@ -32,6 +32,7 @@ test("published registry contains only complete, approved pages with unique meta
       "/",
       "/personal-training-renfrew",
       "/strength-training-renfrew",
+      "/fat-loss-coaching-renfrew",
       "/pricing",
       "/about",
       "/personal-training-for-beginners",
