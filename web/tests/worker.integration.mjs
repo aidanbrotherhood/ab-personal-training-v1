@@ -277,14 +277,15 @@ test("strength training local page is crawlable, relevant, linked and commercial
   assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
   assert.match(html, /<meta name="robots" content="index, follow"/);
   assert.ok(html.includes('<link rel="canonical" href="' + origin + path + '"'));
-  assert.match(html, /images\.unsplash\.com/);
+  assert.match(html, /photo-1722925541142-5db2668ca492/);
+  assert.match(html, /strength-location-panel/);
+  assert.match(html, /Your training base/);
+  assert.match(html, /offer-card--featured/);
+  assert.match(html, /offer-compare-table/);
   assert.match(html, /srcSet="[^"]*600w/);
   for (const link of [
     "/consultation",
     "/pricing",
-    "/pricing#offer-coaching-introduction",
-    "/pricing#offer-coaching-weekly",
-    "/pricing#offer-coaching-complete",
     "/about/approach",
     "/movement-assessment",
     "/personal-training-renfrew#location",
@@ -318,7 +319,10 @@ test("fat loss local landing page is complete, indexable, linked and consistent 
   assert.match(html, /Progress/);
   assert.match(html, /calorie|energy deficit/i);
   assert.match(html, /JD Gyms Renfrew/);
-  assert.match(html, /images\.unsplash\.com/);
+  assert.match(html, /photo-1758875568722-72961c05d5dd/);
+  assert.doesNotMatch(html, /photo-1722925541142-5db2668ca492/);
+  assert.match(html, /fat-location-panel/);
+  assert.match(html, /Your training base/);
   assert.match(html, /<meta name="robots" content="index, follow"/);
   assert.ok(html.includes('<link rel="canonical" href="' + origin + path + '"'));
   for (const label of ["£99", "£180", "£320", "Starter", "Coaching+"]) assert.ok(html.includes(label), label);

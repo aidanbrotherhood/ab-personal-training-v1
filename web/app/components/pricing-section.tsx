@@ -2,7 +2,7 @@ import { Arrow, ConsultationLink } from "./site";
 import { getPerSessionRate, plans } from "../lib/offers";
 
 type PricingSectionProps = {
-  variant: "home" | "renfrew" | "coaching";
+  variant: "home" | "renfrew" | "coaching" | "strength";
 };
 
 const differences = [
@@ -50,9 +50,10 @@ const differences = [
 /** Identical products, disclosures and decision hierarchy on all public pricing surfaces. */
 export function PricingSection({ variant }: PricingSectionProps) {
   const isRenfrew = variant === "renfrew";
-  const compact = variant !== "coaching";
-  const sectionId = isRenfrew ? "prices" : "coaching";
-  const headingId = isRenfrew ? "prices-title" : "coaching-title";
+  const isStrength = variant === "strength";
+  const compact = variant !== "coaching" && !isStrength;
+  const sectionId = isStrength ? "coaching-options" : isRenfrew ? "prices" : "coaching";
+  const headingId = isStrength ? "strength-prices-title" : isRenfrew ? "prices-title" : "coaching-title";
 
   return (
     <section
@@ -66,12 +67,19 @@ export function PricingSection({ variant }: PricingSectionProps) {
             <p className="offer-eyebrow">
               {isRenfrew
                 ? "PERSONAL TRAINING PRICES · RENFREW"
-                : "WORK WITH ME"}
+                : isStrength ? "STRENGTH COACHING · YOUR OPTIONS" : "WORK WITH ME"}
             </p>
-            <h2 id={headingId}>The right support makes all the difference.</h2>
+            <h2 id={headingId}>{isStrength ? "Coaching built around your goals." : "The right support makes all the difference."}</h2>
           </div>
           <div className="offer-introduction">
-            {!compact && (
+            {isStrength && (
+              <p>
+                There&apos;s no separate price for strength training or muscle-building.
+                Your programme is shaped around your goals within the level of support
+                you choose. You don&apos;t need to decide before we meet.
+              </p>
+            )}
+            {!compact && !isStrength && (
               <p>
                 A good programme is only part of the picture. It’s knowing what
                 to do, understanding why you’re doing it, and having someone
@@ -260,6 +268,11 @@ export function PricingSection({ variant }: PricingSectionProps) {
             <a href="/pricing">
               Compare everything included in each package <Arrow />
             </a>
+          </p>
+        )}
+        {isStrength && (
+          <p className="offer-detail-link">
+            <a href="/pricing">View complete pricing details <Arrow /></a>
           </p>
         )}
         <div className="offer-terms">

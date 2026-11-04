@@ -56,43 +56,35 @@
 .strength-philosophy-copy p:first-child { margin-top:0; }
 .strength-philosophy-copy blockquote { font-size:clamp(24px,2.8vw,36px);line-height:1.28;letter-spacing:-.039em;font-weight:630;color:#fff;margin:32px 0 29px;padding-left:22px;border-left:3px solid #88bcf6; }
 .strength-philosophy .inline-link { color:#b6dbff; }
-.strength-location { background:#f8fbfe; }
-.strength-location-copy p + p { margin-top:18px; }
-.strength-location-copy .inline-link { margin-top:20px; }
-.strength-location-note { margin-top:32px;max-width:850px; }
-.strength-location-note .location-note { border:1px solid #d3e1ef; }
-.strength-options { background:#fff; }
-.strength-options-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:54px; }
-.strength-option { display:flex;flex-direction:column;min-width:0;padding:clamp(24px,3vw,39px);border-radius:12px;border:1px solid #d9e4ef;background:#f8fafc; }
-.strength-option-featured { background:#f0f6ff;border-color:#8cb8ed;box-shadow:0 10px 30px rgba(7,95,216,.065); }
-.strength-option h3 { color:var(--strength-ink);font-size:clamp(29px,2.9vw,38px);line-height:1.14;letter-spacing:-.046em;margin-top:15px; }
-.strength-option-price { display:grid;gap:4px;margin-top:14px; }
-.strength-option-price strong { font-size:clamp(42px,4vw,55px);line-height:1.04;letter-spacing:-.062em;color:var(--strength-ink); }
-.strength-option-price span { color:#557086;font-size:13px;font-weight:640; }
-.strength-option > p { margin-top:25px;line-height:1.74;font-size:15px;color:var(--strength-copy); }
-.strength-option ul { list-style:none;padding:17px 0 0;margin:16px 0 29px;border-top:1px solid #d6e2ed;display:grid;gap:12px; }
-.strength-option li { position:relative;padding-left:19px;color:#28435c;font-size:14px;line-height:1.55; }
-.strength-option li::before { content:"✓";position:absolute;left:0;color:#1363b9;font-weight:730; }
-.strength-option-link { display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:45px;border-top:1px solid #d6e2ed;padding-top:17px;color:var(--strength-blue);font-size:14px;font-weight:700;margin-top:auto; }
-.strength-option-link:hover { text-decoration:underline;text-underline-offset:4px; }
-.strength-options-actions { display:flex;align-items:center;justify-content:space-between;gap:25px;margin-top:36px; }
-.strength-options-actions > p { color:#5a7082;font-size:14px;line-height:1.6;max-width:410px; }
-.strength-options-actions > div { display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:19px 26px; }
+
+.strength-location { background:linear-gradient(150deg,#f8fbfe,#edf4fd); }
+.strength-location-layout { display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:clamp(42px,7vw,100px);align-items:center; }
+.strength-location-copy h2 { margin-top:24px; font-size:clamp(39px,4.3vw,58px);line-height:1.1;letter-spacing:-.052em;max-width:610px;color:var(--strength-ink); }
+.strength-location-copy h2 span { display:block;color:var(--strength-blue); }
+.strength-location-copy p:not(.eyebrow) { color:var(--strength-copy);font-size:17px;line-height:1.82;max-width:610px;margin-top:22px; }
+.strength-location-copy p:not(.eyebrow)+p { margin-top:15px; }
+.strength-location-copy .inline-link { margin-top:27px; }
+.strength-location-panel { min-width:0;background:#e4effb;border:1px solid #c8dbea;border-radius:19px;padding:17px;box-shadow:0 18px 45px rgba(25,70,111,.07); }
+.strength-venue-eyebrow { display:flex;justify-content:space-between;align-items:center;gap:15px;margin:7px 8px 17px;font-size:11px;font-weight:770;letter-spacing:.13em;color:#315a84; }
+.strength-venue-eyebrow span { color:#547da5;letter-spacing:.08em; }
+.strength-location-panel .location-note { border:0; border-radius:12px; min-height:390px; padding:clamp(28px,3.2vw,45px);background:linear-gradient(155deg,#204a77,#102f51); }
+.strength-location-panel .location-note > strong { display:block;line-height:1.12; }
+.strength-location-panel .location-note address { font-size:18px; }
+.strength-location-panel .location-note .text-link-row { flex-wrap:wrap;gap:14px 24px; }
+.strength-page .offer-section--strength { background:#fff; }
+.strength-page .offer-section--strength .offer-heading { margin-bottom:38px; }
 .strength-faq { background:#eff4f9; }
 .strength-faq-grid { display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(40px,8vw,100px); }
 .strength-faq .faq-items { margin-top:0; }
 @media(max-width:1100px) {
   .strength-audience-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .strength-options-grid { grid-template-columns:1fr; }
-  .strength-option { padding:30px; }
 }
 @media(max-width:900px) {
-  .strength-hero-grid,.strength-section-heading,.strength-philosophy-grid,.strength-faq-grid { grid-template-columns:1fr; }
+  .strength-hero-grid,.strength-section-heading,.strength-philosophy-grid,.strength-faq-grid,.strength-location-layout { grid-template-columns:1fr; }
   .strength-hero-grid { gap:38px; }
   .strength-hero-visual { min-height:470px;max-width:750px; }
   .strength-section-heading { gap:25px; }
-  .strength-location-note { max-width:none; }
-  .strength-options-actions { align-items:start;flex-direction:column; }
+  .strength-location-layout { gap:35px; }
 }
 @media(max-width:680px) {
   .strength-hero h1 { font-size:clamp(42px,9.2vw,61px); }
@@ -101,10 +93,12 @@
   .strength-audience-grid,.strength-process-grid,.strength-distinction-grid { grid-template-columns:1fr; }
   .strength-audience-grid { margin-top:36px; }
   .strength-audience-grid h3 { margin-top:23px; }
-  .strength-process-grid,.strength-distinction-grid,.strength-options-grid { margin-top:35px; }
+  .strength-process-grid,.strength-distinction-grid { margin-top:35px; }
   .strength-process-stage,.strength-distinction-grid article { padding:27px; }
   .strength-distinction-footer { flex-direction:column;gap:13px; }
-  .strength-options-actions > div { justify-content:flex-start; }
+  .strength-location-panel { padding:11px; }
+  .strength-location-panel .location-note { min-height:0;padding:27px 24px; }
+  .strength-venue-eyebrow { margin:9px 7px 14px; }
   .strength-faq h2 { max-width:540px; }
 }
 @media(prefers-reduced-motion:reduce) { .strength-page * { scroll-behavior:auto; } }
