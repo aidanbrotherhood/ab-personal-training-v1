@@ -134,21 +134,37 @@ test("header, dropdown, mobile menu and grouped footer resolve to canonical dest
   assert.doesNotMatch(html, /href="\/my-approach(?:[\/#?"])/);
 });
 
-test("About Me navigation and text contrast stay consistent with the page design", async () => {
+test("About is a complete personal essay, not a sales landing page", async () => {
   const response = await request("/about");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /about-me-page/);
-  assert.match(html, /about-me-introduction/);
-  assert.match(html, /about-me-details/);
-  assert.match(html, /About Me/);
-  assert.match(html, /<title>About Me \| Aidan Brotherhood \| AB Personal Training<\/title>/);
+  assert.match(html, /about-journal-page/);
+  assert.match(html, /<title>What I Was Trying to Prove \| Aidan Brotherhood<\/title>/);
+  assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
+  assert.match(html, /<h1 id="journal-title">What I Was Trying to Prove<\/h1>/);
+  assert.match(html, /<time dateTime="2026-11-04">4 November 2026<\/time>/);
+  assert.match(html, /rel="canonical" href="https:\/\/aidanbrotherhood.com\/about"/);
+  assert.match(html, /journal-article/);
+  assert.match(html, /journal-afterword/);
   assert.match(html, /href="\/about\/approach"/);
-  assert.doesNotMatch(html, /Meet Aidan/);
+  const article = html.match(/<article class="journal-article"[^>]*>([\s\S]*?)<\/article>/)?.[1];
+  assert.ok(article, "A self-contained semantic article renders");
+  assert.equal((article.match(/<hr class="journal-break"/g) || []).length, 5);
+  assert.equal((article.match(/<p(?:\s|>)/g) || []).length, 187);
+  for (const excerpt of [
+    "I was eighteen when I stopped playing tennis.",
+    "Around a year later, I started a marketing agency.",
+    "What would I be if I wasn't the person building ambio?",
+    "The idea of contribution was what really stayed with me.",
+    "I'm now building AB Personal Training",
+    "I'm much more interested now in what I can do for somebody else.",
+  ]) assert.ok(decode(article).includes(excerpt), excerpt);
+  assert.match(article, /<cite>The Courage to Be Disliked<\/cite>/);
+  assert.doesNotMatch(article, /btn-primary|data-consultation-cta|offer-card|pricing-card/);
+  assert.doesNotMatch(article, /about-me-introduction|approach-section|principles-grid/);
   for (const page of ["/", "/personal-training-for-beginners", "/consultation"]) {
     const other = await (await request(page)).text();
     assert.ok(other.includes("About Me"), page);
-    assert.doesNotMatch(other, /Meet Aidan/);
   }
 });
 
