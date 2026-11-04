@@ -1,0 +1,127 @@
+/* Fat Loss & Body Composition — restrained, editorial, responsive. */
+.fat-loss-page { --fat-ink:#17314c; --fat-copy:#465c70; --fat-blue:#075fd8; }
+.fat-loss-page h2 { color:var(--fat-ink); }
+.fat-loss-page h2 span { color:var(--fat-blue); }
+.fat-loss-page .fat-index { color:#075fd8; font-size:12px; letter-spacing:.12em; font-weight:750; text-transform:uppercase; }
+.fat-loss-page .fat-heading-grid { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr); gap:clamp(38px,7vw,100px); align-items:start; }
+.fat-heading-grid h2 { margin-top:22px; max-width:720px; }
+.fat-heading-copy { max-width:680px; padding-top:25px; }
+.fat-heading-copy p { font-size:17px; line-height:1.8; color:var(--fat-copy); }
+.fat-heading-copy p + p { margin-top:16px; }
+.fat-hero { background:linear-gradient(155deg,#fff 45%,#edf4fc 100%); }
+.fat-hero .page-breadcrumb { padding-block:22px; }
+.fat-hero-grid { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,.86fr); gap:clamp(36px,5vw,75px); align-items:center; padding-block:clamp(50px,7vw,100px); }
+.fat-hero-content { min-width:0; }
+.fat-hero h1 { font-size:clamp(46px,5.3vw,76px); line-height:1.06; letter-spacing:-.065em; color:var(--fat-ink); font-weight:740; margin-top:27px; }
+.fat-hero h1 span { color:var(--fat-blue); }
+.fat-hero-content > p:not(.eyebrow):not(.fat-small-note) { max-width:665px; margin-top:19px; font-size:17px; line-height:1.78; color:var(--fat-copy); }
+.fat-hero-content > p.fat-lead { font-size:clamp(20px,2vw,24px); line-height:1.47; font-weight:650; letter-spacing:-.025em; color:#264764; margin-top:28px; }
+.fat-hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:22px 28px; margin-top:35px; }
+.fat-text-link { display:inline-flex; align-items:center; gap:9px; font-size:15px; line-height:1.5; color:var(--fat-blue); font-weight:700; }
+.fat-text-link:hover { text-decoration:underline; text-underline-offset:4px; }
+.fat-hero-content > p.fat-small-note { margin-top:18px; color:#627588; font-size:13px; }
+.fat-hero-figure { position:relative; margin:0; min-height:610px; border-radius:14px; overflow:hidden; background:#dce7f2; }
+.fat-hero-figure img { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
+.fat-hero-figure::after { content:""; position:absolute; inset:57% 0 0; background:linear-gradient(transparent,rgba(8,27,48,.83)); pointer-events:none; }
+.fat-hero-figure figcaption { position:absolute; z-index:1; bottom:24px; left:24px; right:24px; display:grid; gap:8px; font-size:12px; letter-spacing:.1em; font-weight:750; color:white; }
+.fat-hero-figure figcaption small { letter-spacing:normal; font-size:12px; font-weight:450; color:#e5eef9; }
+.fat-goals { background:white; }
+.fat-goals-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:55px; }
+.fat-goals-grid article { background:#f5f8fc; border:1px solid #e0e8f0; border-radius:12px; min-height:270px; padding:34px; }
+.fat-goals-grid h3 { color:var(--fat-ink); font-size:clamp(24px,2.5vw,31px); letter-spacing:-.04em; margin-top:37px; line-height:1.19; }
+.fat-goals-grid p { margin-top:16px; color:var(--fat-copy); font-size:16px; line-height:1.73; }
+.fat-closing-line { max-width:940px; margin-top:30px; color:#244e75; font-size:19px; line-height:1.65; font-weight:620; }
+.fat-foundations { background:#f6f9fc; }
+.fat-feature-grid { display:grid; grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr); gap:clamp(40px,7vw,100px); align-items:center; margin-top:clamp(70px,9vw,126px); }
+.fat-feature-reversed { grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); }
+.fat-feature-copy h3 { color:var(--fat-ink); font-size:clamp(37px,4.2vw,56px); line-height:1.13; letter-spacing:-.055em; margin-top:23px; }
+.fat-feature-copy h3 span { color:var(--fat-blue); }
+.fat-feature-copy p:not(.fat-index) { color:var(--fat-copy); font-size:16px; line-height:1.82; margin-top:18px; }
+.fat-feature-copy strong { display:block; font-size:18px; font-weight:700; line-height:1.6; color:#1c4774; margin-top:25px; }
+.fat-feature-copy .inline-link { margin-top:24px; }
+.fat-feature-photo { border-radius:13px; overflow:hidden; background:#e3e9ee; margin:0; }
+.fat-feature-photo img { display:block; width:100%; aspect-ratio:4/4.4; object-fit:cover; }
+.fat-feature-photo figcaption { padding:17px 20px; font-size:13px; font-weight:630; color:#405c75; }
+.fat-feature-photo figcaption small { display:block; font-weight:450; margin-top:3px; color:#6a7c8d; }
+.fat-consistency { margin-top:clamp(72px,10vw,140px); padding:clamp(34px,5vw,68px); display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(32px,6vw,90px); border-radius:15px; background:#e8f1fc; }
+.fat-consistency h3 { margin-top:22px; color:var(--fat-ink); font-size:clamp(35px,3.8vw,52px); letter-spacing:-.05em; line-height:1.12; }
+.fat-consistency h3 span { color:var(--fat-blue); }
+.fat-consistency-copy p { color:var(--fat-copy); font-size:16px; line-height:1.8; }
+.fat-consistency-copy p + p { margin-top:18px; }
+.fat-consistency-copy strong { display:block; color:#164b7c; font-size:18px; line-height:1.55; margin-top:24px; }
+.fat-process { background:white; }
+.fat-steps { margin-top:64px; border-top:1px solid #d6e1ec; }
+.fat-step { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:clamp(40px,7vw,95px); padding-block:clamp(36px,5.2vw,63px); border-bottom:1px solid #d6e1ec; }
+.fat-step-title h3 { font-size:clamp(40px,4vw,57px); margin-top:23px; letter-spacing:-.06em; line-height:1.1; color:var(--fat-ink); }
+.fat-step-title strong { display:block; font-size:18px; font-weight:650; color:#315879; line-height:1.5; margin-top:16px; }
+.fat-step-content p { font-size:16px; line-height:1.82; color:var(--fat-copy); }
+.fat-step-content p + p { margin-top:17px; }
+.fat-process-foot { margin-top:38px; display:flex; justify-content:space-between; gap:28px; align-items:center; }
+.fat-process-foot p { max-width:680px; font-size:18px; color:#264e74; font-weight:640; line-height:1.65; }
+.fat-beyond { background:#163b68; color:#fff; }
+.fat-beyond-grid { display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:clamp(50px,8vw,120px); }
+.fat-beyond .eyebrow { color:#aed6ff; }
+.fat-beyond h2 { color:#fff; margin-top:24px; }
+.fat-beyond h2 span { color:#a9d4ff; }
+.fat-beyond-copy p { color:#e1eaf5; font-size:16px; line-height:1.82; }
+.fat-beyond-copy p + p { margin-top:18px; }
+.fat-beyond-copy blockquote { margin:38px 0 24px; padding:0 0 0 22px; border-left:3px solid #91c4ff; font-size:clamp(25px,2.7vw,35px); line-height:1.33; letter-spacing:-.035em; font-weight:650; }
+.fat-beyond-copy blockquote span { color:#a9d4ff; }
+.fat-beyond .inline-link { color:#b8d9ff; }
+.fat-pricing-intro { padding-top:clamp(85px,9vw,130px); }
+.fat-pricing-intro h2 { max-width:870px; margin-top:25px; }
+.fat-pricing-intro p:last-child { max-width:760px; color:var(--fat-copy); font-size:18px; margin-top:24px; }
+.fat-loss-page .offer-section { padding-top:46px; }
+.fat-coach { background:white; }
+.fat-coach-grid { display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:clamp(50px,8vw,115px); align-items:center; }
+.fat-coach-mark { background:#1b416d; border-radius:15px; min-height:540px; display:flex; flex-direction:column; justify-content:space-between; padding:35px; color:white; }
+.fat-coach-mark > span { color:#bbd6f5; letter-spacing:.15em; font-weight:750; font-size:12px; }
+.fat-coach-mark strong { font-size:clamp(47px,5vw,72px); line-height:1.06; letter-spacing:-.065em; font-weight:680; }
+.fat-coach-mark strong span { color:#8ac0ff; }
+.fat-coach-mark small { font-size:13px; letter-spacing:.03em; color:#d1e4f9; }
+.fat-coach-copy h2 { margin-top:24px; }
+.fat-coach-copy p:not(.eyebrow) { font-size:16px; line-height:1.8; color:var(--fat-copy); margin-top:18px; }
+.fat-coach-copy .inline-link { margin-top:25px; }
+.fat-location { background:#f5f8fc; }
+.fat-location-note { margin-top:46px; max-width:650px; }
+.fat-faq-grid { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:clamp(40px,7vw,95px); align-items:start; }
+.fat-faq h2 { margin-top:22px; }
+.fat-faq-grid > div:first-child > p:last-child { font-size:17px; color:var(--fat-copy); margin-top:24px; }
+.fat-loss-page .faq-answer p { font-size:16px; line-height:1.75; margin-bottom:22px; color:var(--fat-copy); }
+.fat-loss-page .faq-answer a { text-decoration:underline; text-decoration-color:#a9c6ef; text-underline-offset:3px; color:var(--fat-blue); font-weight:640; }
+@media (max-width:1000px) {
+  .fat-hero-grid,.fat-heading-grid,.fat-feature-grid,.fat-consistency,.fat-beyond-grid,.fat-coach-grid,.fat-faq-grid { grid-template-columns:1fr; }
+  .fat-hero-grid { gap:34px; }
+  .fat-hero-figure { min-height:480px; max-width:730px; }
+  .fat-heading-copy { padding-top:0; }
+  .fat-goals-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .fat-feature-reversed .fat-feature-photo { order:2; }
+  .fat-feature-reversed .fat-feature-copy { order:1; }
+  .fat-feature-photo { max-width:720px; }
+  .fat-feature-photo img { aspect-ratio:4/3; }
+  .fat-coach-mark { min-height:400px; }
+}
+@media (max-width:680px) {
+  .fat-hero h1 { font-size:clamp(41px,9.7vw,58px); }
+  .fat-hero-grid { padding-block:38px 60px; }
+  .fat-hero-content > p:not(.eyebrow):not(.fat-small-note) { font-size:16px; }
+  .fat-hero-figure { min-height:0; aspect-ratio:4/4.6; }
+  .fat-hero-actions { align-items:stretch; flex-direction:column; gap:22px; }
+  .fat-hero-actions .btn { justify-content:center; width:100%; }
+  .fat-goals-grid { grid-template-columns:1fr; margin-top:34px; }
+  .fat-goals-grid article { min-height:0; padding:28px; }
+  .fat-goals-grid h3 { margin-top:22px; }
+  .fat-heading-copy p { font-size:16px; }
+  .fat-feature-grid { margin-top:58px; gap:32px; }
+  .fat-feature-copy h3 { font-size:clamp(33px,8.3vw,46px); }
+  .fat-feature-photo img { aspect-ratio:4/3.7; }
+  .fat-consistency { margin-top:66px; padding:29px 25px; }
+  .fat-step { grid-template-columns:1fr; gap:25px; padding-block:35px; }
+  .fat-steps { margin-top:35px; }
+  .fat-process-foot { align-items:flex-start; flex-direction:column; }
+  .fat-process-foot .btn { width:100%; justify-content:center; }
+  .fat-pricing-intro { padding-top:78px; }
+  .fat-coach-mark { min-height:340px; padding:25px; }
+  .fat-coach-mark strong { font-size:clamp(45px,11vw,63px); }
+  .fat-location-note { margin-top:35px; }
+}
