@@ -38,6 +38,7 @@ export function Brand({ variant = "full" }: { variant?: "full" | "symbol" }) {
 const trainingLinks = [
   ["/personal-training-renfrew", "Overview", "One-to-one training in Renfrew"],
   ["/strength-training-renfrew", "Strength & Muscle", "Strength coaching and muscular development"],
+  ["/fat-loss-coaching-renfrew", "Fat Loss & Body Composition", "Body composition and weight-loss coaching"],
   ["/personal-training-for-beginners", "Beginners", "A confident place to begin"],
   ["/movement-assessment", "Movement Assessment", "Understand your starting point"],
 ] as const;
@@ -335,6 +336,7 @@ export function Footer() {
             <h2>Coaching</h2>
             <a href="/personal-training-renfrew">Personal Training</a>
             <a href="/strength-training-renfrew">Strength &amp; Muscle</a>
+            <a href="/fat-loss-coaching-renfrew">Fat Loss &amp; Body Composition</a>
             <a href="/pricing">Pricing</a>
             <a href="/personal-training-for-beginners">Beginners</a>
             <a href="/movement-assessment">Movement Assessment</a>

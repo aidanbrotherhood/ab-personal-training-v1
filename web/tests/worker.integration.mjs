@@ -49,7 +49,7 @@ test("full Worker routing serves the production resource sitemap and robots from
   );
   assert.doesNotMatch(
     xml,
-    /priority|changefreq|lastmod|workers\.dev|\/terms|\/strength-training<|\/fat-loss-coaching/,
+    /priority|changefreq|lastmod|workers\.dev|\/terms|\/strength-training<|\/fat-loss-coaching</,
   );
   const robots = await request("/robots.txt");
   assert.equal(
@@ -302,6 +302,40 @@ test("strength training local page is crawlable, relevant, linked and commercial
   for (const source of ["/", "/pricing", "/personal-training-renfrew", "/personal-training-for-beginners"]) {
     const sourceHtml = await (await request(source)).text();
     assert.ok(links(sourceHtml).includes(path), source + " must link to strength service");
+  }
+});
+
+test("fat loss local landing page is complete, indexable, linked and consistent with shared coaching offers", async () => {
+  const path = "/fat-loss-coaching-renfrew";
+  const response = await request(path);
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
+  assert.match(html, /Lose body fat/);
+  assert.match(html, /Build strength/);
+  assert.match(html, /Assess/);
+  assert.match(html, /Develop/);
+  assert.match(html, /Progress/);
+  assert.match(html, /calorie|energy deficit/i);
+  assert.match(html, /JD Gyms Renfrew/);
+  assert.match(html, /images\.unsplash\.com/);
+  assert.match(html, /<meta name="robots" content="index, follow"/);
+  assert.ok(html.includes('<link rel="canonical" href="' + origin + path + '"'));
+  for (const label of ["£99", "£180", "£320", "Starter", "Coaching+"]) assert.ok(html.includes(label), label);
+  for (const link of ["/consultation", "/pricing", "/about", "/about/approach", "/strength-training-renfrew", "/personal-training-renfrew#location"])
+    assert.ok(links(html).includes(link), link);
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])["@graph"];
+  const service = graph.find((node) => node["@type"] === "Service" && node["@id"] === origin + path + "#fat-loss-coaching");
+  assert.ok(service, "fat-loss-focused Service node");
+  assert.equal(service.provider["@id"], origin + "/#business");
+  assert.deepEqual(service.offers.map((offer) => offer.price), [99, 180, 320]);
+  const breadcrumbs = graph.find((node) => node["@type"] === "BreadcrumbList");
+  assert.deepEqual(breadcrumbs.itemListElement.map((item) => item.item), [
+    origin + "/", origin + "/personal-training-renfrew", origin + path
+  ]);
+  for (const source of ["/", "/pricing", "/personal-training-renfrew", "/strength-training-renfrew"]) {
+    const sourceHtml = await (await request(source)).text();
+    assert.ok(links(sourceHtml).includes(path), source + " must link to fat-loss coaching");
   }
 });
 
