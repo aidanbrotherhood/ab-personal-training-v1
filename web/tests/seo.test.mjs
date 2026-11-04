@@ -79,6 +79,7 @@ test("About essay has its own legible, content-first editorial design", () => {
   for (const expected of [
     ".about-journal-page .journal-masthead h1",
     ".about-journal-page .journal-masthead-meta",
+    ".about-journal-page .journal-masthead-intro",
     ".about-journal-page .journal-article p",
     ".about-journal-page .journal-chapter + .journal-chapter",
     ".about-journal-page .journal-afterword",
@@ -87,6 +88,9 @@ test("About essay has its own legible, content-first editorial design", () => {
   assert.ok(!stylesheet.includes("about-display"));
   assert.ok(!stylesheet.includes("principles-grid"));
   assert.ok(!stylesheet.includes("journal-break"));
+  assert.ok(!stylesheet.includes("journal-masthead-rail"));
+  assert.ok(!stylesheet.includes("journal-kicker"));
+  assert.ok(!stylesheet.includes("journal-deck"));
   assert.ok(!stylesheet.includes("border-bottom: 1px solid var(--journal-rule)"));
   assert.ok(!stylesheet.includes("border-top: 1px solid #d8e3f0"));
   const luminance = (hex) => {

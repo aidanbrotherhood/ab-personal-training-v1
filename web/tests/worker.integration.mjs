@@ -143,6 +143,9 @@ test("About is a complete personal essay, not a sales landing page", async () =>
   assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
   assert.match(html, /<h1 id="journal-title">What I Was Trying to Prove<\/h1>/);
   assert.match(html, /<time dateTime="2026-11-04">4 November 2026<\/time>/);
+  assert.match(html, /Aidan Brotherhood/);
+  assert.doesNotMatch(html, /An essay by Aidan Brotherhood|Personal writing|min read|journal-masthead-rail|journal-deck|journal-kicker/);
+  assert.match(html, /journal-masthead-meta/);
   assert.match(html, /rel="canonical" href="https:\/\/aidanbrotherhood.com\/about"/);
   assert.match(html, /journal-article/);
   assert.match(html, /journal-afterword/);
