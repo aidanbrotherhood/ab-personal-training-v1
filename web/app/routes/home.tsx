@@ -128,11 +128,11 @@ export default function Home() {
             </p>
             <span className="pathway-link">Explore strength coaching ↗</span>
           </a>
-          <a href="/pricing#fat-loss">
+          <a href="/fat-loss-coaching-renfrew">
             <span>03 / CHANGING HABITS</span>
             <h3>Make it sustainable.</h3>
             <p>Training and practical nutrition guidance that fit real life.</p>
-            <span className="pathway-link">Explore fat-loss support ↗</span>
+            <span className="pathway-link">Explore fat-loss coaching ↗</span>
           </a>
         </div>
       </section>
