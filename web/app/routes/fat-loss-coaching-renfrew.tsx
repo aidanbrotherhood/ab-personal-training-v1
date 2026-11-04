@@ -262,12 +262,7 @@ export default function FatLossCoachingRenfrew() {
         </div>
       </section>
 
-      <div className="fat-pricing-intro container">
-        <p className="eyebrow">Your coaching options</p>
-        <h2>The support you need. <span>A plan that makes sense.</span></h2>
-        <p>You don't need to commit to months of training before we've even met. Start with a free consultation, discuss your goals and decide which level of support would suit you.</p>
-      </div>
-      <PricingSection variant="home" />
+      <PricingSection variant="fatLoss" />
 
       <section className="section-pad fat-coach">
         <div className="container fat-coach-grid">
