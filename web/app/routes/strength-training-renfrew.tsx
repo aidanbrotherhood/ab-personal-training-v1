@@ -180,6 +180,9 @@ export default function StrengthTrainingRenfrew() {
           <a href="/movement-assessment" className="inline-link">
             Explore the movement assessment <Arrow />
           </a>
+          <a href="/fat-loss-coaching-renfrew" className="inline-link">
+            Fat loss &amp; body composition coaching <Arrow />
+          </a>
         </div>
       </section>
 
