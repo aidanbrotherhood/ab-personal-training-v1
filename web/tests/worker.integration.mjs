@@ -328,7 +328,7 @@ test("fat loss local landing page is complete, indexable, linked and consistent 
   assert.match(html, /offer-card--featured/);
   assert.match(html, /offer-card-benefits/);
   assert.match(html, /offer-compare-table/);
-  assert.equal((html.match(/The support you need\\. A plan that makes sense\\./g) || []).length, 1);
+  assert.equal(html.split("The support you need. A plan that makes sense.").length - 1, 1);
   assert.doesNotMatch(html, /fat-pricing-intro/);
   assert.match(html, /closing-cta section-pad/);
   assert.match(html, /You don.t need a perfect starting point/);
