@@ -160,12 +160,10 @@ export default function FatLossCoachingRenfrew() {
 
       <section className="section-pad fat-foundations" id="the-approach" aria-labelledby="fat-foundations-heading">
         <div className="container">
-          <div className="fat-heading-grid">
-            <div>
-              <p className="eyebrow">A considered approach to body composition</p>
-              <h2 id="fat-foundations-heading">More than <span>losing weight.</span></h2>
-            </div>
-            <div className="fat-heading-copy">
+          <div className="fat-foundations-intro">
+            <p className="eyebrow">A considered approach to body composition</p>
+            <h2 id="fat-foundations-heading">More than <span>losing weight.</span></h2>
+            <div className="fat-foundations-intro-copy">
               <p>Losing weight and improving body composition aren't necessarily the same thing. If your goal is to lose body fat, what happens to your muscle mass, strength and physical fitness matters too.</p>
               <p>That's why my approach combines practical nutrition, purposeful strength training and habits you can maintain. Not a collection of quick fixes. A process built around you.</p>
             </div>
