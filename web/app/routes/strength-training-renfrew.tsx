@@ -7,7 +7,7 @@ import {
   LocationNote,
   PageShell,
 } from "../components/site";
-import { plans } from "../lib/offers";
+import { PricingSection } from "../components/pricing-section";
 import "../strength-training.css";
 
 const situations = [
@@ -111,12 +111,12 @@ export default function StrengthTrainingRenfrew() {
           </div>
           <figure className="strength-hero-visual">
             <img
-              src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1050&q=82"
-              srcSet="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1050&q=82 1050w"
+              src="https://images.unsplash.com/photo-1722925541142-5db2668ca492?auto=format&fit=crop&w=1050&q=82"
+              srcSet="https://images.unsplash.com/photo-1722925541142-5db2668ca492?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1722925541142-5db2668ca492?auto=format&fit=crop&w=1050&q=82 1050w"
               sizes="(max-width: 900px) 100vw, 43vw"
               width="850"
               height="1050"
-              alt="Illustrative photograph of strength training in a gym, not JD Gyms Renfrew"
+              alt="Illustrative close-up of an athlete holding a barbell during strength training, not JD Gyms Renfrew"
               decoding="async"
               fetchPriority="high"
             />
@@ -273,84 +273,33 @@ export default function StrengthTrainingRenfrew() {
         </div>
       </section>
 
-      <section className="section-pad strength-location" id="location">
-        <div className="container strength-section-heading">
-          <div>
-            <p className="eyebrow">Personal training in Renfrew</p>
-            <h2>One-to-one coaching <span>at JD Gyms Renfrew.</span></h2>
-          </div>
+      <section className="section-pad strength-location" id="location" aria-labelledby="strength-location-title">
+        <div className="container strength-location-layout">
           <div className="strength-location-copy">
+            <p className="eyebrow">Personal training in Renfrew</p>
+            <h2 id="strength-location-title">Your training base.<span> JD Gyms Renfrew.</span></h2>
             <p>
-              All in-person coaching takes place at JD Gyms Renfrew, Renfrew
-              Retail Park, PA4 9EN. I operate independently within the gym,
-              providing personal training for people who want individual
-              attention and a structured plan.
+              Strength and muscle-building coaching takes place at JD Gyms Renfrew
+              in Renfrew Retail Park. I work independently within the gym,
+              offering focused one-to-one sessions and a structured approach
+              to training.
             </p>
             <p>
-              Whether you're based in Renfrew, Paisley, Erskine, Clydebank or
-              the surrounding area, your appointments take place here in Renfrew.
-            </p>
-            <p>
-              A valid JD Gyms membership is required for paid sessions and is
-              purchased separately. If you're not a member, contact me before
-              booking your consultation to clarify access arrangements.
+              Whether you're coming from Renfrew, Paisley, Erskine, Clydebank or
+              the surrounding area, this is where we train together.
             </p>
             <a className="inline-link" href="/personal-training-renfrew#location">
-              Training location &amp; gym access <Arrow />
+              See gym location and access details <Arrow />
             </a>
           </div>
+          <aside className="strength-location-panel" aria-label="Where to train and gym access">
+            <p className="strength-venue-eyebrow">THE TRAINING VENUE <span>01 / 01</span></p>
+            <LocationNote />
+          </aside>
         </div>
-        <div className="container strength-location-note"><LocationNote /></div>
       </section>
 
-      <section className="section-pad strength-options" id="coaching-options">
-        <div className="container strength-section-heading">
-          <div>
-            <p className="eyebrow">Your level of support</p>
-            <h2>Coaching built <span>around your goals.</span></h2>
-          </div>
-          <p>
-            There's no separate price for strength training or muscle-building.
-            Your programme is shaped around your goals within the level of
-            support you choose. You don't need to decide before we meet.
-          </p>
-        </div>
-        <div className="container strength-options-grid">
-          {plans.map((plan) => (
-            <article
-              key={plan.id}
-              className={"strength-option" + (plan.id === "weekly" ? " strength-option-featured" : "")}
-            >
-              <div className="strength-option-top">
-                <p className="strength-index">{plan.eyebrow}</p>
-                <h3>{plan.title}</h3>
-                <div className="strength-option-price">
-                  <strong>{plan.price}</strong>
-                  <span>{plan.period}</span>
-                </div>
-              </div>
-              <p>{plan.description}</p>
-              <ul>
-                {plan.features.map((feature) => <li key={feature}>{feature}</li>)}
-              </ul>
-              <a className="strength-option-link" href={"/pricing#offer-coaching-" + plan.id}>
-                Package details <Arrow />
-              </a>
-            </article>
-          ))}
-        </div>
-        <div className="container strength-options-actions">
-          <p>Paid coaching requires a separate JD Gyms membership.</p>
-          <div>
-            <a className="strength-understated-link" href="/pricing">
-              Compare coaching &amp; prices <Arrow />
-            </a>
-            <ConsultationLink placement="strength_packages">
-              Book your free consultation
-            </ConsultationLink>
-          </div>
-        </div>
-      </section>
+      <PricingSection variant="strength" />
 
       <section className="section-pad strength-faq">
         <div className="container strength-faq-grid">
