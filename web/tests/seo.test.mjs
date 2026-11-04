@@ -96,9 +96,14 @@ test("About essay has its own legible, content-first editorial design", () => {
     const b = luminance(background);
     return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
   };
-  assert.ok(contrast("#35404a", "#f9f8f5") >= 7);
-  assert.ok(contrast("#60707b", "#f9f8f5") >= 4.5);
-  assert.ok(contrast("#23578d", "#f1f0eb") >= 4.5);
+  assert.ok(stylesheet.includes("--journal-paper: #f7f9fc;"));
+  assert.ok(stylesheet.includes("--journal-ink: #182a3c;"));
+  assert.ok(stylesheet.includes("--journal-text: #344a60;"));
+  assert.ok(stylesheet.includes("background: #eaf1fa;"));
+  assert.ok(!/Iowan|Baskerville|Palatino|Georgia|Times New Roman/.test(stylesheet));
+  assert.ok(contrast("#344a60", "#f7f9fc") >= 7);
+  assert.ok(contrast("#50677d", "#f7f9fc") >= 4.5);
+  assert.ok(contrast("#075fd8", "#eaf1fa") >= 4.5);
 });
 
 test("canonical normalisation preserves queries and scopes aliases to recognised HTML pages", () => {
