@@ -80,12 +80,15 @@ test("About essay has its own legible, content-first editorial design", () => {
     ".about-journal-page .journal-masthead h1",
     ".about-journal-page .journal-masthead-meta",
     ".about-journal-page .journal-article p",
-    ".about-journal-page .journal-break",
+    ".about-journal-page .journal-chapter + .journal-chapter",
     ".about-journal-page .journal-afterword",
     "@media (max-width: 680px)",
   ]) assert.ok(stylesheet.includes(expected), expected);
   assert.ok(!stylesheet.includes("about-display"));
   assert.ok(!stylesheet.includes("principles-grid"));
+  assert.ok(!stylesheet.includes("journal-break"));
+  assert.ok(!stylesheet.includes("border-bottom: 1px solid var(--journal-rule)"));
+  assert.ok(!stylesheet.includes("border-top: 1px solid #d8e3f0"));
   const luminance = (hex) => {
     const rgb = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
     const linear = rgb.map((c) => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
