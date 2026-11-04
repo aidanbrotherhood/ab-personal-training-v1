@@ -2,7 +2,7 @@ import { Arrow, ConsultationLink } from "./site";
 import { getPerSessionRate, plans } from "../lib/offers";
 
 type PricingSectionProps = {
-  variant: "home" | "renfrew" | "coaching" | "strength";
+  variant: "home" | "renfrew" | "coaching" | "strength" | "fatLoss";
 };
 
 const differences = [
@@ -51,9 +51,10 @@ const differences = [
 export function PricingSection({ variant }: PricingSectionProps) {
   const isRenfrew = variant === "renfrew";
   const isStrength = variant === "strength";
-  const compact = variant !== "coaching" && !isStrength;
+  const isFatLoss = variant === "fatLoss";
+  const compact = variant !== "coaching" && !isStrength && !isFatLoss;
   const sectionId = isStrength ? "coaching-options" : isRenfrew ? "prices" : "coaching";
-  const headingId = isStrength ? "strength-prices-title" : isRenfrew ? "prices-title" : "coaching-title";
+  const headingId = isFatLoss ? "fat-loss-prices-title" : isStrength ? "strength-prices-title" : isRenfrew ? "prices-title" : "coaching-title";
 
   return (
     <section
@@ -67,9 +68,9 @@ export function PricingSection({ variant }: PricingSectionProps) {
             <p className="offer-eyebrow">
               {isRenfrew
                 ? "PERSONAL TRAINING PRICES · RENFREW"
-                : isStrength ? "STRENGTH COACHING · YOUR OPTIONS" : "WORK WITH ME"}
+                : isStrength ? "STRENGTH COACHING · YOUR OPTIONS" : isFatLoss ? "FAT LOSS & BODY COMPOSITION · COACHING OPTIONS" : "WORK WITH ME"}
             </p>
-            <h2 id={headingId}>{isStrength ? "Coaching built around your goals." : "The right support makes all the difference."}</h2>
+            <h2 id={headingId}>{isStrength ? "Coaching built around your goals." : isFatLoss ? "The support you need. A plan that makes sense." : "The right support makes all the difference."}</h2>
           </div>
           <div className="offer-introduction">
             {isStrength && (
@@ -79,7 +80,14 @@ export function PricingSection({ variant }: PricingSectionProps) {
                 you choose. You don&apos;t need to decide before we meet.
               </p>
             )}
-            {!compact && !isStrength && (
+            {isFatLoss && (
+              <p>
+                You don't have to choose a package before we've met. We'll
+                discuss your goals, your starting point and the level of support
+                that makes sense for you.
+              </p>
+            )}
+            {!compact && !isStrength && !isFatLoss && (
               <p>
                 A good programme is only part of the picture. It’s knowing what
                 to do, understanding why you’re doing it, and having someone
