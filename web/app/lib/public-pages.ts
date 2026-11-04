@@ -49,10 +49,10 @@ export const publicPages = [
     key: "about",
     path: "/about",
     file: "routes/about.tsx",
-    title: "About Me | Aidan Brotherhood | AB Personal Training",
+    title: "What I Was Trying to Prove | Aidan Brotherhood",
     description:
-      "About Aidan Brotherhood, the coach behind AB Personal Training at JD Gyms Renfrew. Learn about his approach to strength, confidence and consistent training.",
-    h1: "Your training. A person in your corner.",
+      "A personal essay by Aidan Brotherhood on tennis, entrepreneurship, the pursuit of recognition, and finding meaning in contribution and coaching at JD Gyms Renfrew.",
+    h1: "What I Was Trying to Prove",
   },
   {
     key: "beginners",
