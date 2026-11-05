@@ -193,11 +193,13 @@ export function ConsultationLink({
   className = "btn btn-primary",
   placement = "content",
   offer,
+  onBeforeNavigate,
 }: {
   children?: ReactNode;
   className?: string;
   placement?: string;
   offer?: string;
+  onBeforeNavigate?: () => void;
 }) {
   const { pathname } = useLocation();
   return (
@@ -206,9 +208,10 @@ export function ConsultationLink({
       className={className}
       data-consultation-cta="true"
       data-offer-id={offer}
-      onClick={() =>
-        signal("consultation_cta_clicked", pathname, placement, offer)
-      }
+      onClick={() => {
+        onBeforeNavigate?.();
+        signal("consultation_cta_clicked", pathname, placement, offer);
+      }}
     >
       {children}
       <Arrow />
