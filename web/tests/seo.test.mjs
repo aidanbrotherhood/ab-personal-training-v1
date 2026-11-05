@@ -82,7 +82,8 @@ test("FAQ remains a readable reference page with native disclosures and accessib
     ".faq-page-answer", ".faq-page-jump-links", "@media (max-width: 680px)",
   ]) assert.ok(css.includes(token), token);
   assert.ok(css.includes("scroll-margin-top"));
-  assert.ok(!css.includes("display: none;"));
+  assert.ok(css.includes("summary::-webkit-details-marker"));
+  assert.ok(!css.includes(".faq-page-question { display: none;"));
   assert.ok(!css.includes("color: #fff;"));
 });
 
