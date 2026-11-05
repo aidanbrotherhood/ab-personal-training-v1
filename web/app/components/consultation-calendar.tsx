@@ -60,6 +60,9 @@ export function ConsultationCalendar() {
           parentElement: parent,
           prefill: { customAnswers: { a1: calendlyFitSummary(handoff) } },
         });
+        // The advanced widget creates and manages its own iframe.
+        // Do not leave the loading message indefinitely in this mode.
+        setLoaded(true);
       } catch { setWidgetError(true); }
     };
     if ((window as Window & { Calendly?: CalendlyWidget }).Calendly) {
@@ -210,7 +213,6 @@ export function ConsultationCalendar() {
         </div>
       ))}
 
-      {mode !== "review" && !live && null}
       <p className="booking-privacy-note">
         Calendly provides this calendar and handles your booking. Please don’t
         include medical or sensitive information. See the{" "}
