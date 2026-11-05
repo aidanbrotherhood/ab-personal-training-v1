@@ -28,8 +28,8 @@ export default function Coaching() {
         </p>
         <div className="hero-actions">
           <ConsultationLink placement="coaching_hero" />
-          <a className="intro-secondary" href="#coaching">
-            Compare the packages ↓
+          <a className="intro-secondary" href="#find-your-fit">
+            Help me choose ↓
           </a>
         </div>
       </PageIntro>
