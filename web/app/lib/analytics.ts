@@ -14,12 +14,14 @@ const eventNames = new Set([
   "consultation_cta_clicked", "booking_destination_viewed",
   "booking_calendar_viewed", "booking_time_selected",
   "booking_completed_client_signal", "contact_fallback_clicked",
+  "coaching_fit_started", "coaching_fit_completed", "coaching_fit_reset",
 ]);
 const placements = new Set([
   "content", "header", "footer", "closing", "hero", "renfrew_hero",
   "about_hero", "beginners_hero", "beginners_consultation", "coaching_hero",
   "pricing_home", "pricing_renfrew", "pricing_coaching", "page", "calendar",
-  "direct_calendar", "email",
+  "direct_calendar", "email", "calendar_fit",
+  "pricing_decision_aid", "pricing_decision_aid_result",
   "strength_hero", "strength_packages", "movement_hero", "movement_process",
   "movement_faq", "approach_hero", "approach_closing",
 ]);
