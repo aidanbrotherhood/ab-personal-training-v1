@@ -112,10 +112,13 @@ test("header, dropdown, mobile menu and grouped footer resolve to canonical dest
     "/personal-training-for-beginners",
     "/movement-assessment",
     "/pricing",
+    "/faq",
     "/about",
     "/about/approach",
     "/consultation",
   ]) assert.ok(links(html).includes(path), path);
+  assert.match(html, /class="nav-single" href="\/faq">FAQs<\/a>/);
+  assert.match(html, /<a href="\/faq">FAQs<\/a>/);
   assert.match(html, /aria-controls="nav-panel-training"/);
   assert.match(html, /aria-controls="nav-panel-about"/);
   assert.equal((html.match(/aria-expanded="false"/g) || []).length >= 2, true);
@@ -132,6 +135,41 @@ test("header, dropdown, mobile menu and grouped footer resolve to canonical dest
   assert.deepEqual(breadcrumb.itemListElement.map((item) => item.item), [origin + "/", origin + "/about", origin + "/about/approach"]);
   assert.doesNotMatch(html, /href="\/coaching(?:[\/#?"])/);
   assert.doesNotMatch(html, /href="\/my-approach(?:[\/#?"])/);
+});
+
+test("FAQ page is canonical, navigable and useful without client-side JavaScript", async () => {
+  const res = await request("/faq");
+  assert.equal(res.status, 200);
+  const html = await res.text();
+  assert.match(html, /<title>Personal Training FAQs in Renfrew \| AB Personal Training<\/title>/);
+  assert.match(html, /<h1>Frequently asked questions<\/h1>/);
+  assert.match(html, /<meta name="robots" content="index, follow"/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/aidanbrotherhood.com\/faq"/);
+  assert.equal((html.match(/class="faq-page-section"/g) || []).length, 5);
+  assert.equal((html.match(/class="faq-page-question"/g) || []).length, 25);
+  assert.match(html, /<nav class="faq-page-jump" aria-label="FAQ categories"/);
+  for (const section of ["getting-started", "coaching", "prices", "location", "booking"]) {
+    assert.ok(html.includes(`id="${section}"`), section);
+    assert.ok(html.includes(`href="#${section}"`), section);
+  }
+  for (const term of [
+    "Do I need previous gym experience?",
+    "What happens at the free consultation?",
+    "How much does personal training cost?",
+    "Do I need a JD Gyms membership?",
+    "What if I need to cancel or rearrange a session?",
+    "£99", "£180", "£320", "28 days", "PA4 9EN",
+  ]) assert.ok(decode(html).includes(term), term);
+  assert.ok(links(html).includes("/consultation"));
+  assert.ok(links(html).includes("/pricing"));
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])["@graph"];
+  assert.ok(graph.some(node => node["@type"] === "WebPage"));
+  assert.ok(!graph.some(node => node["@type"] === "FAQPage"));
+  assert.doesNotMatch(html, /guaranteed results|free gym membership|48.hour cancellation/i);
+  const older = await request("/pricing");
+  assert.ok(links(await older.text()).includes("/faq"));
+  const booking = await request("/consultation");
+  assert.ok(links(await booking.text()).includes("/faq"));
 });
 
 test("About is a complete personal essay, not a sales landing page", async () => {
