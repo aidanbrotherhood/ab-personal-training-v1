@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useRouteLoaderData } from "react-router";
 import {
   BUSINESS_EMAIL,
   CONSULTATION_PATH,
@@ -193,11 +193,13 @@ export function ConsultationLink({
   className = "btn btn-primary",
   placement = "content",
   offer,
+  onBeforeNavigate,
 }: {
   children?: ReactNode;
   className?: string;
   placement?: string;
   offer?: string;
+  onBeforeNavigate?: () => void;
 }) {
   const { pathname } = useLocation();
   return (
@@ -206,9 +208,10 @@ export function ConsultationLink({
       className={className}
       data-consultation-cta="true"
       data-offer-id={offer}
-      onClick={() =>
-        signal("consultation_cta_clicked", pathname, placement, offer)
-      }
+      onClick={() => {
+        onBeforeNavigate?.();
+        signal("consultation_cta_clicked", pathname, placement, offer);
+      }}
     >
       {children}
       <Arrow />
@@ -364,6 +367,7 @@ export function Footer() {
               Instagram <Arrow />
             </a>
             <a href="/privacy">Privacy Policy</a>
+            <CookieSettings />
           </div>
           <div className="footer-nav-group">
             <h2>Get Started</h2>
@@ -389,7 +393,11 @@ export function Footer() {
     </footer>
   );
 }
-
+function CookieSettings() {
+  const data = useRouteLoaderData<typeof import("../root").loader>("root");
+  if (!data?.analyticsId) return null;
+  return <button type="button" className="cookie-settings" onClick={() => window.dispatchEvent(new Event("ab:cookie-settings"))}>Cookie settings</button>;
+}
 export function PageShell({
   children,
   className = "",

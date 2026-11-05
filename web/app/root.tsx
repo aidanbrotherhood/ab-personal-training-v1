@@ -13,6 +13,7 @@ import { getPublicPage } from "./lib/public-pages";
 import { BUSINESS_NAME, isIndexableProduction, SITE_ORIGIN } from "./lib/seo";
 import { structuredData } from "./lib/structured-data";
 import { Header, Footer, ConsultationLink } from "./components/site";
+import { AnalyticsConsent } from "./components/analytics-consent";
 import "./styles.css";
 import "./discovery.css";
 import "./navigation.css";
@@ -21,10 +22,13 @@ export function loader({ request, context }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const page = getPublicPage(url.pathname);
   const production = isIndexableProduction(request, context.get(envContext));
+  const analyticsId = (context.get(envContext) as Env & { GA_MEASUREMENT_ID?: string }).GA_MEASUREMENT_ID || "";
   return {
     page,
     indexable: production && !!page,
     bookingEnabled: production,
+    analyticsId,
+    analyticsEnabled: production,
     canonical: production && page ? `${SITE_ORIGIN}${page.path}` : null,
     socialImage: `${url.origin}/social-card.png`,
     graph: production && page ? structuredData(page.path) : null,
@@ -93,6 +97,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <AnalyticsConsent id={data?.analyticsId || ""} enabled={data?.analyticsEnabled || false} />
         <ScrollRestoration />
         <Scripts />
       </body>
