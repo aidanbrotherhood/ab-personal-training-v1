@@ -42,6 +42,7 @@ test("published registry contains only complete, approved pages with unique meta
       "/strength-training-renfrew",
       "/fat-loss-coaching-renfrew",
       "/pricing",
+      "/faq",
       "/about",
       "/personal-training-for-beginners",
       "/about/approach",
@@ -74,6 +75,17 @@ test("published registry contains only complete, approved pages with unique meta
   ])
     assert.equal(getPublicPage(path), undefined);
 });
+test("FAQ remains a readable reference page with native disclosures and accessible navigation", () => {
+  const css = readFileSync("app/faq.css", "utf8");
+  for (const token of [
+    ".faq-page-hero", ".faq-page-section", ".faq-page-question summary",
+    ".faq-page-answer", ".faq-page-jump-links", "@media (max-width: 680px)",
+  ]) assert.ok(css.includes(token), token);
+  assert.ok(css.includes("scroll-margin-top"));
+  assert.ok(!css.includes("display: none;"));
+  assert.ok(!css.includes("color: #fff;"));
+});
+
 test("About essay has its own legible, content-first editorial design", () => {
   const stylesheet = readFileSync("app/about-me.css", "utf8");
   for (const expected of [
