@@ -92,6 +92,36 @@ test("Qualifications page uses a scoped, responsive and restrained design", () =
   assert.ok(!css.includes("font-family: Georgia"));
 });
 
+test("coaching decision aid styling, privacy and measurement use existing infrastructure", () => {
+  const css = readFileSync("app/coaching-fit.css", "utf8");
+  for (const selector of [
+    ".fit-welcome", ".fit-experience", ".fit-option",
+    ".fit-option:has(input:focus-visible)", ".fit-progress-list",
+    ".fit-result-answers", ".fit-alternatives-grid",
+    "@media (max-width: 800px)", "@media (max-width: 560px)",
+    "@media (prefers-reduced-motion: reduce)",
+  ]) assert.ok(css.includes(selector), selector);
+  const component = readFileSync("app/components/coaching-fit.tsx", "utf8");
+  for (const text of [
+    "type=\"radio\"", "role=\"radiogroup\"",
+    "aria-valuenow", "aria-live=\"polite\"",
+    "recommendCoaching(answers)", "data-consultation-cta",
+  ]) {
+    // ConsultationLink emits the existing data attribute, so its use
+    // (rather than a duplicate local anchor) is the intended integration.
+    if (text === "data-consultation-cta") assert.ok(component.includes("ConsultationLink"));
+    else assert.ok(component.includes(text), text);
+  }
+  assert.ok(!component.includes("localStorage"));
+  assert.ok(!component.includes("sessionStorage"));
+  assert.ok(!component.includes("document.cookie"));
+  assert.ok(!component.includes("fetch("));
+  const measurement = readFileSync("app/lib/measurement.ts", "utf8");
+  for (const event of [
+    "coaching_fit_started", "coaching_fit_completed", "coaching_fit_reset",
+  ]) assert.ok(measurement.includes(event), event);
+});
+
 test("FAQ remains a readable reference page with native disclosures and accessible navigation", () => {
   const css = readFileSync("app/faq.css", "utf8");
   for (const token of [
