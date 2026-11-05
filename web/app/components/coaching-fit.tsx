@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ConsultationLink } from "./site";
 import { plans } from "../lib/offers";
 import { signal } from "../lib/measurement";
+import { saveFitHandoff } from "../lib/fit-handoff";
 import {
   emptyFitAnswers,
   fitSteps,
@@ -308,6 +309,7 @@ export function CoachingFit() {
                         className="fit-next-button"
                         placement="pricing_decision_aid_result"
                         offer={decision.packageId || "unsure"}
+                        onBeforeNavigate={() => saveFitHandoff(answers, decision)}
                       >
                         Book a free consultation
                       </ConsultationLink>
