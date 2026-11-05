@@ -2,6 +2,7 @@ import { createRequestHandler, RouterContextProvider } from "react-router";
 import { envContext } from "../app/lib/context";
 import { processNotifications } from "./notifications";
 import { handleEnquiry } from "./enquiry";
+import { handleFunnelEvent } from "./funnel";
 import { canonicalRedirect, isIndexableProduction, legacyPageDestination } from "../app/lib/seo";
 
 const handler = createRequestHandler(
@@ -23,7 +24,9 @@ export default {
     const response =
       url.pathname === "/api/enquiry"
         ? await handleEnquiry(request, env, ctx)
-        : await handler(request, context);
+        : url.pathname === "/api/funnel-event"
+          ? await handleFunnelEvent(request, env)
+          : await handler(request, context);
     response.headers.set("X-Content-Type-Options", "nosniff");
     if (!response.headers.has("Referrer-Policy"))
       response.headers.set(
@@ -35,7 +38,7 @@ export default {
       "camera=(), microphone=(), geolocation=()",
     );
     response.headers.set("X-Frame-Options", "DENY");
-    if (!indexable || response.status >= 400 || url.pathname === "/api/enquiry")
+    if (!indexable || response.status >= 400 || url.pathname.startsWith("/api/"))
       response.headers.set("X-Robots-Tag", "noindex, nofollow");
     return response;
   },
