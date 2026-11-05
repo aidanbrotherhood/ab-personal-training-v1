@@ -311,10 +311,10 @@ test("only known provider engagement messages map to diagnostic signals, never c
   ])
     assert.equal(calendlySignal(value), null);
   const measurement = readFileSync("app/lib/measurement.ts", "utf8");
-  assert.doesNotMatch(
-    measurement,
-    /localStorage|sessionStorage|fetch\(|sendBeacon|document\.cookie/,
-  );
+  assert.doesNotMatch(measurement, /localStorage|sessionStorage|document\.cookie|gtag\(|fbq\(/);
+  assert.ok(measurement.includes('"/api/funnel-event"'));
+  assert.ok(measurement.includes("sendBeacon"));
+  assert.ok(!measurement.includes("payload.email"));
 });
 
 test("provider signals require both the exact origin and the active iframe window", () => {
