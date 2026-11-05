@@ -157,13 +157,16 @@ test("About is a complete personal essay, not a sales landing page", async () =>
   assert.doesNotMatch(html, /journal-break/);
   assert.equal((article.match(/<p(?:\s|>)/g) || []).length, 187);
   for (const excerpt of [
-    "I was eighteen when I stopped playing tennis.",
+    "For years, I built my life around tennis.",
     "Around a year later, I started a marketing agency.",
     "What would I be if I wasn't the person building ambio?",
     "The idea of contribution was what really stayed with me.",
     "I'm now building AB Personal Training",
     "I'm much more interested now in what I can do for somebody else.",
   ]) assert.ok(decode(article).includes(excerpt), excerpt);
+  assert.ok(decode(article).includes("I loved the sport, the training, the competition"));
+  assert.ok(decode(article).includes("That's easier to acknowledge now than it was at eighteen."));
+  assert.doesNotMatch(article, /I was eighteen when I stopped playing tennis/);
   assert.match(article, /<cite>The Courage to Be Disliked<\/cite>/);
   assert.doesNotMatch(article, /btn-primary|data-consultation-cta|offer-card|pricing-card/);
   assert.doesNotMatch(article, /about-me-introduction|approach-section|principles-grid/);
