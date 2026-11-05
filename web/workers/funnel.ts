@@ -73,6 +73,8 @@ export async function handleFunnelEvent(request: Request, env: FunnelEnv): Promi
 
   const payload = await readBody(request);
   if (!payload) return reply(400, false);
+  const allowedFields = new Set(["event", "page", "placement", "packageId", "fromFit", "bookingHash"]);
+  if (Object.keys(payload).some((key) => !allowedFields.has(key))) return reply(422, false);
   const { event, page, placement, packageId, fromFit, bookingHash } = payload;
   if (typeof event !== "string" || !acceptedEvents.has(event) ||
       typeof page !== "string" || !/^\/[a-z0-9/_-]{0,96}$/.test(page) ||
