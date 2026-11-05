@@ -257,6 +257,13 @@ export function Header() {
             >
               Pricing
             </a>
+            <a
+              className="nav-single"
+              href="/faq"
+              aria-current={pathname === "/faq" ? "page" : undefined}
+            >
+              FAQs
+            </a>
             <DesktopMenu
               id="about"
               label="About"
@@ -300,6 +307,7 @@ export function Header() {
               <a href="/" aria-current={pathname === "/" ? "page" : undefined}>Home</a>
               <MobileMenuGroup label="Personal Training" items={trainingLinks} pathname={pathname} />
               <a href="/pricing" aria-current={pathname === "/pricing" ? "page" : undefined}>Pricing</a>
+              <a href="/faq" aria-current={pathname === "/faq" ? "page" : undefined}>FAQs</a>
               <MobileMenuGroup label="About" items={aboutLinks} pathname={pathname} />
               <a className="mobile-book-link" href="/consultation" aria-current={pathname === "/consultation" ? "page" : undefined}>
                 Book Free Consultation <span aria-hidden="true">↗</span>
@@ -338,6 +346,7 @@ export function Footer() {
             <a href="/strength-training-renfrew">Strength &amp; Muscle</a>
             <a href="/fat-loss-coaching-renfrew">Fat Loss &amp; Body Composition</a>
             <a href="/pricing">Pricing</a>
+            <a href="/faq">FAQs</a>
             <a href="/personal-training-for-beginners">Beginners</a>
             <a href="/movement-assessment">Movement Assessment</a>
           </div>
