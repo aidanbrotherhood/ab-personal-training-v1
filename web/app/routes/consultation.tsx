@@ -96,6 +96,7 @@ export default function Consultation() {
             </p>
             <div className="text-link-row">
               <a href="/pricing">Coaching & prices ↗</a>
+              <a href="/faq">Frequently asked questions ↗</a>
               <a href="/about">About Me ↗</a>
               <a href={EMAIL_URL}>Email a question ↗</a>
             </div>
