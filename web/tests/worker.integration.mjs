@@ -482,7 +482,7 @@ test("all three pricing surfaces show the approved packages, hierarchy, exact pr
       "offer-card--complete",
     ])
       assert.ok(html.includes(value), `${path}: ${value}`);
-    assert.match(html, /Recommended for consistency/);
+    assert.match(html, path === "/pricing" ? /Weekly coaching/ : /Recommended for consistency/);
     assert.equal(
       (html.match(/class="offer-compare-table"/g) || []).length,
       path === "/pricing" ? 1 : 0,
@@ -496,6 +496,30 @@ test("all three pricing surfaces show the approved packages, hierarchy, exact pr
   const home = await (await request("/")).text();
   for (const id of ["approach", "about", "coaching", "consultation"])
     assert.ok(home.includes(`id="${id}"`));
+});
+
+test("pricing offers a standalone accessible decision aid without hiding package information", async () => {
+  const response = await request("/pricing");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /<section class="fit-section" id="find-your-fit" aria-labelledby="fit-title"/);
+  assert.match(html, /<h3 id="fit-title">Not sure which level of/);
+  assert.match(html, /Find your coaching fit/);
+  assert.match(html, /No email required\. No personal details collected\. No obligation\./);
+  assert.match(html, /href="#find-your-fit"/);
+  assert.match(html, /href="#offer-compare-coaching"/);
+  assert.match(html, /class="fit-start-button"/);
+  for (const title of ["Starter", "Coaching", "Coaching+"]) {
+    assert.ok(html.includes(title), title);
+  }
+  assert.match(html, /class="offer-compare-table"/);
+  assert.equal((html.match(/class="fit-section"/g) || []).length, 1);
+  assert.doesNotMatch(html, /fit-ask-email|fit-health-question|coaching-fit-cookie/);
+  for (const path of ["/", "/personal-training-renfrew", "/strength-training-renfrew", "/fat-loss-coaching-renfrew"]) {
+    const other = await (await request(path)).text();
+    assert.doesNotMatch(other, /class="fit-section"/, path);
+    assert.match(other, /Recommended for consistency/, path);
+  }
 });
 
 test("staging remains noindex and has no live calendar, even if the production flag is accidentally supplied", async () => {

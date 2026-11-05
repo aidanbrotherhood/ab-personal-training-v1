@@ -1,5 +1,6 @@
 import { Arrow, ConsultationLink } from "./site";
 import { getPerSessionRate, plans } from "../lib/offers";
+import { CoachingFit } from "./coaching-fit";
 
 type PricingSectionProps = {
   variant: "home" | "renfrew" | "coaching" | "strength" | "fatLoss";
@@ -114,7 +115,7 @@ export function PricingSection({ variant }: PricingSectionProps) {
                   <span className="offer-card-eyebrow">{plan.eyebrow}</span>
                   {featured && (
                     <span className="offer-card-recommendation">
-                      Recommended for consistency
+                      {variant === "coaching" ? "Weekly coaching" : "Recommended for consistency"}
                     </span>
                   )}
                 </div>
@@ -164,9 +165,10 @@ export function PricingSection({ variant }: PricingSectionProps) {
           })}
         </div>
 
+        {variant === "coaching" && <CoachingFit />}
         {!compact && (
           <>
-            <div
+            {variant !== "coaching" && <div
               className="offer-bridge"
               aria-label="Choosing the right level of coaching"
             >
@@ -184,7 +186,7 @@ export function PricingSection({ variant }: PricingSectionProps) {
                 independently, practical nutrition guidance and regular progress
                 reviews. Coaching+ adds a second coached session each week.
               </p>
-            </div>
+            </div>}
 
             <div
               className="offer-compare"
