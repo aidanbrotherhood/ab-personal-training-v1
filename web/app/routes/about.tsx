@@ -7,8 +7,8 @@ import { PageShell } from "../components/site";
  */
 const chapters: readonly (readonly string[])[] = [
   [
-    "I was eighteen when I stopped playing tennis.",
-    "Until then, it had been the most important thing in my life. I loved the sport, the training, the competition and the feeling that there was always something to work towards. For years, it occupied my thoughts in a way that very little else did. It was more than something I enjoyed. It had become a large part of how I understood myself.",
+    "For years, I built my life around tennis.",
+    "I loved the sport, the training, the competition and the feeling that there was always something to work towards. It occupied my thoughts in a way that very little else did. It was more than something I enjoyed. It had become a large part of how I understood myself.",
     "I wanted to be a professional tennis player.",
     "Looking back, I can see how unrealistic that ambition was. I was athletic, and there were aspects of the physical side of sport that came naturally to me, but athleticism only takes you so far. I didn't have the technical ability or the mentality required to compete at that level. Whatever I might have wanted, I was nowhere near good enough to make a career of it.",
     "That's easier to acknowledge now than it was at eighteen.",
