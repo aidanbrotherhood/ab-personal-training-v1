@@ -3,7 +3,7 @@ export default function Privacy() {
   return (
     <PageShell>
       <article className="privacy-page">
-        <p className="section-label">Last updated 3 November 2026</p>
+        <p className="section-label">Last updated 5 November 2026</p>
         <h1>Privacy notice for AB Personal Training</h1>
         <p>
           Aidan Brotherhood, trading as AB Personal Training, is responsible for
