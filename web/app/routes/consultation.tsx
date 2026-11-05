@@ -98,6 +98,7 @@ export default function Consultation() {
               <a href="/pricing">Coaching & prices ↗</a>
               <a href="/faq">Frequently asked questions ↗</a>
               <a href="/about">About Me ↗</a>
+              <a href="/about/qualifications">Qualifications &amp; training ↗</a>
               <a href={EMAIL_URL}>Email a question ↗</a>
             </div>
           </div>

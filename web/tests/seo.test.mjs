@@ -46,6 +46,7 @@ test("published registry contains only complete, approved pages with unique meta
       "/about",
       "/personal-training-for-beginners",
       "/about/approach",
+      "/about/qualifications",
       "/movement-assessment",
       "/consultation",
       "/privacy",
@@ -75,6 +76,22 @@ test("published registry contains only complete, approved pages with unique meta
   ])
     assert.equal(getPublicPage(path), undefined);
 });
+test("Qualifications page uses a scoped, responsive and restrained design", () => {
+  const css = readFileSync("app/qualifications.css", "utf8");
+  for (const token of [
+    ".qualifications-hero h1",
+    ".qualifications-section",
+    ".qualifications-record",
+    ".qualifications-details",
+    ".qualifications-development",
+    ".qualifications-closing",
+    "@media (max-width: 680px)",
+  ]) assert.ok(css.includes(token), token);
+  assert.ok(css.includes("#f7f9fc"));
+  assert.ok(css.includes("var(--blue)"));
+  assert.ok(!css.includes("font-family: Georgia"));
+});
+
 test("FAQ remains a readable reference page with native disclosures and accessible navigation", () => {
   const css = readFileSync("app/faq.css", "utf8");
   for (const token of [
