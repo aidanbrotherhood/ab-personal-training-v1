@@ -56,7 +56,7 @@ export function structuredData(path: string) {
       description: page.description,
       inLanguage: "en-GB",
       isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
-      about: { "@id": page.key === "about" ? personId : businessId },
+      about: { "@id": page.key === "about" || page.key === "qualifications" ? personId : businessId },
       ...(path === "/"
         ? {}
         : { breadcrumb: { "@id": `${pageUrl}#breadcrumb` } }),
@@ -73,19 +73,19 @@ export function structuredData(path: string) {
           name: "Home",
           item: `${SITE_ORIGIN}/`,
         },
-        ...(page.key === "approach" || page.key === "strength" || page.key === "fatLoss"
+        ...(page.key === "approach" || page.key === "qualifications" || page.key === "strength" || page.key === "fatLoss"
           ? [{
               "@type": "ListItem",
               position: 2,
-              name: page.key === "approach" ? "About" : "Personal Training",
-              item: page.key === "approach"
+              name: page.key === "approach" || page.key === "qualifications" ? "About" : "Personal Training",
+              item: page.key === "approach" || page.key === "qualifications"
                 ? `${SITE_ORIGIN}/about`
                 : `${SITE_ORIGIN}/personal-training-renfrew`,
             }]
           : []),
         {
           "@type": "ListItem",
-          position: page.key === "approach" || page.key === "strength" || page.key === "fatLoss" ? 3 : 2,
+          position: page.key === "approach" || page.key === "qualifications" || page.key === "strength" || page.key === "fatLoss" ? 3 : 2,
           name:
             page.key === "renfrew"
               ? "Training in Renfrew"
@@ -107,7 +107,9 @@ export function structuredData(path: string) {
                         ? "Free movement assessment"
                         : page.key === "approach"
                           ? "My approach"
-                          : "Privacy notice",
+                          : page.key === "qualifications"
+                            ? "Qualifications"
+                            : "Privacy notice",
           item: pageUrl,
         },
       ],
