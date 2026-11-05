@@ -63,6 +63,7 @@ export default function Qualifications() {
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
                 <dl className="qualifications-details">
+                  <div><dt>Official award</dt><dd>{item.qualification}</dd></div>
                   <div><dt>Training provider</dt><dd>{item.provider}</dd></div>
                   <div><dt>Awarding organisation</dt><dd>{item.awardingBody}</dd></div>
                   <div><dt>Qualification number</dt><dd>{item.qualificationNumber}</dd></div>
