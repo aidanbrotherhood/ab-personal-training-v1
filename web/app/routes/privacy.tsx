@@ -18,6 +18,21 @@ export default function Privacy() {
           </a>
           .
         </p>
+        <h2>Coaching Fit and optional sharing</h2>
+        <p>
+          If you complete Coaching Fit and choose to visit the consultation
+          page, your answers are temporarily held in this browser tab for up
+          to 30 minutes. This lets you review them before deciding whether to
+          share. The summary is never placed in the page URL or included in
+          Analytics. You can discard it and book without sharing.
+        </p>
+        <p>
+          The sharing option is off by default. If you choose to share your
+          Coaching Fit preferences, the summary is pre-filled into Calendly’s
+          existing optional preparation question. You may edit or remove it
+          before confirming your booking. Calendly then processes the
+          information under its own privacy terms.
+        </p>
         <h2>Booking a consultation</h2>
         <p>
           The consultation page includes an embedded Calendly scheduling page.
@@ -102,6 +117,17 @@ export default function Privacy() {
           coaching records and their retention will be explained separately.
         </p>
         <h2>Cookies and measurement</h2>
+        <p>
+          We also count a limited number of first-party website actions in
+          Cloudflare D1, including Coaching Fit usage, consultation clicks and
+          booking signals from the Calendly embed. These records include the
+          event category, page, placement and broad package interest; they do
+          not include names, emails, IP addresses, full referrer URLs or
+          individual questionnaire answers. A Calendly invitee URI may be
+          converted into a SHA-256 digest to prevent duplicate booking signals.
+          We automatically remove these records after 12 months.
+        </p>
+
         <p>
           When enabled, Google Analytics loads only if you select “Accept
           analytics”. It helps us understand page visits, consultation link

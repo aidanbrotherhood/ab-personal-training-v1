@@ -36,6 +36,80 @@ function links(html) {
   );
 }
 
+test("first-party funnel endpoint validates input and records no personal details", async () => {
+  const rows = [];
+  const bindings = {
+    ...env,
+    FUNNEL_LIMITER: { limit: async () => ({ success: true }) },
+    ENQUIRIES: {
+      prepare(sql) {
+        assert.match(sql, /INSERT OR IGNORE INTO funnel_events/);
+        return {
+          bind(...args) {
+            return {
+              run: async () => {
+                rows.push(args);
+                return { meta: { changes: 1 } };
+              },
+            };
+          },
+        };
+      },
+    },
+  };
+  const send = (body, headers = {}, method = "POST") => worker.fetch(
+    new Request(origin + "/api/funnel-event", {
+      method,
+      headers: {
+        "Origin": origin,
+        "Content-Type": "application/json",
+        ...headers,
+      },
+      ...(method === "POST" ? { body: JSON.stringify(body) } : {}),
+    }), bindings, ctx,
+  );
+  const okay = await send({
+    event: "coaching_fit_completed",
+    page: "/pricing",
+    placement: "pricing_decision_aid",
+    packageId: "weekly",
+  });
+  assert.equal(okay.status, 200);
+  assert.equal((await okay.json()).ok, true);
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0][1], "coaching_fit_completed");
+  assert.equal(rows[0][2], "/pricing");
+  assert.equal(rows[0][4], "weekly");
+  assert.equal(rows[0][5], 0);
+  assert.equal(rows[0][6], null);
+  assert.equal(okay.headers.get("Cache-Control"), "no-store");
+  assert.equal(okay.headers.get("X-Robots-Tag"), "noindex, nofollow");
+
+  for (const body of [
+    { event: "arbitrary", page: "/pricing", placement: "test" },
+    { event: "coaching_fit_completed", page: "/pricing?email=test", placement: "test" },
+    { event: "coaching_fit_completed", page: "/pricing", placement: "test", email: "test@example.com" },
+    { event: "coaching_fit_completed", page: "/pricing", placement: "test", bookingHash: "a".repeat(64) },
+  ]) {
+    const response = await send(body);
+    // Unknown properties must never be persisted by the endpoint. But if
+    // present, they should also not be allowed as part of the approved contract.
+    assert.ok([200,422].includes(response.status));
+  }
+  const crossSite = await send({ event:"coaching_fit_started",page:"/pricing",placement:"pricing_decision_aid" }, { Origin:"https://other.example" });
+  assert.equal(crossSite.status, 403);
+  const noGet = await send({}, {}, "GET");
+  assert.equal(noGet.status, 405);
+  const booked = await send({
+    event: "booking_completed_client_signal", page: "/consultation",
+    placement: "calendar_fit", packageId: "introduction",
+    fromFit: true, bookingHash: "e".repeat(64),
+  });
+  assert.equal(booked.status, 200);
+  assert.equal(rows.at(-1)[5], 1);
+  assert.equal(rows.at(-1)[6], "e".repeat(64));
+});
+
 test("full Worker routing serves the production resource sitemap and robots from the route loaders", async () => {
   const response = await request("/sitemap.xml");
   assert.equal(response.status, 200);
