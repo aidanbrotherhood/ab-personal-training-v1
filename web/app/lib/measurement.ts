@@ -6,7 +6,10 @@ export type MeasurementEvent =
   | "booking_calendar_viewed"
   | "booking_time_selected"
   | "booking_completed_client_signal"
-  | "contact_fallback_clicked";
+  | "contact_fallback_clicked"
+  | "coaching_fit_started"
+  | "coaching_fit_completed"
+  | "coaching_fit_reset";
 /** Ephemeral integration points only: no storage, network, vendor or personal payloads. */
 export function signal(
   event: MeasurementEvent,
