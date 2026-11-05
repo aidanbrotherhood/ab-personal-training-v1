@@ -115,13 +115,13 @@
 }
 .qualifications-closing .btn { flex-shrink:0; white-space:nowrap; }
 
-@media (max-width:950px) {
+@media (max-width: 950px) {
   .qualifications-section { grid-template-columns:1fr; gap:35px; }
   .qualifications-section-intro h2 { max-width:700px; }
   .qualifications-section-intro p { max-width:700px; }
   .qualifications-closing { align-items:flex-start; flex-direction:column; }
 }
-@media (max-width:680px) {
+@media (max-width: 680px) {
   .qualifications-page .container { width:calc(100% - 44px); }
   .qualifications-hero .page-breadcrumb { padding-top:18px; }
   .qualifications-hero-inner { padding-top:44px; padding-bottom:63px; }
