@@ -46,6 +46,15 @@ export const publicPages = [
     h1: "The right support. A clear way forward.",
   },
   {
+    key: "faq",
+    path: "/faq",
+    file: "routes/faq.tsx",
+    title: "Personal Training FAQs in Renfrew | AB Personal Training",
+    description:
+      "Answers to common questions about one-to-one personal training with Aidan Brotherhood at JD Gyms Renfrew, including prices, membership, consultations and coaching.",
+    h1: "Frequently asked questions",
+  },
+  {
     key: "about",
     path: "/about",
     file: "routes/about.tsx",
