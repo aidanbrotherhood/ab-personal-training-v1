@@ -481,6 +481,10 @@ export default function MyApproach() {
               Book your free consultation
             </ConsultationLink>
             <p className="approach-footnote">Free · 30 minutes · In person · No obligation</p>
+            <p className="approach-footnote">
+              You can also review my{" "}
+              <a href="/about/qualifications" className="approach-text-link">qualifications and training ↗</a>.
+            </p>
           </div>
         </div>
       </section>
