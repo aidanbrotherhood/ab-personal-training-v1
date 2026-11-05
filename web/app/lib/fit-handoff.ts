@@ -61,7 +61,7 @@ export function readFitHandoff(): FitHandoff | null {
 
 export function fitContextRows(handoff: FitHandoff): { label: string; value: string }[] {
   const a = handoff.answers;
-  const rows = [
+  const rows: { label: string; value: string }[] = [
     { label: "Coaching Fit result", value: packages[handoff.recommendation || "none"] },
     { label: "Support wanted", value: labels.support[a.support || "unsure"] },
     { label: "Training independently", value: labels.independence[a.independence || "unsure"] },
