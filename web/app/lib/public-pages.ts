@@ -82,6 +82,15 @@ export const publicPages = [
     h1: "Become more capable. Live more fully.",
   },
   {
+    key: "qualifications",
+    path: "/about/qualifications",
+    file: "routes/qualifications.tsx",
+    title: "Personal Trainer Qualifications | Aidan Brotherhood",
+    description:
+      "Explore Aidan Brotherhood's Level 3 Personal Training Diploma, Level 2 Gym Instructing Certificate, Level 3 nutrition training and current first-aid qualification.",
+    h1: "Qualifications & training",
+  },
+  {
     key: "movement",
     path: "/movement-assessment",
     file: "routes/movement-assessment.tsx",

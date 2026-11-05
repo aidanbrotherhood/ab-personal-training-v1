@@ -115,6 +115,7 @@ test("header, dropdown, mobile menu and grouped footer resolve to canonical dest
     "/faq",
     "/about",
     "/about/approach",
+    "/about/qualifications",
     "/consultation",
   ]) assert.ok(links(html).includes(path), path);
   assert.match(html, /class="nav-single" href="\/faq">FAQs<\/a>/);
@@ -135,6 +136,51 @@ test("header, dropdown, mobile menu and grouped footer resolve to canonical dest
   assert.deepEqual(breadcrumb.itemListElement.map((item) => item.item), [origin + "/", origin + "/about", origin + "/about/approach"]);
   assert.doesNotMatch(html, /href="\/coaching(?:[\/#?"])/);
   assert.doesNotMatch(html, /href="\/my-approach(?:[\/#?"])/);
+});
+
+test("Qualifications are accurately presented, crawlable and separate from unfinished training", async () => {
+  const response = await request("/about/qualifications");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /<title>Personal Trainer Qualifications \| Aidan Brotherhood<\/title>/);
+  assert.match(html, /<h1>Qualifications &amp; training<\/h1>/);
+  assert.match(html, /<meta name="robots" content="index, follow"/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/aidanbrotherhood.com\/about\/qualifications"/);
+  assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
+  assert.equal((html.match(/class="qualifications-record"/g) || []).length, 4);
+  for (const truth of [
+    "Transcend Level 3 Diploma in Personal Training",
+    "Transcend Level 2 Certificate in Gym Instructing",
+    "603/4215/8",
+    "603/4213/4",
+    "19 March 2026",
+    "22 January 2026",
+    "Level 3 Nutrition and Weight Management",
+    "Course completion, issued March 2026",
+    "Emergency First Aid at Work",
+    "19 June 2026",
+    "19 June 2029",
+    "Stewart First Aid",
+    "Strength and conditioning",
+    "Not yet completed",
+  ]) assert.ok(decode(html).includes(truth), truth);
+  assert.doesNotMatch(html, /Circuit Training Instructor|Level 5 Elite|Strength and Conditioning Diploma|Transcend Level 4/);
+  assert.doesNotMatch(html, /TALhShqzY|TALIyq4B0|FP44398440/);
+  assert.ok(links(html).includes("/about/approach"));
+  assert.ok(links(html).includes("/consultation"));
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])["@graph"];
+  const crumb = graph.find((node) => node["@type"] === "BreadcrumbList");
+  assert.deepEqual(crumb.itemListElement.map((item) => item.item), [
+    origin + "/", origin + "/about", origin + "/about/qualifications",
+  ]);
+  const page = graph.find((node) => node["@type"] === "WebPage");
+  assert.equal(page.about["@id"], origin + "/#aidan");
+  const home = await (await request("/")).text();
+  assert.ok(links(home).includes("/about/qualifications"), "Desktop, mobile and footer links exist");
+  const approach = await (await request("/about/approach")).text();
+  assert.ok(links(approach).includes("/about/qualifications"));
+  const consultation = await (await request("/consultation")).text();
+  assert.ok(links(consultation).includes("/about/qualifications"));
 });
 
 test("FAQ page is canonical, navigable and useful without client-side JavaScript", async () => {

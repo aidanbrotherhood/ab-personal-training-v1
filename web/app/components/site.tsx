@@ -46,6 +46,7 @@ const trainingLinks = [
 const aboutLinks = [
   ["/about", "About Me", "The person behind the coaching"],
   ["/about/approach", "My Approach", "The philosophy behind the training"],
+  ["/about/qualifications", "Qualifications", "My professional training and certificates"],
 ] as const;
 
 type NavItem = readonly [href: string, label: string, description: string];
@@ -354,6 +355,7 @@ export function Footer() {
             <h2>About</h2>
             <a href="/about">About Me</a>
             <a href="/about/approach">My Approach</a>
+            <a href="/about/qualifications">Qualifications</a>
             <a
               href="https://www.instagram.com/aidanbrotherhood.pt/"
               target="_blank"
