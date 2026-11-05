@@ -125,6 +125,16 @@ export function recommendCoaching(answers: FitAnswers): FitDecision | null {
     };
   }
   // Support is ongoing below. Budget and coaching frequency can conflict.
+  if (answers.budget === "unsure") {
+    return {
+      kind: "discuss",
+      packageId: null,
+      heading: "Let's talk about the cost before choosing.",
+      reasoning: "You'd like regular support, but you'd prefer to understand the ongoing price and commitment before settling on a package.",
+      consideration: "Coaching costs £180 per four weeks for one coached session weekly; Coaching+ is £320 for two. Gym membership is purchased separately.",
+      nextStep: "We can discuss the commitment during your free consultation without any pressure to purchase.",
+    };
+  }
   if (answers.budget === "one-off") {
     return {
       kind: "discuss",
