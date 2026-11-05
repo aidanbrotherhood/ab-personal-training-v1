@@ -190,6 +190,9 @@ export default function Coaching() {
               <br />
               No pressure.
             </h2>
+            <a href="/faq" className="inline-link" style={{ marginTop: "25px" }}>
+              All frequently asked questions ↗
+            </a>
           </div>
           <FAQs
             items={[
