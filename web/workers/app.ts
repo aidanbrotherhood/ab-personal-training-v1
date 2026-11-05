@@ -42,7 +42,19 @@ export default {
       response.headers.set("X-Robots-Tag", "noindex, nofollow");
     return response;
   },
-  async scheduled(_event, env, ctx) {
+  async scheduled(event, env, ctx) {
     ctx.waitUntil(processNotifications(env));
+    // Retain aggregate funnel events for no more than 12 months.
+    // Run only once daily within the existing five-minute cron schedule.
+    const scheduled = new Date(event.scheduledTime);
+    if (scheduled.getUTCHours() === 2 && scheduled.getUTCMinutes() === 0) {
+      ctx.waitUntil(
+        env.ENQUIRIES.prepare(
+          "DELETE FROM funnel_events WHERE created_at < datetime('now', '-365 days')",
+        ).run().catch(() => {
+          console.error(JSON.stringify({ event: "funnel_retention_cleanup_failed" }));
+        }),
+      );
+    }
   },
 } satisfies ExportedHandler<Env>;
